@@ -1,0 +1,10 @@
+{
+  "name": "croton",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  }
+}
