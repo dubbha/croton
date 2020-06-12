@@ -6,5 +6,8 @@
       "packages/*"
     ],
     "nohoist": []
+  },
+  "dependencies": {
+    "react-native": "0.61.5"
   }
 }

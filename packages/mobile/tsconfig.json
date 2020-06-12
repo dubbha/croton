@@ -10,10 +10,5 @@
   "include": [
     "index.js",
     "src"
-  ],
-  "references": [
-    {
-      "path": "../common"
-    }
   ]
 }

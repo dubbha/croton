@@ -3,34 +3,37 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "react": "16.12.0",
-    "react-art": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-native-web": "0.12.1",
-    "react-scripts": "3.4.0"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "typescript": "~3.7.2"
   },
   "scripts": {
-    "compile": "tsc -b --incremental",
-    "compile:watch": "yarn compile -w",
-    "start": "react-app-rewired start",
-    "dev": "run-p compile:watch start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "babel-plugin-react-native-web": "0.12.1",
-    "npm-run-all": "4.1.5",
-    "react-app-rewired": "2.1.5",
-    "typescript": "3.7.5"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
