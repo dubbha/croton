@@ -3,17 +3,9 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "typeRoots": [
-      "@types",
-      "../../node_modules/@types"
-    ]
+    "jsx": "react"
   },
   "include": [
     "src"
-  ],
-  "references": [
-    {
-      "path": "../common"
-    }
   ]
 }
