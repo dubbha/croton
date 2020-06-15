@@ -57,17 +57,15 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn ts:check && yarn test"
+      "pre-push": "yarn ts:check && yarn test --watchAll"
     }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,md,json}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "*.{jsx,js,ts,tsx}": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   }
 }
