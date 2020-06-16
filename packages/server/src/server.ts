@@ -1,15 +1,27 @@
 import 'dotenv/config';
+import 'reflect-metadata';
+import {createConnection} from 'typeorm';
 
 import {validateEnv} from './utils/validate-env';
 import App from './app';
 import AuthenticationController from './authentication/authentication.controller';
+import config from './ormconfig';
 
 validateEnv();
 
-const app = new App(
-    [
-        new AuthenticationController()
-    ]
-);
+(async () => {
+    try {
+        await createConnection(config);
+        console.log('Connected to DB!');
+    } catch (error) {
+        console.log('Error while connecting to the DB:', error);
+        return error;
+    }
+    const app = new App(
+        [
+            new AuthenticationController(),
+        ],
+    );
 
-app.listen();
+    app.listen();
+})();
