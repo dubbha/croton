@@ -47,6 +47,15 @@
         ]
       }
     ],
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-quotes": ["error", "prefer-double"],
+    "quotes": ["error", "single"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+    }]
   }
 }
