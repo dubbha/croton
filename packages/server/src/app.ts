@@ -1,45 +1,42 @@
-import { Client, QueryResult } from 'pg';
 import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import morgan from 'morgan';
 
-const app = express();
+import BaseControllerInterface from './interfaces/base-controller.interface';
+import errorMiddleware from './middlewares/error.middleware';
 
-const getClientConfig = (parsed) => ({
-  user: parsed.POSTGRES_USER || 'postges',
-  password: parsed.POSTGRES_PASSWORD || 'qwerty1234',
-  database: parsed.POSTGRES_DB || 'postges',
-  port: Number(parsed.POSTGRES_PORT || '5432'),
-  host: parsed.POSTGRES_HOST || '127.0.0.1',
-  statement_timeout: 10000,
-  query_timeout: 10000,
-});
+export default class App {
+  private app: express.Application;
 
-type QueryToDB = (query?: string) => Promise<string | QueryResult<any>>;
+  constructor(controllers: BaseControllerInterface[]) {
+    this.app = express();
 
-const queryToDB: QueryToDB = async (query) => {
-  try {
-    const clientConfig = getClientConfig(global.process.env);
-    const client = new Client(clientConfig);
-
-    await client.connect();
-    let res = 'The DB is connected!';
-    let queryRes;
-    if (query) {
-      queryRes = await client.query(query);
-    }
-    await client.end();
-    return queryRes || res;
-  } catch (err) {
-    return `DB health check failed with following error: \n ${err}`;
+    this.initializeMiddleware();
+    this.initializeControllers(controllers);
+    this.initializeErrorHandling();
   }
-};
 
-app.get('/api/health-check', async (_, res) => {
-  const queryRes = await queryToDB();
-  res.send({
-    statusCode: 200,
-    body: queryRes,
-    headers: { 'Content-Type': 'application/json' },
-  });
-});
+  public listen(): void {
+    const { PORT } = process.env;
+    this.app.listen(PORT, () => {
+      console.log(`App listening on the port ${PORT}`);
+    });
+  }
 
-export = app;
+  private initializeMiddleware(): void {
+    this.app.use(bodyParser.json());
+    this.app.use(cors());
+    this.app.use(morgan('combined'));
+  }
+
+  private initializeErrorHandling(): void {
+    this.app.use(errorMiddleware);
+  }
+
+  private initializeControllers(controllers: BaseControllerInterface[]): void {
+    controllers.forEach((controller: BaseControllerInterface) => {
+      this.app.use('/api', controller.router);
+    });
+  }
+}

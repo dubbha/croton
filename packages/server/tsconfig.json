@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./bin",
-    "rootDir": "./src",
-    "lib": ["esnext"],
-    "target": "es6",
+    "sourceMap": true,
+    "target": "es2017",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "module": "commonjs"
-  }
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
