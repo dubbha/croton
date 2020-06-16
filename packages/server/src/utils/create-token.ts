@@ -7,7 +7,7 @@ export function createToken(user: User): TokenData {
     const {JWT_SECRET, SESSION_DURATION} = process.env;
     const expiresIn = 60 * 60 * Number(SESSION_DURATION);
     const dataStoredInToken: DataStoredInToken = {
-        _id: user._id,
+        id: user.id,
     };
     return {
         expiresIn,
