@@ -18,11 +18,20 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "typescript": "~3.7.2"
+  },"jest": {
+    "coverageReporters": [
+      "json-summary", 
+      "text",
+      "lcov"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "react-scripts test --watchAll=false",
+    "test:coverage": "npm run test:ci -- --coverage",
+    "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-coverage-badges": "^1.1.2"
   }
 }
