@@ -26,16 +26,15 @@ jobs:
       - run: npm install -g yarn
       - run: yarn workspace web install
       - run: yarn workspace web test:badges
-      - run: yarn workspace web lint --if-present
-      - run: yarn workspace web build --if-present
-      
       - name: Commit coverage report changes
         uses: EndBug/add-and-commit@v4
         with:
           author_name: CI
           author_email: mail@example.com
-          message: "Adding coverage report badges"
-          add: "./packages/web/coverage/*.svg"
+          message: 'Adding coverage report badges'
+          add: './packages/web/coverage/*.svg'
           force: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn workspace web lint --if-present
+      - run: yarn workspace web build --if-present
