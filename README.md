@@ -2,12 +2,6 @@
 
 > Toxic to cats and dogs.
 
-![Coverage lines](./packages/web/coverage/badge-lines.svg)
-![Coverage functions](./packages/web/coverage/badge-functions.svg)
-![Coverage branches](./packages/web/coverage/badge-branches.svg)
-![Coverage statements](./packages/web/coverage/badge-statements.svg)
-
-
 
 ## Monorepo
 This is a monorepo for a `web/mobile/server` development, intending to share as much dependencies and code as possible. Dependencies reside in the root level `node_modules`. Individual packages reside in the `packages` directory:
