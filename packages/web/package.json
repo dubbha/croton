@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "test:ci": "react-scripts test --watchAll=false",
     "test:coverage": "npm run test:ci -- --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges",
+    "test:badges": "npm run test:coverage && jest-coverage-badges",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
