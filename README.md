@@ -18,7 +18,7 @@ If you need to add a dependency to a package, run `yarn add` in the package dire
 ```
 
 ### Run
-Use root or package level commands to run specific package:
+Use root or package level commands to run specific package, e.g. web:
 ```
 [/] yarn workspace web start
 
@@ -44,7 +44,7 @@ This is a monorepo for a `web/mobile/server` development, intending to share as 
 ```
 
 ## Contributing
-If you'd like to contribute, please follow this [recommendations](CONTRIBUTING.md).
+If you'd like to contribute, please follow these [recommendations](CONTRIBUTING.md).
 
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
