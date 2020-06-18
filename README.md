@@ -2,7 +2,11 @@
 
 > Toxic to cats and dogs.
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dubbha/croton/Node.js-common-WEB-CI?label=web%20CI)
+![Coverage lines](./packages/web/coverage/badge-lines.svg)
+![Coverage functions](./packages/web/coverage/badge-functions.svg)
+![Coverage branches](./packages/web/coverage/badge-branches.svg)
+![Coverage statements](./packages/web/coverage/badge-statements.svg)
+
 
 
 ## Monorepo
