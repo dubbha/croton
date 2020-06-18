@@ -1,9 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Coverage lines](./packages/web/coverage/badge-lines.svg)
-![Coverage functions](./packages/web/coverage/badge-functions.svg)
-![Coverage branches](./packages/web/coverage/badge-branches.svg)
-![Coverage statements](./packages/web/coverage/badge-statements.svg)
+![Coverage lines](./coverage/badge-lines.svg)
+![Coverage functions](./coverage/badge-functions.svg)
+![Coverage branches](./coverage/badge-branches.svg)
+![Coverage statements](./coverage/badge-statements.svg)
 
 
 ## Available Scripts
