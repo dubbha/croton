@@ -11,7 +11,4 @@ test('renders learn react link', () => {
 });
 
 
-it('Enzyme renders without crashing', () => {
-  shallow(<App />);
-});
 
