@@ -6,6 +6,7 @@ import {validateEnv} from './utils/validate-env';
 import App from './app';
 import AuthenticationController from './authentication/authentication.controller';
 import config from './ormconfig';
+import HealthCheckController from './health-check/health-check.controller';
 
 validateEnv();
 
@@ -20,7 +21,8 @@ validateEnv();
     const app = new App(
         [
             new AuthenticationController(),
-        ],
+            new HealthCheckController()
+        ]
     );
 
     app.listen();
