@@ -15,5 +15,5 @@ phases:
       - cd packages/web/build
       - export BUCKET=croton-web-$ENV
       - aws s3 rm s3://$BUCKET --recursive
-      - aws s3 cp index.html s3://$BUCKET/$SUB_NAME/index.html --cache-control no-cache
-      - aws s3 cp . s3://$BUCKET/$SUB_NAME --exclude "index.html" --recursive
+      - aws s3 cp index.html s3://$BUCKET/index.html --cache-control no-cache
+      - aws s3 cp . s3://$BUCKET --exclude "index.html" --recursive
