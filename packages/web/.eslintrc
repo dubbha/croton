@@ -8,7 +8,8 @@
     "eslint:recommended",
     "airbnb",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "settings": {
     "import/extensions": [".js",".jsx",".ts",".tsx"],
@@ -22,7 +23,9 @@
     }
   },
   "rules": {
+    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
+    "no-useless-constructor": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     "import/extensions": [
       "error",
@@ -46,14 +49,6 @@
       }
     ],
     "react/jsx-one-expression-per-line": "off",
-    "jsx-quotes": ["error", "prefer-double"],
-    "quotes": ["error", "single"],
-    "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "never",
-      "exports": "never",
-      "functions": "never"
-    }]
+    "jsx-quotes": ["error", "prefer-double"]
   }
 }
