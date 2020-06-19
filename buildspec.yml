@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - yarn workspace web install
+  check:
+    commands:
+      - yarn workspace web test
+  build:
+    commands:
+      - yarn workspace web build
+artifacts:
+  files:
+    - index.js
