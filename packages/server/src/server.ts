@@ -8,10 +8,12 @@ import AuthenticationController from './authentication/authentication.controller
 import config from './ormconfig';
 import HealthCheckController from './health-check/health-check.controller';
 
+console.log('Validating env params...');
 validateEnv();
 
 (async () => {
     try {
+        console.log('Connecting to DB...');
         await createConnection(config);
         console.log('Connected to DB!');
     } catch (error) {

@@ -2,20 +2,14 @@ import 'dotenv/config';
 import * as typeorm from 'typeorm';
 
 import AuthenticationService from './authentication.service';
-import UserWithToken from '../interfaces/user-with-token';
-import User from '../interfaces/user.interface';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (typeorm as any).getRepository = jest.fn();
 
 describe('AuthenticationController', () => {
     let authenticationService;
-    let user: User;
-    let userWithToken: UserWithToken;
 
     beforeEach(() => {
-        user = {password: 'password', email: 'email', id: 'id', name: 'name'};
-        userWithToken = {email: 'email', id: 'id', name: 'name', token: expect.any(String)};
-
         authenticationService = new AuthenticationService();
     });
 

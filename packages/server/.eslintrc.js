@@ -8,6 +8,7 @@ module.exports = {
         sourceType: 'module',
     },
     rules: {
-        quotes: [2, 'single']
+        quotes: [2, 'single'],
+        'object-curly-spacing': [2]
     },
 };
