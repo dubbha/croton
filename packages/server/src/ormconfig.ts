@@ -1,4 +1,4 @@
-import { ConnectionOptions } from 'typeorm';
+import {ConnectionOptions} from 'typeorm';
 
 const {
     POSTGRES_HOST,

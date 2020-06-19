@@ -1,6 +1,6 @@
 # Server setup
 
-To run:
+### To run:
 
 1. `npm i`
 2. setup `.env` file
