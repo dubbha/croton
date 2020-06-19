@@ -1,5 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![WEB-CI-common](https://github.com/dubbha/croton/workflows/WEB-CI-common/badge.svg?branch=dev)
 ![Coverage lines](./coverage/badge-lines.svg)
 ![Coverage functions](./coverage/badge-functions.svg)
 ![Coverage branches](./coverage/badge-branches.svg)
