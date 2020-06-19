@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - yarn workspace web install
+  pre_build:
+    commands:
+      - yarn workspace web test
+  build:
+    commands:
+      - yarn workspace web build
+  post_build:
+    commands:
+      - cd packages/web/build
+      - export BUCKET=croton-web-$ENV
+      - aws s3 rm s3://$BUCKET --recursive
+      - aws s3 cp index.html s3://$BUCKET/index.html --cache-control no-cache
+      - aws s3 cp . s3://$BUCKET --exclude "index.html" --recursive

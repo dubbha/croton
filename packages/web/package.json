@@ -65,5 +65,19 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.10",
     "jest-coverage-badges": "^1.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn ts:check && yarn test --watchAll=false"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md,json}": [
+      "prettier --write"
+    ],
+    "*.{jsx,js,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
