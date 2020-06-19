@@ -3,13 +3,10 @@
 
 name: WEB-CI-common
 
-on: [push]
-  paths:
-    - "./packages/web/**"
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
+on:
+  push:
+    paths:
+    - './packages/web/**'
 
 jobs:
   build:
