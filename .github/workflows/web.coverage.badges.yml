@@ -3,15 +3,10 @@
 
 name: WEB-CI-coverage-badges-dev
 
-on: 
-  push:
-    branches: [ dev ]
-    paths:
-      - "./packages/web/**"
-  pull_request:
-    branches: [ dev ]
-    paths:
-      - "./packages/web/**"
+on: [push, pull_request]
+  branches: [ dev ]
+  paths:
+    - "./packages/web/**"
 
 jobs:
   build:
