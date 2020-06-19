@@ -1,15 +1,18 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: WEB-CI-common
+name: WEB-CI-coverage-badges-dev
 
 on: [push]
-  paths:
+
+  push:
+    branches: [ dev ]
+    paths:
       - "./packages/web/**"
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - "./packages/web/**"
 
 jobs:
   build:
@@ -27,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g yarn
       - run: yarn workspace web install
-      - run: yarn workspace web test:ci
+      - run: yarn workspace web test:badges
       - name: Commit coverage report changes
         uses: EndBug/add-and-commit@v4
         with:
@@ -38,5 +41,3 @@ jobs:
           force: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: yarn workspace web lint
-      - run: yarn workspace web build --if-present
