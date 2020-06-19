@@ -19,10 +19,20 @@
     "redux": "^4.0.5",
     "typescript": "~3.7.2"
   },
+  "jest": {
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
+    "test:coverage": "npm run test -- --coverage",
+    "test:badges": "npm run test:coverage && jest-coverage-badges",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .jsx,.js,.tsx,.ts",
     "lint:fix": "eslint ./src --ext .jsx,.js,.tsx,.ts --fix",
@@ -53,7 +63,8 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.10"
+    "lint-staged": "^10.2.10",
+    "jest-coverage-badges": "^1.1.2"
   },
   "husky": {
     "hooks": {
