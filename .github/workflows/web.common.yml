@@ -6,7 +6,8 @@ name: WEB-CI-common
 on:
   push:
     paths:
-    - './packages/web/**'
+    - "./packages/web/**"
+    - "./.github/workflows/**"
 
 jobs:
   build:
