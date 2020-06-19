@@ -33,7 +33,10 @@
     "test:ci": "react-scripts test --watchAll=false",
     "test:coverage": "npm run test:ci -- --coverage",
     "test:badges": "npm run test:coverage && jest-coverage-badges",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src --ext .jsx,.js,.tsx,.ts",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.tsx,.ts --fix",
+    "ts:check": "tsc --p ./tsconfig.json --noEmit"
   },
   "eslintConfig": {
     "extends": "react-app"
