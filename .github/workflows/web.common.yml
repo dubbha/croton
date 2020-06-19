@@ -36,5 +36,5 @@ jobs:
           force: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: yarn workspace web lint --if-present
+      - run: yarn workspace web lint
       - run: yarn workspace web build --if-present
