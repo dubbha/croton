@@ -10,6 +10,12 @@ phases:
   build:
     commands:
       - yarn workspace web build
-artifacts:
-  files:
-    - index.js
+  post_build:
+    commands:
+      - cd packages/web/build
+      - export BUCKET=croton-web-dev
+      - aws s3 rm s3://$BUCKET --recursive
+      - aws s3 cp . s3://$WEBSITEBUCKET --recursive
+      # - aws s3 cp index.html s3://$WEBSITEBUCKET/$SUB_NAME/index.html --cache-control no-cache
+      - aws s3 cp . s3://$WEBSITEBUCKET/$SUB_NAME --exclude "index.html" --recursive
+      # - aws s3 cp ../../DeployInfo/env-$SUB_NAME.html s3://$WEBSITEBUCKET/$SUB_NAME/env.html --cache-control no-cache
