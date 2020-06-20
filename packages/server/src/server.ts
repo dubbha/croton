@@ -12,20 +12,18 @@ console.log('Validating env params...');
 validateEnv();
 
 (async () => {
-    try {
-        console.log('Connecting to DB...');
-        await createConnection(config);
-        console.log('Connected to DB!');
-    } catch (error) {
-        console.log('Error while connecting to the DB:', error);
-        return error;
-    }
-    const app = new App(
-        [
-            new AuthenticationController(),
-            new HealthCheckController()
-        ]
-    );
+  try {
+    console.log('Connecting to DB...');
+    await createConnection(config);
+    console.log('Connected to DB!');
+  } catch (error) {
+    console.log('Error while connecting to the DB:', error);
+    return error;
+  }
+  const app = new App([
+    new AuthenticationController(),
+    new HealthCheckController(),
+  ]);
 
-    app.listen();
+  app.listen();
 })();

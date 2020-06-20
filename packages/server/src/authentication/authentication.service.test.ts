@@ -7,13 +7,13 @@ import AuthenticationService from './authentication.service';
 (typeorm as any).getRepository = jest.fn();
 
 describe('AuthenticationController', () => {
-    let authenticationService;
+  let authenticationService;
 
-    beforeEach(() => {
-        authenticationService = new AuthenticationService();
-    });
+  beforeEach(() => {
+    authenticationService = new AuthenticationService();
+  });
 
-    it('should create', () => {
-        expect(authenticationService).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(authenticationService).toBeTruthy();
+  });
 });

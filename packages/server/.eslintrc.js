@@ -1,20 +1,18 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/eslint-recommended'
-    ],
-    parserOptions: {
-        ecmaVersion: 2018,
-        sourceType: 'module',
+  extends: ['../core/.eslintrc'],
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  settings: {
+    'import/extensions': ['.js', '.ts'],
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts'],
     },
-    rules: {
-        quotes: [2, 'single'],
-        'object-curly-spacing': [2],
-        'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': 'error',
-        'no-useless-constructor': 'off',
-        '@typescript-eslint/no-useless-constructor': 'error'
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+      },
     },
+  },
 };

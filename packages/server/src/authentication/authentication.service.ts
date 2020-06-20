@@ -11,45 +11,50 @@ import WrongCredentials from '../exceptions/wrong-creditionals.exception';
 import User from '../interfaces/user.interface';
 
 export default class AuthenticationService {
-    private userRepository = getRepository(UserEntity);
+  private userRepository = getRepository(UserEntity);
 
-    public async register(registrationData: RegistrationDto): Promise<UserWithToken> {
-        if (await this.userRepository.findOne({email: registrationData.email})) {
-            throw new UserWithThatEmailAlreadyExists(registrationData.email);
-        } else {
-            const hashedPassword = await hash(registrationData.password, 10);
-            const user = await this.userRepository.save({
-                ...registrationData,
-                password: hashedPassword,
-            });
+  public async register(
+    registrationData: RegistrationDto
+  ): Promise<UserWithToken> {
+    if (await this.userRepository.findOne({email: registrationData.email})) {
+      throw new UserWithThatEmailAlreadyExists(registrationData.email);
+    } else {
+      const hashedPassword = await hash(registrationData.password, 10);
+      const user = await this.userRepository.save({
+        ...registrationData,
+        password: hashedPassword,
+      });
 
-            return this.loginUser(<User>user);
-        }
+      return this.loginUser(user as User);
     }
+  }
 
-    public async login(loginData: LoginDto): Promise<UserWithToken> {
-        const user = await this.userRepository.findOne({email: loginData.email});
+  public async login(loginData: LoginDto): Promise<UserWithToken> {
+    const user = await this.userRepository.findOne({email: loginData.email});
 
-        if (user) {
-            const isPasswordMatching = await compare(loginData.password, user.password);
-            if (isPasswordMatching) {
-                return this.loginUser(<User>user);
-            } else {
-                throw new WrongCredentials();
-            }
-        } else {
-            throw new WrongCredentials();
-        }
+    if (user) {
+      const isPasswordMatching = await compare(
+        loginData.password,
+        user.password
+      );
+      if (isPasswordMatching) {
+        return this.loginUser(user as User);
+      } else {
+        throw new WrongCredentials();
+      }
+    } else {
+      throw new WrongCredentials();
     }
+  }
 
-    private loginUser(user: User): UserWithToken {
-        const tokenData = createToken(user);
+  private loginUser(user: User): UserWithToken {
+    const tokenData = createToken(user);
 
-        return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            token: tokenData.token
-        };
-    }
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token: tokenData.token,
+    };
+  }
 }
