@@ -8,13 +8,18 @@
     "lint:fix": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "start": "ts-node ./src/server.ts",
-    "start:watch": "nodemon"
+    "start:dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
+    "start:psql:local": "psql -U testUser -h 127.0.0.1 -d localDB -f localDB.sql",
+    "deploy-lambda": "node deploy-lambda",
+    "update-lambda": "node update-lambda",
+    "server:deploy": "tsc && yarn deploy-lambda && node cleanUpDist",
+    "server:update": "tsc && yarn update-lambda && node cleanUpDist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-serverless-express": "^3.3.8",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "class-transformer": "^0.2.3",
@@ -31,13 +36,19 @@
     "typescript": "^3.9.5"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.56",
+    "@types/aws-serverless-express": "^3.3.3",
     "@types/jest": "^26.0.0",
     "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "claudia": "^5.12.0",
     "eslint": "^7.2.0",
     "eslint-plugin-mocha": "^7.0.1",
+    "fs-extra": "^9.0.1",
     "jest": "^26.0.1",
     "nodemon": "^2.0.4",
     "ts-jest": "^26.1.0",
-    "ts-node": "^8.10.2"
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.49"
   }
 }

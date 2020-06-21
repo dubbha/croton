@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import BaseControllerInterface from './interfaces/base-controller.interface';
-import errorMiddleware from './middlewares/error.middleware';
+import BaseControllerInterface from '../interfaces/base-controller.interface';
+import errorMiddleware from '../middlewares/error.middleware';
 
 export default class App {
   private app: express.Application;
@@ -18,7 +18,7 @@ export default class App {
   }
 
   public listen(): void {
-    const { PORT } = process.env;
+    const {PORT = 3000} = process.env;
     this.app.listen(PORT, () => {
       console.log(`App listening on the port ${PORT}`);
     });
