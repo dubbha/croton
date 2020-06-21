@@ -48,3 +48,19 @@ If you'd like to contribute, please follow these [recommendations](CONTRIBUTING.
 
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
+
+## Badges
+### web
+| dev  |      stage      |  prod |
+|----------|-------------|------|
+| ![dev@AWS](https://codebuild.eu-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidVcrTGg4WC9HUVVSM3ZvejZDVk5FS0k3TEdmYm02OXBidTZ5VUR2WDNjamtnWE5BWVl2MjlmR2NlczN3SnFpWHhOVDVObjllbjNaM1JNbzdTWlVGVWhZPSIsIml2UGFyYW1ldGVyU3BlYyI6IkJzQUlyZS9pVkhPSVJDZlciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev) |  ![dev@AWS](https://codebuild.eu-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidVcrTGg4WC9HUVVSM3ZvejZDVk5FS0k3TEdmYm02OXBidTZ5VUR2WDNjamtnWE5BWVl2MjlmR2NlczN3SnFpWHhOVDVObjllbjNaM1JNbzdTWlVGVWhZPSIsIml2UGFyYW1ldGVyU3BlYyI6IkJzQUlyZS9pVkhPSVJDZlciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=stage) | ![dev@AWS](https://codebuild.eu-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidVcrTGg4WC9HUVVSM3ZvejZDVk5FS0k3TEdmYm02OXBidTZ5VUR2WDNjamtnWE5BWVl2MjlmR2NlczN3SnFpWHhOVDVObjllbjNaM1JNbzdTWlVGVWhZPSIsIml2UGFyYW1ldGVyU3BlYyI6IkJzQUlyZS9pVkhPSVJDZlciLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=prod) |
+| ![dev@WEB-CI-common](https://github.com/dubbha/croton/workflows/WEB-CI-common/badge.svg?branch=dev) | | |
+| ![lines](./packages/web/coverage/badge-lines.svg) | | |
+| ![functions](./packages/web/coverage/badge-functions.svg) | | |
+| ![branches](./packages/web/coverage/badge-branches.svg) | | |
+| ![statements](./packages/web/coverage/badge-statements.svg) | | |
+
+
+
+
+
