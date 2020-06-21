@@ -33,6 +33,7 @@
     "test:watch": "react-scripts test",
     "test:coverage": "npm run test -- --coverage",
     "test:badges": "npm run test:coverage && jest-coverage-badges",
+    "test:mutation": "stryker run",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .jsx,.js,.tsx,.ts",
     "lint:fix": "eslint ./src --ext .jsx,.js,.tsx,.ts --fix",
