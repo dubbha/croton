@@ -86,5 +86,6 @@
     "*.{jsx,js,ts,tsx}": [
       "eslint --fix"
     ]
-  }
+  },
+  "license": "MIT"
 }
