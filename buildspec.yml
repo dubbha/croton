@@ -13,8 +13,11 @@ phases:
   post_build:
     commands:
       - cd packages/web/build
+      - echo $CODEBUILD_WEBHOOK_HEAD_REF
       - export ENV=`echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///gi'`
+      - echo $ENV
       - export BUCKET=croton-web-$ENV
+      - echo $BUCKET
       - aws s3 rm s3://$BUCKET --recursive
       - aws s3 cp index.html s3://$BUCKET/index.html --cache-control no-cache
       - aws s3 cp . s3://$BUCKET --exclude "index.html" --recursive
