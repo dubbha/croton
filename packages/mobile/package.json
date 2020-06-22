@@ -13,7 +13,8 @@
     "studio": "studio android",
     "xcode": "open ios/myprojectname.xcworkspace",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "core": "0.0.1",

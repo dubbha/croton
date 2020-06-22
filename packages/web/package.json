@@ -56,6 +56,12 @@
       "json-summary",
       "text",
       "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/index.tsx",
+      "!src/*.d.ts",
+      "!src/**/*/index.ts"
     ]
   },
   "eslintConfig": {
