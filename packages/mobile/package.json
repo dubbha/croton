@@ -1,0 +1,38 @@
+{
+  "name": "mobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "compile": "tsc -b --incremental",
+    "compile:watch": "yarn run compile -w",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "dev": "run-p compile:watch start",
+    "start:android": "run-p dev android",
+    "start:ios": "run-p dev ios",
+    "studio": "studio android",
+    "xcode": "open ios/myprojectname.xcworkspace",
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "dependencies": {
+    "core": "0.0.1",
+    "react": "16.13.1",
+    "react-native": "0.61.5"
+  },
+  "devDependencies": {
+    "@react-native-community/eslint-config": "0.0.7",
+    "@types/react": "16.9.19",
+    "@types/react-native": "0.61.12",
+    "babel-jest": "24.9.0",
+    "eslint": "6.8.0",
+    "jest": "24.9.0",
+    "npm-run-all": "^4.1.5",
+    "react-test-renderer": "16.13.1",
+    "typescript": "3.7.5"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
