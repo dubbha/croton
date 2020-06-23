@@ -3,6 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "core": "0.0.1"
-  }
+    "core": "0.0.1",
+    "aws-serverless-express": "^3.3.8",
+    "express": "^4.17.1",
+    "pg": "^8.2.1"
+  },
+  "scripts": {
+    "start:psql:local": "psql -U postgres -h 127.0.0.1 -p qwerty1234 -d postgres ",
+    "start:dev": "yarn start:psql:local && yarn tsc && yarn nodemon local",
+    "lambda:deploy": "claudia create --name crotonLambda --set-env-from-json envVariables.json --handler lambda.handler --deploy-proxy-api --region us-east-1 ",
+    "lambda:update": "claudia update --name crotonLambda --set-env-from-json envVariables.json --handler lambda.handler --deploy-proxy-api --region us-east-1 ",
+    "lambda:destroy": "claudia destroy --name crotonLambda",
+    "server:deploy": "tsc && yarn lambda:deploy && node emptyBin",
+    "server:update": "tsc && yarn lambda:update && node emptyBin"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/pg": "^7.14.3",
+    "claudia": "^5.12.0",
+    "fs-extra": "^9.0.1",
+    "nodemon": "^2.0.4",
+    "typescript": "^3.9.5"
+  },
+  "description": ""
 }

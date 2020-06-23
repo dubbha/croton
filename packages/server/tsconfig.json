@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./bin",
+    "rootDir": "./src",
+    "lib": ["esnext"],
+    "target": "es6",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "module": "commonjs"
+  }
+}
