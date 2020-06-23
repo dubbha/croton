@@ -8,7 +8,19 @@
     "express": "^4.17.1",
     "pg": "^8.2.1"
   },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/pg": "^7.14.3",
+    "eslint": "^7.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "claudia": "^5.12.0",
+    "fs-extra": "^9.0.1",
+    "nodemon": "^2.0.4",
+    "typescript": "^3.9.5"
+  },
   "scripts": {
+    "lint": "eslint ./src --ext .jsx,.js,.tsx,.ts",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.tsx,.ts --fix",
     "start:psql:local": "psql -U postgres -h 127.0.0.1 -p qwerty1234 -d postgres ",
     "start:dev": "yarn start:psql:local && yarn tsc && yarn nodemon local",
     "lambda:deploy": "claudia create --name crotonLambda --set-env-from-json envVariables.json --handler lambda.handler --deploy-proxy-api --region us-east-1 ",
@@ -16,14 +28,6 @@
     "lambda:destroy": "claudia destroy --name crotonLambda",
     "server:deploy": "tsc && yarn lambda:deploy && node emptyBin",
     "server:update": "tsc && yarn lambda:update && node emptyBin"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.6",
-    "@types/pg": "^7.14.3",
-    "claudia": "^5.12.0",
-    "fs-extra": "^9.0.1",
-    "nodemon": "^2.0.4",
-    "typescript": "^3.9.5"
   },
   "description": ""
 }

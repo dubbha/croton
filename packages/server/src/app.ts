@@ -9,8 +9,6 @@ const getClientConfig = (parsed) => ({
   database: parsed.POSTGRES_DB || 'postges',
   port: Number(parsed.POSTGRES_PORT || '5432'),
   host: parsed.POSTGRES_HOST || '127.0.0.1',
-  statement_timeout: 10000,
-  query_timeout: 10000,
 });
 
 type QueryToDB = (query?: string) => Promise<string | QueryResult<any>>;
@@ -21,7 +19,7 @@ const queryToDB: QueryToDB = async (query) => {
     const client = new Client(clientConfig);
 
     await client.connect();
-    let res = 'The DB is connected!';
+    const res = 'The DB is connected!';
     let queryRes;
     if (query) {
       queryRes = await client.query(query);
