@@ -115,3 +115,8 @@ web_modules/
 .yarn/build-state.yml
 .pnp.*
 
+# claudia deploy files
+
+envVariables.json
+claudia.json
+

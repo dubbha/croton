@@ -1,9 +1,18 @@
-import {createServer, proxy} from 'aws-serverless-express';
-import {APIGatewayProxyEvent, Context} from 'aws-lambda';
+import { APIGatewayProxyEvent, Context } from 'aws-lambda';
 
-import runApp from './app/runApp';
+import App from './app/app';
+import createPostgresConnection from './utils/createPostgresConnection';
 
-const handler = (event: APIGatewayProxyEvent, context: Context) =>
-  proxy(createServer(runApp), event, context);
+import AuthenticationController from './authentication/authentication.controller';
+import HealthCheckController from './health-check/health-check.controller';
 
-export {handler};
+export const handler = async (
+  event: APIGatewayProxyEvent,
+  context: Context
+) => {
+  await createPostgresConnection();
+  return new App([
+    new AuthenticationController(),
+    new HealthCheckController(),
+  ]).generateLambdaHandler(event, context);
+};

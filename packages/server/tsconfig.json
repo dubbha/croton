@@ -2,7 +2,7 @@
   "compilerOptions": {
     "sourceMap": false,
     "inlineSourceMap": false,
-    "target": "es2017",
+    "target": "es2015",
     "outDir": "./dist",
     "baseUrl": "./src",
     "rootDir": "./src",
@@ -12,7 +12,7 @@
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
-    "module": "commonJs",
+    "module": "CommonJS",
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],

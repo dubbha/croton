@@ -1,11 +1,8 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
+import { createConnection } from 'typeorm';
 
-import {validateEnv} from '../utils/validate-env';
-import App from './app';
-import AuthenticationController from '../authentication/authentication.controller';
-import HealthCheckController from '../health-check/health-check.controller';
+import { validateEnv } from '../utils/validate-env';
 
 import config from './ormconfig';
 
@@ -20,10 +17,4 @@ export default async () => {
     console.log('Error while connecting to the DB:', error);
     return error;
   }
-  const app = new App([
-    new AuthenticationController(),
-    new HealthCheckController(),
-  ]);
-
-  app.listen();
 };

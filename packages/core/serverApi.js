@@ -1,8 +1,11 @@
-const { lambda, api } = require('../web/serverConfig.json');
+const prodConfig = require('../web/claudia.json');
 
-const createRoot = (id, region) =>
-  `https://${id}.execute-api.${region}.amazonaws.com/latest`;
+const root = prodConfig
+  ? `https://${prodConfig.api.id}.execute-api.${
+      prodConfig.lambda.region
+    }.amazonaws.com/latest`
+  : 'http://127.0.0.1:3000';
 
 module.exports = {
-  root: createRoot(api.id, lambda.region),
+  root,
 };

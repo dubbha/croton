@@ -1,8 +1,0 @@
-{
-  "POSTGRES_PASSWORD": "Z0hiR5D7BYA43bKJvnMY",
-  "POSTGRES_DB": "postgres",
-  "POSTGRES_USER": "postgres",
-  "POSTGRES_HOST": "croton-global.cizhyv33sdan.us-east-2.rds.amazonaws.com",
-  "POSTGRES_PORT": "5432",
-  "PORT": "3000"
-}
