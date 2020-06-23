@@ -15,7 +15,8 @@
     "ts:check": "tsc --p ./tsconfig.json --noEmit",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:run:smoke": "cypress run --spec=cypress/integration/smoke/*"
+    "cy:run:smoke": "cypress run --spec=cypress/integration/smoke/*",
+    "audit:ci": "yarn-audit-ci"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -49,7 +50,8 @@
     "husky": "^4.2.5",
     "jest-coverage-badges": "^1.1.2",
     "lint-staged": "^10.2.10",
-    "cypress": "^4.8.0"
+    "cypress": "^4.8.0",
+    "yarn-audit-ci": "^1.2.0"
   },
   "jest": {
     "coverageReporters": [
