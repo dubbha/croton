@@ -28,5 +28,5 @@ cypress/videos
 cypress/screenshots
 
 # stryker
-.stryker-tmp
+stryker-tmp
 reports
