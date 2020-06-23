@@ -16,7 +16,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:smoke": "cypress run --spec=cypress/integration/smoke/*",
-    "audit": "yarn-audit-ci"
+    "audit:ci": "yarn-audit-ci"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
