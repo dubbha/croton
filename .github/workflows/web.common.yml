@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g yarn
       - run: yarn workspace web install
-      - run: yarn workspace web test
+      - run: yarn workspace web test:coverage
       - run: yarn workspace web lint
       - run: yarn workspace web audit:ci
       - run: yarn workspace web build --if-present
