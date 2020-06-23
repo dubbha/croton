@@ -1,0 +1,7 @@
+# env
+.env
+
+# claudia configs
+
+claudia.json
+envVariables.json
