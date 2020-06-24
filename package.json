@@ -7,8 +7,15 @@
     ],
     "nohoist": []
   },
+  "scripts": {
+    "cpd": "jscpd ./packages/*/src",
+    "cpd:ci": "yarn cpd --silent --threshold 20"
+  },
   "dependencies": {
     "react-native": "0.61.5"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jscpd": "^3.3.0-rc.9"
+  }
 }
