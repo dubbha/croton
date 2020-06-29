@@ -23,13 +23,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            export BRANCH=`echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///gi'`
-            echo $BRANCH
             echo ${{ steps.extract_branch.outputs.branch }}
             pwd
             ls -la
             cd ~/croton-app/croton
-            git pull origin $BRANCH
+            git fetch remote origin
             git checkout ${{ steps.extract_branch.outputs.branch }}
             yarn workspace server install
             yarn workspace server start
