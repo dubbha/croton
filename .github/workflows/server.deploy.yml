@@ -27,7 +27,7 @@ jobs:
             pwd
             ls -la
             cd ~/croton-app/croton
-            git fetch origin dev
+            git fetch origin
             git checkout ${{ steps.extract_branch.outputs.branch }}
             yarn workspace server install
             yarn workspace server start
