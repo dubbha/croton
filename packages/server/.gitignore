@@ -120,3 +120,5 @@ web_modules/
 envVariables.json
 claudia.json
 
+# prod build
+dist

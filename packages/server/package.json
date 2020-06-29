@@ -10,6 +10,7 @@
     "test:watch": "jest --watchAll",
     "start:dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
     "start:psql:local": "psql -U testUser -h 127.0.0.1 -d localDB -f localDB.sql",
+    "build": "tsc",
     "deploy-lambda": "claudia create --name croton --set-env-from-json envVariables.json --handler lambda.handler --deploy-proxy-api --region us-east-1 ",
     "update-lambda": "claudia update --name croton --set-env-from-json envVariables.json --handler lambda.handler --deploy-proxy-api --region us-east-1 ",
     "remove-lambda": "claudia destroy",
@@ -53,9 +54,5 @@
     "ts-jest": "^26.1.0",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.49"
-  },
-  "os": [
-    "darwin",
-    "linux"
-  ]
+  }
 }
