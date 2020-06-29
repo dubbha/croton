@@ -23,6 +23,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            whoami
+            yarn -v
+            node -v
             echo ${{ steps.extract_branch.outputs.branch }}
             cd ~/croton-app/croton
             git fetch origin
