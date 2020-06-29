@@ -28,6 +28,7 @@ jobs:
             echo ${{ steps.extract_branch.outputs.branch }}
             pwd
             ls -la
+            cd ~/croton-app/croton
             git pull origin $BRANCH
             git checkout ${{ steps.extract_branch.outputs.branch }}
             yarn workspace server install
