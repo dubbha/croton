@@ -23,10 +23,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            export ENV=`echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///gi'`
-            echo $ENV
+            export BRANCH=`echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///gi'`
+            echo $BRANCH
             echo ${{ steps.extract_branch.outputs.branch }}
-            git pull origin $ENV
+            pwd
+            ls -la
+            git pull origin $BRANCH
             git checkout ${{ steps.extract_branch.outputs.branch }}
             yarn workspace server install
             yarn workspace server start
