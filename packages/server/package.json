@@ -9,6 +9,8 @@
     "pg": "^8.2.1"
   },
   "scripts": {
+    "start": "ts-node ./src/server.ts",
+    "start:watch": "nodemon",
     "start:psql:local": "psql -U postgres -h 127.0.0.1 -p qwerty1234 -d postgres ",
     "start:dev": "yarn start:psql:local && yarn tsc && yarn nodemon local",
     "lambda:deploy": "claudia create --name crotonLambda --set-env-from-json envVariables.json --handler lambda.handler --deploy-proxy-api --region us-east-1 ",
