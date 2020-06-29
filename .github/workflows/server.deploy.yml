@@ -29,5 +29,6 @@ jobs:
             cd ~/croton-app/croton
             git fetch origin
             git checkout ${{ steps.extract_branch.outputs.branch }}
+            git pull
             yarn workspace server install
             yarn workspace server start
