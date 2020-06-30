@@ -1,13 +1,20 @@
 {
   "compilerOptions": {
-    "outDir": "./bin",
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "target": "es2015",
+    "outDir": "./dist",
+    "baseUrl": "./src",
     "rootDir": "./src",
-    "lib": ["esnext"],
-    "target": "es6",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
     "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
-    "skipLibCheck": true,
-    "module": "commonjs"
-  }
+    "module": "CommonJS",
+    "types": ["node", "reflect-metadata", "jest"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "src/**/*.spec.*", "src/**/*.test.*"]
 }

@@ -9,7 +9,9 @@
   },
   "scripts": {
     "cpd": "jscpd ./packages/*/src",
-    "cpd:ci": "yarn cpd --silent --threshold 20"
+    "cpd:ci": "yarn cpd --silent --threshold 20",
+    "server:update": "cd packages/server && yarn server:update",
+    "server:deploy": "cd packages/server && yarn server:deploy"
   },
   "dependencies": {
     "react-native": "0.61.5"
