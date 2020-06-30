@@ -2,11 +2,11 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
-import { validateEnv } from '../utils/validate-env';
+import { validateEnv } from './validate-env';
 
 import config from './ormconfig';
 
-export default async () => {
+export default async (): Promise<void> => {
   console.log('Validating env params...');
   validateEnv();
   try {

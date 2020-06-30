@@ -1,4 +1,4 @@
-import {getRepository} from 'typeorm';
+import { getRepository } from 'typeorm';
 import HealthCheckEntity from '../models/health-check.entity';
 import HealthCheckException from '../exceptions/health-check.exception';
 

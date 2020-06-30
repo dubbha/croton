@@ -1,4 +1,4 @@
-import {Router, Request, Response, NextFunction} from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 
 import BaseControllerInterface from '../interfaces/base-controller.interface';
 import HealthCheckService from './health-check.service';

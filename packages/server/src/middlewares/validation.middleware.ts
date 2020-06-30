@@ -1,15 +1,15 @@
-import {plainToClass} from 'class-transformer';
-import {validate, ValidationError} from 'class-validator';
-import {RequestHandler} from 'express';
+import { plainToClass } from 'class-transformer';
+import { validate, ValidationError } from 'class-validator';
+import { RequestHandler } from 'express';
 import HttpException from '../exceptions/http.exception';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function validationMiddleware<T>(
-  type,
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    type,
   skipMissingProperties = false
 ): RequestHandler {
   return (req, res, next) => {
-    validate(plainToClass(type, req.body), {skipMissingProperties}).then(
+    validate(plainToClass(type, req.body), { skipMissingProperties }).then(
       (errors: ValidationError[]) => {
         if (errors.length) {
           const message = errors

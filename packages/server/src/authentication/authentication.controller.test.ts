@@ -5,13 +5,10 @@ import AuthenticationController from './authentication.controller';
 (typeorm as any).getRepository = jest.fn();
 
 describe('AuthenticationController', () => {
-  let authenticationController;
-
-  beforeEach(() => {
-    authenticationController = new AuthenticationController();
-  });
+  let authenticationController: AuthenticationController;
 
   it('should create', () => {
+    authenticationController = new AuthenticationController();
     expect(authenticationController).toBeTruthy();
   });
 });

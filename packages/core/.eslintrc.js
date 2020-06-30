@@ -11,8 +11,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'prettier', 'mocha'],
   rules: {
-    quotes: [2, 'single'],
-    'object-curly-spacing': [2],
+    quotes: ['error', 'single'],
+    'object-curly-spacing': ['error', 'always', { arraysInObjects: false }],
     'no-unused-vars': 'off',
     'mocha/no-global-tests': 'off',
     'mocha/no-mocha-arrows': 'off',
