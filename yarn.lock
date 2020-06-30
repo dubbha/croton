@@ -4416,25 +4416,6 @@ class-validator@^0.12.2:
     tslib ">=1.9.0"
     validator "13.0.0"
 
-claudia@^5.12.0:
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/claudia/-/claudia-5.12.0.tgz#774e05d00d29cb6064d19da1c0d4a4713f2836e0"
-  integrity sha512-ukgOGUNeIaU23xQB5r41AqGPAcq8bBd5LGz4Q880aRgGSW6VGHVMD/srsZcWM6mP4XKSmaofHzmJfoIXSmlJFg==
-  dependencies:
-    archiver "^3.0.0"
-    aws-sdk "^2.599.0"
-    fs-extra "^6.0.1"
-    glob "^7.1.2"
-    gunzip-maybe "^1.4.0"
-    https-proxy-agent "^3.0.0"
-    minimal-request-promise "^1.1.0"
-    minimist "^1.2.0"
-    oh-no-i-insist "^1.1.1"
-    sequential-promise-map "^1.0.0"
-    tar-fs "^1.14.0"
-    uuid "^2.0.1"
-    which "^1.3.1"
-
 clean-css@^4.1.11, clean-css@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"

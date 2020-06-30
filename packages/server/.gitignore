@@ -78,12 +78,6 @@ web_modules/
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -92,9 +86,6 @@ web_modules/
 
 # vuepress build output
 .vuepress/dist
-
-# Serverless directories
-.serverless/
 
 # FuseBox cache
 .fusebox/
@@ -114,11 +105,6 @@ web_modules/
 .yarn/unplugged
 .yarn/build-state.yml
 .pnp.*
-
-# claudia deploy files
-
-envVariables.json
-claudia.json
 
 # prod build
 dist
