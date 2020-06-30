@@ -1,7 +1,6 @@
 {
   "name": "mobile",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "compile": "tsc -b --incremental",
     "compile:watch": "yarn run compile -w",
@@ -14,7 +13,8 @@
     "studio": "studio android",
     "xcode": "open ios/myprojectname.xcworkspace",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "core": "0.0.1",
@@ -25,6 +25,7 @@
     "@react-native-community/eslint-config": "0.0.7",
     "@types/react": "16.9.19",
     "@types/react-native": "0.61.12",
+    "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "24.9.0",
     "eslint": "6.8.0",
     "jest": "24.9.0",
@@ -34,5 +35,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "license": "MIT"
 }

@@ -1,0 +1,37 @@
+name: SERVER-CI-deploy
+
+on:
+  push:
+    paths:
+      - "packages/server/**"
+      - ".github/workflows/**"
+    branches:
+      - dev
+      - stage
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: SSH and deploy croton server app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo ${{ steps.extract_branch.outputs.branch }}
+            cd /var/www/croton-server-${{ steps.extract_branch.outputs.branch }}
+            git fetch origin
+            git checkout ${{ steps.extract_branch.outputs.branch }}
+            git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
+            yarn workspace server install
+            yarn workspace server build
+            sudo systemctl restart croton-server-${{ steps.extract_branch.outputs.branch }}
