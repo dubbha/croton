@@ -30,8 +30,8 @@ jobs:
             echo ${{ steps.extract_branch.outputs.branch }}
             cd /var/www/croton-server-${{ steps.extract_branch.outputs.branch }}
             git fetch origin
-            git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
             git checkout ${{ steps.extract_branch.outputs.branch }}
+            git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
             yarn workspace server install
             yarn workspace server build
             sudo systemctl restart croton-server-${{ steps.extract_branch.outputs.branch }}
