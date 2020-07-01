@@ -15,6 +15,9 @@ export default class User {
   public password: string;
 
   @Column()
+  public status: string;
+
+  @Column()
   public facebookId: string;
 
   @Column()
