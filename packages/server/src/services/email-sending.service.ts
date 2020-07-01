@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
-import {Pages} from 'core/constants/pages';
-import {QueryParams} from 'core/constants/query-params';
+import { Pages } from 'core/constants/pages';
+import { QueryParams } from 'core/constants/query-params';
 
 export default class EmailSendingService {
   public async sendEmail(mailOptions: Record<string, unknown>): Promise<void> {
