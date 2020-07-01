@@ -1,4 +1,4 @@
-import { SystemState, SystemActionTypes, UPDATE_SESSION } from './types';
+import { SystemState, SystemActionTypes, SYSTEM_UPDATE } from './actions';
 
 const initialState: SystemState = {
   loggedIn: false,
@@ -11,7 +11,7 @@ export function systemReducer(
   action: SystemActionTypes,
 ): SystemState {
   switch (action.type) {
-    case UPDATE_SESSION: {
+    case SYSTEM_UPDATE: {
       return {
         ...state,
         ...action.payload,

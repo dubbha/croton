@@ -1,9 +1,15 @@
 import React from 'react';
-import { LightButton, DarkButton } from 'elements';
+import { Nav } from 'elements';
 
 export const Header = () => (
   <header>
-    <LightButton />
-    <DarkButton />
+    <Nav>
+      <Nav.Item>
+        <Nav.Link href="/">Home</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/signin">Sign In</Nav.Link>
+      </Nav.Item>
+    </Nav>
   </header>
 );

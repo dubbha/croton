@@ -1,12 +1,19 @@
-import { combineReducers, createStore } from 'redux';
-import { systemReducer } from './system/reducers';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga'
+import { systemReducer } from './system/reducer';
+import { rootSaga } from './rootSaga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   system: systemReducer,
 });
 
-export type RootState = ReturnType<typeof rootReducer>
-
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  {},
+  applyMiddleware(sagaMiddleware));
 
 export default store;
+
+sagaMiddleware.run(rootSaga)
