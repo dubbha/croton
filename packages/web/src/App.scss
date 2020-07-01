@@ -1,3 +1,6 @@
+// @import "~bootstrap/scss/bootstrap";
+@import "custom";
+
 .App {
   text-align: center;
 }
@@ -13,8 +16,10 @@
   }
 }
 
+$app-header-bgcolor: #282c34; // SCSS variable
+
 .App-header {
-  background-color: #282c34;
+  background-color: $app-header-bgcolor;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

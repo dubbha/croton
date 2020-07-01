@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['../core/.eslintrc', 'airbnb', 'plugin:react-hooks/recommended'],
+  extends: [
+    '../core/.eslintrc',
+    'airbnb',
+    'plugin:react-hooks/recommended',
+  ],
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
@@ -8,6 +12,7 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
     react: {
@@ -26,6 +31,17 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          'src/setupTests.ts',
+          '**/*.test.ts*',
+        ],
+      },
+    ],
+    'import/prefer-default-export': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/jsx-filename-extension': [
       1,
       {
