@@ -1,4 +1,4 @@
-const root = './api';
+const root = '/api';
 const auth = '/auth';
 const authLogin = `${auth}/login`;
 const authLoginFacebook = '/facebook';
