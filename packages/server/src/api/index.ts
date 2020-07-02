@@ -6,7 +6,7 @@ const authLoginGoogle = '/google';
 const authRegister = `${auth}/register`;
 const healthCheck = '/health-check';
 
-export default {
+export const api = {
   root,
   auth,
   authLogin,
@@ -15,3 +15,5 @@ export default {
   authLoginFacebook,
   authLoginGoogle,
 };
+
+export type Api = typeof api;
