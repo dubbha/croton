@@ -10,7 +10,8 @@
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "start:dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "build:serve": "tsc && node ./dist/server.js"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-export const LightButton = () => <Button variant="light">Light</Button>;
+type Props = {
+  children?: React.ReactNode | React.ReactNode[],
+}
+export const LightButton = ({ children }: Props) => <Button variant="light">{children}</Button>;

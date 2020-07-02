@@ -1,14 +1,14 @@
 import React from 'react';
-import { Nav } from 'elements';
+import { Nav, NavLink } from 'elements';
 
 export const Header = () => (
   <header>
     <Nav>
       <Nav.Item>
-        <Nav.Link href="/">Home</Nav.Link>
+        <NavLink to="/" exact>Home</NavLink>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/signin">Sign In</Nav.Link>
+        <NavLink to="/signin">Sign In</NavLink>
       </Nav.Item>
     </Nav>
   </header>

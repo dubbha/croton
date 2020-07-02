@@ -1,9 +1,14 @@
+$color-grass-dark: #2f8611;
+$color-grass: #7ec850;
+$color-grass-light: #95e083;
+
+
 $theme-colors: (
-    "info": tomato
+  "primary": $color-grass-dark
 );
 
-$code-color: teal;
-$code-font-size: 120%;
+$code-color: $color-grass;
+$code-font-size: 100%;
 
 .container {
   height: 100vh;
@@ -12,6 +17,16 @@ $code-font-size: 120%;
   align-items: center;
   justify-content: space-evenly;
   font-size: calc(10px + 2vmin);
+}
+
+.nav-link {
+  color: $color-grass-dark;
+  &.active {
+    color: $color-grass;
+  }
+  &:hover {
+    color: $color-grass-light;
+  }
 }
 
 @import "~bootstrap/scss/bootstrap";
