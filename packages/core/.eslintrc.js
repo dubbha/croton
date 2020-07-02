@@ -14,13 +14,16 @@ module.exports = {
   rules: {
     quotes: ['error', 'single'],
     'object-curly-spacing': ['error', 'always'],
-    'no-unused-vars': 'off',
     'no-undef': 'off',
     'no-console': 'off',
     'implicit-arrow-linebreak': 'off',
     'arrow-parens': 'off',
+    'global-require': 'off',
+    'no-shadow': ['error', { allow: ['React'] }],
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'error',
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };

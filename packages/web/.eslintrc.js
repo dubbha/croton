@@ -48,5 +48,14 @@ module.exports = {
     ],
     'react/jsx-one-expression-per-line': 'off',
     'jsx-quotes': ['error', 'prefer-double'],
+    
   },
+  overrides: [{
+    files: ['*.test.ts*'],
+    rules: {
+      'react/prop-types': 'off',
+      'jsx-a11y/control-has-associated-label': 'off',
+      'react/button-has-type': 'off',
+    },
+  }],
 };

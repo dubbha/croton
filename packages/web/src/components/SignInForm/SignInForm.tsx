@@ -17,7 +17,6 @@ export const SignInForm = ({ onSubmit }: Props) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(e.target);
     onSubmit(email, password);
   };
 
@@ -28,12 +27,14 @@ export const SignInForm = ({ onSubmit }: Props) => {
         placeholder="Enter email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        data-testid="signInForm__email"
       />
       <Form.Control
         type="password"
         placeholder="Enter password"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        data-testid="signInForm__password"
       />
       <SubmitButton disabled={!isValid} />
     </Form>

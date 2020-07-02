@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/SignIn should render successfully 1`] = `
+<div
+  class="container"
+>
+  <header>
+    <div
+      class="nav"
+    >
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          data-rb-event-key="/"
+          href="/"
+        >
+          Home
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          data-rb-event-key="/signin"
+          href="/signin"
+        >
+          Sign In
+        </a>
+      </div>
+    </div>
+  </header>
+  <button
+    data-testid="submit"
+  />
+  <footer>
+    <button
+      class="btn btn-light"
+      type="button"
+    >
+      Light
+    </button>
+    <button
+      class="btn btn-dark"
+      type="button"
+    >
+      Dark
+    </button>
+  </footer>
+</div>
+`;

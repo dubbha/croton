@@ -10,7 +10,7 @@ export const SubmitButton = ({
   children = 'Submit',
   disabled = false,
 }: Props) => (
-  <Button variant="primary" type="submit" disabled={disabled}>
+  <Button variant="primary" type="submit" disabled={disabled} data-testid="submitButton">
     {children}
   </Button>
 );

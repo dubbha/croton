@@ -18,7 +18,6 @@ export const environments = {
 }
 
 export const getEnvironment = () => {
-  console.log(window.location.hostname)
   switch (window.location.hostname) {
     case environments.prod.hostname:
       return environments.prod;

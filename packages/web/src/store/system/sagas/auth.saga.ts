@@ -6,7 +6,6 @@ import { SYSTEM_AUTH, SystemAuthAction } from '../actions';
 
 function* handleAuth(action: SystemAuthAction) {
   const { email, password } = action.payload;
-  yield call(console.log, email, password);
   try {
     yield call(
       axios.post,
