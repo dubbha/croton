@@ -13,4 +13,10 @@ export default class User {
 
   @Column()
   public password: string;
+
+  @Column()
+  public facebookId: string;
+
+  @Column()
+  public googleId: string;
 }

@@ -1,29 +1,27 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-import BaseControllerInterface from '../interfaces/base-controller.interface';
+import BaseController from '../base-classes/controller';
 import validationMiddleware from '../middlewares/validation.middleware';
 import RegistrationDto from './registration.dto';
 import LoginDto from './login.dto';
 import AuthenticationService from './authentication.service';
 
-export default class AuthenticationController
-  implements BaseControllerInterface {
-  public path = '/auth';
-  public router = Router();
+export default class AuthenticationController extends BaseController {
   private authenticationService = new AuthenticationService();
 
   constructor() {
+    super();
     this.initializeRoutes();
   }
 
-  private initializeRoutes(): void {
+  initializeRoutes(): void {
     this.router.post(
-      `${this.path}/register`,
+      this.serverApi.authLogin,
       validationMiddleware(RegistrationDto),
       this.registrationHandler
     );
     this.router.post(
-      `${this.path}/login`,
+      this.serverApi.authRegister,
       validationMiddleware(LoginDto),
       this.loginHandler
     );
