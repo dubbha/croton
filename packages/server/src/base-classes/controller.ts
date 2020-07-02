@@ -8,10 +8,5 @@ export default abstract class BaseController
   implements BaseControllerInterface {
   public router = Router();
   public serverApi = serverApi;
-
-  constructor() {
-    this.initializeRoutes();
-  }
-
   abstract initializeRoutes(): void;
 }

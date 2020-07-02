@@ -6,6 +6,11 @@ import HealthCheckService from './health-check.service';
 export default class HealthCheckController extends BaseController {
   private healthCheckService = new HealthCheckService();
 
+  constructor() {
+    super();
+    this.initializeRoutes();
+  }
+
   initializeRoutes(): void {
     this.router.get(this.serverApi.healthCheck, this.healthCheckHandler);
   }

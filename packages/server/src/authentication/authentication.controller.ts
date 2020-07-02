@@ -9,6 +9,11 @@ import AuthenticationService from './authentication.service';
 export default class AuthenticationController extends BaseController {
   private authenticationService = new AuthenticationService();
 
+  constructor() {
+    super();
+    this.initializeRoutes();
+  }
+
   initializeRoutes(): void {
     this.router.post(
       this.serverApi.authLogin,

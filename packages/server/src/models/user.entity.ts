@@ -15,7 +15,7 @@ export default class User {
   public password: string;
 
   @Column()
-  public facebooId: string;
+  public facebookId: string;
 
   @Column()
   public googleId: string;
