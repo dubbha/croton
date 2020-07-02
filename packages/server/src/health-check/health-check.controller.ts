@@ -1,19 +1,19 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
 import BaseControllerInterface from '../interfaces/base-controller.interface';
+import BaseController from '../base-classes/controller';
 import HealthCheckService from './health-check.service';
 
-export default class HealthCheckController implements BaseControllerInterface {
-  public path = '/health-check';
-  public router = Router();
+export default class HealthCheckController extends BaseController
+  implements BaseControllerInterface {
   private healthCheckService = new HealthCheckService();
 
   constructor() {
-    this.initializeRoutes();
+    super();
   }
 
-  private initializeRoutes(): void {
-    this.router.get(this.path, this.healthCheckHandler);
+  initializeRoutes(): void {
+    this.router.get(this.serverApi.healthCheck, this.healthCheckHandler);
   }
 
   private healthCheckHandler = async (
