@@ -1,0 +1,17 @@
+$theme-colors: (
+    "info": tomato
+);
+
+$code-color: teal;
+$code-font-size: 120%;
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: calc(10px + 2vmin);
+}
+
+@import "~bootstrap/scss/bootstrap";

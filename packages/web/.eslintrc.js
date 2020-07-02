@@ -1,14 +1,13 @@
 module.exports = {
-  extends: ['../core/.eslintrc', 'airbnb', 'plugin:react-hooks/recommended'],
+  extends: [
+    'airbnb',
+    'plugin:react-hooks/recommended',
+    '../core/.eslintrc',
+  ],
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
     },
     react: {
       version: 'detect',
@@ -26,13 +25,37 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          'src/setupTests.ts',
+          '**/*.test.ts*',
+        ],
+      },
+    ],
+    'import/prefer-default-export': 'off',
+    'import/no-unresolved': [
+      'error',
+      { ignore: ['elements', 'components', 'pages', 'store', 'config'] },
+    ],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/jsx-filename-extension': [
-      1,
+      'warn',
       {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     ],
     'react/jsx-one-expression-per-line': 'off',
     'jsx-quotes': ['error', 'prefer-double'],
+    
   },
+  overrides: [{
+    files: ['*.test.ts*'],
+    rules: {
+      'react/prop-types': 'off',
+      'jsx-a11y/control-has-associated-label': 'off',
+      'react/button-has-type': 'off',
+    },
+  }],
 };
