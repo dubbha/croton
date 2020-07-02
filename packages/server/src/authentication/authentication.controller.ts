@@ -1,19 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 
 import BaseController from '../base-classes/controller';
-import BaseControllerInterface from '../interfaces/base-controller.interface';
 import validationMiddleware from '../middlewares/validation.middleware';
 import RegistrationDto from './registration.dto';
 import LoginDto from './login.dto';
 import AuthenticationService from './authentication.service';
 
-export default class AuthenticationController extends BaseController
-  implements BaseControllerInterface {
+export default class AuthenticationController extends BaseController {
   private authenticationService = new AuthenticationService();
-
-  constructor() {
-    super();
-  }
 
   initializeRoutes(): void {
     this.router.post(
