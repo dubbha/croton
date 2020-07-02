@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import serverApi from 'core/api/server';
+import { api } from '../api';
 
 import BaseControllerInterface from '../interfaces/base-controller.interface';
 import errorMiddleware from '../middlewares/error.middleware';
@@ -39,7 +39,7 @@ export default class App {
 
   private initializeControllers(controllers: BaseControllerInterface[]): void {
     controllers.forEach((controller: BaseControllerInterface) => {
-      this.app.use(serverApi.root, controller.router);
+      this.app.use(api.root, controller.router);
     });
   }
 }
