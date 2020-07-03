@@ -1,9 +1,8 @@
 import React from 'react';
-import { LightButton, DarkButton } from 'elements';
+import { LightButton } from 'elements';
 
 export const Footer = () => (
   <footer>
-    <LightButton />
-    <DarkButton />
+    <LightButton>Footer</LightButton>
   </footer>
 );

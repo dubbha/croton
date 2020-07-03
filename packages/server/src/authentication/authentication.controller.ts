@@ -17,13 +17,13 @@ export default class AuthenticationController extends BaseController {
   initializeRoutes(): void {
     this.router.post(
       this.serverApi.authLogin,
-      validationMiddleware(RegistrationDto),
-      this.registrationHandler
+      validationMiddleware(LoginDto),
+      this.loginHandler
     );
     this.router.post(
       this.serverApi.authRegister,
-      validationMiddleware(LoginDto),
-      this.loginHandler
+      validationMiddleware(RegistrationDto),
+      this.registrationHandler
     );
   }
 

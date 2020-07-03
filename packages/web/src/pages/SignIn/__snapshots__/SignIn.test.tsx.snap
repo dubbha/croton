@@ -12,8 +12,8 @@ exports[`pages/SignIn should render successfully 1`] = `
         class="nav-item"
       >
         <a
-          class="nav-link"
-          data-rb-event-key="/"
+          aria-current="page"
+          class="nav-link active"
           href="/"
         >
           Home
@@ -24,7 +24,6 @@ exports[`pages/SignIn should render successfully 1`] = `
       >
         <a
           class="nav-link"
-          data-rb-event-key="/signin"
           href="/signin"
         >
           Sign In
@@ -40,13 +39,7 @@ exports[`pages/SignIn should render successfully 1`] = `
       class="btn btn-light"
       type="button"
     >
-      Light
-    </button>
-    <button
-      class="btn btn-dark"
-      type="button"
-    >
-      Dark
+      Footer
     </button>
   </footer>
 </div>

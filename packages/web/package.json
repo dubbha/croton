@@ -58,6 +58,7 @@
     "husky": "^4.2.5",
     "jest-coverage-badges": "^1.1.2",
     "lint-staged": "^10.2.10",
+    "redux-saga-test-plan": "^4.0.0-rc.3",
     "yarn-audit-ci": "^1.2.0"
   },
   "jest": {

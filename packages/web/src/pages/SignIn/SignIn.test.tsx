@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 
 describe('pages/SignIn', () => {
@@ -22,7 +23,7 @@ describe('pages/SignIn', () => {
 
       const { SignIn } = require('./SignIn');
 
-      const { container } = render(<SignIn />);
+      const { container } = render(<SignIn />, { wrapper: MemoryRouter });
       expect(container.firstChild).toMatchSnapshot();
     })
   })
@@ -45,7 +46,7 @@ describe('pages/SignIn', () => {
 
       const { SignIn } = require('./SignIn');
 
-      const { getByTestId } = render(<SignIn />);
+      const { getByTestId } = render(<SignIn />, { wrapper: MemoryRouter });
       const submitButton = getByTestId('submit');
 
       fireEvent.click(submitButton);

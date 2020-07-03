@@ -13,7 +13,7 @@ function* handleAuth(action: SystemAuthAction) {
       { email, password },
     );
   } catch (e) {
-    console.error(e);
+    yield call(console.error, e);
   }
 }
 
