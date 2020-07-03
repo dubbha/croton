@@ -1,12 +1,19 @@
-import { cleanEnv, port, str } from 'envalid';
+import { cleanEnv, num, port, str } from 'envalid';
 
 export function validateEnv(): void {
   cleanEnv(process.env, {
-    POSTGRES_PASSWORD: str({ devDefault: 'qwerty12345' }),
-    POSTGRES_DB: str({ devDefault: 'localDB' }),
-    POSTGRES_USER: str({ devDefault: 'testUser' }),
-    POSTGRES_HOST: str({ devDefault: '127.0.0.1' }),
-    POSTGRES_PORT: port({ devDefault: 5432 }),
-    PORT: port({ devDefault: 3000 }),
+    POSTGRES_PASSWORD: str(),
+    POSTGRES_DB: str(),
+    POSTGRES_USER: str(),
+    POSTGRES_HOST: str(),
+    POSTGRES_PORT: port(),
+    PORT: port(),
+    JWT_SECRET: str(),
+    SESSION_DURATION: num(),
+    EMAIL_VERIFICATION_EXPIRATION_TIME: num(),
+    EMAIL_HOST: str(),
+    EMAIL_PORT: num(),
+    EMAIL_USER: str(),
+    EMAIL_PASS: str()
   });
 }

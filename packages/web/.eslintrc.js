@@ -39,7 +39,6 @@ module.exports = {
       'error',
       { ignore: ['elements', 'components', 'pages', 'store', 'config'] },
     ],
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/jsx-filename-extension': [
       'warn',
       {
