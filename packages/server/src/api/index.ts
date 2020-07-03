@@ -1,8 +1,10 @@
 const root = '/api';
 const auth = '/auth';
 const authLogin = `${auth}/login`;
-const authLoginFacebook = '/facebook';
-const authLoginGoogle = '/google';
+const authLoginFacebook = `${auth}/facebook`;
+const authLoginFacebookCallback = `${authLoginFacebook}/callback`;
+const authLoginGoogle = `${auth}/google`;
+const authLoginGoogleCallback = `${authLoginGoogle}/callback`;
 const authRegister = `${auth}/register`;
 const authConfirm = `${auth}/confirm`;
 const authPasswordReset = `${auth}/password-reset`;
@@ -16,7 +18,9 @@ export const api = {
   authRegister,
   healthCheck,
   authLoginFacebook,
+  authLoginFacebookCallback,
   authLoginGoogle,
+  authLoginGoogleCallback,
   authConfirm,
   authPasswordReset,
   authPasswordUpdate,

@@ -1,0 +1,95 @@
+import { getRepository } from 'typeorm';
+import passport, { Profile } from 'passport';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+// import { OAuthStrategy as GoogleStrategy } from 'passport-google-oauth'
+
+import UserEnity from '../models/user.entity';
+
+import RegistrationDto from '../models/registration.dto';
+
+import { ProvidersIdDBFieldName, ProvidersServiceName } from './providers-auth.interfaces'
+
+export default class ProvidersAuthService {
+  private loginUser;
+  private registerUser;
+  private repostory = getRepository(UserEnity);
+
+  constructor(loginUser, registerUser) {
+    // bindall(this)
+    this.loginUser = loginUser;
+    this.registerUser = registerUser;
+    this.initFacebookProviderLogin()
+    return this
+  }
+
+  private async findUserByProviderId(id: string, providerIdKeyName: ProvidersIdDBFieldName): Promise<UserEnity> {
+    return await this.repostory.findOne({ [providerIdKeyName]: id });
+  }
+
+  private formatProviderProfileToRegistrationDto(profile: Profile, accessToken: string, passportIdKeyName: ProvidersIdDBFieldName): RegistrationDto {
+    return {
+      firstName: profile.name?.givenName || profile.displayName,
+      lastName: profile.name?.familyName || profile.displayName,
+      email: profile.emails[0].value,
+      password: accessToken,
+      [passportIdKeyName]: profile.id
+    }
+  }
+
+  private async registerOrLoginUserByProviderProfile(
+    accessToken: string,
+    profile: Profile,
+    passportIdKeyName: ProvidersIdDBFieldName
+) {
+      const existingUser = await this.findUserByProviderId(profile.id, passportIdKeyName)
+      if(!existingUser) {
+        const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken, passportIdKeyName)
+        return await this.registerUser(registrationDto)
+      }
+      const { email, password } = existingUser
+      return await this.loginUser({ email, password })
+    }
+
+  private async handleFacebookProviderLogin(
+    accessToken: string,
+    _: string,
+    profile: Profile,
+    done: any
+  ):Promise<void> {
+    try {
+      const loggedInOrRegisteredUser = this.registerOrLoginUserByProviderProfile(
+        accessToken,
+        profile,
+        ProvidersIdDBFieldName.FACEBOOK
+        )
+        return done(null, loggedInOrRegisteredUser)
+      } catch (err) {
+        done(err)
+      }
+  }
+
+  private initFacebookProviderLogin () {
+    const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env
+    passport.use(new FacebookStrategy({
+      clientID: FACEBOOK_APP_ID,
+      clientSecret: FACEBOOK_APP_SECRET,
+      callbackURL: 'http://192.168.0.100:8080/auth/facebook/callback'
+    },
+    this.handleFacebookProviderLogin
+  ));
+  }
+
+  public getAuthenticateFacebookProvider () {
+    return passport.authenticate(ProvidersServiceName.FACEBOOK as string)
+  }
+
+  public getHandleFacebookProviderCallback () {
+    return passport.authenticate(ProvidersServiceName.FACEBOOK as string,
+    {
+      successRedirect: '/',
+      failureRedirect: '/api/auth'
+    }
+    );
+  }
+
+}
