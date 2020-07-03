@@ -27,16 +27,16 @@ export default class AuthenticationController extends BaseController {
       this.registrationHandler
     );
     this.router.post(
-      `${this.path}/confirm`,
+      this.serverApi.authConfirm,
       validationMiddleware(EmailVerificationDto),
       this.emailConfirmHandler
     );
   }
 
   private emailConfirmHandler = async (
-      request: Request,
-      response: Response,
-      next: NextFunction
+    request: Request,
+    response: Response,
+    next: NextFunction
   ): Promise<void> => {
     try {
       const user = await this.authenticationService.verify(

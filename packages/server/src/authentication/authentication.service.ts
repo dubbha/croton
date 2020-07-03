@@ -9,7 +9,7 @@ import UserWithToken from '../interfaces/user-with-token';
 import LoginDto from './login.dto';
 import WrongCredentials from '../exceptions/wrong-creditionals.exception';
 import User from '../interfaces/user.interface';
-import { UserStatuses } from 'core/constants/user-statuses';
+import { UserStatuses } from '../constants/user-statuses';
 import { createRandomString } from '../utils/create-random-string';
 import EmailVerificationEntity from '../models/email-verification.entity';
 import WrongEmailVerificationToken from '../exceptions/wrong-email-verification-token.exception';
@@ -37,7 +37,7 @@ export default class AuthenticationService {
         password: hashedPassword,
       });
 
-      await this.sendActivationMessage(user.id, user.email, host);
+      await this.sendActivationMessage(user, host);
     }
   }
 
@@ -102,18 +102,18 @@ export default class AuthenticationService {
     }
   }
 
-  private async sendActivationMessage(userId, userEmail, host) {
+  private async sendActivationMessage({id, email, name}: User, host) {
     const {
       EMAIL_VERIFICATION_EXPIRATION_TIME
     } = process.env;
     const emailVerificationToken = createRandomString(64);
     const expiresInHours = 1000 * 60 * 60 * Number(EMAIL_VERIFICATION_EXPIRATION_TIME);
     await this.emailVerificationRepository.save({
-      userId,
+      userId: id,
       emailVerificationToken,
       expiresIn: Date.now() + expiresInHours
     });
 
-    await this.emailSendingService.sendActivationMessage(userEmail, host, emailVerificationToken);
+    await this.emailSendingService.sendActivationMessage(email, name, host, emailVerificationToken);
   }
 }
