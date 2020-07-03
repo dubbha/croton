@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 import { Pages } from '../constants/pages';
 import { QueryParams } from '../constants/query-params';
-import {createActivationEmail} from "../utils/create-activation-email";
+import { createActivationEmail } from '../utils/create-activation-email';
 
 export default class EmailSendingService {
   public async sendEmail(mailOptions: Record<string, unknown>): Promise<void> {

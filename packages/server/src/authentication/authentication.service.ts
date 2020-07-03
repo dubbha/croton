@@ -102,7 +102,7 @@ export default class AuthenticationService {
     }
   }
 
-  private async sendActivationMessage({id, email, name}: User, host) {
+  private async sendActivationMessage({ id, email, name }: User, host) {
     const {
       EMAIL_VERIFICATION_EXPIRATION_TIME
     } = process.env;
