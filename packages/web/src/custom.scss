@@ -2,9 +2,10 @@ $color-grass-dark: #2f8611;
 $color-grass: #7ec850;
 $color-grass-light: #95e083;
 
+$color-lightcoral: #F08080;
 
 $theme-colors: (
-  "primary": $color-grass-dark
+  'primary': $color-grass-dark,
 );
 
 $code-color: $color-grass;
@@ -17,6 +18,31 @@ $code-font-size: 100%;
   align-items: center;
   justify-content: space-evenly;
   font-size: calc(10px + 2vmin);
+
+  form {
+    .form-label{
+      font-size: medium;
+    }
+  }
+
+  .reset-password-link {
+    font-size: medium;
+    .nav-link {
+      padding-left: 0;
+    }
+  }
+
+  .password-not-match{
+    color: $color-lightcoral;
+  }
+
+  .signin-register,
+  .signup-login {
+    font-size: medium;
+    .nav-link {
+      display: inline;
+    }
+  }
 }
 
 .nav-link {
@@ -29,4 +55,4 @@ $code-font-size: 100%;
   }
 }
 
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';

@@ -1,4 +1,4 @@
-import { SystemState, SystemActionTypes, SYSTEM_UPDATE } from './actions';
+import { SystemState, SystemActionTypes, SYSTEM_UPDATE, SYSTEM_REGISTER } from './actions';
 
 export const initialState: SystemState = {
   loggedIn: false,
@@ -16,6 +16,11 @@ export function systemReducer(
         ...state,
         ...action.payload,
       };
+    case SYSTEM_REGISTER: 
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

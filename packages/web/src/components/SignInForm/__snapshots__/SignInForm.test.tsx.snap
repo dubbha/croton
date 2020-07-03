@@ -29,35 +29,6 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
 </form>
 `;
 
-exports[`components/SignInForm should render submit button disabed by default 1`] = `
-<form
-  class=""
->
-  <input
-    class="form-control"
-    data-testid="signInForm__email"
-    placeholder="Enter email"
-    type="email"
-    value=""
-  />
-  <input
-    class="form-control"
-    data-testid="signInForm__password"
-    placeholder="Enter password"
-    type="password"
-    value=""
-  />
-  <button
-    class="btn btn-primary"
-    data-testid="submitButton"
-    disabled=""
-    type="submit"
-  >
-    Submit
-  </button>
-</form>
-`;
-
 exports[`components/SignInForm should render successfully 1`] = `
 <form
   class=""

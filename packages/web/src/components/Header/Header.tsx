@@ -10,6 +10,12 @@ export const Header = () => (
       <Nav.Item>
         <NavLink to="/signin">Sign In</NavLink>
       </Nav.Item>
+      <Nav.Item>
+        <NavLink to="/signup">Sign Up</NavLink>
+      </Nav.Item>
+      <Nav.Item>
+        <NavLink to="/reset">Reset Password</NavLink>
+      </Nav.Item>
     </Nav>
   </header>
 );

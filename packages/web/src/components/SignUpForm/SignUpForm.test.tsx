@@ -1,17 +1,17 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { SignInForm } from './SignInForm';
+import { SignUpForm } from './SignUpForm';
 
 describe('components/SignInForm', () => {
   const fn = jest.fn()
 
   it('should render successfully', () => {
-    const { container } = render(<SignInForm onSubmit={fn} />);
+    const { container } = render(<SignUpForm onSubmit={fn} />);
     expect(container.firstChild).toMatchSnapshot();
   })
 
   it('should render submit button disabled by default', () => {
-    const { container, getByTestId } = render(<SignInForm onSubmit={fn} />);
+    const { container, getByTestId } = render(<SignUpForm onSubmit={fn} />);
     expect(container.firstChild).toMatchSnapshot();
 
     const submitButton = getByTestId('submitButton');
@@ -19,16 +19,22 @@ describe('components/SignInForm', () => {
   })
 
   it('should call onSubmit prop on submit', () => {
-    const { container, getByTestId } = render(<SignInForm onSubmit={fn} />);
+    const { container, getByTestId } = render(<SignUpForm onSubmit={fn} />);
     expect(container.firstChild).toMatchSnapshot();
 
-    const emailInput = getByTestId('signInForm__email');
-    const passwordInput = getByTestId('signInForm__password');
+    const emailInput = getByTestId('SignUpForm__email');
+    const passwordInput = getByTestId('SignUpForm__password');
+    const passwordMatchInput = getByTestId('signUpForm__passwordMatch');
+    const firstNameInput = getByTestId('signUpForm__firstName');
+    const lastNameInput = getByTestId('signUpForm__lastName');
     const submitButton = getByTestId('submitButton');
 
     fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } });
     fireEvent.change(passwordInput, { target: { value: 'admin' } });
-
+    fireEvent.change(passwordMatchInput,  { target: { value: 'admin' } })
+    fireEvent.change(firstNameInput,  { target: { value: 'first' } })
+    fireEvent.change(lastNameInput,  { target: { value: 'last' } })
+    
     expect(submitButton).toBeEnabled();
 
     fireEvent.click(submitButton);

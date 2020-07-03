@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, Header, Footer, SignInForm } from 'components';
+import { Container, Header, Footer, SignUpForm } from 'components';
 import { Link } from 'react-router-dom';
 import { SYSTEM_AUTH } from 'store/system/actions';
 
-export const SignIn = () => {
+export const SignUp = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (email: string, password: string) => {
@@ -17,9 +17,9 @@ export const SignIn = () => {
   return (
     <Container>
       <Header />
-      <SignInForm onSubmit={handleSubmit} />
-      <div className="signin-register">
-        Don&apos;t have an account?<Link to="/signup"> Register</Link>
+      <SignUpForm onSubmit={handleSubmit} />
+      <div className="signup-login">
+        Already have an account ?<Link to="/signin"> Sign In</Link>
       </div>
       <Footer />
     </Container>
