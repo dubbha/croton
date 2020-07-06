@@ -22,34 +22,32 @@ export const SignInForm = ({ onSubmit }: Props) => {
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            data-testid="signInForm__email"
-          />
-        </Form.Group>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          data-testid="signInForm__email"
+        />
+      </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            data-testid="signInForm__password"
-          />
-          <Form.Text className="reset-password-link">
-            <Link to="/reset">Forgot password?</Link>
-          </Form.Text>
-        </Form.Group>
-        <SubmitButton disabled={!isValid}>Sign Up</SubmitButton>
-      </Form>
-    </>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          data-testid="signInForm__password"
+        />
+        <Form.Text className="reset-password-link">
+          <Link to="/reset">Forgot password?</Link>
+        </Form.Text>
+      </Form.Group>
+      <SubmitButton disabled={!isValid} data-testid="submitButton">Sign Up</SubmitButton>
+    </Form>
   );
 };

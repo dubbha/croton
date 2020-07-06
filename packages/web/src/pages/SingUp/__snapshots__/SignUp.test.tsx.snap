@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/SignUp should render successfully 1`] = `
+<div
+  class="container"
+>
+  <header>
+    <div
+      class="nav"
+    >
+      <div
+        class="nav-item"
+      >
+        <a
+          aria-current="page"
+          class="nav-link active"
+          href="/"
+        >
+          Home
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/signin"
+        >
+          Sign In
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/signup"
+        >
+          Sign Up
+        </a>
+      </div>
+      <div
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/reset"
+        >
+          Reset Password
+        </a>
+      </div>
+    </div>
+  </header>
+  <button
+    data-testid="submit"
+  />
+  <div
+    class="signup-login"
+  >
+    Already have an account ?
+    <a
+      href="/signin"
+    >
+       Sign In
+    </a>
+  </div>
+  <footer>
+    <button
+      class="btn btn-light"
+      type="button"
+    >
+      Footer
+    </button>
+  </footer>
+</div>
+`;

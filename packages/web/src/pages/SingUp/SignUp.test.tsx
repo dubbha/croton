@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
-describe('pages/SignIn', () => {
-  const fn = jest.fn()
+describe('pages/SignUp', () => {
+  const fn = jest.fn();
 
   it('should render successfully', () => {
     jest.isolateModules(() => {
@@ -12,20 +13,22 @@ describe('pages/SignIn', () => {
         }),
         useDispatch: () => fn,
       }));
-  
-      jest.doMock('components/SignInForm', () => {
+
+      jest.doMock('components/SignUpForm', () => {
         const React = require('react');
         return {
-          SignInForm: ({ onSubmit }) => <button onClick={onSubmit} data-testid="submit" />,
+          SignUpForm: ({ onSubmit }) => (
+            <button onClick={onSubmit} data-testid="submit" />
+          ),
         };
       });
 
-      const { SignIn } = require('./SignIn');
+      const { SignUp } = require('./SignUp');
 
-      const { container } = render(<SignIn />);
+      const { container } = render(<SignUp />, { wrapper: MemoryRouter });
       expect(container.firstChild).toMatchSnapshot();
-    })
-  })
+    });
+  });
 
   it('should dispatch on submit', () => {
     jest.isolateModules(() => {
@@ -35,21 +38,23 @@ describe('pages/SignIn', () => {
         }),
         useDispatch: () => fn,
       }));
-  
-      jest.doMock('components/SignInForm', () => {
+
+      jest.doMock('components/SignUpForm', () => {
         const React = require('react');
         return {
-          SignInForm: ({ onSubmit }) => <button onClick={onSubmit} data-testid="submit" />,
+          SignUpForm: ({ onSubmit }) => (
+            <button onClick={onSubmit} data-testid="submit" />
+          ),
         };
       });
 
-      const { SignIn } = require('./SignIn');
+      const { SignUp } = require('./SignUp');
 
-      const { getByTestId } = render(<SignIn />);
+      const { getByTestId } = render(<SignUp />, { wrapper: MemoryRouter });
       const submitButton = getByTestId('submit');
 
       fireEvent.click(submitButton);
       expect(fn).toBeCalled();
-    })
-  })
-})
+    });
+  });
+});

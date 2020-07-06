@@ -22,8 +22,8 @@ describe('components/SignInForm', () => {
     const { container, getByTestId } = render(<SignUpForm onSubmit={fn} />);
     expect(container.firstChild).toMatchSnapshot();
 
-    const emailInput = getByTestId('SignUpForm__email');
-    const passwordInput = getByTestId('SignUpForm__password');
+    const emailInput = getByTestId('signUpForm__email');
+    const passwordInput = getByTestId('signUpForm__password');
     const passwordMatchInput = getByTestId('signUpForm__passwordMatch');
     const firstNameInput = getByTestId('signUpForm__firstName');
     const lastNameInput = getByTestId('signUpForm__lastName');
