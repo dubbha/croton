@@ -51,13 +51,68 @@ exports[`pages/SignIn should render successfully 1`] = `
       </div>
     </div>
   </header>
-  <button
-    data-testid="submit"
-  />
+  <form
+    class=""
+  >
+    <div
+      style="height: 50px; margin-bottom: 16px;"
+    />
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+      >
+        Email address
+      </label>
+      <input
+        class="form-control"
+        data-testid="signInForm__email"
+        placeholder="Enter email"
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formPassword"
+      >
+        Password
+      </label>
+      <input
+        class="form-control"
+        data-testid="signInForm__password"
+        id="formPassword"
+        placeholder="Enter password"
+        type="password"
+        value=""
+      />
+      <small
+        class="reset-password-link form-text"
+      >
+        <a
+          href="/reset"
+        >
+          Forgot password?
+        </a>
+      </small>
+    </div>
+    <button
+      class="btn btn-primary"
+      data-testid="submitButton"
+      disabled=""
+      type="submit"
+    >
+      Sign Up
+    </button>
+  </form>
   <div
     class="signin-register"
   >
-    Don't have an account?
+    Don't have an account? 
     <a
       href="/signup"
     >

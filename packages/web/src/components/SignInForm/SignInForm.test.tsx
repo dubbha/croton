@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { SignInForm } from './SignInForm';
 
 describe('components/SignInForm', () => {
@@ -8,18 +8,16 @@ describe('components/SignInForm', () => {
 
   it('should render successfully', () => {
     const { container } = render(
-      <Router>
-        <SignInForm onSubmit={fn} />
-      </Router>
+      <SignInForm onSubmit={fn} isLoading={false} error={null} />,
+      { wrapper: MemoryRouter }
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render submit button disabled by default', () => {
     const { container, getByTestId } = render(
-      <Router>
-        <SignInForm onSubmit={fn} />
-      </Router>
+      <SignInForm onSubmit={fn} isLoading={false} error={null} />,
+      { wrapper: MemoryRouter }
     );
     expect(container.firstChild).toMatchSnapshot();
 
@@ -29,9 +27,8 @@ describe('components/SignInForm', () => {
 
   it('should call onSubmit prop on submit', () => {
     const { container, getByTestId } = render(
-      <Router>
-        <SignInForm onSubmit={fn} />
-      </Router>
+      <SignInForm onSubmit={fn} isLoading={false} error={null} />,
+      { wrapper: MemoryRouter }
     );
     expect(container.firstChild).toMatchSnapshot();
 

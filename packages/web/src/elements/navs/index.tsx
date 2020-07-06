@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 
 export { default as Nav } from 'react-bootstrap/Nav';
+export { Link } from 'react-router-dom';
 
 type Props = {
   to: string;

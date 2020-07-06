@@ -3,25 +3,15 @@ import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('pages/SignUp', () => {
-  const fn = jest.fn();
-
   it('should render successfully', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useStore: () => ({
           getState: () => ({}),
         }),
-        useDispatch: () => fn,
+        useDispatch: () => jest.fn(),
+        useSelector: () => false,
       }));
-
-      jest.doMock('components/SignUpForm', () => {
-        const React = require('react');
-        return {
-          SignUpForm: ({ onSubmit }) => (
-            <button onClick={onSubmit} data-testid="submit" />
-          ),
-        };
-      });
 
       const { SignUp } = require('./SignUp');
 
@@ -31,12 +21,14 @@ describe('pages/SignUp', () => {
   });
 
   it('should dispatch on submit', () => {
+    const fn = jest.fn();
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useStore: () => ({
           getState: () => ({}),
         }),
         useDispatch: () => fn,
+        useSelector: () => false,
       }));
 
       jest.doMock('components/SignUpForm', () => {

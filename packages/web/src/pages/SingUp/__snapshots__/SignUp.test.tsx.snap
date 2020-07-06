@@ -51,9 +51,108 @@ exports[`pages/SignUp should render successfully 1`] = `
       </div>
     </div>
   </header>
-  <button
-    data-testid="submit"
-  />
+  <form
+    class=""
+  >
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formFirstName"
+      >
+        First Name
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__firstName"
+        id="formFirstName"
+        placeholder="Enter First Name"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formLastName"
+      >
+        Last Name
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__lastName"
+        id="formLastName"
+        placeholder="Enter Last Name"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formEmail"
+      >
+        Email address
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__email"
+        id="formEmail"
+        placeholder="Enter Email"
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formPassword"
+      >
+        Password
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__password"
+        id="formPassword"
+        placeholder="Enter password"
+        type="password"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formPasswordMatch"
+      >
+        Repeat Password
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__passwordMatch"
+        id="formPasswordMatch"
+        placeholder="Repeat password"
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      class="btn btn-primary"
+      data-testid="submitButton"
+      disabled=""
+      type="submit"
+    >
+      Sing Up
+    </button>
+  </form>
   <div
     class="signup-login"
   >

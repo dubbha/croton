@@ -1,13 +1,22 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { Form, SubmitButton } from 'elements';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './styles.scss';
 
+import {
+  Form,
+  SubmitButton,
+  ErrorAlert,
+  AlertPlaceholder,
+  Link,
+} from 'elements';
+
 type Props = {
+  isLoading: boolean;
+  error: string | null;
   onSubmit: (email: string, password: string) => void;
 };
 
-export const SignInForm = ({ onSubmit }: Props) => {
+export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -23,7 +32,9 @@ export const SignInForm = ({ onSubmit }: Props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formEmail">
+      {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
+      {isLoading && 'Is Loading'}
+      <Form.Group>
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
@@ -47,7 +58,10 @@ export const SignInForm = ({ onSubmit }: Props) => {
           <Link to="/reset">Forgot password?</Link>
         </Form.Text>
       </Form.Group>
-      <SubmitButton disabled={!isValid} data-testid="submitButton">Sign Up</SubmitButton>
+      <SubmitButton disabled={!isValid} data-testid="submitButton">
+        Sign Up
+      </SubmitButton>
+
     </Form>
   );
 };
