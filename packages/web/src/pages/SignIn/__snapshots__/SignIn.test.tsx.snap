@@ -78,14 +78,12 @@ exports[`pages/SignIn should render successfully 1`] = `
     >
       <label
         class="form-label"
-        for="formPassword"
       >
         Password
       </label>
       <input
         class="form-control"
         data-testid="signInForm__password"
-        id="formPassword"
         placeholder="Enter password"
         type="password"
         value=""
@@ -106,7 +104,7 @@ exports[`pages/SignIn should render successfully 1`] = `
       disabled=""
       type="submit"
     >
-      Sign Up
+      Sign In
     </button>
   </form>
   <div
