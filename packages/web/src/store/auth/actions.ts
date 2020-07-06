@@ -26,6 +26,10 @@ export const AUTH_UPDATE_PASSWORD = 'AUTH_UPDATE_PASSWORD';
 export const AUTH_UPDATE_PASSWORD_SUCCESS = 'AUTH_UPDATE_PASSWORD_SUCCESS';
 export const AUTH_UPDATE_PASSWORD_ERROR = 'AUTH_UPDATE_PASSWORD_ERROR';
 
+export const AUTH_EMAIL_CONFIRM = 'AUTH_EMAIL_CONFIRM';
+export const AUTH_EMAIL_CONFIRM_SUCCESS = 'AUTH_EMAIL_CONFIRM_SUCCESS';
+export const AUTH_EMAIL_CONFIRM_ERROR = 'AUTH_EMAIL_CONFIRM_ERROR';
+
 export interface AuthLogin {
   type: typeof AUTH_LOGIN;
   payload: { email: string; password: string };
@@ -56,6 +60,21 @@ export interface AuthRegisterSuccess {
 
 export interface AuthRegisterError {
   type: typeof AUTH_REGISTER_ERROR;
+  payload: { error: string };
+}
+
+export interface AuthEmailConfirm {
+  type: typeof AUTH_EMAIL_CONFIRM;
+  payload: { emailVerificationToken: string };
+}
+
+export interface AuthEmailConfirmSuccess {
+  type: typeof AUTH_EMAIL_CONFIRM_SUCCESS;
+  payload: { id: number; name: string; email: string; token: string };
+}
+
+export interface AuthEmailConfirmError {
+  type: typeof AUTH_EMAIL_CONFIRM_ERROR;
   payload: { error: string };
 }
 
@@ -106,4 +125,7 @@ export type AuthActionTypes =
   | AuthResetPasswordError
   | AuthUpdatePassword
   | AuthUpdatePasswordSuccess
-  | AuthUpdatePasswordError;
+  | AuthUpdatePasswordError
+  | AuthEmailConfirm
+  | AuthEmailConfirmSuccess
+  |AuthEmailConfirmError;

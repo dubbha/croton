@@ -5,3 +5,4 @@ export * from './SignInForm';
 export * from './SignUpForm';
 export * from './PasswordResetForm';
 export * from './PasswordUpdateForm';
+export * from './EmailConfirmMessage';
