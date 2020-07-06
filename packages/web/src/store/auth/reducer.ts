@@ -8,6 +8,7 @@ import {
   AUTH_REGISTER,
   AUTH_REGISTER_SUCCESS,
   AUTH_REGISTER_ERROR,
+  AUTH_LOGOUT
 } from './actions';
 
 export const initialState: AuthState = {
@@ -67,6 +68,10 @@ export function authReducer(
         isLoading: false,
         error: action.payload.error
       };
+    case AUTH_LOGOUT:
+      return {
+        ...initialState,
+      }
     case LOCATION_CHANGE:
       return {
         ...state,
