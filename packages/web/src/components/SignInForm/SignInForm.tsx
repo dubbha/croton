@@ -1,12 +1,14 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { Form, SubmitButton } from 'elements';
+import { Form, SubmitButton, ErrorAlert } from 'elements';
 import './styles.scss';
 
 type Props = {
-  onSubmit: (email: string, password: string) => void
-}
+  isLoading: boolean;
+  error: string | null;
+  onSubmit: (email: string, password: string) => void;
+};
 
-export const SignInForm = ({ onSubmit }: Props) => {
+export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -36,7 +38,8 @@ export const SignInForm = ({ onSubmit }: Props) => {
         onChange={e => setPassword(e.target.value)}
         data-testid="signInForm__password"
       />
-      <SubmitButton disabled={!isValid} />
+      <SubmitButton disabled={!isValid || isLoading} />
+      {error && <ErrorAlert>{error}</ErrorAlert>}
     </Form>
   );
 };
