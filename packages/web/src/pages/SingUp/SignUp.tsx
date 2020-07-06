@@ -2,15 +2,15 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Header, Footer, SignUpForm } from 'components';
 import { Link } from 'react-router-dom';
-import { SYSTEM_AUTH } from 'store/system/actions';
+import { AUTH_REGISTER } from 'store/auth/actions';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (email: string, password: string) => {
+  const handleSubmit = (email: string, password: string, name: string) => {
     dispatch({
-      type: SYSTEM_AUTH,
-      payload: { email, password },
+      type: AUTH_REGISTER,
+      payload: { email, password, name },
     });
   };
 

@@ -11,19 +11,31 @@ export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 export const AUTH_LOGIN_ERROR = 'AUTH_LOGIN_ERROR';
 
+export const AUTH_REGISTER = 'SYSTEM_REGISTER'
+
 export interface AuthLogin {
   type: typeof AUTH_LOGIN;
-  payload: { email: string; password: string };
+  payload: {email: string; password: string};
+}
+
+export interface AuthRegister {
+  type: typeof AUTH_REGISTER;
+  payload: {
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  };
 }
 
 export interface AuthLoginSuccess {
   type: typeof AUTH_LOGIN_SUCCESS;
-  payload: { id: number; name: string; email: string; token: string };
+  payload: {id: number; name: string; email: string; token: string};
 }
 
 export interface AuthLoginError {
   type: typeof AUTH_LOGIN_ERROR;
-  payload: { error: string };
+  payload: {error: string};
 }
 
-export type SystemActionTypes = AuthLogin | AuthLoginSuccess | AuthLoginError;
+export type SystemActionTypes = AuthLogin | AuthLoginSuccess | AuthLoginError | AuthRegister;
