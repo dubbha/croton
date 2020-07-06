@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pages/SignIn should render successfully 1`] = `
+exports[`pages/SignUp should render successfully 1`] = `
 <div
   class="container"
 >
@@ -55,20 +55,55 @@ exports[`pages/SignIn should render successfully 1`] = `
     class=""
   >
     <div
-      style="height: 50px; margin-bottom: 16px;"
-    />
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formFirstName"
+      >
+        First Name
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__firstName"
+        id="formFirstName"
+        placeholder="Enter First Name"
+        type="text"
+        value=""
+      />
+    </div>
     <div
       class="form-group"
     >
       <label
         class="form-label"
+        for="formLastName"
+      >
+        Last Name
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__lastName"
+        id="formLastName"
+        placeholder="Enter Last Name"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formEmail"
       >
         Email address
       </label>
       <input
         class="form-control"
-        data-testid="signInForm__email"
-        placeholder="Enter email"
+        data-testid="signUpForm__email"
+        id="formEmail"
+        placeholder="Enter Email"
         type="email"
         value=""
       />
@@ -78,25 +113,36 @@ exports[`pages/SignIn should render successfully 1`] = `
     >
       <label
         class="form-label"
+        for="formPassword"
       >
         Password
       </label>
       <input
         class="form-control"
-        data-testid="signInForm__password"
+        data-testid="signUpForm__password"
+        id="formPassword"
         placeholder="Enter password"
         type="password"
         value=""
       />
-      <small
-        class="reset-password-link form-text"
+    </div>
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+        for="formPasswordMatch"
       >
-        <a
-          href="/reset"
-        >
-          Forgot password?
-        </a>
-      </small>
+        Repeat Password
+      </label>
+      <input
+        class="form-control"
+        data-testid="signUpForm__passwordMatch"
+        id="formPasswordMatch"
+        placeholder="Repeat password"
+        type="password"
+        value=""
+      />
     </div>
     <button
       class="btn btn-primary"
@@ -104,17 +150,17 @@ exports[`pages/SignIn should render successfully 1`] = `
       disabled=""
       type="submit"
     >
-      Sign In
+      Sing Up
     </button>
   </form>
   <div
-    class="signin-register"
+    class="signup-login"
   >
-    Don't have an account? 
+    Already have an account ?
     <a
-      href="/signup"
+      href="/signin"
     >
-       Register
+       Sign In
     </a>
   </div>
   <footer>

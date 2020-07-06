@@ -1,9 +1,13 @@
+import { LOCATION_CHANGE, LocationChangeAction } from 'connected-react-router'
 import {
   AuthState,
-  SystemActionTypes,
+  AuthActionTypes,
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
-  AUTH_LOGIN_ERROR
+  AUTH_LOGIN_ERROR,
+  AUTH_REGISTER,
+  AUTH_REGISTER_SUCCESS,
+  AUTH_REGISTER_ERROR,
 } from './actions';
 
 export const initialState: AuthState = {
@@ -17,7 +21,7 @@ export const initialState: AuthState = {
 
 export function authReducer(
   state = initialState,
-  action: SystemActionTypes
+  action: AuthActionTypes | LocationChangeAction
 ): AuthState {
   switch (action.type) {
     case AUTH_LOGIN:
@@ -34,7 +38,8 @@ export function authReducer(
         name,
         email,
         token,
-        isLoading: false
+        isLoading: false,
+        error: null
       };
     }
     case AUTH_LOGIN_ERROR:
@@ -43,6 +48,31 @@ export function authReducer(
         isLoading: false,
         error: action.payload.error
       };
+    case AUTH_REGISTER:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case AUTH_REGISTER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    }
+    case AUTH_REGISTER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error
+      };
+    case LOCATION_CHANGE:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+      }
     default:
       return state;
   }

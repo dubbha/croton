@@ -38,6 +38,15 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
       type="password"
       value=""
     />
+    <small
+      class="reset-password-link form-text"
+    >
+      <a
+        href="/reset"
+      >
+        Forgot password?
+      </a>
+    </small>
   </div>
   <button
     class="btn btn-primary"
@@ -45,18 +54,8 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
     disabled=""
     type="submit"
   >
-    Submit
+    Sign In
   </button>
-  <div
-    class="register"
-  >
-    Don't have an account? 
-    <a
-      href="/signup"
-    >
-      Register
-    </a>
-  </div>
 </form>
 `;
 
@@ -98,6 +97,15 @@ exports[`components/SignInForm should render submit button disabled by default 1
       type="password"
       value=""
     />
+    <small
+      class="reset-password-link form-text"
+    >
+      <a
+        href="/reset"
+      >
+        Forgot password?
+      </a>
+    </small>
   </div>
   <button
     class="btn btn-primary"
@@ -105,18 +113,8 @@ exports[`components/SignInForm should render submit button disabled by default 1
     disabled=""
     type="submit"
   >
-    Submit
+    Sign In
   </button>
-  <div
-    class="register"
-  >
-    Don't have an account? 
-    <a
-      href="/signup"
-    >
-      Register
-    </a>
-  </div>
 </form>
 `;
 
@@ -158,6 +156,15 @@ exports[`components/SignInForm should render successfully 1`] = `
       type="password"
       value=""
     />
+    <small
+      class="reset-password-link form-text"
+    >
+      <a
+        href="/reset"
+      >
+        Forgot password?
+      </a>
+    </small>
   </div>
   <button
     class="btn btn-primary"
@@ -165,17 +172,7 @@ exports[`components/SignInForm should render successfully 1`] = `
     disabled=""
     type="submit"
   >
-    Submit
+    Sign In
   </button>
-  <div
-    class="register"
-  >
-    Don't have an account? 
-    <a
-      href="/signup"
-    >
-      Register
-    </a>
-  </div>
 </form>
 `;
