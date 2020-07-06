@@ -1,3 +1,4 @@
 export enum Pages {
-    EMAIL_CONFIRMATION_PAGE = '/confirm'
+  EMAIL_CONFIRMATION_PAGE = '/confirm',
+  PASSWORD_RESET_PAGE = '/password-reset'
 }

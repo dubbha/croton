@@ -6,6 +6,8 @@ import RegistrationDto from './registration.dto';
 import LoginDto from './login.dto';
 import AuthenticationService from './authentication.service';
 import EmailVerificationDto from './email-verification.dto';
+import PasswordResetDto from './password-reset.dto';
+import PasswordUpdateDto from './password-update.dto';
 
 export default class AuthenticationController extends BaseController {
   private authenticationService = new AuthenticationService();
@@ -30,6 +32,18 @@ export default class AuthenticationController extends BaseController {
       this.serverApi.authConfirm,
       validationMiddleware(EmailVerificationDto),
       this.emailConfirmHandler
+    );
+
+    this.router.post(
+      this.serverApi.authPasswordReset,
+      validationMiddleware(PasswordResetDto),
+      this.passwordResetHandler
+    );
+
+    this.router.post(
+      this.serverApi.authPasswordUpdate,
+      validationMiddleware(PasswordUpdateDto),
+      this.passwordUpdateHandler
     );
   }
 
@@ -74,6 +88,37 @@ export default class AuthenticationController extends BaseController {
         request.body
       );
       response.send(userWithToken);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private passwordResetHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.authenticationService.resetPassword(
+        request.body.email,
+        request.get('host')
+      );
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private passwordUpdateHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.authenticationService.updatePassword(
+        request.body
+      );
+      response.status(204).send();
     } catch (error) {
       next(error);
     }

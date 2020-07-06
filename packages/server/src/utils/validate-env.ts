@@ -11,6 +11,7 @@ export function validateEnv(): void {
     JWT_SECRET: str(),
     SESSION_DURATION: num(),
     EMAIL_VERIFICATION_EXPIRATION_TIME: num(),
+    PASSWORD_RESET_EXPIRATION_TIME: num(),
     EMAIL_HOST: str(),
     EMAIL_PORT: num(),
     EMAIL_USER: str(),
