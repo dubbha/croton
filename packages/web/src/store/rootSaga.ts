@@ -4,7 +4,7 @@ import { authLoginSaga } from './auth/sagas';
 
 export function* rootSaga() {
   yield all([
-    authLoginSaga,
+    authLoginSaga(),
     // registerSaga(),
   ])
 }
