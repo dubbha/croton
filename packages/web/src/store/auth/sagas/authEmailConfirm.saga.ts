@@ -22,10 +22,8 @@ function* handle(action: AuthEmailConfirm) {
   }
 
   try {
-    const result = yield call(
-      axios.post,
-      `${api}/auth/confirm`,
-      { emailVerificationToken },
+    const result = yield call(axios.post, `${api}/auth/confirm`,
+      { emailVerificationToken }
     );
     yield put({
       type: AUTH_EMAIL_CONFIRM_SUCCESS,

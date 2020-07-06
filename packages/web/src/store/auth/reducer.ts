@@ -85,8 +85,14 @@ export function authReducer(
         error: null
       };
     case AUTH_EMAIL_CONFIRM_SUCCESS: {
+      const { id, name, email, token } = action.payload;
+
       return {
         ...state,
+        id,
+        name,
+        email,
+        token,
         isLoading: false,
         error: null
       };

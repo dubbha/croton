@@ -15,7 +15,7 @@ export const EmailConfirmMessage = ({ onInit, error, isLoading }: Props) => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     onInit(params.get(QueryParams.EMAIL_VERIFICATION_TOKEN) as string);
-  }, []);
+  }, [location.search, onInit]);
 
   return (
     <>
