@@ -4,20 +4,41 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
 <form
   class=""
 >
-  <input
-    class="form-control"
-    data-testid="signInForm__email"
-    placeholder="Enter email"
-    type="email"
-    value=""
+  <div
+    style="height: 50px; margin-bottom: 16px;"
   />
-  <input
-    class="form-control"
-    data-testid="signInForm__password"
-    placeholder="Enter password"
-    type="password"
-    value=""
-  />
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Email address
+    </label>
+    <input
+      class="form-control"
+      data-testid="signInForm__email"
+      placeholder="Enter email"
+      type="email"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Password
+    </label>
+    <input
+      class="form-control"
+      data-testid="signInForm__password"
+      placeholder="Enter password"
+      type="password"
+      value=""
+    />
+  </div>
   <button
     class="btn btn-primary"
     data-testid="submitButton"
@@ -26,27 +47,58 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
   >
     Submit
   </button>
+  <div
+    class="register"
+  >
+    Don't have an account? 
+    <a
+      href="/signup"
+    >
+      Register
+    </a>
+  </div>
 </form>
 `;
 
-exports[`components/SignInForm should render submit button disabed by default 1`] = `
+exports[`components/SignInForm should render submit button disabled by default 1`] = `
 <form
   class=""
 >
-  <input
-    class="form-control"
-    data-testid="signInForm__email"
-    placeholder="Enter email"
-    type="email"
-    value=""
+  <div
+    style="height: 50px; margin-bottom: 16px;"
   />
-  <input
-    class="form-control"
-    data-testid="signInForm__password"
-    placeholder="Enter password"
-    type="password"
-    value=""
-  />
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Email address
+    </label>
+    <input
+      class="form-control"
+      data-testid="signInForm__email"
+      placeholder="Enter email"
+      type="email"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Password
+    </label>
+    <input
+      class="form-control"
+      data-testid="signInForm__password"
+      placeholder="Enter password"
+      type="password"
+      value=""
+    />
+  </div>
   <button
     class="btn btn-primary"
     data-testid="submitButton"
@@ -55,6 +107,16 @@ exports[`components/SignInForm should render submit button disabed by default 1`
   >
     Submit
   </button>
+  <div
+    class="register"
+  >
+    Don't have an account? 
+    <a
+      href="/signup"
+    >
+      Register
+    </a>
+  </div>
 </form>
 `;
 
@@ -62,20 +124,41 @@ exports[`components/SignInForm should render successfully 1`] = `
 <form
   class=""
 >
-  <input
-    class="form-control"
-    data-testid="signInForm__email"
-    placeholder="Enter email"
-    type="email"
-    value=""
+  <div
+    style="height: 50px; margin-bottom: 16px;"
   />
-  <input
-    class="form-control"
-    data-testid="signInForm__password"
-    placeholder="Enter password"
-    type="password"
-    value=""
-  />
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Email address
+    </label>
+    <input
+      class="form-control"
+      data-testid="signInForm__email"
+      placeholder="Enter email"
+      type="email"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Password
+    </label>
+    <input
+      class="form-control"
+      data-testid="signInForm__password"
+      placeholder="Enter password"
+      type="password"
+      value=""
+    />
+  </div>
   <button
     class="btn btn-primary"
     data-testid="submitButton"
@@ -84,5 +167,15 @@ exports[`components/SignInForm should render successfully 1`] = `
   >
     Submit
   </button>
+  <div
+    class="register"
+  >
+    Don't have an account? 
+    <a
+      href="/signup"
+    >
+      Register
+    </a>
+  </div>
 </form>
 `;
