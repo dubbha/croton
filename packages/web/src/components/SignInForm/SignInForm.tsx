@@ -1,5 +1,4 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import './styles.scss';
 
 import {
@@ -61,7 +60,6 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
       <SubmitButton disabled={!isValid} data-testid="submitButton">
         Sign Up
       </SubmitButton>
-
     </Form>
   );
 };
