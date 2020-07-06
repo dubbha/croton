@@ -25,5 +25,6 @@ module.exports = {
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'error',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };
