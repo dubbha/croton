@@ -9,9 +9,9 @@ import './custom.scss';
 const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Route path="/" exact component={Home} />
       <Route path="/signin" component={SignIn} />
       <Route path="/profile" component={Profile} />
+      <Route path="/" component={Home} />
     </ConnectedRouter>
   </Provider>
 );

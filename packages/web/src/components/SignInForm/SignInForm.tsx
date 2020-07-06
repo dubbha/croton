@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { Form, SubmitButton, ErrorAlert } from 'elements';
+import { Form, SubmitButton, ErrorAlert, AlertPlaceholder, Link } from 'elements';
 import './styles.scss';
 
 type Props = {
@@ -24,22 +24,32 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Control
-        type="email"
-        placeholder="Enter email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        data-testid="signInForm__email"
-      />
-      <Form.Control
-        type="password"
-        placeholder="Enter password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        data-testid="signInForm__password"
-      />
+      {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
+      <Form.Group>
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          data-testid="signInForm__email"
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          data-testid="signInForm__password"
+        />
+      </Form.Group>
       <SubmitButton disabled={!isValid || isLoading} />
-      {error && <ErrorAlert>{error}</ErrorAlert>}
+      <div className="register">
+        {'Don\'t have an account? '}<Link to="/signup">Register</Link>
+      </div>
     </Form>
   );
 };
