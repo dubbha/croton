@@ -1,2 +1,2 @@
 export * from './authLogin.saga';
-export * from './register.saga'
+export * from './authRegister.saga'
