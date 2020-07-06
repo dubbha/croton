@@ -15,7 +15,4 @@ export default class RegistrationDto {
 
   @IsString()
   public facebookId?: string;
-
-  @IsString()
-  public googleId?: string;
 }

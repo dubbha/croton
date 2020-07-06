@@ -2,11 +2,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
+import passport from 'passport';
 
 import { api } from '../api';
 
 import BaseControllerInterface from '../interfaces/base-controller.interface';
 import errorMiddleware from '../middlewares/error.middleware';
+import ServerService from '../services/server.service';
 
 export default class App {
   private app: express.Application;
@@ -21,16 +23,14 @@ export default class App {
   }
 
   public listen(): void {
-    const { PORT = 3000 } = process.env;
-    this.app.listen(PORT, () => {
-      console.log(`App listening on the port ${PORT}`);
-    });
+    new ServerService().initServer(this.app);
   }
 
   private initializeMiddleware(): void {
     this.app.use(bodyParser.json());
     this.app.use(cors());
     this.app.use(morgan('combined'));
+    this.app.use(passport.initialize());
   }
 
   private initializeErrorHandling(): void {

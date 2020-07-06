@@ -146,7 +146,7 @@ export default class AuthenticationService {
 
   private async sendPasswordResetMessage(
     { id, email, firstName: name }: User,
-    host
+    host: string
   ) {
     const { PASSWORD_RESET_EXPIRATION_TIME } = process.env;
     const passwordResetToken = createRandomString(64);

@@ -60,6 +60,14 @@ export default class AuthenticationController extends BaseController {
       this.serverApi.authLoginFacebookCallback,
       this.providersAuthService.getHandleFacebookProviderCallback()
     );
+    this.router.get(
+      this.serverApi.authLoginFacebookSuccess,
+      this.providersAuthService.handleFacebookLoginSuccess
+    );
+    this.router.get(
+      this.serverApi.authLoginFacebookFailure,
+      this.providersAuthService.handleFacebookLoginFailure
+    );
   }
 
   private emailConfirmHandler = async (

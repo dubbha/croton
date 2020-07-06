@@ -20,9 +20,6 @@ export default class User {
   @Column()
   public status: string;
 
-  @Column({ nullable: true })
+  @Column({ update: false, nullable: true })
   public facebookId?: string;
-
-  @Column({ nullable: true })
-  public googleId?: string;
 }

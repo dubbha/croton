@@ -1,29 +1,31 @@
+import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import passport, { Profile } from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-// import { OAuthStrategy as GoogleStrategy } from 'passport-google-oauth'
 
-import UserEnity from '../models/user.entity';
+import { api } from '../api'
+
+import UserEntity from '../models/user.entity';
 
 import RegistrationDto from '../models/registration.dto';
+import WrongCredentials from '../exceptions/wrong-creditionals.exception';
 
 import { ProvidersIdDBFieldName, ProvidersServiceName } from './providers-auth.interfaces'
 
 export default class ProvidersAuthService {
   private loginUser;
   private registerUser;
-  private repostory = getRepository(UserEnity);
+  private userRepository = getRepository(UserEntity);
 
   constructor(loginUser, registerUser) {
-    // bindall(this)
     this.loginUser = loginUser;
     this.registerUser = registerUser;
     this.initFacebookProviderLogin()
     return this
   }
 
-  private async findUserByProviderId(id: string, providerIdKeyName: ProvidersIdDBFieldName): Promise<UserEnity> {
-    return await this.repostory.findOne({ [providerIdKeyName]: id });
+  private async findUserByProviderId(id: string, providerIdKeyName: ProvidersIdDBFieldName): Promise<UserEntity> {
+    return await this.userRepository.findOne({ [providerIdKeyName]: id });
   }
 
   private formatProviderProfileToRegistrationDto(profile: Profile, accessToken: string, passportIdKeyName: ProvidersIdDBFieldName): RegistrationDto {
@@ -70,12 +72,15 @@ export default class ProvidersAuthService {
 
   private initFacebookProviderLogin () {
     const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env
+    const { getFacebookCallbackURL } = api
+    const { APP_HOST, HTTPS_PORT } = process.env
+
     passport.use(new FacebookStrategy({
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
-      callbackURL: 'http://192.168.0.100:8080/auth/facebook/callback'
+      callbackURL: getFacebookCallbackURL(APP_HOST, HTTPS_PORT)
     },
-    this.handleFacebookProviderLogin
+    this.handleFacebookProviderLogin.bind(this)
   ));
   }
 
@@ -84,12 +89,25 @@ export default class ProvidersAuthService {
   }
 
   public getHandleFacebookProviderCallback () {
+   const { getFacebookSuccessRedirect, getFacebookFailureRedirect, } = api
+   const { APP_HOST, PORT } = process.env
+
     return passport.authenticate(ProvidersServiceName.FACEBOOK as string,
     {
-      successRedirect: '/',
-      failureRedirect: '/api/auth'
+      successRedirect: getFacebookSuccessRedirect(APP_HOST, PORT),
+      failureRedirect: getFacebookFailureRedirect(APP_HOST, PORT),
+      session: false
     }
     );
+  }
+
+  public handleFacebookLoginSuccess(_: Request, res: Response) {
+    res.send('Succesfully logged in via Facebook!')
+  }
+
+  public handleFacebookLoginFailure() {
+    console.log('*** Failed logging in via Facebook! ***')
+    throw new WrongCredentials();
   }
 
 }
