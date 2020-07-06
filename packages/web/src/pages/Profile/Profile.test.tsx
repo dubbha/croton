@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 jest.mock('components/Header', () => {
   const React = require('react');
@@ -25,7 +25,7 @@ describe('pages/Profile', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => ({ token: 'TOKEN', name: 'NAME', email: 'EMAIL' }),
+        useSelector: () => ({ token: 'TOKEN', name: 'NAME', email: 'EMAIL' })
       }));
 
       const { Profile } = require('./Profile');
@@ -41,17 +41,17 @@ describe('pages/Profile', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => ({ token: null, name: null, email: null }),
+        useSelector: () => ({ token: null, name: null, email: null })
       }));
 
       const { Profile } = require('./Profile');
 
-      render(<Profile />);      
+      render(<Profile />);
 
       expect(fn).toBeCalledWith({
         type: 'callHistoryMethod',
-        payload: { path: '/signin' },
-      })
+        payload: { path: '/signin' }
+      });
     });
   });
 });
