@@ -1,22 +1,24 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, Footer, SignInForm } from 'components';
-import { SYSTEM_AUTH } from 'store/system/actions';
+import { AUTH_LOGIN } from 'store/auth/actions';
+import { getAuth } from 'store/auth/selectors';
 
 export const SignIn = () => {
   const dispatch = useDispatch();
+  const { isLoading, error } = useSelector(getAuth);
 
   const handleSubmit = (email: string, password: string) => {
     dispatch({
-      type: SYSTEM_AUTH,
-      payload: { email, password },
+      type: AUTH_LOGIN,
+      payload: { email, password }
     });
-  }
+  };
 
   return (
     <Container>
       <Header />
-      <SignInForm onSubmit={handleSubmit} />
+      <SignInForm isLoading={isLoading} error={error} onSubmit={handleSubmit} />
       <Footer />
     </Container>
   );
