@@ -15,6 +15,8 @@ export const AUTH_REGISTER = 'AUTH_REGISTER';
 export const AUTH_REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
 export const AUTH_REGISTER_ERROR = 'AUTH_REGISTER_ERROR';
 
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
 export interface AuthLogin {
   type: typeof AUTH_LOGIN;
   payload: { email: string; password: string };
@@ -50,10 +52,13 @@ export interface AuthRegisterError {
   payload: { error: string };
 }
 
+export interface AuthLogout { type: typeof AUTH_LOGOUT }
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
   | AuthLoginError
   | AuthRegister
   | AuthRegisterSuccess
-  | AuthRegisterError;
+  | AuthRegisterError
+  | AuthLogout;

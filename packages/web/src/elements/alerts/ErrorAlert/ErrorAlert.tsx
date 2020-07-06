@@ -12,5 +12,3 @@ export const ErrorAlert = ({ children = 'Error' }: Props) => (
     {children}
   </Alert>
 );
-
-export const AlertPlaceholder = () => <div style={{ height: '50px', marginBottom: '16px' }} />;

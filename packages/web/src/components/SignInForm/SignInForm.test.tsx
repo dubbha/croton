@@ -44,4 +44,17 @@ describe('components/SignInForm', () => {
     fireEvent.click(submitButton);
     expect(fn).toBeCalled();
   });
+
+  it('should display error alert on error', () => {
+    const error = 'ERROR';
+    const { getByTestId } = render(
+      <SignInForm onSubmit={fn} isLoading={false} error={error} />,
+      { wrapper: MemoryRouter }
+    );
+
+    const errorAlert = getByTestId('errorAlert');
+
+    expect(errorAlert.textContent).toBe('ERROR');
+
+  })
 });
