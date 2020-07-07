@@ -5,5 +5,4 @@ export default interface User {
   email: string;
   status: string;
   facebookId?: string;
-  googleId?: string;
 }
