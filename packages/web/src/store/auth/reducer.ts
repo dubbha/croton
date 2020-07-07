@@ -2,6 +2,9 @@ import { LOCATION_CHANGE, LocationChangeAction } from 'connected-react-router';
 import {
   AuthState,
   AuthActionTypes,
+  AUTH_EMAIL_CONFIRM,
+  AUTH_EMAIL_CONFIRM_ERROR,
+  AUTH_EMAIL_CONFIRM_SUCCESS,
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_ERROR,
@@ -70,6 +73,31 @@ export function authReducer(
       };
     }
     case AUTH_REGISTER_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error
+      };
+    case AUTH_EMAIL_CONFIRM:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case AUTH_EMAIL_CONFIRM_SUCCESS: {
+      const { id, name, email, token } = action.payload;
+
+      return {
+        ...state,
+        id,
+        name,
+        email,
+        token,
+        isLoading: false,
+        error: null
+      };
+    }
+    case AUTH_EMAIL_CONFIRM_ERROR:
       return {
         ...state,
         isLoading: false,
