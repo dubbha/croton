@@ -48,7 +48,8 @@ module.exports = {
         'react/prop-types': 'off',
         'jsx-a11y/control-has-associated-label': 'off',
         'react/button-has-type': 'off',
-        'prefer-promise-reject-errors': 'off'
+        'prefer-promise-reject-errors': 'off',
+        'react/jsx-props-no-spreading': 'off'
       }
     }
   ]

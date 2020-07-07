@@ -3,23 +3,34 @@ import { render, fireEvent } from '@testing-library/react';
 import { SignUpForm } from './SignUpForm';
 
 describe('components/SignInForm', () => {
-  const fn = jest.fn()
+  const fn = jest.fn();
+
+  const props = {
+    isLoading: false,
+    error: null,
+    info: null,
+    onSubmit: fn
+  };
+
+  afterEach(() => {
+    fn.mockReset();
+  });
 
   it('should render successfully', () => {
-    const { container } = render(<SignUpForm onSubmit={fn} />);
+    const { container } = render(<SignUpForm {...props} />);
     expect(container.firstChild).toMatchSnapshot();
-  })
+  });
 
   it('should render submit button disabled by default', () => {
-    const { container, getByTestId } = render(<SignUpForm onSubmit={fn} />);
+    const { container, getByTestId } = render(<SignUpForm {...props} />);
     expect(container.firstChild).toMatchSnapshot();
 
     const submitButton = getByTestId('submitButton');
     expect(submitButton).toBeDisabled();
-  })
+  });
 
   it('should call onSubmit prop on submit', () => {
-    const { container, getByTestId } = render(<SignUpForm onSubmit={fn} />);
+    const { container, getByTestId } = render(<SignUpForm {...props} />);
     expect(container.firstChild).toMatchSnapshot();
 
     const emailInput = getByTestId('signUpForm__email');
@@ -31,13 +42,13 @@ describe('components/SignInForm', () => {
 
     fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } });
     fireEvent.change(passwordInput, { target: { value: 'admin' } });
-    fireEvent.change(passwordMatchInput,  { target: { value: 'admin' } })
-    fireEvent.change(firstNameInput,  { target: { value: 'first' } })
-    fireEvent.change(lastNameInput,  { target: { value: 'last' } })
-    
+    fireEvent.change(passwordMatchInput, { target: { value: 'admin' } });
+    fireEvent.change(firstNameInput, { target: { value: 'first' } });
+    fireEvent.change(lastNameInput, { target: { value: 'last' } });
+
     expect(submitButton).toBeEnabled();
 
     fireEvent.click(submitButton);
     expect(fn).toBeCalled();
-  })
-})
+  });
+});

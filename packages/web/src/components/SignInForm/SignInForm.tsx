@@ -1,5 +1,12 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { Form, SubmitButton, ErrorAlert, AlertPlaceholder, Link } from 'elements';
+import {
+  Form,
+  SubmitButton,
+  ErrorAlert,
+  AlertPlaceholder,
+  Link,
+  LoadingSpinner
+} from 'elements';
 import './styles.scss';
 
 type Props = {
@@ -50,7 +57,10 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
         </Form.Text>
       </Form.Group>
       <SubmitButton disabled={!isValid || isLoading} data-testid="submitButton">
-        Sign In
+        <div className="spinner-container">
+          {isLoading && <LoadingSpinner />}
+        </div>
+        <span>Sign In</span>
       </SubmitButton>
     </Form>
   );

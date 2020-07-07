@@ -5,6 +5,7 @@ export interface AuthState {
   name: string | null;
   email: string | null;
   error: string | null;
+  info: string | null;
 }
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
@@ -16,6 +17,14 @@ export const AUTH_REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
 export const AUTH_REGISTER_ERROR = 'AUTH_REGISTER_ERROR';
 
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const AUTH_RESET_PASSWORD = 'AUTH_RESET_PASSWORD';
+export const AUTH_RESET_PASSWORD_SUCCESS = 'AUTH_RESET_PASSWORD_SUCCESS';
+export const AUTH_RESET_PASSWORD_ERROR = 'AUTH_RESET_PASSWORD_ERROR';
+
+export const AUTH_UPDATE_PASSWORD = 'AUTH_UPDATE_PASSWORD';
+export const AUTH_UPDATE_PASSWORD_SUCCESS = 'AUTH_UPDATE_PASSWORD_SUCCESS';
+export const AUTH_UPDATE_PASSWORD_ERROR = 'AUTH_UPDATE_PASSWORD_ERROR';
 
 export interface AuthLogin {
   type: typeof AUTH_LOGIN;
@@ -35,16 +44,14 @@ export interface AuthLoginError {
 export interface AuthRegister {
   type: typeof AUTH_REGISTER;
   payload: {
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string
+    email: string;
+    password: string;
+    name: string;
   };
 }
 
 export interface AuthRegisterSuccess {
   type: typeof AUTH_REGISTER_SUCCESS;
-  payload: { id: number; name: string; email: string; token: string };
 }
 
 export interface AuthRegisterError {
@@ -52,7 +59,39 @@ export interface AuthRegisterError {
   payload: { error: string };
 }
 
-export interface AuthLogout { type: typeof AUTH_LOGOUT }
+export interface AuthLogout {
+  type: typeof AUTH_LOGOUT;
+}
+
+export interface AuthResetPassword {
+  type: typeof AUTH_RESET_PASSWORD;
+  payload: { email: string };
+}
+
+export interface AuthResetPasswordSuccess {
+  type: typeof AUTH_RESET_PASSWORD_SUCCESS;
+  payload: { info: string };
+}
+
+export interface AuthResetPasswordError {
+  type: typeof AUTH_RESET_PASSWORD_ERROR;
+  payload: { error: string };
+}
+
+export interface AuthUpdatePassword {
+  type: typeof AUTH_UPDATE_PASSWORD;
+  payload: { token: string; password: string };
+}
+
+export interface AuthUpdatePasswordSuccess {
+  type: typeof AUTH_UPDATE_PASSWORD_SUCCESS;
+  payload: { info: string };
+}
+
+export interface AuthUpdatePasswordError {
+  type: typeof AUTH_UPDATE_PASSWORD_ERROR;
+  payload: { error: string };
+}
 
 export type AuthActionTypes =
   | AuthLogin
@@ -61,4 +100,10 @@ export type AuthActionTypes =
   | AuthRegister
   | AuthRegisterSuccess
   | AuthRegisterError
-  | AuthLogout;
+  | AuthLogout
+  | AuthResetPassword
+  | AuthResetPasswordSuccess
+  | AuthResetPasswordError
+  | AuthUpdatePassword
+  | AuthUpdatePasswordSuccess
+  | AuthUpdatePasswordError;
