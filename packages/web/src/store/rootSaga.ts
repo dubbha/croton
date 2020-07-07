@@ -3,7 +3,8 @@ import {
   authLoginSaga,
   authRegisterSaga,
   authResetPasswordSaga,
-  authUpdatePasswordSaga
+  authUpdatePasswordSaga,
+  authEmailConfirmSaga
 } from './auth/sagas';
 
 export function* rootSaga() {
@@ -11,6 +12,7 @@ export function* rootSaga() {
     authLoginSaga(),
     authRegisterSaga(),
     authResetPasswordSaga(),
-    authUpdatePasswordSaga()
-  ]);
+    authUpdatePasswordSaga(),
+    authEmailConfirmSaga()
+  ])
 }

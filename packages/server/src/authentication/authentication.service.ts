@@ -1,12 +1,13 @@
 import { compare } from 'bcrypt';
 import { getRepository } from 'typeorm';
+import bindall from 'bindall';
 
 import UserEntity from '../models/user.entity';
-import RegistrationDto from './registration.dto';
+import RegistrationDto from '../models/registration.dto';
 import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
 import { createToken } from '../utils/create-token';
-import UserWithToken from '../interfaces/user-with-token';
-import LoginDto from './login.dto';
+import UserWithToken from '../interfaces/tokenized.user.interface';
+import LoginDto from '../models/login.dto';
 import WrongCredentials from '../exceptions/wrong-creditionals.exception';
 import User from '../interfaces/user.interface';
 import { UserStatuses } from '../constants/user-statuses';
@@ -29,6 +30,10 @@ export default class AuthenticationService {
   private passwordResetRepository = getRepository(PasswordResetEntity);
   private emailSendingService = new EmailSendingService();
 
+  constructor() {
+    bindall(this);
+  }
+
   public async register(
     registrationData: RegistrationDto,
     host: string
@@ -47,10 +52,7 @@ export default class AuthenticationService {
     }
   }
 
-  public async resetPassword(
-    email: string,
-    host: string
-  ): Promise<void> {
+  public async resetPassword(email: string, host: string): Promise<void> {
     const user = await this.userRepository.findOne({ email });
 
     if (user) {
@@ -62,7 +64,7 @@ export default class AuthenticationService {
     passwordUpdateData: PasswordUpdateDto
   ): Promise<void> {
     const passwordVerification = await this.passwordResetRepository.findOne({
-      passwordResetToken: passwordUpdateData.passwordResetToken
+      passwordResetToken: passwordUpdateData.passwordResetToken,
     });
 
     if (!passwordVerification) {
@@ -73,7 +75,9 @@ export default class AuthenticationService {
       throw new PasswordResetTokenExpired();
     }
 
-    const user = await this.userRepository.findOne({ id: passwordVerification.userId });
+    const user = await this.userRepository.findOne({
+      id: passwordVerification.userId,
+    });
     user.password = await createNewPassword(passwordUpdateData.password);
 
     await this.userRepository.update(user.id, user);
@@ -85,10 +89,7 @@ export default class AuthenticationService {
 
     this.validateUser(user);
 
-    const isPasswordMatching = await compare(
-        loginData.password,
-        user.password
-    );
+    const isPasswordMatching = await compare(loginData.password, user.password);
 
     if (!isPasswordMatching) {
       throw new WrongCredentials();
@@ -97,8 +98,10 @@ export default class AuthenticationService {
     return this.loginUser(user);
   }
 
-  public async verify(emailVerificationToken: string) : Promise<UserWithToken> {
-    const emailVerification = await this.emailVerificationRepository.findOne({ emailVerificationToken });
+  public async verify(emailVerificationToken: string): Promise<UserWithToken> {
+    const emailVerification = await this.emailVerificationRepository.findOne({
+      emailVerificationToken,
+    });
 
     if (!emailVerification) {
       throw new WrongEmailVerificationToken();
@@ -108,7 +111,9 @@ export default class AuthenticationService {
       throw new EmailVerificationTokenExpired();
     }
 
-    const user = await this.userRepository.findOne({ id: emailVerification.userId });
+    const user = await this.userRepository.findOne({
+      id: emailVerification.userId,
+    });
     user.status = UserStatuses.ACTIVE;
     await this.userRepository.update(user.id, user);
     await this.emailVerificationRepository.delete(emailVerification.id);
@@ -116,13 +121,11 @@ export default class AuthenticationService {
     return this.loginUser(user);
   }
 
-  private loginUser(user: User): UserWithToken {
+  private loginUser(user: UserEntity): UserWithToken {
     const tokenData = createToken(user);
 
     return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
+      ...user,
       token: tokenData.token,
     };
   }
@@ -141,33 +144,47 @@ export default class AuthenticationService {
     }
   }
 
-  private async sendPasswordResetMessage({ id, email, name }: User, host) {
-    const {
-      PASSWORD_RESET_EXPIRATION_TIME
-    } = process.env;
+  private async sendPasswordResetMessage(
+    { id, email, firstName: name }: User,
+    host: string
+  ) {
+    const { PASSWORD_RESET_EXPIRATION_TIME } = process.env;
     const passwordResetToken = createRandomString(64);
-    const expiresInHours = 1000 * 60 * 60 * Number(PASSWORD_RESET_EXPIRATION_TIME);
+    const expiresInHours =
+      1000 * 60 * 60 * Number(PASSWORD_RESET_EXPIRATION_TIME);
     await this.passwordResetRepository.save({
       userId: id,
       passwordResetToken,
-      expiresIn: Date.now() + expiresInHours
+      expiresIn: Date.now() + expiresInHours,
     });
 
-    await this.emailSendingService.sendPasswordResetMessage(email, name, host, passwordResetToken);
+    await this.emailSendingService.sendPasswordResetMessage(
+      email,
+      name,
+      host,
+      passwordResetToken
+    );
   }
 
-  private async sendActivationMessage({ id, email, name }: User, host): Promise<void> {
-    const {
-      EMAIL_VERIFICATION_EXPIRATION_TIME
-    } = process.env;
+  private async sendActivationMessage(
+    { id, email, firstName: name }: User,
+    host
+  ): Promise<void> {
+    const { EMAIL_VERIFICATION_EXPIRATION_TIME } = process.env;
     const emailVerificationToken = createRandomString(64);
-    const expiresInHours = 1000 * 60 * 60 * Number(EMAIL_VERIFICATION_EXPIRATION_TIME);
+    const expiresInHours =
+      1000 * 60 * 60 * Number(EMAIL_VERIFICATION_EXPIRATION_TIME);
     await this.emailVerificationRepository.save({
       userId: id,
       emailVerificationToken,
-      expiresIn: Date.now() + expiresInHours
+      expiresIn: Date.now() + expiresInHours,
     });
 
-    await this.emailSendingService.sendActivationMessage(email, name, host, emailVerificationToken);
+    await this.emailSendingService.sendActivationMessage(
+      email,
+      name,
+      host,
+      emailVerificationToken
+    );
   }
 }
