@@ -7,9 +7,10 @@ import path from 'path';
 export default class HttpsServerService {
   private getAssets(): ServerOptions {
     try {
+      const { HOME } = process.env;
       return {
-        key: readFileSync(path.resolve('assets/server.key'), 'utf8'),
-        cert: readFileSync(path.resolve('assets/server.crt'), 'utf8'),
+        key: readFileSync(path.resolve(`${HOME}/server.key`), 'utf8'),
+        cert: readFileSync(path.resolve(`${HOME}/server.crt`), 'utf8'),
       };
     } catch (err) {
       console.error(
@@ -29,7 +30,7 @@ export default class HttpsServerService {
   }
 
   private initHttpServer(expressApp: Application) {
-    const { PORT = 3000 } = process.env;
+    const { PORT = 8081 } = process.env;
     const httpServer = createHttpServer(expressApp);
     httpServer.listen(PORT, () => {
       console.log(`Http server is UP and listening to the port ${PORT}`);
