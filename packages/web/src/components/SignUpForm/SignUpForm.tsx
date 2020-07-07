@@ -1,18 +1,20 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { Form, SubmitButton } from 'elements';
+import {
+  Form,
+  SubmitButton,
+  ErrorAlert,
+  AlertPlaceholder,
+  LoadingSpinner
+} from 'elements';
 import './styles.scss';
 
 type Props = {
-  onSubmit: (
-    email: string,
-    password: string,
-    name: string
-  ) => // firstName: string,
-  // lastName: string
-  void;
+  isLoading: boolean;
+  error: string | null;
+  onSubmit: (email: string, password: string, name: string) => void;
 };
 
-export const SignUpForm = ({ onSubmit }: Props) => {
+export const SignUpForm = ({ isLoading, error, onSubmit }: Props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,18 +39,19 @@ export const SignUpForm = ({ onSubmit }: Props) => {
       setIsPasswordMatch(false);
       return;
     }
-    onSubmit(email, password, `${firstName}, ${lastName}`);
+    onSubmit(email, password, `${firstName} ${lastName}`);
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
       <Form.Group controlId="formFirstName">
         <Form.Label>First Name</Form.Label>
         <Form.Control
           type="text"
           placeholder="Enter First Name"
           value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          onChange={e => setFirstName(e.target.value)}
           data-testid="signUpForm__firstName"
         />
       </Form.Group>
@@ -59,7 +62,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           type="text"
           placeholder="Enter Last Name"
           value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={e => setLastName(e.target.value)}
           data-testid="signUpForm__lastName"
         />
       </Form.Group>
@@ -70,7 +73,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           type="email"
           placeholder="Enter Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           data-testid="signUpForm__email"
         />
       </Form.Group>
@@ -81,7 +84,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           type="password"
           placeholder="Enter password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           data-testid="signUpForm__password"
         />
       </Form.Group>
@@ -92,18 +95,21 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           type="password"
           placeholder="Repeat password"
           value={passwordMatch}
-          onChange={(e) => setPasswordMatch(e.target.value)}
+          onChange={e => setPasswordMatch(e.target.value)}
           data-testid="signUpForm__passwordMatch"
         />
-        {!isPasswordMatch ? (
+        {!isPasswordMatch && (
           <Form.Text id="passwordHelpBlock" className="password-not-match">
             Your passwords must match.
           </Form.Text>
-        ) : (
-          undefined
         )}
       </Form.Group>
-      <SubmitButton disabled={!isValid}>Sing Up</SubmitButton>
+      <SubmitButton disabled={!isValid || isLoading}>
+        <div className="spinner-container">
+          {isLoading && <LoadingSpinner />}
+        </div>
+        <span>Sing Up</span>
+      </SubmitButton>
     </Form>
   );
 };

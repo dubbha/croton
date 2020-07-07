@@ -104,7 +104,12 @@ exports[`pages/SignIn should render successfully 1`] = `
       disabled=""
       type="submit"
     >
-      Sign In
+      <div
+        class="spinner-container"
+      />
+      <span>
+        Sign In
+      </span>
     </button>
   </form>
   <div
