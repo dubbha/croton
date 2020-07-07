@@ -5,15 +5,20 @@ import { PasswordResetForm } from './PasswordResetForm';
 describe('components/PasswordResetForm', () => {
   const fn = jest.fn();
 
+  const props = {
+    isLoading: false,
+    error: null,
+    info: null,
+    onSubmit: fn
+  };
+
   it('should render successfully', () => {
-    const { container } = render(<PasswordResetForm onSubmit={fn} />);
+    const { container } = render(<PasswordResetForm {...props} />);
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render submit button disabled by default', () => {
-    const { container, getByTestId } = render(
-      <PasswordResetForm onSubmit={fn} />
-    );
+    const { container, getByTestId } = render(<PasswordResetForm {...props} />);
     expect(container.firstChild).toMatchSnapshot();
 
     const submitButton = getByTestId('submitButton');
@@ -21,9 +26,7 @@ describe('components/PasswordResetForm', () => {
   });
 
   it('should call onSubmit prop on submit', () => {
-    const { container, getByTestId } = render(
-      <PasswordResetForm onSubmit={fn} />
-    );
+    const { container, getByTestId } = render(<PasswordResetForm {...props} />);
     expect(container.firstChild).toMatchSnapshot();
 
     const emailInput = getByTestId('passwordResetForm__email');

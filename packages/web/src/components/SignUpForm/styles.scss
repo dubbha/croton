@@ -3,5 +3,14 @@
 }
 
 form {
-  width: 50%;
+  width: 70%;
+  margin-bottom: 76px;
+}
+
+.spinner-container {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  position: absolute;
+  margin-left: -32px;
 }

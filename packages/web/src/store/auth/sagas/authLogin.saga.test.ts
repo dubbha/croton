@@ -13,7 +13,7 @@ jest.mock('connected-react-router', () => ({
   push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
 }));
 
-describe('system/authSaga', () => {
+describe('system/authLoginSaga', () => {
   it('should call api', () => {
     jest.spyOn(axios, 'post').mockImplementationOnce(() =>
       Promise.resolve({

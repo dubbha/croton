@@ -44,7 +44,7 @@ exports[`pages/SignUp should render successfully 1`] = `
       >
         <a
           class="nav-link"
-          href="/reset"
+          href="/password-reset"
         >
           Reset Password
         </a>
@@ -54,6 +54,9 @@ exports[`pages/SignUp should render successfully 1`] = `
   <form
     class=""
   >
+    <div
+      style="height: 50px; margin-bottom: 16px;"
+    />
     <div
       class="form-group"
     >
@@ -150,7 +153,12 @@ exports[`pages/SignUp should render successfully 1`] = `
       disabled=""
       type="submit"
     >
-      Sing Up
+      <div
+        class="spinner-container"
+      />
+      <span>
+        Sing Up
+      </span>
     </button>
   </form>
   <div

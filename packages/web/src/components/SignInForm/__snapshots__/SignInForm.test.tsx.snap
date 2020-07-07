@@ -42,7 +42,7 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
       class="reset-password-link form-text"
     >
       <a
-        href="/reset"
+        href="/password-reset"
       >
         Forgot password?
       </a>
@@ -54,7 +54,12 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
     disabled=""
     type="submit"
   >
-    Sign In
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Sign In
+    </span>
   </button>
 </form>
 `;
@@ -101,7 +106,7 @@ exports[`components/SignInForm should render submit button disabled by default 1
       class="reset-password-link form-text"
     >
       <a
-        href="/reset"
+        href="/password-reset"
       >
         Forgot password?
       </a>
@@ -113,7 +118,12 @@ exports[`components/SignInForm should render submit button disabled by default 1
     disabled=""
     type="submit"
   >
-    Sign In
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Sign In
+    </span>
   </button>
 </form>
 `;
@@ -160,7 +170,7 @@ exports[`components/SignInForm should render successfully 1`] = `
       class="reset-password-link form-text"
     >
       <a
-        href="/reset"
+        href="/password-reset"
       >
         Forgot password?
       </a>
@@ -172,7 +182,12 @@ exports[`components/SignInForm should render successfully 1`] = `
     disabled=""
     type="submit"
   >
-    Sign In
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Sign In
+    </span>
   </button>
 </form>
 `;

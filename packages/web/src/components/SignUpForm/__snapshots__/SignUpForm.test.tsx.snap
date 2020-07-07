@@ -5,6 +5,9 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
   class=""
 >
   <div
+    style="height: 50px; margin-bottom: 16px;"
+  />
+  <div
     class="form-group"
   >
     <label
@@ -100,7 +103,12 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
     disabled=""
     type="submit"
   >
-    Sing Up
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Sing Up
+    </span>
   </button>
 </form>
 `;
@@ -110,6 +118,9 @@ exports[`components/SignInForm should render submit button disabled by default 1
   class=""
 >
   <div
+    style="height: 50px; margin-bottom: 16px;"
+  />
+  <div
     class="form-group"
   >
     <label
@@ -205,7 +216,12 @@ exports[`components/SignInForm should render submit button disabled by default 1
     disabled=""
     type="submit"
   >
-    Sing Up
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Sing Up
+    </span>
   </button>
 </form>
 `;
@@ -215,6 +231,9 @@ exports[`components/SignInForm should render successfully 1`] = `
   class=""
 >
   <div
+    style="height: 50px; margin-bottom: 16px;"
+  />
+  <div
     class="form-group"
   >
     <label
@@ -310,7 +329,12 @@ exports[`components/SignInForm should render successfully 1`] = `
     disabled=""
     type="submit"
   >
-    Sing Up
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Sing Up
+    </span>
   </button>
 </form>
 `;

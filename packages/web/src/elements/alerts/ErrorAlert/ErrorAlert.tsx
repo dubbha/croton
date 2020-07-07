@@ -1,8 +1,6 @@
 import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 
-export { default as Alert } from 'react-bootstrap/Alert';
-
 type Props = {
   children?: React.ReactNode | React.ReactNode[];
 };

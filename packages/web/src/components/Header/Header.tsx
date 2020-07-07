@@ -26,7 +26,7 @@ export const Header = () => {
               <NavLink to="/signup">Sign Up</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink to="/reset">Reset Password</NavLink>
+              <NavLink to="/password-reset">Reset Password</NavLink>
             </Nav.Item>
           </>
         )}

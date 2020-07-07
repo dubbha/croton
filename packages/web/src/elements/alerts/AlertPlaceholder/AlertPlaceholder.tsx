@@ -1,3 +1,9 @@
 import React from 'react';
 
-export const AlertPlaceholder = () => <div style={{ height: '50px', marginBottom: '16px' }} />;
+type Props = {
+  height?: string;
+};
+
+export const AlertPlaceholder = ({ height = '50px' }: Props) => (
+  <div style={{ height, marginBottom: '16px' }} />
+);

@@ -6,11 +6,8 @@ describe('pages/SignUp', () => {
   it('should render successfully', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
-        useStore: () => ({
-          getState: () => ({}),
-        }),
         useDispatch: () => jest.fn(),
-        useSelector: () => false,
+        useSelector: () => false
       }));
 
       const { SignUp } = require('./SignUp');
@@ -24,11 +21,8 @@ describe('pages/SignUp', () => {
     const fn = jest.fn();
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
-        useStore: () => ({
-          getState: () => ({}),
-        }),
         useDispatch: () => fn,
-        useSelector: () => false,
+        useSelector: () => false
       }));
 
       jest.doMock('components/SignUpForm', () => {
@@ -36,7 +30,7 @@ describe('pages/SignUp', () => {
         return {
           SignUpForm: ({ onSubmit }) => (
             <button onClick={onSubmit} data-testid="submit" />
-          ),
+          )
         };
       });
 
