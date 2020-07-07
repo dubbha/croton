@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { AlertPlaceholder, ErrorAlert, InfoAlert } from 'elements/alerts';
-import { QueryParams } from '../../constants/query-params';
+import { useSelector } from 'react-redux';
+
+import { getQuery } from 'store/router/selectors';
 
 type Props = {
   isLoading: boolean;
@@ -10,17 +11,17 @@ type Props = {
 }
 
 export const EmailConfirmMessage = ({ onInit, error, isLoading }: Props) => {
-  const location = useLocation();
+  const { emailVerificationToken } = useSelector(getQuery);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    onInit(params.get(QueryParams.EMAIL_VERIFICATION_TOKEN) as string);
-  }, [location.search, onInit]);
+    onInit(emailVerificationToken);
+  }, [onInit, emailVerificationToken]);
 
   return (
     <>
-      {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
-      {isLoading ? <InfoAlert>We are about to activate yor account!</InfoAlert> : <AlertPlaceholder />}
+      {error && <ErrorAlert>{error}</ErrorAlert>}
+      {isLoading && <InfoAlert>We are about to activate yor account!</InfoAlert>}
+      {!error && !isLoading && <AlertPlaceholder />}
     </>
   );
 };

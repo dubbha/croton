@@ -70,7 +70,7 @@ export default class AuthenticationController extends BaseController {
     try {
       await this.authenticationService.register(
         request.body,
-        request.get('host')
+        request.headers.origin
       );
       response.status(204).send();
     } catch (error) {
@@ -101,7 +101,7 @@ export default class AuthenticationController extends BaseController {
     try {
       await this.authenticationService.resetPassword(
         request.body.email,
-        request.get('host')
+        request.headers.origin
       );
       response.status(204).send();
     } catch (error) {
