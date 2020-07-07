@@ -6,7 +6,10 @@ export default class User {
   public id: string;
 
   @Column()
-  public name: string;
+  public firstName: string;
+
+  @Column()
+  public lastName: string;
 
   @Column()
   public email: string;
@@ -17,9 +20,6 @@ export default class User {
   @Column()
   public status: string;
 
-  @Column()
-  public facebookId: string;
-
-  @Column()
-  public googleId: string;
+  @Column({ update: false, nullable: true })
+  public facebookId?: string;
 }

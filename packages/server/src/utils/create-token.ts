@@ -1,4 +1,4 @@
-import User from '../interfaces/user.interface';
+import User from '../interfaces/db.user.interface';
 import TokenData from '../interfaces/token.interface';
 import DataStoredInToken from '../interfaces/data-stored-in-token.interface';
 import jwt from 'jsonwebtoken';
