@@ -44,7 +44,7 @@ exports[`pages/SignUp should render successfully 1`] = `
       >
         <a
           class="nav-link"
-          href="/password-reset"
+          href="/reset"
         >
           Reset Password
         </a>

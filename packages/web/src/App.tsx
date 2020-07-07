@@ -13,7 +13,7 @@ const App = () => (
       <Route path="/signout" component={SignOut} />
       <Route path="/profile" component={Profile} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/password-reset" component={PasswordReset} />
+      <Route path="/reset" component={PasswordReset} />
       <Route path="/" exact component={Home} />
     </ConnectedRouter>
   </Provider>

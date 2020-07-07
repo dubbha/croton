@@ -53,7 +53,7 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
           data-testid="signInForm__password"
         />
         <Form.Text className="reset-password-link">
-          <Link to="/password-reset">Forgot password?</Link>
+          <Link to="/reset">Forgot password?</Link>
         </Form.Text>
       </Form.Group>
       <SubmitButton disabled={!isValid || isLoading} data-testid="submitButton">
