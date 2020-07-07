@@ -2,7 +2,7 @@ $color-grass-dark: #2f8611;
 $color-grass: #7ec850;
 $color-grass-light: #95e083;
 
-$color-lightcoral: #F08080;
+$color-danger: #F08080;
 
 $theme-colors: (
   'primary': $color-grass-dark,
@@ -31,8 +31,8 @@ $code-font-size: 100%;
     }
   }
 
-  .password-not-match{
-    color: $color-lightcoral;
+  .form-error-message{
+    color: $color-danger;
   }
 
   .signin-register,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
+exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
 <form
   class=""
 >
@@ -113,7 +113,7 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
 </form>
 `;
 
-exports[`components/SignInForm should render submit button disabled by default 1`] = `
+exports[`components/SignUpForm should render submit button disabled by default 1`] = `
 <form
   class=""
 >
@@ -226,7 +226,7 @@ exports[`components/SignInForm should render submit button disabled by default 1
 </form>
 `;
 
-exports[`components/SignInForm should render successfully 1`] = `
+exports[`components/SignUpForm should render successfully 1`] = `
 <form
   class=""
 >

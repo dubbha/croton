@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { SignUpForm } from './SignUpForm';
 
-describe('components/SignInForm', () => {
+describe('components/SignUpForm', () => {
   const fn = jest.fn();
 
   const props = {
@@ -41,8 +41,8 @@ describe('components/SignInForm', () => {
     const submitButton = getByTestId('submitButton');
 
     fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'admin' } });
-    fireEvent.change(passwordMatchInput, { target: { value: 'admin' } });
+    fireEvent.change(passwordInput, { target: { value: 'adminPass' } });
+    fireEvent.change(passwordMatchInput, { target: { value: 'adminPass' } });
     fireEvent.change(firstNameInput, { target: { value: 'first' } });
     fireEvent.change(lastNameInput, { target: { value: 'last' } });
 
