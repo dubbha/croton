@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.0.0",
     "bindall": "^2.0.1",
-    "eslint": "^7.2.0",
+    "eslint": "^6.6.0",
     "jest": "^26.0.1",
     "ts-class-autobind": "^0.3.0",
     "ts-jest": "^26.1.0",
