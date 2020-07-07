@@ -71,9 +71,8 @@ export default class ProvidersAuthService {
   }
 
   private initFacebookProviderLogin () {
-    const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env
+    const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, APP_HOST, HTTPS_PORT } = process.env
     const { getFacebookCallbackURL } = api
-    const { APP_HOST, HTTPS_PORT } = process.env
 
     passport.use(new FacebookStrategy({
       clientID: FACEBOOK_APP_ID,
