@@ -50,12 +50,14 @@ export interface AuthRegister {
   payload: {
     email: string;
     password: string;
-    name: string;
+    firstName: string;
+    lastName: string;
   };
 }
 
 export interface AuthRegisterSuccess {
   type: typeof AUTH_REGISTER_SUCCESS;
+  payload: { info: string };
 }
 
 export interface AuthRegisterError {
@@ -128,4 +130,4 @@ export type AuthActionTypes =
   | AuthUpdatePasswordError
   | AuthEmailConfirm
   | AuthEmailConfirmSuccess
-  |AuthEmailConfirmError;
+  | AuthEmailConfirmError;

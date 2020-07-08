@@ -1,5 +1,4 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
 import axios from 'axios';
 import { api } from 'config';
 import {
@@ -10,20 +9,20 @@ import {
 } from '../actions';
 
 function* handle(action: AuthRegister) {
-  const { email, password, name } = action.payload;
+  const { email, password, firstName, lastName } = action.payload;
 
   try {
     yield call(axios.post, `${api}/auth/register`, {
       email,
       password,
-      name,
+      firstName,
+      lastName,
       facebookId: 'fff', // TODO: remove me
-      googleId: 'ggg' // TODO: remove me
     });
     yield put({
-      type: AUTH_REGISTER_SUCCESS
+      type: AUTH_REGISTER_SUCCESS,
+      payload: { info: 'Please check your email for verification before signing in' },
     });
-    yield put(push('/signin'));
   } catch (e) {
     yield put({
       type: AUTH_REGISTER_ERROR,
