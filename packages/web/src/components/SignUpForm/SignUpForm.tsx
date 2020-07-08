@@ -64,8 +64,8 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
 
   // validation and error setting for First Name
   useEffect(() => {
-    if (firstName.length <= 2) {
-      setFirstNameError('First name has to be greater than 2 symbols.');
+    if (firstName.length < 2) {
+      setFirstNameError('First name has to be greater than 1 symbols.');
     } else {
       setFirstNameError('');
     }
@@ -73,8 +73,8 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
 
   // validation and error setting for Last Name
   useEffect(() => {
-    if (lastName.length <= 2) {
-      setLastNameError('Last name has to be greater than 2 symbols.');
+    if (lastName.length < 2) {
+      setLastNameError('Last name has to be greater than 1 symbols.');
     } else {
       setLastNameError('');
     }
