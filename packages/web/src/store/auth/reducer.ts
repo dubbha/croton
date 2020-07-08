@@ -69,14 +69,15 @@ export function authReducer(
     case AUTH_REGISTER_SUCCESS: {
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        info: action.payload.info,
       };
     }
     case AUTH_REGISTER_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
     case AUTH_EMAIL_CONFIRM:
       return {

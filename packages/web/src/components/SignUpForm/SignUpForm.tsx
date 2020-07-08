@@ -3,6 +3,7 @@ import {
   Form,
   SubmitButton,
   ErrorAlert,
+  InfoAlert,
   AlertPlaceholder,
   LoadingSpinner,
 } from 'elements';
@@ -11,10 +12,11 @@ import './styles.scss';
 type Props = {
   isLoading: boolean;
   error: string | null;
-  onSubmit: (email: string, password: string, name: string) => void;
+  info: string | null;
+  onSubmit: (email: string, password: string, firstName: string, lastName: string) => void;
 };
 
-export const SignUpForm = ({ isLoading, error, onSubmit }: Props) => {
+export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
   const [firstName, setFirstName] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
   const [firstNameTouched, setFirstNameTouched] = useState(false);
@@ -111,12 +113,14 @@ export const SignUpForm = ({ isLoading, error, onSubmit }: Props) => {
     setIsValid(
       !!email && !!password && !!passwordMatch && !!firstName && !!lastName
     );
-    onSubmit(email, password, `${firstName} ${lastName}`);
+    onSubmit(email, password, firstName, lastName);
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
+      {error && <ErrorAlert>{error}</ErrorAlert>}
+      {info && <InfoAlert>{info}</InfoAlert>}
+      {!error && !info && <AlertPlaceholder />}
       <Form.Group controlId="formFirstName">
         <Form.Label>First Name</Form.Label>
         <Form.Control
