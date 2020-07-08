@@ -17,7 +17,7 @@ export const Home = () => (
         </div>
       </div>
       <section id="features" className="features text-center section-dark">
-        <div className="container">
+        <div className="container-body">
           <div className="section-title mb-3">
             <h2>Features</h2>
             <p>
@@ -68,7 +68,7 @@ export const Home = () => (
         </div>
       </section>
       <section id="services" className="services text-center section-dark">
-        <div className="container">
+        <div className="container-body">
           <div className="section-title">
             <h2>Our Services</h2>
             <h3>We offer to you</h3>
