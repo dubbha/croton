@@ -7,19 +7,19 @@ import { getAuth } from 'store/auth/selectors';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(getAuth);
+  const { isLoading, error, info } = useSelector(getAuth);
 
-  const handleSubmit = (email: string, password: string, name: string) => {
+  const handleSubmit = (email: string, password: string, firstName: string, lastName: string) => {
     dispatch({
       type: AUTH_REGISTER,
-      payload: { email, password, name }
+      payload: { email, password, firstName, lastName }
     });
   };
 
   return (
     <Container>
       <Header />
-      <SignUpForm isLoading={isLoading} error={error} onSubmit={handleSubmit} />
+      <SignUpForm isLoading={isLoading} error={error} info={info} onSubmit={handleSubmit} />
       <div className="signup-login">
         Already have an account ?<Link to="/signin"> Sign In</Link>
       </div>
