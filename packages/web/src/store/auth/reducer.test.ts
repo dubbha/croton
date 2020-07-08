@@ -60,7 +60,7 @@ describe('store/auth/reducer', () => {
     expect(
       authReducer(initialState, {
         type: AUTH_REGISTER,
-        payload: { email: 'EMAIL', password: 'PASSWORD', name: 'NAME' }
+        payload: { email: 'EMAIL', password: 'PASSWORD', firstName: 'FNAME', lastName: 'LNAME' }
       })
     ).toEqual({
       ...initialState,
@@ -74,11 +74,13 @@ describe('store/auth/reducer', () => {
     const state = { ...initialState, isLoading: true };
     expect(
       authReducer(state, {
-        type: AUTH_REGISTER_SUCCESS
+        type: AUTH_REGISTER_SUCCESS,
+        payload: { info: 'INFO' },
       })
     ).toEqual({
       ...state,
-      isLoading: false
+      isLoading: false,
+      info: 'INFO',
     });
   });
 

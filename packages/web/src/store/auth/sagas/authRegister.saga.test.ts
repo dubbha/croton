@@ -1,5 +1,4 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import { push } from 'connected-react-router';
 import axios from 'axios';
 import { environments } from 'config';
 import {
@@ -25,17 +24,17 @@ describe('system/authRegisterSaga', () => {
       .call(axios.post, `${environments.local.api}/auth/register`, {
         email: 'admin@admin.com',
         password: 'admin',
-        name: 'NAME',
+        firstName: 'FNAME',
+        lastName: 'LNAME',
         facebookId: 'fff', // TODO: remove me
-        googleId: 'ggg' // TODO: remove me
       })
       .put({
-        type: AUTH_REGISTER_SUCCESS
+        type: AUTH_REGISTER_SUCCESS,
+        payload: { info: 'Please check your email for verification before signing in' },
       })
-      .put(push('/signin'))
       .dispatch({
         type: AUTH_REGISTER,
-        payload: { email: 'admin@admin.com', password: 'admin', name: 'NAME' }
+        payload: { email: 'admin@admin.com', password: 'admin',  firstName: 'FNAME', lastName: 'LNAME' }
       })
       .silentRun();
   });
