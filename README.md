@@ -40,6 +40,21 @@ Use root or package level commands to run mobile:
 
 [/packages/mobile] yarn start:android
 ```
+You can run iOS simulator only on macOS
+If you use macOS you should install dependencies for Swift/Objective-C for run iOS emulator
+```
+[/packages/mobile/ios] pod install
+```
+Use root or package level commands to run mobile:
+```
+[/] yarn workspace mobile start:ios
+
+[/packages/mobile] yarn start:ios
+```
+If you would like to start android simulator on macOS you should give permission for:
+```
+[/] chmod 755 packages/mobile/android/gradlew
+```
 
 ### Monorepo
 This is a monorepo for a `web/mobile/server` development, intending to share as much dependencies and code as possible. Dependencies reside in the root level `node_modules`. Individual packages reside in the `packages` directory:
