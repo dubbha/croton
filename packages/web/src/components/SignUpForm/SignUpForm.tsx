@@ -8,112 +8,105 @@ import {
   LoadingSpinner,
 } from 'elements';
 import './styles.scss';
+import useCustomForm from '../../hooks/useCustomForm';
+import { isEmail } from '../../helpers/validators';
 
 type Props = {
   isLoading: boolean;
   error: string | null;
   info: string | null;
-  onSubmit: (email: string, password: string, firstName: string, lastName: string) => void;
+  onSubmit: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => void;
 };
 
 export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
-  const [firstName, setFirstName] = useState('');
-  const [firstNameError, setFirstNameError] = useState('');
-  const [firstNameTouched, setFirstNameTouched] = useState(false);
-
-  const [lastName, setLastName] = useState('');
-  const [lastNameError, setLastNameError] = useState('');
-  const [lastNameTouched, setLastNameTouched] = useState(false);
-
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [emailTouched, setEmailTouched] = useState(false);
-
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [passwordTouched, setPasswordTouched] = useState(false);
-
-  const [passwordMatch, setPasswordMatch] = useState('');
-  const [passwordMatchError, setPasswordMatchError] = useState('');
-  const [passwordMatchTouched, setPasswordMatchTouched] = useState(false);
-
-  const [isValid, setIsValid] = useState(false);
-
-  // I've decided to keep it here for now, but later probably we can use 'validate' or/and 'Formik' npm libs.
-  const validateEmail = (emailToTest) => {
-    // eslint-disable-next-line
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(emailToTest).toLowerCase());
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
   };
+
+  const emailErrorMessage = (email: string): string | null => {
+    if (!isEmail(email)) {
+      return 'Email is invalid.';
+    }
+    return null;
+  };
+
+  const firstNameErrorMessage = (firstName: string): string | null => {
+    if (firstName.length < 2) {
+      return 'First name has to be greater than 1 symbols.';
+    }
+    return null;
+  };
+
+  const lastNameErrorMessage = (lastName: string): string | null => {
+    if (lastName.length < 2) {
+      return 'Last name has to be greater than 1 symbols.';
+    }
+    return null;
+  };
+
+  const passwordErrorMessage = (password: string): string | null => {
+    if (password.length < 8) {
+      return 'Password has to be greater than 8 symbols.';
+    }
+    return null;
+  };
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+  }: {
+    values: any;
+    errors: any;
+    touched: any;
+    handleChange: any;
+    handleBlur: any;
+  } = useCustomForm({
+    initialValues,
+    errorsRules: {
+      email: emailErrorMessage,
+      firstName: firstNameErrorMessage,
+      lastName: lastNameErrorMessage,
+      password: passwordErrorMessage,
+    },
+  });
+
+  const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     setIsValid(
-      !emailError 
-      && !passwordError 
-      && !passwordMatchError 
-      && !firstNameError 
-      && !lastNameError
+      !errors.email &&
+        !errors.password &&
+        !passwordMatchError &&
+        !errors.firstName &&
+        !errors.lastName
     );
-  }, [
-    emailError,
-    passwordError,
-    passwordMatchError,
-    firstNameError,
-    lastNameError,
-  ]);
+  }, [errors, passwordMatchError]);
 
-  // validation and error setting for First Name
+  // Password match is not moved to useCustomForm hook due to custom logic
   useEffect(() => {
-    if (firstName.length < 2) {
-      setFirstNameError('First name has to be greater than 1 symbols.');
-    } else {
-      setFirstNameError('');
-    }
-  }, [firstName]);
-
-  // validation and error setting for Last Name
-  useEffect(() => {
-    if (lastName.length < 2) {
-      setLastNameError('Last name has to be greater than 1 symbols.');
-    } else {
-      setLastNameError('');
-    }
-  }, [lastName]);
-
-  // validation and error setting for Email
-  useEffect(() => {
-    if (!validateEmail(email)) {
-      setEmailError('Email is invalid.');
-    } else {
-      setEmailError('');
-    }
-  }, [email]);
-
-  // validation and error setting for Password
-  useEffect(() => {
-    if (password.length < 8) {
-      setPasswordError('Password has to be greater than 8 symbols.');
-    } else {
-      setPasswordError('');
-    }
-  }, [password]);
-
-  // validation and error setting for Password Matching
-  useEffect(() => {
-    if (password !== passwordMatch) {
+    if (values.password !== values.passwordMatch) {
       setPasswordMatchError('Password doesn\'t match.');
     } else {
       setPasswordMatchError('');
     }
-  }, [passwordMatch, password]);
+  }, [values.password, values.passwordMatch]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    setIsValid(
-      !!email && !!password && !!passwordMatch && !!firstName && !!lastName
-    );
-    onSubmit(email, password, firstName, lastName);
+    onSubmit(values.email, values.password, values.firstName, values.lastName);
   };
 
   return (
@@ -126,13 +119,16 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="text"
           placeholder="Enter First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          onBlur={() => setFirstNameTouched(true)}
+          value={values.name}
+          name="firstName"
+          onChange={handleChange}
+          onBlur={handleBlur}
           data-testid="signUpForm__firstName"
         />
-        {firstNameTouched && firstNameError && (
-          <Form.Text className="form-error-message">{firstNameError}</Form.Text>
+        {touched.firstName && errors.firstName && (
+          <Form.Text className="form-error-message">
+            {errors.firstName}
+          </Form.Text>
         )}
       </Form.Group>
 
@@ -141,13 +137,16 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="text"
           placeholder="Enter Last Name"
-          value={lastName}
-          onBlur={() => setLastNameTouched(true)}
-          onChange={(e) => setLastName(e.target.value)}
+          value={values.name}
+          name="lastName"
+          onBlur={handleBlur}
+          onChange={handleChange}
           data-testid="signUpForm__lastName"
         />
-        {lastNameTouched && lastNameError && (
-          <Form.Text className="form-error-message">{lastNameError}</Form.Text>
+        {touched.lastName && errors.lastName && (
+          <Form.Text className="form-error-message">
+            {errors.lastName}
+          </Form.Text>
         )}
       </Form.Group>
 
@@ -156,13 +155,16 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="email"
           placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onBlur={() => setEmailTouched(true)}
+          value={values.name}
+          name="email"
+          onChange={handleChange}
+          onBlur={handleBlur}
           data-testid="signUpForm__email"
         />
-        {emailTouched && emailError && (
-          <Form.Text className="form-error-message">{emailError}</Form.Text>
+        {touched.email && errors.email && (
+          <Form.Text className="form-error-message">
+            {errors.email}
+          </Form.Text>
         )}
       </Form.Group>
 
@@ -171,13 +173,16 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="password"
           placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={() => setPasswordTouched(true)}
+          value={values.name}
+          name="password"
+          onChange={handleChange}
+          onBlur={handleBlur}
           data-testid="signUpForm__password"
         />
-        {passwordTouched && passwordError && (
-          <Form.Text className="form-error-message">{passwordError}</Form.Text>
+        {touched.password && errors.password && (
+          <Form.Text className="form-error-message">
+            {errors.password}
+          </Form.Text>
         )}
       </Form.Group>
 
@@ -186,18 +191,19 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="password"
           placeholder="Repeat password"
-          value={passwordMatch}
-          onChange={(e) => setPasswordMatch(e.target.value)}
-          onBlur={() => setPasswordMatchTouched(true)}
+          value={values.name}
+          name="passwordMatch"
+          onChange={handleChange}
+          onBlur={handleBlur}
           data-testid="signUpForm__passwordMatch"
         />
-        {passwordMatchTouched && passwordMatchError && (
+        {touched.passwordMatch && passwordMatchError && (
           <Form.Text className="form-error-message">
             {passwordMatchError}
           </Form.Text>
         )}
       </Form.Group>
-      <SubmitButton disabled={!isValid || isLoading}>
+      <SubmitButton disabled={!isValid}>
         <div className="spinner-container">
           {isLoading && <LoadingSpinner />}
         </div>
