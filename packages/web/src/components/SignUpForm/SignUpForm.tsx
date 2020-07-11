@@ -203,7 +203,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
           </Form.Text>
         )}
       </Form.Group>
-      <SubmitButton disabled={!isValid}>
+      <SubmitButton disabled={!isValid || isLoading}>
         <div className="spinner-container">
           {isLoading && <LoadingSpinner />}
         </div>
