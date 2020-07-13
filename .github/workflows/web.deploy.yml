@@ -43,8 +43,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: ${{ source }}
-          target: "/var/tmp/croton-web"
+          source: "croton-web-dev"
+          target: "/var/tmp/croton-web-${branch}"
           rm: true
           
 
