@@ -1,0 +1,62 @@
+name: WEB-CI-deploy
+
+on:
+  push:
+    paths:
+      - "packages/web/**"
+      - ".github/workflows/**"
+    branches:
+      - feat/43-https-ssl
+      # - dev
+      # - stage
+      # - prod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: |
+          cd packages/web
+          yarn
+          yarn build
+
+      - name: deploy
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "build/**/*"
+          target: "var/tmp/build"
+          
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Extract branch name
+  #       shell: bash
+  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  #       id: extract_branch
+
+  #     - name: SCP
+  #       uses: appleboy/scp-action@master
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         script: |
+  #           echo ${{ steps.extract_branch.outputs.branch }}
+  #           cd /var/www/croton-server-${{ steps.extract_branch.outputs.branch }}
+  #           git fetch origin
+  #           git checkout ${{ steps.extract_branch.outputs.branch }}
+  #           git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
+  #           yarn workspace web install
+  #           yarn workspace web build
+  #           sudo systemctl restart croton-web-${{ steps.extract_branch.outputs.branch }}

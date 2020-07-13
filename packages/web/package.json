@@ -16,7 +16,9 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:smoke": "cypress run --spec=cypress/integration/smoke/*",
-    "audit:ci": "yarn-audit-ci"
+    "audit:ci": "yarn-audit-ci",
+    "serve": "node server/index.js",
+    "build:serve": "yall build serve"
   },
   "dependencies": {
     "axios": "^0.19.2",
