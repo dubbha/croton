@@ -31,8 +31,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "packages/web/build/*"
-          target: /var/tmp/croton-web-${{ GITHUB_REF#refs/heads/ }}
+          source: "croton-web-*"
+          target: "/var/tmp/croton-web"
           rm: true
           
 
