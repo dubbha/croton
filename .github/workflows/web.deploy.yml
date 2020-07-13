@@ -53,6 +53,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          envs: branch
           script: |
             echo $branch
             sudo rm -Rf /var/www/croton-web-$branch
