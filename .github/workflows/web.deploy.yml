@@ -23,6 +23,8 @@ jobs:
           yarn workspace web build
           mkdir croton-web-${GITHUB_REF#refs/heads/}
           ls -l
+          cp -Rp packages/web/build/* ./croton-web-${GITHUB_REF#refs/heads/}/
+          ls -l ./croton-web-${GITHUB_REF#refs/heads/}/
 
       - name: deploy
         uses: appleboy/scp-action@master
