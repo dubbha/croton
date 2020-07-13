@@ -21,6 +21,7 @@ jobs:
         run: |
           echo "::set-env name=branch::${GITHUB_REF#refs/heads/}"
           echo "::set-env name=dir::croton-web-dev"
+
       - name: build
         run: |
           echo $branch
@@ -31,8 +32,8 @@ jobs:
           # yarn workspace web install
           # yarn workspace web build
           # ls -l
-          # cp -Rp packages/web/build/* ./${dir}/
-          # ls -l ./${dir}/
+          # cp -Rp packages/web/build/* ./$dir/
+          # ls -l ./$dir/
 
       - name: deploy
         uses: appleboy/scp-action@master
@@ -41,7 +42,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: $dir
+          source: $dir/*
           target: "/var/tmp/croton-web"
           rm: true
           
