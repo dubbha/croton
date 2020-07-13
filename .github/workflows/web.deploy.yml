@@ -17,7 +17,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: build
         run: |
           cd packages/web
@@ -31,8 +30,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "build/**/*"
+          source: "packages/web/build/*"
           target: "var/tmp/build"
+          rm: true
           
 
   # deploy:
