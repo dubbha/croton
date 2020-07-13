@@ -1,6 +1,8 @@
 export default interface User {
-  email: string;
-  password: string;
-  name: string;
   id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  status: string;
+  facebookId?: string;
 }

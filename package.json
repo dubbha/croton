@@ -10,14 +10,21 @@
   "scripts": {
     "cpd": "jscpd ./packages/*/src",
     "cpd:ci": "yarn cpd --silent --threshold 20",
-    "server:update": "cd packages/server && yarn server:update",
-    "server:deploy": "cd packages/server && yarn server:deploy"
+    "lint:web": "yarn workspace web lint",
+    "lint:mobile": "yarn workspace mobile lint",
+    "lint:server": "yarn workspace server lint",
+    "lint": "yall lint:web lint:mobile lint:server",
+    "test:web": "yarn workspace web test",
+    "test:mobile": "yarn workspace mobile test",
+    "test:server": "yarn workspace server test",
+    "test": "yall test:web test:mobile test:server"
   },
   "dependencies": {
     "react-native": "0.61.5"
   },
   "license": "MIT",
   "devDependencies": {
-    "jscpd": "^3.3.0-rc.9"
+    "jscpd": "^3.3.0-rc.9",
+    "yall-scripts": "^1.1.0"
   }
 }
