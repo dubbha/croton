@@ -20,10 +20,12 @@ jobs:
       - name: set env vars
         run: |
           echo "::set-env name=branch::${GITHUB_REF#refs/heads/}"
+          echo "::set-env name=branch-fixed::${GITHUB_REF#refs/heads/}"
           echo "::set-env name=dir::croton-web-${GITHUB_REF#refs/heads/}"
       - name: build
         run: |
           echo $branch
+          export branch-fixed=`sed s/\//-/ $branch`
           echo $dir
           mkdir $dir
           yarn workspace web install
