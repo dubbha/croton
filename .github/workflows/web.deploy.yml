@@ -20,56 +20,41 @@ jobs:
       - name: set env vars
         run: |
           echo "::set-env name=branch::${GITHUB_REF#refs/heads/}"
-          echo "::set-env name=dir::croton-web-dev"
-          echo "::set-env name=source::croton-web-dev/*"
 
       - name: build
         run: |
           echo $branch
-          echo $dir
-          mkdir $dir
-          cp -Rp packages/web/public/* $dir/
-          ls -l $dir
+          mkdir deploy
+          cp -Rp packages/web/public/* deploy/
+          ls -l deploy
           # yarn workspace web install
           # yarn workspace web build
           # ls -l
           # cp -Rp packages/web/build/* ./$dir/
           # ls -l ./$dir/
 
-      - name: deploy
+      - name: scp
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "croton-web-dev"
-          target: "/var/tmp/croton-web-${branch}"
+          source: "deploy"
+          target: "/var/tmp/croton-web"
           rm: true
-          
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Extract branch name
-  #       shell: bash
-  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-  #       id: extract_branch
-
-  #     - name: SCP
-  #       uses: appleboy/scp-action@master
-  #       with:
-  #         host: ${{ secrets.SSH_HOST }}
-  #         username: ${{ secrets.SSH_USERNAME }}
-  #         key: ${{ secrets.SSH_KEY }}
-  #         port: ${{ secrets.SSH_PORT }}
-  #         script: |
-  #           echo ${{ steps.extract_branch.outputs.branch }}
-  #           cd /var/www/croton-server-${{ steps.extract_branch.outputs.branch }}
-  #           git fetch origin
-  #           git checkout ${{ steps.extract_branch.outputs.branch }}
-  #           git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
-  #           yarn workspace web install
-  #           yarn workspace web build
-  #           sudo systemctl restart croton-web-${{ steps.extract_branch.outputs.branch }}
+      - name: ssh
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo $branch
+            rm -Rf /var/www/croton-web-$branch
+            mkdir /var/www/croton-web-$branch
+            cp -Rp /var/tmp/croton-web/* /var/www/croton-web-$branch
+            ls -l /var/www/croton-web-$branch
+            # sudo systemctl restart croton-web-${{ steps.extract_branch.outputs.branch }}
