@@ -21,10 +21,14 @@ jobs:
         run: |
           yarn workspace web install
           yarn workspace web build
-          mkdir croton-web-${GITHUB_REF#refs/heads/}
+          export BRANCH=${GITHUB_REF#refs/heads/}
+          echo ${BRANCH}
+          export DIR=croton-web-${branch}
+          echo ${DIR}
+          mkdir ${DIR}
           ls -l
-          cp -Rp packages/web/build/* ./croton-web-${GITHUB_REF#refs/heads/}/
-          ls -l ./croton-web-${GITHUB_REF#refs/heads/}/
+          cp -Rp packages/web/build/* ./${DIR}/
+          ls -l ./${DIR}/
 
       - name: deploy
         uses: appleboy/scp-action@master
@@ -33,7 +37,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "croton-web-*"
+          source: ${BRANCH}
           target: "/var/tmp/croton-web"
           rm: true
           
