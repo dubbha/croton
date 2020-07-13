@@ -17,13 +17,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: set env vars
-        run: |
-          echo "::set-env name=branch::${GITHUB_REF#refs/heads/}"
+      # - name: set env vars
+      #   run: |
+      #     echo "::set-env name=branch::${GITHUB_REF#refs/heads/}"
 
       - name: build
         run: |
-          echo $branch
           mkdir deploy
           cp -Rp packages/web/public/* deploy/
           ls -l deploy
@@ -47,17 +46,19 @@ jobs:
       - name: ssh, move build files, restart service
         uses: appleboy/ssh-action@master
         env:
-          branch: $branch
+          branch: ${GITHUB_REF#refs/heads/}
+          test: "test"
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          envs: branch
+          envs: branch, test
           script: |
             echo $branch
-            sudo rm -Rf /var/www/croton-web-$branch
-            sudo mkdir /var/www/croton-web-$branch
-            sudo cp -Rp /var/tmp/croton-web/* /var/www/croton-web-$branch
-            sudo ls -l /var/www/croton-web-$branch
+            echo $test
+            sudo rm -Rf /var/www/croton-web-$test
+            sudo mkdir /var/www/croton-web-$test
+            sudo cp -Rp /var/tmp/croton-web/* /var/www/croton-web-$test
+            sudo ls -l /var/www/croton-web-$test
             # sudo systemctl restart croton-web-$branch
