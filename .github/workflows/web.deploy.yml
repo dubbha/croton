@@ -46,7 +46,7 @@ jobs:
       - name: ssh, move build files, restart service
         uses: appleboy/ssh-action@master
         env:
-          branch: ${GITHUB_REF#refs/heads/}
+          branch: ${{ GITHUB_REF#refs/heads/ }}
           test: "test"
         with:
           host: ${{ secrets.SSH_HOST }}
