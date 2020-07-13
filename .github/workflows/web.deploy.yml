@@ -31,7 +31,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "packages/web/build/*"
-          target: "var/tmp/build"
+          target: "/var/tmp/croton"
           rm: true
           
 
