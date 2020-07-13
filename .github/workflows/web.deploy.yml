@@ -46,6 +46,8 @@ jobs:
 
       - name: ssh, move build files, restart service
         uses: appleboy/ssh-action@master
+        env:
+          branch: $branch
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -53,8 +55,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             echo $branch
-            rm -Rf /var/www/croton-web-$branch
-            mkdir /var/www/croton-web-$branch
-            cp -Rp /var/tmp/croton-web/* /var/www/croton-web-$branch
-            ls -l /var/www/croton-web-$branch
+            sudo rm -Rf /var/www/croton-web-$branch
+            sudo mkdir /var/www/croton-web-$branch
+            sudo cp -Rp /var/tmp/croton-web/* /var/www/croton-web-$branch
+            sudo ls -l /var/www/croton-web-$branch
             # sudo systemctl restart croton-web-$branch
