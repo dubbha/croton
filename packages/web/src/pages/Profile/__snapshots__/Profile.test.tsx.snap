@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/Profile should render successfully if user is logged in 1`] = `
+<div
+  class="container"
+>
+  <div>
+    Header
+  </div>
+  <div>
+    NAME [EMAIL]
+  </div>
+  <div>
+    Footer
+  </div>
+</div>
+`;

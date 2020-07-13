@@ -4,8 +4,7 @@ import { RequestHandler } from 'express';
 import HttpException from '../exceptions/http.exception';
 
 export default function validationMiddleware<T>(
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    type,
+  type,
   skipMissingProperties = false
 ): RequestHandler {
   return (req, res, next) => {

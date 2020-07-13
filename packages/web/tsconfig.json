@@ -3,9 +3,12 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./src",
+    "noImplicitAny": false,
   },
   "include": [
-    "src"
+    "src",
+    "core",
   ]
 }

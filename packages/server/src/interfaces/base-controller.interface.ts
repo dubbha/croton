@@ -1,6 +1,8 @@
 import { Router } from 'express';
+import { Api } from '../api';
 
 export default interface BaseController {
-  path: string;
   router: Router;
+  serverApi: Api;
+  initializeRoutes(): void;
 }
