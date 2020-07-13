@@ -26,8 +26,8 @@ jobs:
           echo $branch
           echo $dir
           mkdir $dir
-          # yarn workspace web install
-          # yarn workspace web build
+          yarn workspace web install
+          yarn workspace web build
           ls -l
           cp -Rp packages/web/build/* ./${dir}/
           ls -l ./${dir}/
