@@ -3,34 +3,37 @@ import { environments, getEnvironment } from './environment';
 describe('config/environments', () => {
   const realLocation = window.location;
   delete window.location; // https://github.com/jsdom/jsdom/issues/2112
-  window.location = { hostname: '' } as Location;
 
   afterAll(() => {
     window.location = realLocation;
   })
 
   it('should map prod host', () => {
-    window.location.hostname = environments.prod.hostname;
+    const { protocol, host } = environments.prod;
+    window.location = { protocol, host } as Location;
     expect(getEnvironment()).toEqual(environments.prod);
   })
 
   it('should map stage host', () => {
-    window.location.hostname = environments.stage.hostname;
+    const { protocol, host } = environments.stage;
+    window.location = { protocol, host } as Location;
     expect(getEnvironment()).toEqual(environments.stage);
   })
 
   it('should map dev host', () => {
-    window.location.hostname = environments.dev.hostname;
+    const { protocol, host } = environments.dev;
+    window.location = { protocol, host } as Location;
     expect(getEnvironment()).toEqual(environments.dev);
   })
 
   it('should map localhost', () => {
-    window.location.hostname = environments.local.hostname;
+    const { protocol, host } = environments.local;
+    window.location = { protocol, host } as Location;
     expect(getEnvironment()).toEqual(environments.local);
   })
 
   it('should map to local env by default', () => {
-    window.location.hostname = 'UNKNOWN';
+    window.location = { protocol: 'PROTOCOL', host: 'HOST' } as Location;
     expect(getEnvironment()).toEqual(environments.local);
   })
 })
