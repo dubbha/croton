@@ -11,7 +11,13 @@
     "test:coverage": "jest --coverage",
     "start:dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
     "build": "tsc",
-    "build:serve": "tsc && node ./dist/server.js"
+    "build:serve": "tsc && node ./dist/server.js",
+    "migration:generate:linux": "ts-node ./node_modules/.bin/typeorm migration:generate -n migration",
+    "migration:generate:windows": "ts-node ../../node_modules/typeorm/cli.js migration:generate -n migration",
+    "migration:run:linux": "ts-node ./node_modules/.bin/typeorm migration:run",
+    "migration:run:windows": "ts-node ../../node_modules/typeorm/cli.js migration:run",
+    "migration:revert:linux": "ts-node ./node_modules/.bin/typeorm migration:revert",
+    "migration:revert:windows": "ts-node ../../node_modules/typeorm/cli.js migration:revert"
   },
   "keywords": [],
   "author": "",
