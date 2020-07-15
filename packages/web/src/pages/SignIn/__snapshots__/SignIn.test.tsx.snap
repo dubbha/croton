@@ -89,67 +89,72 @@ exports[`pages/SignIn should render successfully 1`] = `
       </div>
     </nav>
   </header>
-  <form
-    class=""
+  <div
+    class="container signInConrollersContainer"
   >
-    <div
-      style="height: 50px; margin-bottom: 16px;"
-    />
-    <div
-      class="form-group"
-    >
-      <label
-        class="form-label"
-      >
-        Email address
-      </label>
-      <input
-        class="form-control"
-        data-testid="signInForm__email"
-        placeholder="Enter email"
-        type="email"
-        value=""
-      />
-    </div>
-    <div
-      class="form-group"
-    >
-      <label
-        class="form-label"
-      >
-        Password
-      </label>
-      <input
-        class="form-control"
-        data-testid="signInForm__password"
-        placeholder="Enter password"
-        type="password"
-        value=""
-      />
-      <small
-        class="reset-password-link form-text"
-      >
-        <a
-          href="/reset"
-        >
-          Forgot password?
-        </a>
-      </small>
-    </div>
-    <button
-      class="btn btn-primary"
-      data-testid="submitButton"
-      disabled=""
-      type="submit"
+    <form
+      class="signinForm"
     >
       <div
-        class="spinner-container"
+        style="height: 50px; margin-bottom: 16px;"
       />
-      <span>
-        Sign In
-      </span>
-    </button>
-  </form>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+        >
+          Email address
+        </label>
+        <input
+          class="form-control"
+          data-testid="signInForm__email"
+          placeholder="Enter email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+        >
+          Password
+        </label>
+        <input
+          class="form-control"
+          data-testid="signInForm__password"
+          placeholder="Enter password"
+          type="password"
+          value=""
+        />
+        <small
+          class="reset-password-link form-text"
+        >
+          <a
+            href="/reset"
+          >
+            Forgot password?
+          </a>
+        </small>
+      </div>
+      <button
+        class="btn btn-primary"
+        data-testid="submitButton"
+        disabled=""
+        type="submit"
+      >
+        <div
+          class="spinner-container"
+        />
+        <span>
+          Sign In
+        </span>
+      </button>
+    </form>
+    <button />
+  </div>
   <div
     class="signin-register"
   >

@@ -9,6 +9,12 @@ describe('pages/SignIn', () => {
         useDispatch: () => jest.fn(),
         useSelector: () => false,
       }));
+      jest.doMock('components/FbAuth', () => {
+        const React = require('react');
+        return {
+          FbAuth: () => <button />,
+        };
+      });
 
       const { SignIn } = require('./SignIn');
 
@@ -24,13 +30,18 @@ describe('pages/SignIn', () => {
         useDispatch: () => fn,
         useSelector: () => false,
       }));
-
       jest.doMock('components/SignInForm', () => {
         const React = require('react');
         return {
           SignInForm: ({ onSubmit }) => (
             <button onClick={onSubmit} data-testid="submitButton" />
           ),
+        };
+      });
+      jest.doMock('components/FbAuth', () => {
+        const React = require('react');
+        return {
+          FbAuth: () => <button />,
         };
       });
 

@@ -8,7 +8,7 @@ exports[`pages/Profile should render successfully if user is logged in 1`] = `
     Header
   </div>
   <div>
-    NAME [EMAIL]
+     [EMAIL]
   </div>
   <div>
     Footer

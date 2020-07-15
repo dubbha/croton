@@ -17,17 +17,21 @@ import {
   AUTH_RESET_PASSWORD_ERROR,
   AUTH_UPDATE_PASSWORD,
   AUTH_UPDATE_PASSWORD_SUCCESS,
-  AUTH_UPDATE_PASSWORD_ERROR
+  AUTH_UPDATE_PASSWORD_ERROR,
+  AUTH_FACEBOOK,
+  AUTH_FACEBOOK_SUCCESS,
+  AUTH_FACEBOOK_ERROR,
 } from './actions';
 
 export const initialState: AuthState = {
   token: null,
   id: null,
-  name: null,
+  firstName: null,
+  lastName: null,
   email: null,
   isLoading: false,
   error: null,
-  info: null
+  info: null,
 };
 
 export function authReducer(
@@ -35,37 +39,42 @@ export function authReducer(
   action: AuthActionTypes | LocationChangeAction
 ): AuthState {
   switch (action.type) {
+    case AUTH_UPDATE_PASSWORD:
+    case AUTH_RESET_PASSWORD:
+    case AUTH_FACEBOOK:
+    case AUTH_REGISTER:
     case AUTH_LOGIN:
       return {
         ...state,
         isLoading: true,
         error: null,
-        info: null
+        info: null,
       };
+    case AUTH_EMAIL_CONFIRM_SUCCESS:
+    case AUTH_FACEBOOK_SUCCESS:
     case AUTH_LOGIN_SUCCESS: {
-      const { id, name, email, token } = action.payload;
+      const { id, firstName, lastName, email, token } = action.payload;
       return {
         ...state,
         id,
-        name,
+        firstName,
+        lastName,
         email,
         token,
-        isLoading: false
+        isLoading: false,
       };
     }
+    case AUTH_EMAIL_CONFIRM_ERROR:
+    case AUTH_REGISTER_ERROR:
     case AUTH_LOGIN_ERROR:
+    case AUTH_FACEBOOK_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
-    case AUTH_REGISTER:
-      return {
-        ...state,
-        isLoading: true,
-        error: null,
-        info: null
-      };
+    case AUTH_UPDATE_PASSWORD_SUCCESS:
+    case AUTH_RESET_PASSWORD_SUCCESS:
     case AUTH_REGISTER_SUCCESS: {
       return {
         ...state,
@@ -73,87 +82,34 @@ export function authReducer(
         info: action.payload.info,
       };
     }
-    case AUTH_REGISTER_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload.error,
-      };
-    case AUTH_EMAIL_CONFIRM:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
-    case AUTH_EMAIL_CONFIRM_SUCCESS: {
-      const { id, name, email, token } = action.payload;
 
-      return {
-        ...state,
-        id,
-        name,
-        email,
-        token,
-        isLoading: false,
-        error: null
-      };
-    }
-    case AUTH_EMAIL_CONFIRM_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload.error
-      };
-    case AUTH_LOGOUT:
-      return {
-        ...initialState
-      };
-    case AUTH_RESET_PASSWORD:
-      return {
-        ...state,
-        isLoading: true,
-        error: null,
-        info: null
-      };
-    case AUTH_RESET_PASSWORD_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        info: action.payload.info
-      };
+    case AUTH_UPDATE_PASSWORD_ERROR:
     case AUTH_RESET_PASSWORD_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload.error,
-        info: null
+        info: null,
       };
-    case AUTH_UPDATE_PASSWORD:
+
+    case AUTH_EMAIL_CONFIRM:
       return {
         ...state,
         isLoading: true,
         error: null,
-        info: null
       };
-    case AUTH_UPDATE_PASSWORD_SUCCESS:
+
+    case AUTH_LOGOUT:
       return {
-        ...state,
-        isLoading: false,
-        info: action.payload.info
+        ...initialState,
       };
-    case AUTH_UPDATE_PASSWORD_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload.error,
-        info: null
-      };
+
     case LOCATION_CHANGE:
       return {
         ...state,
         isLoading: false,
         error: null,
-        info: null
+        info: null,
       };
     default:
       return state;
