@@ -12,10 +12,9 @@ phases:
       - yarn workspace web build
   post_build:
     commands:
-      - cd packages/web
-      - mkdir build/coverage
-      - cp coverage/badge-*.svg build/coverage/
-      - cd build
+      - cd packages/web/build
+      - mkdir coverage
+      - cp ../coverage/badge-*.svg ./coverage/
       - echo $CODEBUILD_WEBHOOK_HEAD_REF
       - export ENV=`echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///gi'`
       - echo $ENV
