@@ -5,7 +5,7 @@
 
 ![dev@github](https://github.com/dubbha/croton/workflows/WEB-CI-common/badge.svg?branch=dev)
 
-![lines](https://croton-web-dev.s3.eu-west-2.amazonaws.com/coverage/badge-lines.svg) ![functions](https://croton-web-dev.s3.eu-west-2.amazonaws.com/coverage/badge-functions.svg) ![branches](https://croton-web-dev.s3.eu-west-2.amazonaws.com/coverage/badge-branches.svg) ![statements](https://croton-web-dev.s3.eu-west-2.amazonaws.com/coverage/badge-statements.svg)
+![lines](http://croton.cf:8080/coverage/badge-lines.svg) ![functions](http://croton.cf:8080/coverage/badge-functions.svg) ![branches](http://croton.cf:8080/coverage/badge-branches.svg) ![statements](http://croton.cf:8080/coverage/badge-statements.svg)
 
 
 # Croton

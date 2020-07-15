@@ -6,15 +6,13 @@ phases:
       - yarn workspace web install
   pre_build:
     commands:
-      - yarn workspace web test:badges
+      - yarn workspace web test
   build:
     commands:
       - yarn workspace web build
   post_build:
     commands:
       - cd packages/web/build
-      - mkdir coverage
-      - cp ../coverage/badge-*.svg ./coverage/
       - echo $CODEBUILD_WEBHOOK_HEAD_REF
       - export ENV=`echo $CODEBUILD_WEBHOOK_HEAD_REF | sed 's/refs\/heads\///gi'`
       - echo $ENV
