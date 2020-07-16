@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import classNames from 'classnames';
 
 import { Container, Header, Footer, SignInForm, FbAuth } from 'components';
 import { Link } from 'react-router-dom';
@@ -16,14 +15,14 @@ export const SignIn = () => {
   const handleSubmit = (email: string, password: string) => {
     dispatch({
       type: AUTH_LOGIN,
-      payload: { email, password },
+      payload: { email, password }
     });
   };
 
   return (
     <Container>
       <Header />
-      <div className={classNames(['container', 'signInConrollersContainer'])}>
+      <div className="container signInConrollersContainer">
         <SignInForm
           isLoading={isLoading}
           error={error}

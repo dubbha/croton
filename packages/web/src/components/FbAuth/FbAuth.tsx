@@ -2,7 +2,6 @@ import React from 'react';
 import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 import { AUTH_FACEBOOK, AUTH_FACEBOOK_ERROR } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
 import { appId, fields, scope, icon } from '../../constants/fb-login-props';
@@ -13,17 +12,18 @@ export const FbAuth = () => {
 
   const responseFacebook = (response: ReactFacebookLoginInfo) => {
     const { accessToken } = response;
-    if (accessToken) {
-      dispatch({
-        type: AUTH_FACEBOOK,
-        payload: { accessToken },
-      });
-    } else {
-      dispatch({
-        type: AUTH_FACEBOOK_ERROR,
-        payload: { error: response },
-      });
-    }
+    const type = accessToken ? AUTH_FACEBOOK : AUTH_FACEBOOK_ERROR;
+
+    const payload = accessToken
+      ? { accessToken }
+      : {
+          error: 'Sorry, something went wrong with logging you in via Facebook '
+        };
+
+    dispatch({
+      type,
+      payload
+    });
   };
 
   return (
