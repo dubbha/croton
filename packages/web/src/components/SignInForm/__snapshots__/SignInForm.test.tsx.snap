@@ -2,7 +2,7 @@
 
 exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
 <form
-  class=""
+  class="signinForm"
 >
   <div
     style="height: 50px; margin-bottom: 16px;"
@@ -66,7 +66,7 @@ exports[`components/SignInForm should call onSubmit prop on submit 1`] = `
 
 exports[`components/SignInForm should render submit button disabled by default 1`] = `
 <form
-  class=""
+  class="signinForm"
 >
   <div
     style="height: 50px; margin-bottom: 16px;"
@@ -130,7 +130,7 @@ exports[`components/SignInForm should render submit button disabled by default 1
 
 exports[`components/SignInForm should render successfully 1`] = `
 <form
-  class=""
+  class="signinForm"
 >
   <div
     style="height: 50px; margin-bottom: 16px;"

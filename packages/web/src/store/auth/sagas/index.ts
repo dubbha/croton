@@ -3,3 +3,4 @@ export * from './authRegister.saga';
 export * from './authResetPassword.saga';
 export * from './authUpdatePassword.saga';
 export * from './authEmailConfirm.saga';
+export * from './authFacebook.saga';

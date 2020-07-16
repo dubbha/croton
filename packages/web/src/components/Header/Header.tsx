@@ -7,7 +7,7 @@ import './styles.scss';
 import logo from './logo.svg';
 
 export const Header = () => {
-  const { token, name } = useSelector(getAuth);
+  const { token, firstName = '', lastName = '' } = useSelector(getAuth);
 
   return (
     <header>
@@ -36,7 +36,7 @@ export const Header = () => {
         <Nav>
           {token ? (
             <>
-              <Nav.Item>{name}</Nav.Item>
+              <Nav.Item>{`${firstName} ${lastName}`.trim()}</Nav.Item>
               <NavLink to="/signout">Sign Out</NavLink>
             </>
           ) : (

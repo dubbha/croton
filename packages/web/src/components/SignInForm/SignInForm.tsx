@@ -5,7 +5,7 @@ import {
   ErrorAlert,
   AlertPlaceholder,
   Link,
-  LoadingSpinner
+  LoadingSpinner,
 } from 'elements';
 import './styles.scss';
 
@@ -30,7 +30,7 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="signinForm">
       {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
       <Form.Group>
         <Form.Label>Email address</Form.Label>
@@ -38,7 +38,7 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
           type="email"
           placeholder="Enter email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           data-testid="signInForm__email"
         />
       </Form.Group>
@@ -49,7 +49,7 @@ export const SignInForm = ({ isLoading, error, onSubmit }: Props) => {
           type="password"
           placeholder="Enter password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           data-testid="signInForm__password"
         />
         <Form.Text className="reset-password-link">

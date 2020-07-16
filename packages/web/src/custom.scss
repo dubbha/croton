@@ -11,7 +11,7 @@
   justify-content: space-between;
 
   form {
-    .form-label{
+    .form-label {
       font-size: medium;
     }
   }
@@ -23,7 +23,7 @@
     }
   }
 
-  .form-error-message{
+  .form-error-message {
     color: $color-danger;
   }
 
@@ -79,8 +79,12 @@ footer {
 
     &::after {
       position: absolute;
-      content: "";
-      background: linear-gradient(to right, $color-grass-light 0%, $color-grass-dark 100%);
+      content: '';
+      background: linear-gradient(
+        to right,
+        $color-grass-light 0%,
+        $color-grass-dark 100%
+      );
       height: 4px;
       width: 60px;
       bottom: 0;
@@ -119,7 +123,7 @@ footer {
   background-size: 100%;
 
   .overlay {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
   }
 
   h1 {
@@ -194,7 +198,6 @@ footer {
         padding: 0 8px;
       }
     }
-
   }
 
   .about-image {
@@ -240,7 +243,6 @@ footer {
 }
 
 .sign-up {
-
   p {
     text-align: center;
     color: white;
@@ -250,7 +252,6 @@ footer {
 }
 
 .join-us {
-
 }
 
 .signup-button {

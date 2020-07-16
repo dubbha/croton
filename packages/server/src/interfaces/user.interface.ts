@@ -3,6 +3,4 @@ export default interface User {
   firstName: string;
   lastName: string;
   email: string;
-  status: string;
-  facebookId?: string;
 }

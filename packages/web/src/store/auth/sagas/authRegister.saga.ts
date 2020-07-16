@@ -17,11 +17,13 @@ function* handle(action: AuthRegister) {
       password,
       firstName,
       lastName,
-      facebookId: 'fff', // TODO: remove me
+      facebookId: 'fff' // TODO: remove me
     });
     yield put({
       type: AUTH_REGISTER_SUCCESS,
-      payload: { info: 'Please check your email for verification before signing in' },
+      payload: {
+        info: 'Please check your email for verification before signing in'
+      }
     });
   } catch (e) {
     yield put({

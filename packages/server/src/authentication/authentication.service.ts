@@ -1,15 +1,14 @@
 import { compare } from 'bcrypt';
 import { getRepository } from 'typeorm';
-import bindall from 'bindall';
 
 import UserEntity from '../models/user.entity';
 import RegistrationDto from '../models/registration.dto';
 import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
-import { createToken } from '../utils/create-token';
+import { createTokenizedUser } from '../utils/create-tokenized-user';
 import UserWithToken from '../interfaces/tokenized.user.interface';
 import LoginDto from '../models/login.dto';
 import WrongCredentials from '../exceptions/wrong-creditionals.exception';
-import User from '../interfaces/user.interface';
+import User from '../interfaces/db.user.interface';
 import { UserStatuses } from '../constants/user-statuses';
 import { createRandomString } from '../utils/create-random-string';
 import EmailVerificationEntity from '../models/email-verification.entity';
@@ -29,10 +28,6 @@ export default class AuthenticationService {
   private emailVerificationRepository = getRepository(EmailVerificationEntity);
   private passwordResetRepository = getRepository(PasswordResetEntity);
   private emailSendingService = new EmailSendingService();
-
-  constructor() {
-    bindall(this);
-  }
 
   public async register(
     registrationData: RegistrationDto,
@@ -95,7 +90,7 @@ export default class AuthenticationService {
       throw new WrongCredentials();
     }
 
-    return this.loginUser(user);
+    return createTokenizedUser(user);
   }
 
   public async verify(emailVerificationToken: string): Promise<UserWithToken> {
@@ -118,16 +113,7 @@ export default class AuthenticationService {
     await this.userRepository.update(user.id, user);
     await this.emailVerificationRepository.delete(emailVerification.id);
 
-    return this.loginUser(user);
-  }
-
-  private loginUser(user: UserEntity): UserWithToken {
-    const tokenData = createToken(user);
-
-    return {
-      ...user,
-      token: tokenData.token,
-    };
+    return createTokenizedUser(user);
   }
 
   private validateUser(user: User): void {

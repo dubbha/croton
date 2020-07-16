@@ -3,5 +3,5 @@ export enum ProvidersIdDBFieldName {
 }
 
 export enum ProvidersServiceName {
-  FACEBOOK = 'facebook',
+  FACEBOOK = 'facebook-token',
 }
