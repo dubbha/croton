@@ -1,5 +1,4 @@
 import { getRepository } from 'typeorm';
-import bindall from 'bindall';
 
 import UserEntity from '../models/user.entity';
 import EmailResetEntity from '../models/email-reset.entity';
@@ -10,16 +9,12 @@ import { createExpiresInHours } from '../utils/create-expires-in-hourse';
 import EmailUpdateDto from './email-update.dto';
 import WrongEmailResetToken from '../exceptions/wrong-email-reset-token.exception';
 import EmailResetTokenExpired from '../exceptions/email-reset-token-expired.exception';
-import { loginUser } from '../utils/login-user';
+import { createTokenizedUser } from '../utils/create-tokenized-user';
 
 export default class UserManagementService {
   private userRepository = getRepository(UserEntity);
   private emailResetRepository = getRepository(EmailResetEntity);
   private emailSendingService = new EmailSendingService();
-
-  constructor() {
-    bindall(this);
-  }
 
   async resetEmail(id: string, host: string): Promise<void> {
     const user = await this.userRepository.findOne({ id });
@@ -71,6 +66,6 @@ export default class UserManagementService {
     await this.emailResetRepository.delete(emailVerification.id);
     await this.userRepository.update(user.id, user);
 
-    return loginUser(user);
+    return createTokenizedUser(user);
   }
 }

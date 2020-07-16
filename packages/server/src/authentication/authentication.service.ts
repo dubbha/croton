@@ -23,7 +23,6 @@ import WrongPasswordResetToken from '../exceptions/wrong-password-reset-token.ex
 import PasswordResetTokenExpired from '../exceptions/password-reset-token-expired.exception';
 import { createNewPassword } from '../utils/create-new-password';
 import { createExpiresInHours } from '../utils/create-expires-in-hourse';
-import { loginUser } from '../utils/login-user';
 
 export default class AuthenticationService {
   private userRepository = getRepository(UserEntity);
