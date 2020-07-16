@@ -1,10 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import { Container, Header, Footer, SignInForm, FbAuth } from 'components';
 import { Link } from 'react-router-dom';
 import { AUTH_LOGIN } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
+
+import './styles.scss';
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -20,14 +23,14 @@ export const SignIn = () => {
   return (
     <Container>
       <Header />
-      <Container className="signInConrollersContainer">
+      <div className={classNames(['container', 'signInConrollersContainer'])}>
         <SignInForm
           isLoading={isLoading}
           error={error}
           onSubmit={handleSubmit}
         />
         <FbAuth />
-      </Container>
+      </div>
       <div className="signin-register">
         Don&apos;t have an account? <Link to="/signup"> Register</Link>
       </div>
