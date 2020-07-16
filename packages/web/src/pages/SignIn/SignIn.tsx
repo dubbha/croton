@@ -22,7 +22,7 @@ export const SignIn = () => {
   return (
     <Container>
       <Header />
-      <div className="container signInConrollersContainer">
+      <div className="signInConrollersContainer">
         <SignInForm
           isLoading={isLoading}
           error={error}

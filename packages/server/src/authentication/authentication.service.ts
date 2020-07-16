@@ -8,7 +8,7 @@ import { createTokenizedUser } from '../utils/create-tokenized-user';
 import UserWithToken from '../interfaces/tokenized.user.interface';
 import LoginDto from '../models/login.dto';
 import WrongCredentials from '../exceptions/wrong-creditionals.exception';
-import User from '../interfaces/user.interface';
+import User from '../interfaces/db.user.interface';
 import { UserStatuses } from '../constants/user-statuses';
 import { createRandomString } from '../utils/create-random-string';
 import EmailVerificationEntity from '../models/email-verification.entity';

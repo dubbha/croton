@@ -90,7 +90,7 @@ exports[`pages/SignIn should render successfully 1`] = `
     </nav>
   </header>
   <div
-    class="container signInConrollersContainer"
+    class="signInConrollersContainer"
   >
     <form
       class="signinForm"
