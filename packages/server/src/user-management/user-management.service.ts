@@ -10,6 +10,7 @@ import EmailUpdateDto from './email-update.dto';
 import WrongEmailResetToken from '../exceptions/wrong-email-reset-token.exception';
 import EmailResetTokenExpired from '../exceptions/email-reset-token-expired.exception';
 import { createTokenizedUser } from '../utils/create-tokenized-user';
+import UserUpdateDto from './user-update.dto';
 
 export default class UserManagementService {
   private userRepository = getRepository(UserEntity);
@@ -67,5 +68,19 @@ export default class UserManagementService {
     await this.userRepository.update(user.id, user);
 
     return createTokenizedUser(user);
+  }
+
+  async updateUser({ lastName, firstName }: UserUpdateDto, id: string): Promise<User> {
+    const user = await this.userRepository.findOne({
+      id
+    });
+    const updatedUser = {
+      ...user,
+      lastName,
+      firstName
+    };
+    await this.userRepository.update(user.id, updatedUser);
+
+    return createTokenizedUser(updatedUser);
   }
 }

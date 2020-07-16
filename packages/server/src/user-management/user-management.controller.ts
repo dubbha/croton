@@ -6,6 +6,7 @@ import validationMiddleware from '../middlewares/validation.middleware';
 import authMiddleware from '../middlewares/auth.middleware';
 import EmailUpdateDto from './email-update.dto';
 import RequestWithUser from '../interfaces/request-with-user.interface';
+import UserUpdateDto from './user-update.dto';
 
 export default class UserManagementController extends BaseController {
   private userManagementService = new UserManagementService();
@@ -26,6 +27,13 @@ export default class UserManagementController extends BaseController {
       this.serverApi.userManagementEmailUpdate,
       validationMiddleware(EmailUpdateDto),
       this.emailUpdateHandler
+    );
+
+    this.router.post(
+      this.serverApi.userManagementUserUpdate,
+      authMiddleware,
+      validationMiddleware(UserUpdateDto),
+      this.userUpdateHandler
     );
   }
 
@@ -52,6 +60,22 @@ export default class UserManagementController extends BaseController {
   ): Promise<void> => {
     try {
       const updatedUser = await this.userManagementService.updateEmail(request.body);
+      response.send(updatedUser);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private userUpdateHandler = async (
+    request: RequestWithUser,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const updatedUser = await this.userManagementService.updateUser(
+        request.body,
+        request.user.id,
+      );
       response.send(updatedUser);
     } catch (error) {
       next(error);

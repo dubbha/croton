@@ -9,6 +9,7 @@ const authPasswordReset = `${auth}/password-reset`;
 const authPasswordUpdate = `${auth}/password-update`;
 const userManagementEmailReset = `${management}/email-reset`;
 const userManagementEmailUpdate = `${management}/email-update`;
+const userManagementUserUpdate = `${management}/user-update`;
 const healthCheck = '/health-check';
 
 export const api = {
@@ -22,7 +23,8 @@ export const api = {
   authPasswordReset,
   authPasswordUpdate,
   userManagementEmailReset,
-  userManagementEmailUpdate
+  userManagementEmailUpdate,
+  userManagementUserUpdate
 };
 
 export type Api = typeof api;

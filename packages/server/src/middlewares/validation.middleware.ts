@@ -8,8 +8,8 @@ export default function validationMiddleware<T>(
   skipMissingProperties = false
 ): RequestHandler {
   return (req, res, next) => {
-    validate(plainToClass(type, req.body), { skipMissingProperties }).then(
-      (errors: ValidationError[]) => {
+    validate(plainToClass(type, req.body), { skipMissingProperties })
+      .then((errors: ValidationError[]) => {
         if (errors.length) {
           const message = errors
             .map((error: ValidationError) => Object.values(error.constraints))
