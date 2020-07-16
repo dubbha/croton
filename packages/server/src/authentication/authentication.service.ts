@@ -22,6 +22,7 @@ import PasswordUpdateDto from './password-update.dto';
 import WrongPasswordResetToken from '../exceptions/wrong-password-reset-token.exception';
 import PasswordResetTokenExpired from '../exceptions/password-reset-token-expired.exception';
 import { createNewPassword } from '../utils/create-new-password';
+import { createExpiresInHours } from '../utils/create-expires-in-hourse';
 
 export default class AuthenticationService {
   private userRepository = getRepository(UserEntity);
@@ -131,13 +132,12 @@ export default class AuthenticationService {
   }
 
   private async sendPasswordResetMessage(
-    { id, email, firstName: name }: User,
+    { id, email, firstName }: User,
     host: string
   ) {
     const { PASSWORD_RESET_EXPIRATION_TIME } = process.env;
     const passwordResetToken = createRandomString(64);
-    const expiresInHours =
-      1000 * 60 * 60 * Number(PASSWORD_RESET_EXPIRATION_TIME);
+    const expiresInHours = createExpiresInHours(Number(PASSWORD_RESET_EXPIRATION_TIME));
     await this.passwordResetRepository.save({
       userId: id,
       passwordResetToken,
@@ -146,20 +146,19 @@ export default class AuthenticationService {
 
     await this.emailSendingService.sendPasswordResetMessage(
       email,
-      name,
+      firstName,
       host,
       passwordResetToken
     );
   }
 
   private async sendActivationMessage(
-    { id, email, firstName: name }: User,
+    { id, email, firstName }: User,
     host
   ): Promise<void> {
     const { EMAIL_VERIFICATION_EXPIRATION_TIME } = process.env;
     const emailVerificationToken = createRandomString(64);
-    const expiresInHours =
-      1000 * 60 * 60 * Number(EMAIL_VERIFICATION_EXPIRATION_TIME);
+    const expiresInHours = createExpiresInHours(Number(EMAIL_VERIFICATION_EXPIRATION_TIME));
     await this.emailVerificationRepository.save({
       userId: id,
       emailVerificationToken,
@@ -168,7 +167,7 @@ export default class AuthenticationService {
 
     await this.emailSendingService.sendActivationMessage(
       email,
-      name,
+      firstName,
       host,
       emailVerificationToken
     );
