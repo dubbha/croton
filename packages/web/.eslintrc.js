@@ -30,7 +30,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-unresolved': [
       'error',
-      { ignore: ['elements', 'components', 'pages', 'store', 'config'] }
+      { ignore: ['elements', 'components', 'pages', 'store', 'config', 'services'] }
     ],
     'react/jsx-filename-extension': [
       'warn',

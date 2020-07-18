@@ -1,6 +1,6 @@
 export interface AuthState {
   isLoading: boolean;
-  token: string | null;
+  isAuthenticated: boolean | null;
   id: number | null;
   firstName: string | null;
   lastName: string | null;
@@ -40,7 +40,6 @@ interface AuthLoginSuccessPayload {
   firstName: string;
   lastName: string;
   email: string;
-  token: string;
 }
 
 export interface AuthLogin {

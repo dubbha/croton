@@ -1,7 +1,7 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import { push } from 'connected-react-router';
-import axios from 'axios';
 import { call } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
+import { http } from 'services';
 
 import { getEnvironment } from 'config';
 import {
@@ -11,8 +11,10 @@ import {
 } from '../actions';
 import { authFacebook } from './authFacebook.saga';
 
-jest.mock('axios', () => ({
-  post: jest.fn(),
+jest.mock('services', () => ({
+  http: {
+    post: jest.fn(),
+  }
 }));
 
 jest.mock('connected-react-router', () => ({
@@ -32,12 +34,12 @@ describe('system/authFacebook', () => {
 
   it('should call api', () => {
     jest
-      .spyOn(axios, 'post')
+      .spyOn(http, 'post')
       .mockImplementationOnce(() => Promise.resolve({ data }));
 
     return expectSaga(authFacebook)
       .provide([[call(getEnvironment), { api }]])
-      .call(axios.post, `${api}/auth/facebook`, { access_token: accessToken })
+      .call(http.post, '/auth/facebook', { access_token: accessToken })
       .put({
         type: AUTH_FACEBOOK_SUCCESS,
         payload: data,
@@ -51,7 +53,7 @@ describe('system/authFacebook', () => {
   });
 
   it('should hanlde error', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.reject({
         response: {
           data: {

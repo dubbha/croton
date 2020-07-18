@@ -1,6 +1,5 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
-import axios from 'axios';
-import { api } from 'config';
+import { http } from 'services';
 import {
   AUTH_REGISTER,
   AUTH_REGISTER_SUCCESS,
@@ -12,7 +11,7 @@ function* handle(action: AuthRegister) {
   const { email, password, firstName, lastName } = action.payload;
 
   try {
-    yield call(axios.post, `${api}/auth/register`, {
+    yield call(http.post, '/auth/register', {
       email,
       password,
       firstName,

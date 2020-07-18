@@ -1,6 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import axios from 'axios';
-import { api } from 'config';
+import { http } from 'services';
 import { push } from 'connected-react-router';
 import {
   AUTH_EMAIL_CONFIRM,
@@ -22,12 +21,10 @@ function* handle(action: AuthEmailConfirm) {
   }
 
   try {
-    const result = yield call(axios.post, `${api}/auth/confirm`,
-      { emailVerificationToken }
-    );
+    const result = yield call(http.post, '/auth/confirm', { emailVerificationToken });
     yield put({
       type: AUTH_EMAIL_CONFIRM_SUCCESS,
-      payload: result.data
+      payload: result.data,
     });
     yield put(push('/profile'));
   } catch (e) {
