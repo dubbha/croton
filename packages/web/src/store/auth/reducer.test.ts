@@ -73,6 +73,7 @@ describe('store/auth/reducer', () => {
     actions.forEach((action) => {
       describe(action, () => {
         it('should handle succesfull authantication', () => {
+          const { token, ...userData } = authResult; // eslint-disable-line @typescript-eslint/no-unused-vars
           expect(
             authReducer(
               { ...initialState, isLoading: true },
@@ -83,7 +84,8 @@ describe('store/auth/reducer', () => {
             )
           ).toEqual({
             ...initialState,
-            ...authResult,
+            ...userData,
+            isAuthenticated: true,
           });
         });
       });

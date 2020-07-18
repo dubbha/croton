@@ -24,7 +24,7 @@ import {
 } from './actions';
 
 export const initialState: AuthState = {
-  token: null,
+  isAuthenticated: false,
   id: null,
   firstName: null,
   lastName: null,
@@ -53,14 +53,14 @@ export function authReducer(
     case AUTH_EMAIL_CONFIRM_SUCCESS:
     case AUTH_FACEBOOK_SUCCESS:
     case AUTH_LOGIN_SUCCESS: {
-      const { id, firstName, lastName, email, token } = action.payload;
+      const { id, firstName, lastName, email } = action.payload;
       return {
         ...state,
+        isAuthenticated: true,
         id,
         firstName,
         lastName,
         email,
-        token,
         isLoading: false,
       };
     }
@@ -102,6 +102,7 @@ export function authReducer(
     case AUTH_LOGOUT:
       return {
         ...initialState,
+        isAuthenticated: false,
       };
 
     case LOCATION_CHANGE:

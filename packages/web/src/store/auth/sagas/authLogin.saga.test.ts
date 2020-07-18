@@ -1,12 +1,13 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import { push } from 'connected-react-router';
-import axios from 'axios';
-import { environments } from 'config';
+import { http } from 'services';
 import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_ERROR } from '../actions';
 import { authLoginSaga } from './authLogin.saga';
 
-jest.mock('axios', () => ({
-  post: jest.fn(),
+jest.mock('services', () => ({
+  http: {
+    post: jest.fn(),
+  }
 }));
 
 jest.mock('connected-react-router', () => ({
@@ -24,17 +25,20 @@ const loginPayload = { email: 'admin@admin.com', password: 'admin' };
 
 describe('system/authLoginSaga', () => {
   it('should call api', () => {
-    jest
-      .spyOn(axios, 'post')
-      .mockImplementationOnce(() => Promise.resolve({ data }));
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
+      Promise.resolve({ data })
+    );
+
+    const { token, ...userData } = data;
 
     return expectSaga(authLoginSaga)
-      .call(axios.post, `${environments.local.api}/auth/login`, {
+      .call(http.post, '/auth/login', {
         ...loginPayload,
       })
+      .call([localStorage, localStorage.setItem], 'authToken', token)
       .put({
         type: AUTH_LOGIN_SUCCESS,
-        payload: { ...data },
+        payload: { ...userData },
       })
       .put(push('/profile'))
       .dispatch({
@@ -45,7 +49,7 @@ describe('system/authLoginSaga', () => {
   });
 
   it('should hanlde error', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.reject({
         response: {
           data: {

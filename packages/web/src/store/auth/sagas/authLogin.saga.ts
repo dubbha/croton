@@ -1,7 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import axios from 'axios';
-import { api } from 'config';
+import { http } from 'services';
 import {
   AUTH_LOGIN,
   AUTH_LOGIN_ERROR,
@@ -12,13 +11,15 @@ import {
 function* handle(action: AuthLogin) {
   const { email, password } = action.payload;
   try {
-    const result = yield call(axios.post, `${api}/auth/login`, {
+    const result = yield call(http.post, '/auth/login', {
       email,
       password
     });
+    const { data: { token, ...userData } } =  result;
+    yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: AUTH_LOGIN_SUCCESS,
-      payload: result.data
+      payload: userData
     });
     yield put(push('/profile'));
   } catch (e) {

@@ -1,6 +1,5 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
-import axios from 'axios';
-import { api } from 'config';
+import { http } from 'services';
 import {
   AUTH_RESET_PASSWORD,
   AUTH_RESET_PASSWORD_SUCCESS,
@@ -12,7 +11,7 @@ function* handle(action: AuthResetPassword) {
   const { email } = action.payload;
 
   try {
-    yield call(axios.post, `${api}/auth/password-reset`, { email });
+    yield call(http.post, '/auth/password-reset', { email });
     yield put({
       type: AUTH_RESET_PASSWORD_SUCCESS,
       payload: {
