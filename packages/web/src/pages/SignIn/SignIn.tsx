@@ -1,7 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Container, Header, Footer, SignInForm, FbAuth } from 'components';
+import {
+  Container,
+  Header,
+  Footer,
+  SignInForm,
+  FbAuth,
+  GoogleAuth
+} from 'components';
 import { Link } from 'react-router-dom';
 import { AUTH_LOGIN } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
@@ -28,12 +35,13 @@ export const SignIn = () => {
           error={error}
           onSubmit={handleSubmit}
         />
+        <div className="auth-separator">or</div>
         <FbAuth />
+        <GoogleAuth />
+        <div className="signin-register">
+          Don&apos;t have an account? <Link to="/signup"> Register</Link>
+        </div>
       </div>
-      <div className="signin-register">
-        Don&apos;t have an account? <Link to="/signup"> Register</Link>
-      </div>
-
       <Footer />
     </Container>
   );

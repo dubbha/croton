@@ -35,6 +35,10 @@ export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
 export const AUTH_FACEBOOK_SUCCESS = 'AUTH_FACEBOOK_SUCCESS';
 export const AUTH_FACEBOOK_ERROR = 'AUTH_FACEBOOK_ERROR';
 
+export const AUTH_GOOGLE = 'AUTH_GOOGLE';
+export const AUTH_GOOGLE_SUCCESS = 'AUTH_GOOGLE_SUCCESS';
+export const AUTH_GOOGLE_ERROR = 'AUTH_GOOGLE_ERROR';
+
 interface AuthLoginSuccessPayload {
   id: number;
   firstName: string;
@@ -142,6 +146,21 @@ export interface AuthFacebookError {
   payload: { error: any };
 }
 
+export interface AuthGoogle {
+  type: typeof AUTH_GOOGLE;
+  payload: { accessToken: string };
+}
+
+export interface AuthGoogleSuccess {
+  type: typeof AUTH_GOOGLE_SUCCESS;
+  payload: AuthLoginSuccessPayload;
+}
+
+export interface AuthGoogleError {
+  type: typeof AUTH_GOOGLE_ERROR;
+  payload: { error: any };
+}
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
@@ -161,4 +180,7 @@ export type AuthActionTypes =
   | AuthEmailConfirmError
   | AuthFacebook
   | AuthFacebookSuccess
-  | AuthFacebookError;
+  | AuthFacebookError
+  | AuthGoogle
+  | AuthGoogleSuccess
+  | AuthGoogleError;
