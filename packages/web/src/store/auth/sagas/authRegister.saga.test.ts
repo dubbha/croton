@@ -1,6 +1,5 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import axios from 'axios';
-import { environments } from 'config';
+import { http } from 'services';
 import {
   AUTH_REGISTER,
   AUTH_REGISTER_SUCCESS,
@@ -8,8 +7,10 @@ import {
 } from '../actions';
 import { authRegisterSaga } from './authRegister.saga';
 
-jest.mock('axios', () => ({
-  post: jest.fn()
+jest.mock('services', () => ({
+  http: {
+    post: jest.fn()
+  }
 }));
 
 jest.mock('connected-react-router', () => ({
@@ -26,11 +27,11 @@ describe('system/authRegisterSaga', () => {
   };
   it('should call api', () => {
     jest
-      .spyOn(axios, 'post')
+      .spyOn(http, 'post')
       .mockImplementationOnce(() => Promise.resolve({ ...data }));
 
     return expectSaga(authRegisterSaga)
-      .call(axios.post, `${environments.local.api}/auth/register`, {
+      .call(http.post, '/auth/register', {
         ...data
       })
       .put({
@@ -49,7 +50,7 @@ describe('system/authRegisterSaga', () => {
   });
 
   it('should hanlde error', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.reject({
         response: {
           data: {

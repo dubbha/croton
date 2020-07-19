@@ -1,11 +1,12 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import axios from 'axios';
-import { environments } from 'config';
+import { http } from 'services'
 import { AUTH_UPDATE_PASSWORD, AUTH_UPDATE_PASSWORD_SUCCESS, AUTH_UPDATE_PASSWORD_ERROR } from '../actions';
 import { authUpdatePasswordSaga } from './authUpdatePassword.saga';
 
-jest.mock('axios', () => ({
-  post: jest.fn()
+jest.mock('services', () => ({
+  http: {
+    post: jest.fn()
+  }
 }));
 
 jest.mock('connected-react-router', () => ({
@@ -14,12 +15,12 @@ jest.mock('connected-react-router', () => ({
 
 describe('authUpdatePassword', () => {
   it('should call api', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.resolve({})
     );
 
     return expectSaga(authUpdatePasswordSaga)
-      .call(axios.post, `${environments.local.api}/auth/password-update`, {
+      .call(http.post, '/auth/password-update', {
         passwordResetToken: 'TOKEN',
         password: 'password'
       })
@@ -37,7 +38,7 @@ describe('authUpdatePassword', () => {
   });
 
   it('should handle error', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.reject({
         response: {
           data: {

@@ -1,8 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import axios from 'axios';
-
-import { getEnvironment } from 'config';
+import { http } from 'services';
 
 import {
   AUTH_FACEBOOK_ERROR,
@@ -13,9 +11,8 @@ import {
 
 function* handle(action: AuthFacebook) {
   const { accessToken } = action.payload;
-  const { api } = yield call(getEnvironment);
   try {
-    const result = yield call(axios.post, `${api}/auth/facebook`, {
+    const result = yield call(http.post, '/auth/facebook', {
       access_token: accessToken,
     });
     yield put({

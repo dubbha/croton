@@ -6,12 +6,13 @@ import { getAuth } from 'store/auth/selectors';
 
 export const Profile = () => {
   const dispatch = useDispatch();
-  const { token, firstName = '', lastName = '', email } = useSelector(getAuth);
+  const { isAuthenticated, firstName = '', lastName = '', email } = useSelector(getAuth);
   const name = `${firstName} ${lastName}`.trim();
 
   useEffect(() => {
-    if (!token) dispatch(push('/signin'));
-  }, [token, dispatch]);
+    if (!isAuthenticated) dispatch(push('/signin'));
+  }, [isAuthenticated, dispatch]);
+
   return (
     <Container>
       <Header />
