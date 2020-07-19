@@ -1,31 +1,21 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
-import { http } from 'services';
+import { takeLatest, call } from 'redux-saga/effects';
 
 import {
   AUTH_FACEBOOK_ERROR,
   AuthFacebook,
   AUTH_FACEBOOK_SUCCESS,
-  AUTH_FACEBOOK,
+  AUTH_FACEBOOK
 } from '../actions';
 
+import { handleAuthViaSocials } from './handleAuthViaSocials.saga';
+
 function* handle(action: AuthFacebook) {
-  const { accessToken } = action.payload;
-  try {
-    const result = yield call(http.post, '/auth/facebook', {
-      access_token: accessToken,
-    });
-    yield put({
-      type: AUTH_FACEBOOK_SUCCESS,
-      payload: result.data,
-    });
-    yield put(push('/profile'));
-  } catch (e) {
-    yield put({
-      type: AUTH_FACEBOOK_ERROR,
-      payload: { error: e.response.data.message },
-    });
-  }
+  yield call(handleAuthViaSocials, {
+    accessToken: action.payload.accessToken,
+    apiEndpoint: '/auth/facebook',
+    successActionType: AUTH_FACEBOOK_SUCCESS,
+    errorActionType: AUTH_FACEBOOK_ERROR
+  });
 }
 
 export function* authFacebook() {

@@ -52,6 +52,16 @@ jest.mock(
     }
 );
 
+jest.mock(
+  'passport-google-token',
+  () =>
+    function(config: any, callback: any) {
+      callback(accessToken, refreshToken, mockFbProfile, mockDone);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return config;
+    }
+);
+
 describe('ProvidersAuthService', () => {
   afterEach(() => {
     jest.resetAllMocks();

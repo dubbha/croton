@@ -1,9 +1,15 @@
 .signInConrollersContainer {
   display: flex;
   width: 100%;
-  height: 100%;
   flex-direction: column;
   align-items: center;
   padding: 0;
   justify-content: flex-start;
+  margin-bottom: 170px;
+}
+
+.authButtonContainer {
+  width: 70%;
+  padding: 0;
+  margin: 10px 0;
 }

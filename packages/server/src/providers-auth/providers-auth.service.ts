@@ -2,6 +2,7 @@ import { Request, Response, RequestHandler } from 'express';
 import { getRepository } from 'typeorm';
 import passport, { Profile } from 'passport';
 import FacebookTokenStrategy from 'passport-facebook-token';
+import GoogleTokenStrategy from 'passport-google-token'
 
 import UserEntity from '../models/user.entity';
 import SocialRegistrationDto from '../models/social-registration.dto';
@@ -14,10 +15,15 @@ import { ProvidersIdDBFieldName, ProvidersServiceName } from './providers-auth.i
 export default class ProvidersAuthService {
   private userRepository = getRepository(UserEntity);
   public verifyFacebookLogin: RequestHandler
+  public verifyGoogleLogin: RequestHandler
+
 
   constructor() {
     this.verifyFacebookLogin = passport.authenticate(ProvidersServiceName.FACEBOOK as string, { session: false })
+    this.verifyGoogleLogin = passport.authenticate(ProvidersServiceName.GOOGLE as string, { session: false })
+
     this.initFacebookProviderLogin()
+    this.initGoogleProviderLogin()
     return this
   }
 
@@ -53,23 +59,23 @@ export default class ProvidersAuthService {
       return createTokenizedUser(user)
     }
 
-  private async handleFacebookProviderLogin(
+  private getHandleProviderLogin(providersIdDBFieldName: ProvidersIdDBFieldName) {return async function(
     accessToken: string,
     _: string,
     profile: Profile,
     done: any
-  ):Promise<void> {
+  ) {
     try {
       const loggedInOrRegisteredUser = await this.registerOrLoginUserByProviderProfile(
         accessToken,
         profile,
-        ProvidersIdDBFieldName.FACEBOOK
+        providersIdDBFieldName
         )
         return done(null, loggedInOrRegisteredUser)
       } catch (err) {
         done(err)
       }
-  }
+  }}
 
   private initFacebookProviderLogin () {
     const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env
@@ -79,11 +85,23 @@ export default class ProvidersAuthService {
       clientSecret: FACEBOOK_APP_SECRET,
       fbGraphVersion: 'v3.0'
     },
-    this.handleFacebookProviderLogin.bind(this)
+    this.getHandleProviderLogin(ProvidersIdDBFieldName.FACEBOOK).bind(this)
   ));
   }
 
-  public handleFacebookAuthResult(req: Request, res:Response) {
+  private initGoogleProviderLogin () {
+    const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env
+
+    passport.use(new GoogleTokenStrategy({
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      fbGraphVersion: 'v3.0'
+    },
+    this.getHandleProviderLogin(ProvidersIdDBFieldName.GOOGLE).bind(this)
+  ));
+  }
+
+  public handleAuthResult(req: Request, res:Response) {
     if(req.user) {
       return res.send(req.user)
     }
