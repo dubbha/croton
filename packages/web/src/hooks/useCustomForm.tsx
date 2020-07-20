@@ -30,7 +30,7 @@ const useCustomForm = ({ initialValues, errorsRules }) => {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) : void => {
     const { target } = event;
     const { name, value } = target;
     event.persist();
@@ -38,7 +38,7 @@ const useCustomForm = ({ initialValues, errorsRules }) => {
     handleErrors(name, value);
   };
 
-  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) : void  => {
     const { target } = event;
     const { name, value } = target;
     setTouched({ ...touched, [name]: true });

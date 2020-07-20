@@ -23,12 +23,21 @@ type Props = {
   ) => void;
 };
 
+interface SignUpFormI {
+  email?: string;
+  password?: string;
+  passwordMatch?: string;
+  firstName?: string;
+  lastName?: string;
+}
+
 export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
   const initialValues = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
+    passwordMatch: '',
   };
 
   const emailErrorMessage = (email: string): string | null => {
@@ -66,11 +75,11 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
     handleChange,
     handleBlur,
   }: {
-    values: any;
-    errors: any;
-    touched: any;
-    handleChange: any;
-    handleBlur: any;
+    values: SignUpFormI;
+    errors: SignUpFormI;
+    touched: SignUpFormI;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
   } = useCustomForm({
     initialValues,
     errorsRules: {
@@ -97,7 +106,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
   // Password match is not moved to useCustomForm hook due to custom logic
   useEffect(() => {
     if (values.password !== values.passwordMatch) {
-      setPasswordMatchError('Password doesn\'t match.');
+      setPasswordMatchError("Password doesn't match.");
     } else {
       setPasswordMatchError('');
     }
@@ -105,8 +114,19 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    onSubmit(values.email, values.password, values.firstName, values.lastName);
+    if (
+      values.email &&
+      values.password &&
+      values.firstName &&
+      values.lastName
+    ) {
+      onSubmit(
+        values.email,
+        values.password,
+        values.firstName,
+        values.lastName
+      );
+    }
   };
 
   return (
@@ -119,7 +139,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="text"
           placeholder="Enter First Name"
-          value={values.name}
+          value={values.firstName}
           name="firstName"
           onChange={handleChange}
           onBlur={handleBlur}
@@ -137,7 +157,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="text"
           placeholder="Enter Last Name"
-          value={values.name}
+          value={values.lastName}
           name="lastName"
           onBlur={handleBlur}
           onChange={handleChange}
@@ -155,16 +175,14 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="email"
           placeholder="Enter Email"
-          value={values.name}
+          value={values.email}
           name="email"
           onChange={handleChange}
           onBlur={handleBlur}
           data-testid="signUpForm__email"
         />
         {touched.email && errors.email && (
-          <Form.Text className="form-error-message">
-            {errors.email}
-          </Form.Text>
+          <Form.Text className="form-error-message">{errors.email}</Form.Text>
         )}
       </Form.Group>
 
@@ -173,7 +191,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="password"
           placeholder="Enter password"
-          value={values.name}
+          value={values.password || ''}
           name="password"
           onChange={handleChange}
           onBlur={handleBlur}
@@ -191,7 +209,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <Form.Control
           type="password"
           placeholder="Repeat password"
-          value={values.name}
+          value={values.passwordMatch || ''}
           name="passwordMatch"
           onChange={handleChange}
           onBlur={handleBlur}
