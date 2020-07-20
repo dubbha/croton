@@ -7,18 +7,23 @@ import {
 
 export { default as Nav } from 'react-bootstrap/Nav';
 
-interface LinkProps {
-  to: string | object;
-  children?: React.ReactNode | React.ReactNode[];
+type LinkProps = {
+  to: string;
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export const Link = ({ to, children }: LinkProps) =>
   <Nav.Link as={RouterLink} to={to}>{children}</Nav.Link>
 
-interface NavLinkProps extends LinkProps {
+type NavLinkProps = {
+  to: string;
+  children: React.ReactNode | React.ReactNode[];
   exact?: boolean;
 }
 
-export const NavLink = ({ to, exact, children }: NavLinkProps) =>
-  <Nav.Link as={RouterNavLink} to={to} exact={exact}>{children}</Nav.Link>
+export const NavLink = ({ to, children, exact = false }: NavLinkProps) => (
+  <Nav.Link as={RouterNavLink} to={to} exact={exact}>
+    {children}
+  </Nav.Link>
+);
 

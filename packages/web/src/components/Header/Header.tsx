@@ -31,14 +31,14 @@ export const Header = () => {
             <Link to="/#about">About</Link>
           </Nav.Item>
           <Nav.Item>
-          <Link to="/#services">Services</Link>
+            <Link to="/#services">Services</Link>
           </Nav.Item>
         </Nav>
         <Nav>
           {isAuthenticated ? (
             <>
               <Nav.Item>
-              <NavLink to="/profile">{`${firstName} ${lastName}`.trim()}</NavLink>
+                <NavLink to="/profile">{`${firstName} ${lastName}`.trim()}</NavLink>
               </Nav.Item>
               <NavLink to="/signout">Sign Out</NavLink>
             </>
