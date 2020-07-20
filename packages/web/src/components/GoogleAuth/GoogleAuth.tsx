@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleLogin, {
   GoogleLoginResponse,
-  GoogleLoginResponseOffline
+  GoogleLoginResponseOffline,
 } from 'react-google-login';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,7 +21,7 @@ export const GoogleAuth = () => {
   ) => {
     dispatch({
       type: AUTH_GOOGLE,
-      payload: { accessToken: (response as GoogleLoginResponse).accessToken }
+      payload: { accessToken: (response as GoogleLoginResponse).accessToken },
     });
   };
 
@@ -29,18 +29,19 @@ export const GoogleAuth = () => {
     dispatch({
       type: AUTH_GOOGLE_ERROR,
       payload: {
-        error: 'Sorry, something went wrong with logging you in via Google'
-      }
+        error: 'Sorry, something went wrong with logging you in via Google',
+      },
     });
   };
 
   return (
     <GoogleLogin
       clientId={clientId}
+      buttonText="Login with Google"
       onSuccess={responseGoogleSuccess}
       onFailure={responseGoogleFailure}
       disabled={isLoading}
-      className="googleLoginBtn"
+      className="google-auth-btn"
     />
   );
 };
