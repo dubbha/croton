@@ -1,0 +1,26 @@
+
+@import '../../custom.scss';
+
+form {
+  width: 70%;
+}
+
+.form-label {
+  margin-top: 15px;
+}
+
+input[type=button] {
+  text-align: left;
+}
+
+.circle {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  font-size: 75px;
+  color: #fff;
+  line-height: 250px;
+  text-align: center;
+  background: $color-grass-dark;
+  user-select: none;
+}

@@ -7,9 +7,55 @@ exports[`pages/Profile should render successfully if user is logged in 1`] = `
   <div>
     Header
   </div>
-  <div>
-    FIRST_NAME LAST_NAME [EMAIL]
+  <div
+    class="circle"
+  >
+    F L
   </div>
+  <form
+    class=""
+  >
+    <div
+      style="height: 50px; margin-bottom: 16px;"
+    />
+    <div
+      class="form-group"
+    >
+      <label
+        class="form-label"
+      >
+        First Name
+      </label>
+      <input
+        class="form-control"
+        placeholder="First Name"
+        type="text"
+        value="FIRST_NAME"
+      />
+      <label
+        class="form-label"
+      >
+        Last Name
+      </label>
+      <input
+        class="form-control"
+        placeholder="Last Name"
+        type="text"
+        value="LAST_NAME"
+      />
+      <label
+        class="form-label"
+      >
+        Email
+      </label>
+      <input
+        class="form-control"
+        placeholder="Email"
+        type="button"
+        value="EMAIL"
+      />
+    </div>
+  </form>
   <div>
     Footer
   </div>

@@ -1,6 +1,6 @@
 export interface AuthState {
   isLoading: boolean;
-  isAuthenticated: boolean | null;
+  isAuthenticated: boolean;
   id: number | null;
   firstName: string | null;
   lastName: string | null;
@@ -34,6 +34,10 @@ export const AUTH_EMAIL_CONFIRM_ERROR = 'AUTH_EMAIL_CONFIRM_ERROR';
 export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
 export const AUTH_FACEBOOK_SUCCESS = 'AUTH_FACEBOOK_SUCCESS';
 export const AUTH_FACEBOOK_ERROR = 'AUTH_FACEBOOK_ERROR';
+
+export const AUTH_UPDATE_PROFILE = 'AUTH_UPDATE_PROFILE';
+export const AUTH_UPDATE_PROFILE_SUCCESS = 'AUTH_UPDATE_PROFILE_SUCCESS';
+export const AUTH_UPDATE_PROFILE_ERROR = 'AUTH_UPDATE_PROFILE_ERROR';
 
 interface AuthLoginSuccessPayload {
   id: number;
@@ -141,6 +145,21 @@ export interface AuthFacebookError {
   payload: { error: any };
 }
 
+export interface AuthUpdateProfile {
+  type: typeof AUTH_UPDATE_PROFILE,
+  payload: { firstName: string, lastName: string }
+}
+
+export interface AuthUpdateProfileSuccess {
+  type: typeof AUTH_UPDATE_PROFILE_SUCCESS,
+  payload: { firstName: string, lastName: string, info: string }
+}
+
+export interface AuthUpdateProfileError {
+  type: typeof AUTH_UPDATE_PROFILE_ERROR,
+  payload: { error: string }
+}
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
@@ -160,4 +179,7 @@ export type AuthActionTypes =
   | AuthEmailConfirmError
   | AuthFacebook
   | AuthFacebookSuccess
-  | AuthFacebookError;
+  | AuthFacebookError
+  | AuthUpdateProfile
+  | AuthUpdateProfileSuccess
+  | AuthUpdateProfileError;
