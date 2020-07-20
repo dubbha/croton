@@ -1,67 +1,72 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import { push } from 'connected-react-router';
-import axios from 'axios';
-import { environments } from 'config';
+import { http } from 'services';
 import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_ERROR } from '../actions';
 import { authLoginSaga } from './authLogin.saga';
 
-jest.mock('axios', () => ({
-  post: jest.fn()
+jest.mock('services', () => ({
+  http: {
+    post: jest.fn(),
+  }
 }));
 
 jest.mock('connected-react-router', () => ({
-  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
+  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } }),
 }));
+
+const data = {
+  id: 'ID',
+  fistName: 'FIRST_NAME',
+  lastName: 'LAST_NAME',
+  email: 'EMAIL',
+  token: 'TOKEN',
+};
+const loginPayload = { email: 'admin@admin.com', password: 'admin' };
 
 describe('system/authLoginSaga', () => {
   it('should call api', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
-      Promise.resolve({
-        data: {
-          id: 'ID',
-          name: 'NAME',
-          email: 'EMAIL',
-          token: 'TOKEN'
-        }
-      })
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
+      Promise.resolve({ data })
     );
 
+    const { token, ...userData } = data;
+
     return expectSaga(authLoginSaga)
-      .call(axios.post, `${environments.local.api}/auth/login`, {
-        email: 'admin@admin.com',
-        password: 'admin'
+      .call(http.post, '/auth/login', {
+        ...loginPayload,
       })
+      .call([localStorage, localStorage.setItem], 'authToken', token)
       .put({
         type: AUTH_LOGIN_SUCCESS,
-        payload: { id: 'ID', name: 'NAME', email: 'EMAIL', token: 'TOKEN' }
+        payload: { ...userData },
       })
       .put(push('/profile'))
       .dispatch({
         type: AUTH_LOGIN,
-        payload: { email: 'admin@admin.com', password: 'admin' }
+        payload: { ...loginPayload },
       })
       .silentRun();
   });
 
   it('should hanlde error', () => {
-    jest.spyOn(axios, 'post').mockImplementationOnce(() =>
+    jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.reject({
         response: {
           data: {
-            message: 'Error'
-          }
-        }
+            message: 'Error',
+          },
+        },
       })
     );
 
     return expectSaga(authLoginSaga)
       .put({
         type: AUTH_LOGIN_ERROR,
-        payload: { error: 'Error' }
+        payload: { error: 'Error' },
       })
       .dispatch({
         type: AUTH_LOGIN,
-        payload: { email: 'admin@admin.com', password: 'admin' }
+        payload: { ...loginPayload },
       })
       .silentRun();
   });

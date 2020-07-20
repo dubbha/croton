@@ -13,88 +13,168 @@ import {
   AUTH_RESET_PASSWORD_ERROR,
   AUTH_UPDATE_PASSWORD,
   AUTH_UPDATE_PASSWORD_SUCCESS,
-  AUTH_UPDATE_PASSWORD_ERROR
+  AUTH_UPDATE_PASSWORD_ERROR,
+  AUTH_EMAIL_CONFIRM,
+  AUTH_EMAIL_CONFIRM_SUCCESS,
+  AUTH_FACEBOOK_SUCCESS,
+  AUTH_FACEBOOK,
+  AUTH_EMAIL_CONFIRM_ERROR,
+  AUTH_FACEBOOK_ERROR,
 } from './actions';
 
 describe('store/auth/reducer', () => {
-  it('should handle login', () => {
-    expect(
-      authReducer(initialState, {
-        type: AUTH_LOGIN,
-        payload: { email: 'EMAIL', password: 'PASSWORD' }
-      })
-    ).toEqual({
-      ...initialState,
-      isLoading: true
+  const authResult = {
+    id: 123,
+    firstName: 'FIRST_NAME',
+    lastName: 'LAST_NAME',
+    email: 'EMAIL',
+    token: 'TOKEN',
+  };
+
+  const authError = 'AUTH WENT WRONG!!!';
+
+  const info =
+    'Some succesful auth event probably has happened, but details are not important';
+
+  describe('loading start', () => {
+    const actions = [
+      AUTH_UPDATE_PASSWORD,
+      AUTH_RESET_PASSWORD,
+      AUTH_FACEBOOK,
+      AUTH_REGISTER,
+      AUTH_LOGIN,
+    ];
+
+    actions.forEach((action) => {
+      describe(action, () => {
+        it('should start loading', () => {
+          expect(
+            authReducer(initialState, {
+              type: action as any,
+            })
+          ).toEqual({
+            ...initialState,
+            isLoading: true,
+            error: null,
+            info: null,
+          });
+        });
+      });
     });
   });
 
-  it('should handle login success', () => {
-    const payload = { id: 123, name: 'NAME', email: 'EMAIL', token: 'TOKEN' };
-    expect(
-      authReducer(initialState, {
-        type: AUTH_LOGIN_SUCCESS,
-        payload
-      })
-    ).toEqual({
-      ...initialState,
-      ...payload
+  describe('authantication result', () => {
+    const actions = [
+      AUTH_EMAIL_CONFIRM_SUCCESS,
+      AUTH_FACEBOOK_SUCCESS,
+      AUTH_LOGIN_SUCCESS,
+    ];
+
+    actions.forEach((action) => {
+      describe(action, () => {
+        it('should handle succesfull authantication', () => {
+          const { token, ...userData } = authResult; // eslint-disable-line @typescript-eslint/no-unused-vars
+          expect(
+            authReducer(
+              { ...initialState, isLoading: true },
+              {
+                type: action as any,
+                payload: { ...authResult },
+              }
+            )
+          ).toEqual({
+            ...initialState,
+            ...userData,
+            isAuthenticated: true,
+          });
+        });
+      });
     });
   });
 
-  it('should handle login error', () => {
-    const state = { ...initialState, isLoading: true };
-    const payload = { error: 'ERROR' };
-    expect(
-      authReducer(state, {
-        type: AUTH_LOGIN_ERROR,
-        payload
-      })
-    ).toEqual({
-      ...initialState,
-      ...payload
+  describe('errors', () => {
+    const actions = [
+      AUTH_EMAIL_CONFIRM_ERROR,
+      AUTH_REGISTER_ERROR,
+      AUTH_LOGIN_ERROR,
+      AUTH_FACEBOOK_ERROR,
+    ];
+    actions.forEach((action) => {
+      describe(action, () => {
+        it('should handle errors during authantication', () => {
+          expect(
+            authReducer(
+              { ...initialState, isLoading: true },
+              {
+                type: action as any,
+                payload: { error: authError },
+              }
+            )
+          ).toEqual({
+            ...initialState,
+            error: authError,
+          });
+        });
+      });
     });
   });
 
-  it('should  handle register', () => {
+  describe('info', () => {
+    const actions = [
+      AUTH_UPDATE_PASSWORD_SUCCESS,
+      AUTH_RESET_PASSWORD_SUCCESS,
+      AUTH_REGISTER_SUCCESS,
+    ];
+    actions.forEach((action) => {
+      describe(action, () => {
+        it('should save the info about result', () => {
+          expect(
+            authReducer(
+              { ...initialState, isLoading: true },
+              {
+                type: action as any,
+                payload: { info },
+              }
+            )
+          ).toEqual({
+            ...initialState,
+            info,
+          });
+        });
+      });
+    });
+  });
+
+  describe('info + error', () => {
+    const actions = [AUTH_UPDATE_PASSWORD_ERROR, AUTH_RESET_PASSWORD_ERROR];
+    actions.forEach((action) => {
+      describe(action, () => {
+        it('should handle error and clean up info', () => {
+          expect(
+            authReducer(
+              { ...initialState, isLoading: true, info },
+              {
+                type: action as any,
+                payload: { error: authError },
+              }
+            )
+          ).toEqual({
+            ...initialState,
+            error: authError,
+          });
+        });
+      });
+    });
+  });
+
+  it('should handle confirm auth email', () => {
     expect(
-      authReducer(initialState, {
-        type: AUTH_REGISTER,
-        payload: { email: 'EMAIL', password: 'PASSWORD', firstName: 'FNAME', lastName: 'LNAME' }
-      })
+      authReducer({ ...initialState, isLoading: false, error: authError }, {
+        type: AUTH_EMAIL_CONFIRM,
+      } as any)
     ).toEqual({
       ...initialState,
       isLoading: true,
-      error: null,
-      info: null
-    });
-  });
-
-  it('should  handle register success', () => {
-    const state = { ...initialState, isLoading: true };
-    expect(
-      authReducer(state, {
-        type: AUTH_REGISTER_SUCCESS,
-        payload: { info: 'INFO' },
-      })
-    ).toEqual({
-      ...state,
-      isLoading: false,
-      info: 'INFO',
-    });
-  });
-
-  it('should  handle register error', () => {
-    const state = { ...initialState, isLoading: true };
-    const payload = { error: 'ERROR' };
-    expect(
-      authReducer(state, {
-        type: AUTH_REGISTER_ERROR,
-        payload
-      })
-    ).toEqual({
-      ...initialState,
-      ...payload
     });
   });
 
@@ -102,104 +182,13 @@ describe('store/auth/reducer', () => {
     const state = {
       ...initialState,
       id: 123,
-      name: 'NAME',
+      firstName: 'FIRST_NAME',
+      lastName: 'LAST_NAME',
       email: 'EMAIL',
-      token: 'TOKEN'
+      token: 'TOKEN',
     };
     expect(authReducer(state, { type: AUTH_LOGOUT })).toEqual({
-      ...initialState
-    });
-  });
-
-  it('should  handle reset password', () => {
-    const state = { ...initialState, error: 'ERROR', info: 'INFO' };
-    expect(
-      authReducer(state, {
-        type: AUTH_RESET_PASSWORD,
-        payload: { email: 'EMAIL' }
-      })
-    ).toEqual({
       ...initialState,
-      isLoading: true,
-      error: null,
-      info: null
-    });
-  });
-
-  it('should  handle reset password success', () => {
-    const state = { ...initialState, isLoading: true };
-    const payload = { info: 'INFO' };
-    expect(
-      authReducer(state, {
-        type: AUTH_RESET_PASSWORD_SUCCESS,
-        payload
-      })
-    ).toEqual({
-      ...state,
-      ...payload,
-      isLoading: false
-    });
-  });
-
-  it('should  handle reset password error', () => {
-    const state = { ...initialState, isLoading: true, info: 'INFO' };
-    const payload = { error: 'ERROR' };
-    expect(
-      authReducer(state, {
-        type: AUTH_RESET_PASSWORD_ERROR,
-        payload
-      })
-    ).toEqual({
-      ...initialState,
-      ...payload,
-      isLoading: false,
-      info: null
-    });
-  });
-
-  it('should handle update password', () => {
-    const state = { ...initialState, error: 'ERROR', info: 'INFO' };
-    expect(
-      authReducer(state, {
-        type: AUTH_UPDATE_PASSWORD,
-        payload: { token: 'TOKEN', password: 'PASS' }
-      })
-    ).toEqual({
-      ...initialState,
-      isLoading: true,
-      error: null,
-      info: null
-    });
-  });
-
-  it('should handle update password success', () => {
-    const state = { ...initialState, isLoading: true };
-    const payload = { info: 'INFO' };
-    expect(
-      authReducer(state, {
-        type: AUTH_UPDATE_PASSWORD_SUCCESS,
-        payload
-      })
-    ).toEqual({
-      ...state,
-      ...payload,
-      isLoading: false
-    });
-  });
-
-  it('should handle update password error', () => {
-    const state = { ...initialState, isLoading: true, info: 'INFO' };
-    const payload = { error: 'ERROR' };
-    expect(
-      authReducer(state, {
-        type: AUTH_UPDATE_PASSWORD_ERROR,
-        payload
-      })
-    ).toEqual({
-      ...initialState,
-      ...payload,
-      isLoading: false,
-      info: null
     });
   });
 
@@ -214,15 +203,15 @@ describe('store/auth/reducer', () => {
             pathname: 'PATHNAME',
             search: 'SEARCH',
             state: 'STATE',
-            hash: 'HASH'
+            hash: 'HASH',
           },
-          action: 'PUSH'
-        }
+          action: 'PUSH',
+        },
       })
     ).toEqual({
       ...initialState,
       isLoading: false,
-      info: null
+      info: null,
     });
   });
 });

@@ -4,6 +4,7 @@ import { Pages } from '../constants/pages';
 import { QueryParams } from '../constants/query-params';
 import { createActivationEmail } from '../utils/create-activation-email';
 import { createPasswordResetEmail } from '../utils/create-password-reset-email';
+import { createEmailResetEmail } from '../utils/create-email-reset-email';
 
 export default class EmailSendingService {
   public async sendEmail(mailOptions: Record<string, unknown>): Promise<void> {
@@ -47,6 +48,17 @@ export default class EmailSendingService {
       to: userEmail,
       subject: 'You are about to change your password',
       html: createPasswordResetEmail(name, link)
+    };
+
+    await this.sendEmail(mailOptions);
+  }
+
+  public async sendEmailResetMessage(userEmail: string, name: string, host: string, emailResetToken: string): Promise<void> {
+    const link = `${host}${Pages.PASSWORD_RESET_PAGE}?${QueryParams.EMAIL_RESET_TOKEN}=${emailResetToken}`;
+    const mailOptions = {
+      to: userEmail,
+      subject: 'You are about to change your email',
+      html: createEmailResetEmail(name, link)
     };
 
     await this.sendEmail(mailOptions);

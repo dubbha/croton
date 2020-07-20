@@ -1,34 +1,54 @@
 export const environments = {
   local: {
-    hostname: 'localhost',
-    api: 'http://ec2-52-90-198-38.compute-1.amazonaws.com:3000/api',
+    protocol: 'http:',
+    host: 'localhost:8080',
+    api: 'http://croton.cf:3000/api',
+  },
+  localServer: {
+    protocol: 'http:',
+    host: 'localhost',
+    api: 'http://croton.cf:3000/api',
+  },
+  localServerHttps: {
+    protocol: 'https:',
+    host: 'localhost',
+    api: 'https://croton.cf:4000/api',
   },
   dev: {
-    hostname: 'croton-web-dev.s3-website.eu-west-2.amazonaws.com',
-    api: 'http://ec2-52-90-198-38.compute-1.amazonaws.com:3000/api',
+    protocol: 'http:',
+    host: 'croton.cf:8080',
+    api: 'http://croton.cf:3000/api',
+  },
+  devHttps: {
+    protocol: 'https:',
+    host: 'croton.cf:4430',
+    api: 'https://croton.cf:4000/api',
   },
   stage: {
-    hostname: 'croton-web-stage.s3-website.eu-west-2.amazonaws.com',
-    api: 'http://ec2-52-90-198-38.compute-1.amazonaws.com:3001/api',
+    protocol: 'http:',
+    host: 'croton.cf:8081',
+    api: 'http://croton.cf:3001/api',
+  },
+  stageHttps: {
+    protocol: 'https:',
+    host: 'croton.cf:4431',
+    api: 'https://croton.cf:4001/api',
   },
   prod: {
-    hostname: 'croton-web-prod.s3-website.eu-west-2.amazonaws.com',
-    api: 'http://ec2-52-90-198-38.compute-1.amazonaws.com:3001/api',
-  }
+    protocol: 'http:',
+    host: 'croton.cf',
+    api: 'http://croton.cf:3002/api',
+  },
+  prodHttps: {
+    protocol: 'https:',
+    host: 'croton.cf',
+    api: 'https://croton.cf:4002/api',
+  },
 }
 
-export const getEnvironment = () => {
-  switch (window.location.hostname) {
-    case environments.prod.hostname:
-      return environments.prod;
-    case environments.stage.hostname:
-      return environments.stage;
-    case environments.dev.hostname:
-      return environments.dev;
-    case environments.local.hostname:
-    default:
-      return environments.local;
-  }
-}
+export const getEnvironment = () =>
+  Object.values(environments).find(
+    env => window.location.protocol === env.protocol && window.location.host === env.host
+  ) || environments.local;
 
 export const { api } = getEnvironment();

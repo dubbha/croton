@@ -1,8 +1,9 @@
 export interface AuthState {
   isLoading: boolean;
-  token: string | null;
+  isAuthenticated: boolean | null;
   id: number | null;
-  name: string | null;
+  firstName: string | null;
+  lastName: string | null;
   email: string | null;
   error: string | null;
   info: string | null;
@@ -30,6 +31,17 @@ export const AUTH_EMAIL_CONFIRM = 'AUTH_EMAIL_CONFIRM';
 export const AUTH_EMAIL_CONFIRM_SUCCESS = 'AUTH_EMAIL_CONFIRM_SUCCESS';
 export const AUTH_EMAIL_CONFIRM_ERROR = 'AUTH_EMAIL_CONFIRM_ERROR';
 
+export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
+export const AUTH_FACEBOOK_SUCCESS = 'AUTH_FACEBOOK_SUCCESS';
+export const AUTH_FACEBOOK_ERROR = 'AUTH_FACEBOOK_ERROR';
+
+interface AuthLoginSuccessPayload {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
 export interface AuthLogin {
   type: typeof AUTH_LOGIN;
   payload: { email: string; password: string };
@@ -37,7 +49,7 @@ export interface AuthLogin {
 
 export interface AuthLoginSuccess {
   type: typeof AUTH_LOGIN_SUCCESS;
-  payload: { id: number; name: string; email: string; token: string };
+  payload: AuthLoginSuccessPayload;
 }
 
 export interface AuthLoginError {
@@ -72,7 +84,7 @@ export interface AuthEmailConfirm {
 
 export interface AuthEmailConfirmSuccess {
   type: typeof AUTH_EMAIL_CONFIRM_SUCCESS;
-  payload: { id: number; name: string; email: string; token: string };
+  payload: AuthLoginSuccessPayload;
 }
 
 export interface AuthEmailConfirmError {
@@ -114,6 +126,21 @@ export interface AuthUpdatePasswordError {
   payload: { error: string };
 }
 
+export interface AuthFacebook {
+  type: typeof AUTH_FACEBOOK;
+  payload: { accessToken: string };
+}
+
+export interface AuthFacebookSuccess {
+  type: typeof AUTH_FACEBOOK_SUCCESS;
+  payload: AuthLoginSuccessPayload;
+}
+
+export interface AuthFacebookError {
+  type: typeof AUTH_FACEBOOK_ERROR;
+  payload: { error: any };
+}
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
@@ -130,4 +157,7 @@ export type AuthActionTypes =
   | AuthUpdatePasswordError
   | AuthEmailConfirm
   | AuthEmailConfirmSuccess
-  | AuthEmailConfirmError;
+  | AuthEmailConfirmError
+  | AuthFacebook
+  | AuthFacebookSuccess
+  | AuthFacebookError;

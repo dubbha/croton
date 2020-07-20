@@ -34,4 +34,5 @@ jobs:
             git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
             yarn workspace server install
             yarn workspace server build
+            yarn workspace server migration:run:linux
             sudo systemctl restart croton-server-${{ steps.extract_branch.outputs.branch }}

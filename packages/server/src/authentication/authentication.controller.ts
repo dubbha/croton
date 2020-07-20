@@ -12,14 +12,13 @@ import PasswordUpdateDto from './password-update.dto';
 import ProvidersAuthService from '../providers-auth/providers-auth.service';
 
 export default class AuthenticationController extends BaseController {
-  private authenticationService = new AuthenticationService();
-  private providersAuthService = new ProvidersAuthService(
-    this.authenticationService.login,
-    this.authenticationService.register
-  );
+  private authenticationService: AuthenticationService;
+  private providersAuthService: ProvidersAuthService;
 
   constructor() {
     super();
+    this.authenticationService = new AuthenticationService();
+    this.providersAuthService = new ProvidersAuthService();
     this.initializeRoutes();
   }
 
@@ -52,21 +51,10 @@ export default class AuthenticationController extends BaseController {
       this.passwordUpdateHandler
     );
 
-    this.router.get(
+    this.router.post(
       this.serverApi.authLoginFacebook,
-      this.providersAuthService.getAuthenticateFacebookProvider()
-    );
-    this.router.get(
-      this.serverApi.authLoginFacebookCallback,
-      this.providersAuthService.getHandleFacebookProviderCallback()
-    );
-    this.router.get(
-      this.serverApi.authLoginFacebookSuccess,
-      this.providersAuthService.handleFacebookLoginSuccess
-    );
-    this.router.get(
-      this.serverApi.authLoginFacebookFailure,
-      this.providersAuthService.handleFacebookLoginFailure
+      this.providersAuthService.verifyFacebookLogin,
+      this.providersAuthService.handleFacebookAuthResult
     );
   }
 

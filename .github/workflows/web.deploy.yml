@@ -1,0 +1,65 @@
+name: WEB-CI-deploy
+
+on:
+  push:
+    paths:
+      - "packages/web/**"
+      - ".github/workflows/**"
+    branches:
+      - dev
+      - stage
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: build
+        run: |
+          yarn workspace web install
+          yarn workspace web build
+          yarn workspace web test:badges
+          mkdir deploy
+          cp -Rp packages/web/build deploy/
+          cp -Rp packages/web/server deploy/
+          cp -p packages/web/service.js deploy/
+          mkdir deploy/build/coverage
+          cp -p packages/web/coverage/badge-*.svg deploy/build/coverage/
+          ls -l deploy
+
+      - name: scp build files
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "deploy/*"
+          target: "/var/tmp/croton-web-deploy"
+          strip_components: 1
+          rm: true
+
+      - name: ssh, move build files, restart service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            branch=${{ steps.extract_branch.outputs.branch }}
+            echo $branch
+            mkdir -p /var/www/croton/web/$branch
+            rm -Rf /var/www/croton/web/$branch/build
+            cp -Rp /var/tmp/croton-web-deploy/* /var/www/croton/web/$branch/
+            ls -l /var/www/croton/web/$branch/
+            cd /var/www/croton/web/$branch/server
+            yarn
+            sudo systemctl restart croton-web-$branch

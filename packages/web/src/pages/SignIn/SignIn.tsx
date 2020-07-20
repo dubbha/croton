@@ -1,9 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Header, Footer, SignInForm } from 'components';
+
+import { Container, Header, Footer, SignInForm, FbAuth } from 'components';
 import { Link } from 'react-router-dom';
 import { AUTH_LOGIN } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
+
+import './styles.scss';
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -12,17 +15,25 @@ export const SignIn = () => {
   const handleSubmit = (email: string, password: string) => {
     dispatch({
       type: AUTH_LOGIN,
-      payload: { email, password },
+      payload: { email, password }
     });
   };
 
   return (
     <Container>
       <Header />
-      <SignInForm isLoading={isLoading} error={error} onSubmit={handleSubmit} />
+      <div className="signInConrollersContainer">
+        <SignInForm
+          isLoading={isLoading}
+          error={error}
+          onSubmit={handleSubmit}
+        />
+        <FbAuth />
+      </div>
       <div className="signin-register">
         Don&apos;t have an account? <Link to="/signup"> Register</Link>
       </div>
+
       <Footer />
     </Container>
   );
