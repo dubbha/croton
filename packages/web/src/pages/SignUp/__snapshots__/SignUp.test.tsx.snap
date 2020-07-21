@@ -195,7 +195,7 @@ exports[`pages/SignUp should render successfully 1`] = `
         class="spinner-container"
       />
       <span>
-        Sing Up
+        Sign Up
       </span>
     </button>
   </form>
