@@ -95,13 +95,18 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
 
   useEffect(() => {
     setIsValid(
-      !errors.email &&
+      !!values.email &&
+        !!values.password &&
+        !!values.firstName &&
+        !!values.lastName &&
+        !errors.email &&
+        !errors.email &&
         !errors.password &&
         !passwordMatchError &&
         !errors.firstName &&
         !errors.lastName
     );
-  }, [errors, passwordMatchError]);
+  }, [errors, passwordMatchError, values]);
 
   // Password match is not moved to useCustomForm hook due to custom logic
   useEffect(() => {
