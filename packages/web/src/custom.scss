@@ -79,6 +79,10 @@ footer {
   color: $color-grass-dark;
 }
 
+.btn-primary:disabled {
+  opacity: 0.4;
+}
+
 /* HOME PAGE */
 .home-page {
   h2 {
