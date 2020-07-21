@@ -23,7 +23,7 @@ type Props = {
   ) => void;
 };
 
-interface SignUpFormI {
+interface FormFields {
   email?: string;
   password?: string;
   passwordMatch?: string;
@@ -75,9 +75,9 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
     handleChange,
     handleBlur,
   }: {
-    values: SignUpFormI;
-    errors: SignUpFormI;
-    touched: SignUpFormI;
+    values: FormFields;
+    errors: FormFields;
+    touched: FormFields;
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
   } = useCustomForm({
