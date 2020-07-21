@@ -21,6 +21,7 @@ input[type=button] {
   color: #fff;
   line-height: 250px;
   text-align: center;
-  background: $color-grass-dark;
+  background-color: $color-grass-dark;
+  background: url('./bg.png');
   user-select: none;
 }

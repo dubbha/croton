@@ -30,12 +30,12 @@ export const Profile = () => {
   });
 
   const changeFirstName = () =>
-    fName !== firstName && fName.trim().length > 2
+    fName !== firstName && fName.trim().length > 1
       ? updateProfile({ firstName: fName })
       : setFName(firstName || '');
 
   const changeLastName = () =>
-    lName !== lastName && lName.trim().length > 2
+    lName !== lastName && lName.trim().length > 1
       ? updateProfile({ lastName: lName })
       : setLName(lastName || '');
 
