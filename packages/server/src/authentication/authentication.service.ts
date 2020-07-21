@@ -1,15 +1,14 @@
 import { compare } from 'bcrypt';
 import { getRepository } from 'typeorm';
-import bindall from 'bindall';
 
 import UserEntity from '../models/user.entity';
 import RegistrationDto from '../models/registration.dto';
 import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
-import { createToken } from '../utils/create-token';
+import { createTokenizedUser } from '../utils/create-tokenized-user';
 import UserWithToken from '../interfaces/tokenized.user.interface';
 import LoginDto from '../models/login.dto';
 import WrongCredentials from '../exceptions/wrong-creditionals.exception';
-import User from '../interfaces/user.interface';
+import User from '../interfaces/db.user.interface';
 import { UserStatuses } from '../constants/user-statuses';
 import { createRandomString } from '../utils/create-random-string';
 import EmailVerificationEntity from '../models/email-verification.entity';
@@ -23,16 +22,13 @@ import PasswordUpdateDto from './password-update.dto';
 import WrongPasswordResetToken from '../exceptions/wrong-password-reset-token.exception';
 import PasswordResetTokenExpired from '../exceptions/password-reset-token-expired.exception';
 import { createNewPassword } from '../utils/create-new-password';
+import { createExpiresInHours } from '../utils/create-expires-in-hourse';
 
 export default class AuthenticationService {
   private userRepository = getRepository(UserEntity);
   private emailVerificationRepository = getRepository(EmailVerificationEntity);
   private passwordResetRepository = getRepository(PasswordResetEntity);
   private emailSendingService = new EmailSendingService();
-
-  constructor() {
-    bindall(this);
-  }
 
   public async register(
     registrationData: RegistrationDto,
@@ -95,7 +91,7 @@ export default class AuthenticationService {
       throw new WrongCredentials();
     }
 
-    return this.loginUser(user);
+    return createTokenizedUser(user);
   }
 
   public async verify(emailVerificationToken: string): Promise<UserWithToken> {
@@ -118,16 +114,7 @@ export default class AuthenticationService {
     await this.userRepository.update(user.id, user);
     await this.emailVerificationRepository.delete(emailVerification.id);
 
-    return this.loginUser(user);
-  }
-
-  private loginUser(user: UserEntity): UserWithToken {
-    const tokenData = createToken(user);
-
-    return {
-      ...user,
-      token: tokenData.token,
-    };
+    return createTokenizedUser(user);
   }
 
   private validateUser(user: User): void {
@@ -145,13 +132,12 @@ export default class AuthenticationService {
   }
 
   private async sendPasswordResetMessage(
-    { id, email, firstName: name }: User,
+    { id, email, firstName }: User,
     host: string
   ) {
     const { PASSWORD_RESET_EXPIRATION_TIME } = process.env;
     const passwordResetToken = createRandomString(64);
-    const expiresInHours =
-      1000 * 60 * 60 * Number(PASSWORD_RESET_EXPIRATION_TIME);
+    const expiresInHours = createExpiresInHours(Number(PASSWORD_RESET_EXPIRATION_TIME));
     await this.passwordResetRepository.save({
       userId: id,
       passwordResetToken,
@@ -160,20 +146,19 @@ export default class AuthenticationService {
 
     await this.emailSendingService.sendPasswordResetMessage(
       email,
-      name,
+      firstName,
       host,
       passwordResetToken
     );
   }
 
   private async sendActivationMessage(
-    { id, email, firstName: name }: User,
+    { id, email, firstName }: User,
     host
   ): Promise<void> {
     const { EMAIL_VERIFICATION_EXPIRATION_TIME } = process.env;
     const emailVerificationToken = createRandomString(64);
-    const expiresInHours =
-      1000 * 60 * 60 * Number(EMAIL_VERIFICATION_EXPIRATION_TIME);
+    const expiresInHours = createExpiresInHours(Number(EMAIL_VERIFICATION_EXPIRATION_TIME));
     await this.emailVerificationRepository.save({
       userId: id,
       emailVerificationToken,
@@ -182,7 +167,7 @@ export default class AuthenticationService {
 
     await this.emailSendingService.sendActivationMessage(
       email,
-      name,
+      firstName,
       host,
       emailVerificationToken
     );

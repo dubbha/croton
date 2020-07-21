@@ -1,26 +1,29 @@
-import { Request, Response } from 'express';
+import { Request, Response, RequestHandler } from 'express';
 import { getRepository } from 'typeorm';
 import passport, { Profile } from 'passport';
-import { Strategy as FacebookStrategy } from 'passport-facebook';
-
-import { api } from '../api'
+import FacebookTokenStrategy from 'passport-facebook-token';
+import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 
 import UserEntity from '../models/user.entity';
-
-import RegistrationDto from '../models/registration.dto';
+import SocialRegistrationDto from '../models/social-registration.dto';
 import WrongCredentials from '../exceptions/wrong-creditionals.exception';
+import { UserStatuses } from '../constants/user-statuses';
+import { createTokenizedUser } from '../utils/create-tokenized-user';
 
-import { ProvidersIdDBFieldName, ProvidersServiceName } from './providers-auth.interfaces'
+import { ProvidersIdDBFieldName, ProvidersServiceName } from './providers-auth.interfaces';
 
 export default class ProvidersAuthService {
-  private loginUser;
-  private registerUser;
   private userRepository = getRepository(UserEntity);
+  public verifyFacebookLogin: RequestHandler;
+  public verifyGoogleLogin: RequestHandler;
 
-  constructor(loginUser, registerUser) {
-    this.loginUser = loginUser;
-    this.registerUser = registerUser;
-    this.initFacebookProviderLogin()
+
+  constructor() {
+    this.verifyFacebookLogin = passport.authenticate(ProvidersServiceName.FACEBOOK as string, { session: false });
+    this.verifyGoogleLogin = passport.authenticate(ProvidersServiceName.GOOGLE as string, { session: false });
+
+    this.initFacebookProviderLogin();
+    this.initGoogleProviderLogin();
     return this
   }
 
@@ -28,13 +31,18 @@ export default class ProvidersAuthService {
     return await this.userRepository.findOne({ [providerIdKeyName]: id });
   }
 
-  private formatProviderProfileToRegistrationDto(profile: Profile, accessToken: string, passportIdKeyName: ProvidersIdDBFieldName): RegistrationDto {
+  private async createUserBySocialRegistrationDto(socialRegistrationDto: SocialRegistrationDto): Promise<UserEntity> {
+    return await this.userRepository.save(socialRegistrationDto);
+  }
+
+  private formatProviderProfileToSocialRegistrationDto(profile: Profile, accessToken: string, passportIdKeyName: ProvidersIdDBFieldName): SocialRegistrationDto {
     return {
       firstName: profile.name?.givenName || profile.displayName,
       lastName: profile.name?.familyName || profile.displayName,
       email: profile.emails[0].value,
       password: accessToken,
-      [passportIdKeyName]: profile.id
+      [passportIdKeyName]: profile.id,
+      status: UserStatuses.ACTIVE
     }
   }
 
@@ -43,70 +51,59 @@ export default class ProvidersAuthService {
     profile: Profile,
     passportIdKeyName: ProvidersIdDBFieldName
 ) {
-      const existingUser = await this.findUserByProviderId(profile.id, passportIdKeyName)
-      if(!existingUser) {
-        const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken, passportIdKeyName)
-        return await this.registerUser(registrationDto)
+      let user = await this.findUserByProviderId(profile.id, passportIdKeyName);
+      if(!user) {
+        const socialRegistrationDto = this.formatProviderProfileToSocialRegistrationDto(profile, accessToken, passportIdKeyName);
+        user = await this.createUserBySocialRegistrationDto(socialRegistrationDto)
       }
-      const { email, password } = existingUser
-      return await this.loginUser({ email, password })
+      return createTokenizedUser(user)
     }
 
-  private async handleFacebookProviderLogin(
+  private getHandleProviderLogin(providersIdDBFieldName: ProvidersIdDBFieldName) {return async function(
     accessToken: string,
     _: string,
     profile: Profile,
     done: any
-  ):Promise<void> {
+  ) {
     try {
-      const loggedInOrRegisteredUser = this.registerOrLoginUserByProviderProfile(
+      const loggedInOrRegisteredUser = await this.registerOrLoginUserByProviderProfile(
         accessToken,
         profile,
-        ProvidersIdDBFieldName.FACEBOOK
-        )
+        providersIdDBFieldName
+        );
         return done(null, loggedInOrRegisteredUser)
       } catch (err) {
         done(err)
       }
-  }
+  }}
 
   private initFacebookProviderLogin () {
-    const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, APP_HOST, HTTPS_PORT } = process.env
-    const { getFacebookCallbackURL } = api
+    const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env;
 
-    passport.use(new FacebookStrategy({
+    passport.use(new FacebookTokenStrategy({
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
-      callbackURL: getFacebookCallbackURL(APP_HOST, HTTPS_PORT)
+      fbGraphVersion: 'v3.0'
     },
-    this.handleFacebookProviderLogin.bind(this)
+    this.getHandleProviderLogin(ProvidersIdDBFieldName.FACEBOOK).bind(this)
   ));
   }
 
-  public getAuthenticateFacebookProvider () {
-    return passport.authenticate(ProvidersServiceName.FACEBOOK as string)
+  private initGoogleProviderLogin () {
+    const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
+
+    passport.use(new GoogleTokenStrategy({
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET
+    },
+    this.getHandleProviderLogin(ProvidersIdDBFieldName.GOOGLE).bind(this)
+  ));
   }
 
-  public getHandleFacebookProviderCallback () {
-   const { getFacebookSuccessRedirect, getFacebookFailureRedirect, } = api
-   const { APP_HOST, PORT } = process.env
-
-    return passport.authenticate(ProvidersServiceName.FACEBOOK as string,
-    {
-      successRedirect: getFacebookSuccessRedirect(APP_HOST, PORT),
-      failureRedirect: getFacebookFailureRedirect(APP_HOST, PORT),
-      session: false
+  public handleAuthResult(req: Request, res:Response) {
+    if(req.user) {
+      return res.send(req.user)
     }
-    );
+    throw new WrongCredentials()
   }
-
-  public handleFacebookLoginSuccess(_: Request, res: Response) {
-    res.send('Succesfully logged in via Facebook!')
-  }
-
-  public handleFacebookLoginFailure() {
-    console.log('*** Failed logging in via Facebook! ***')
-    throw new WrongCredentials();
-  }
-
 }

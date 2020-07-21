@@ -18,24 +18,21 @@ exports[`pages/SignIn should render successfully 1`] = `
           <img
             alt="logo"
             class="d-inline-block align-top"
-            height="30"
+            height="60"
             src="logo.svg"
-            width="30"
+            width="60"
           />
-           
-          <span
-            class="companyName"
-          >
-            Croton
-          </span>
+          <img
+            alt="Croton. Care. Free."
+            src="croton.png"
+          />
         </a>
         <div
           class="nav-item"
         >
           <a
             class="nav-link"
-            data-rb-event-key="#features"
-            href="#features"
+            href="/#features"
           >
             Features
           </a>
@@ -45,8 +42,7 @@ exports[`pages/SignIn should render successfully 1`] = `
         >
           <a
             class="nav-link"
-            data-rb-event-key="#about"
-            href="#about"
+            href="/#about"
           >
             About
           </a>
@@ -56,8 +52,7 @@ exports[`pages/SignIn should render successfully 1`] = `
         >
           <a
             class="nav-link"
-            data-rb-event-key="#services"
-            href="#services"
+            href="/#services"
           >
             Services
           </a>
@@ -89,67 +84,86 @@ exports[`pages/SignIn should render successfully 1`] = `
       </div>
     </nav>
   </header>
-  <form
-    class=""
+  <div
+    class="signInConrollersContainer"
   >
-    <div
-      style="height: 50px; margin-bottom: 16px;"
-    />
-    <div
-      class="form-group"
-    >
-      <label
-        class="form-label"
-      >
-        Email address
-      </label>
-      <input
-        class="form-control"
-        data-testid="signInForm__email"
-        placeholder="Enter email"
-        type="email"
-        value=""
-      />
-    </div>
-    <div
-      class="form-group"
-    >
-      <label
-        class="form-label"
-      >
-        Password
-      </label>
-      <input
-        class="form-control"
-        data-testid="signInForm__password"
-        placeholder="Enter password"
-        type="password"
-        value=""
-      />
-      <small
-        class="reset-password-link form-text"
-      >
-        <a
-          href="/reset"
-        >
-          Forgot password?
-        </a>
-      </small>
-    </div>
-    <button
-      class="btn btn-primary"
-      data-testid="submitButton"
-      disabled=""
-      type="submit"
+    <form
+      class="signinForm"
     >
       <div
-        class="spinner-container"
+        style="height: 50px; margin-bottom: 16px;"
       />
-      <span>
-        Sign In
-      </span>
-    </button>
-  </form>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+        >
+          Email address
+        </label>
+        <input
+          class="form-control"
+          data-testid="signInForm__email"
+          placeholder="Enter email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+        >
+          Password
+        </label>
+        <input
+          class="form-control"
+          data-testid="signInForm__password"
+          placeholder="Enter password"
+          type="password"
+          value=""
+        />
+        <small
+          class="reset-password-link form-text"
+        >
+          <a
+            href="/reset"
+          >
+            Forgot password?
+          </a>
+        </small>
+      </div>
+      <button
+        class="btn btn-primary"
+        data-testid="submitButton"
+        disabled=""
+        type="submit"
+      >
+        <div
+          class="spinner-container"
+        />
+        <span>
+          Sign In
+        </span>
+      </button>
+    </form>
+    <div
+      class="auth-separator"
+    >
+      or
+    </div>
+    <div
+      class="authButtonContainer"
+    >
+      <button />
+    </div>
+    <div
+      class="authButtonContainer"
+    >
+      <button />
+    </div>
+  </div>
   <div
     class="signin-register"
   >

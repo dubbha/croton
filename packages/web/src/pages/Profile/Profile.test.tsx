@@ -25,7 +25,12 @@ describe('pages/Profile', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => ({ token: 'TOKEN', name: 'NAME', email: 'EMAIL' })
+        useSelector: () => ({
+          token: 'TOKEN',
+          firstName: 'FIRST_NAME',
+          lastName: 'LAST_NAME',
+          email: 'EMAIL'
+        })
       }));
 
       const { Profile } = require('./Profile');
@@ -41,7 +46,12 @@ describe('pages/Profile', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => ({ token: null, name: null, email: null })
+        useSelector: () => ({
+          token: null,
+          firstName: null,
+          lastName: null,
+          email: null
+        })
       }));
 
       const { Profile } = require('./Profile');

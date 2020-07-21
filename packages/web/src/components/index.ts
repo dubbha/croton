@@ -6,3 +6,5 @@ export * from './SignUpForm';
 export * from './PasswordResetForm';
 export * from './PasswordUpdateForm';
 export * from './EmailConfirmMessage';
+export * from './FbAuth';
+export * from './GoogleAuth';

@@ -11,7 +11,7 @@
   justify-content: space-between;
 
   form {
-    .form-label{
+    .form-label {
       font-size: medium;
     }
   }
@@ -23,7 +23,7 @@
     }
   }
 
-  .form-error-message{
+  .form-error-message {
     color: $color-danger;
   }
 
@@ -44,13 +44,27 @@ footer {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: $color-grass-dark;
+  &, &:focus {
+    color: $color-grass-dark;
+  }
   &.active {
     color: $color-grass;
   }
   &:hover {
     color: $color-grass-light;
   }
+
+  @media (min-width: 992px) {
+    padding: 0.5em 0.75em;
+  }
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.row {
+  margin: 0;
 }
 
 .btn .spinner-container {
@@ -63,6 +77,10 @@ footer {
 
 .companyName {
   color: $color-grass-dark;
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
 }
 
 /* HOME PAGE */
@@ -79,8 +97,12 @@ footer {
 
     &::after {
       position: absolute;
-      content: "";
-      background: linear-gradient(to right, $color-grass-light 0%, $color-grass-dark 100%);
+      content: '';
+      background: linear-gradient(
+        to right,
+        $color-grass-light 0%,
+        $color-grass-dark 100%
+      );
       height: 4px;
       width: 60px;
       bottom: 0;
@@ -119,7 +141,7 @@ footer {
   background-size: 100%;
 
   .overlay {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
   }
 
   h1 {
@@ -159,7 +181,7 @@ footer {
   }
 }
 /* About Section */
-#about {
+.about {
   h2 {
     &:after {
       bottom: 0;
@@ -194,7 +216,6 @@ footer {
         padding: 0 8px;
       }
     }
-
   }
 
   .about-image {
@@ -240,17 +261,12 @@ footer {
 }
 
 .sign-up {
-
   p {
     text-align: center;
     color: white;
     line-height: 24px;
     margin: 30px 0;
   }
-}
-
-.join-us {
-
 }
 
 .signup-button {

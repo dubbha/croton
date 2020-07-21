@@ -22,4 +22,7 @@ export default class User {
 
   @Column({ update: false, nullable: true })
   public facebookId?: string;
+
+  @Column({ update: false, nullable: true })
+  public googleId?: string;
 }

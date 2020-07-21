@@ -25,10 +25,13 @@ jobs:
         run: |
           yarn workspace web install
           yarn workspace web build
+          yarn workspace web test:badges
           mkdir deploy
           cp -Rp packages/web/build deploy/
           cp -Rp packages/web/server deploy/
           cp -p packages/web/service.js deploy/
+          mkdir deploy/build/coverage
+          cp -p packages/web/coverage/badge-*.svg deploy/build/coverage/
           ls -l deploy
 
       - name: scp build files

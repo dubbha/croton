@@ -1,21 +1,17 @@
 const root = '/api';
 const auth = '/auth';
+const management = '/management';
 const authLogin = `${auth}/login`;
 const authLoginFacebook = `${auth}/facebook`;
-const authLoginFacebookCallback = `${authLoginFacebook}/callback`;
-const authLoginFacebookSuccess = `${authLoginFacebook}/success`;
-const authLoginFacebookFailure = `${authLoginFacebook}/failure`;
+const authLoginGoogle = `${auth}/google`;
 const authRegister = `${auth}/register`;
 const authConfirm = `${auth}/confirm`;
 const authPasswordReset = `${auth}/password-reset`;
 const authPasswordUpdate = `${auth}/password-update`;
+const userManagementEmailReset = `${management}/email-reset`;
+const userManagementEmailUpdate = `${management}/email-update`;
+const userManagementUserUpdate = `${management}/user-update`;
 const healthCheck = '/health-check';
-const getFacebookCallbackURL = (host: string, port: string) =>
-  `https://${host}:${port}${root}${authLoginFacebookCallback}`;
-const getFacebookSuccessRedirect = (host: string, port: string) =>
-  `http://${host}:${port}${root}${authLoginFacebookSuccess}`;
-const getFacebookFailureRedirect = (host: string, port: string) =>
-  `http://${host}:${port}${root}${authLoginFacebookFailure}`;
 
 export const api = {
   root,
@@ -24,15 +20,13 @@ export const api = {
   authRegister,
   healthCheck,
   authLoginFacebook,
-  authLoginFacebookCallback,
-  getFacebookCallbackURL,
-  getFacebookSuccessRedirect,
-  getFacebookFailureRedirect,
-  authLoginFacebookSuccess,
-  authLoginFacebookFailure,
+  authLoginGoogle,
   authConfirm,
   authPasswordReset,
   authPasswordUpdate,
+  userManagementEmailReset,
+  userManagementEmailUpdate,
+  userManagementUserUpdate,
 };
 
 export type Api = typeof api;

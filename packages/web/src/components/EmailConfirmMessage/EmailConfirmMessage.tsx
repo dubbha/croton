@@ -14,7 +14,9 @@ export const EmailConfirmMessage = ({ onInit, error, isLoading }: Props) => {
   const { emailVerificationToken } = useSelector(getQuery);
 
   useEffect(() => {
-    onInit(emailVerificationToken);
+    if (emailVerificationToken) {
+      onInit(emailVerificationToken);
+    }
   }, [onInit, emailVerificationToken]);
 
   return (
