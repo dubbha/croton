@@ -111,7 +111,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
   // Password match is not moved to useCustomForm hook due to custom logic
   useEffect(() => {
     if (values.password !== values.passwordMatch) {
-      setPasswordMatchError("Password doesn't match.");
+      setPasswordMatchError('Password doesn\'t match.');
     } else {
       setPasswordMatchError('');
     }
