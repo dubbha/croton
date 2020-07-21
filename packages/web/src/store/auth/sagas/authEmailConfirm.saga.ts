@@ -22,9 +22,11 @@ function* handle(action: AuthEmailConfirm) {
 
   try {
     const result = yield call(http.post, '/auth/confirm', { emailVerificationToken });
+    const { data: { token, ...userData } } =  result;
+    yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: AUTH_EMAIL_CONFIRM_SUCCESS,
-      payload: result.data,
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
