@@ -3,20 +3,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Container, Header, Footer } from 'components';
 import { Form, ErrorAlert, InfoAlert, AlertPlaceholder } from 'elements';
-import { AUTH_UPDATE_PROFILE } from 'store/auth/actions';
+import { AUTH_RESET_EMAIL, AUTH_UPDATE_PROFILE } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
 
 export const Profile = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, firstName, lastName, email, error, info } = useSelector(getAuth);
+  const {
+    isAuthenticated,
+    firstName,
+    lastName,
+    email,
+    error,
+    info
+  } = useSelector(getAuth);
 
   useEffect(() => {
     if (!isAuthenticated) dispatch(push('/signin'));
   }, [isAuthenticated, dispatch]);
 
-  const initials = `${firstName && firstName[0] ? firstName[0].toUpperCase() : ''} ${
-    lastName && lastName[0] ? lastName[0].toUpperCase() : ''}`;
+  const initials = `${
+    firstName && firstName[0] ? firstName[0].toUpperCase() : ''
+  } ${lastName && lastName[0] ? lastName[0].toUpperCase() : ''}`;
 
   const [fName, setFName] = useState(firstName || '');
   const [lName, setLName] = useState(lastName || '');
@@ -24,10 +32,11 @@ export const Profile = () => {
   type Profile = { firstName: string | null; lastName: string | null };
   const profile: Profile = { firstName, lastName };
 
-  const updateProfile = (partial: Partial<Profile>) => dispatch({
-    type: AUTH_UPDATE_PROFILE,
-    payload: { ...profile, ...partial },
-  });
+  const updateProfile = (partial: Partial<Profile>) =>
+    dispatch({
+      type: AUTH_UPDATE_PROFILE,
+      payload: { ...profile, ...partial }
+    });
 
   const changeFirstName = () =>
     fName !== firstName && fName.trim().length > 1
@@ -39,7 +48,7 @@ export const Profile = () => {
       ? updateProfile({ lastName: lName })
       : setLName(lastName || '');
 
-  const changeEmail = () => dispatch(push('/email-reset'));
+  const changeEmail = () => dispatch({ type: AUTH_RESET_EMAIL });
 
   return (
     <Container>

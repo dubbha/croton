@@ -54,7 +54,7 @@ export default class EmailSendingService {
   }
 
   public async sendEmailResetMessage(userEmail: string, name: string, host: string, emailResetToken: string): Promise<void> {
-    const link = `${host}${Pages.PASSWORD_RESET_PAGE}?${QueryParams.EMAIL_RESET_TOKEN}=${emailResetToken}`;
+    const link = `${host}${Pages.EMAIL_RESET_PAGE}?${QueryParams.EMAIL_RESET_TOKEN}=${emailResetToken}`;
     const mailOptions = {
       to: userEmail,
       subject: 'You are about to change your email',

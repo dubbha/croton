@@ -21,5 +21,7 @@ export function validateEnv(): void {
     HOME: str(),
     FACEBOOK_APP_ID: str(),
     FACEBOOK_APP_SECRET: str(),
+    GOOGLE_CLIENT_ID: str(),
+    GOOGLE_CLIENT_SECRET: str()
   });
 }
