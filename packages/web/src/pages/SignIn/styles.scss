@@ -1,9 +1,42 @@
 .signInConrollersContainer {
   display: flex;
   width: 100%;
-  height: 100%;
   flex-direction: column;
   align-items: center;
   padding: 0;
   justify-content: flex-start;
+  margin-bottom: 170px;
+}
+
+.authButtonContainer {
+  width: 70%;
+  padding: 0;
+  margin: 10px 0;
+}
+
+
+.auth-separator {
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  width: 50%;
+
+  &:after, &:before {
+    display: inline-block;
+    width: 43%;
+    border-top: 1px solid #333;
+    content: " ";
+    position: absolute;
+    top: 0.7em;
+  }
+
+  &:after {
+    right: 0;
+  }
+
+  &:before {
+    left: 0;
+  }
 }

@@ -230,7 +230,7 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
         <div className="spinner-container">
           {isLoading && <LoadingSpinner />}
         </div>
-        <span>Sing Up</span>
+        <span>Sign Up</span>
       </SubmitButton>
     </Form>
   );

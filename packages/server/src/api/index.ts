@@ -3,6 +3,7 @@ const auth = '/auth';
 const management = '/management';
 const authLogin = `${auth}/login`;
 const authLoginFacebook = `${auth}/facebook`;
+const authLoginGoogle = `${auth}/google`;
 const authRegister = `${auth}/register`;
 const authConfirm = `${auth}/confirm`;
 const authPasswordReset = `${auth}/password-reset`;
@@ -19,12 +20,13 @@ export const api = {
   authRegister,
   healthCheck,
   authLoginFacebook,
+  authLoginGoogle,
   authConfirm,
   authPasswordReset,
   authPasswordUpdate,
   userManagementEmailReset,
   userManagementEmailUpdate,
-  userManagementUserUpdate
+  userManagementUserUpdate,
 };
 
 export type Api = typeof api;

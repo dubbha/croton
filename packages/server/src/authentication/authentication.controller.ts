@@ -54,7 +54,13 @@ export default class AuthenticationController extends BaseController {
     this.router.post(
       this.serverApi.authLoginFacebook,
       this.providersAuthService.verifyFacebookLogin,
-      this.providersAuthService.handleFacebookAuthResult
+      this.providersAuthService.handleAuthResult
+    );
+
+    this.router.post(
+      this.serverApi.authLoginGoogle,
+      this.providersAuthService.verifyGoogleLogin,
+      this.providersAuthService.handleAuthResult
     );
   }
 

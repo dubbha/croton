@@ -39,6 +39,7 @@
     "nodemailer": "^6.4.10",
     "passport": "^0.4.1",
     "passport-facebook-token": "^4.0.0",
+    "passport-google-token": "^0.1.2",
     "path": "^0.12.7",
     "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",
