@@ -1,5 +1,14 @@
 import React from 'react';
-import { KeyboardAvoidingView, ScrollView, View, Image, TouchableWithoutFeedback, StyleSheet, Platform, Keyboard } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Platform,
+  Keyboard,
+} from 'react-native';
 
 import { COMPONENTS_STYLE } from '../../styles';
 import { CustomButton } from '../../components/Button';
@@ -9,26 +18,28 @@ import { Divider } from '../../components/Divider';
 export const SignInScreen = () => {
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           scrollEnabled={Platform.OS === 'android' ? false : true}
-          contentContainerStyle={styles.container__scroll}
-        >
-          <View
-            style={{
-              flex: 1,
-            }} 
-          >
+          contentContainerStyle={styles.container__scroll}>
+          <View style={styles.container__body}>
             <View style={styles.container__topPart}>
               <View style={styles.container__socials}>
                 <View style={styles.container__social}>
-                  <CustomButton icon='iconFb' isOutline={true} title='Facebook' />
+                  <CustomButton
+                    icon="iconFb"
+                    isOutline={true}
+                    title="Facebook"
+                  />
                 </View>
                 <View style={styles.container__social}>
-                  <CustomButton icon='iconGoogle' isOutline={true}  title='Google' />
+                  <CustomButton
+                    icon="iconGoogle"
+                    isOutline={true}
+                    title="Google"
+                  />
                 </View>
               </View>
             </View>
@@ -36,23 +47,30 @@ export const SignInScreen = () => {
               <Divider isDark={true} />
             </View>
             <View style={styles.container__bottomPart}>
-              <View style={[styles.container__inputWrap, styles.container__inputWrap__first]}>
+              <View
+                style={[
+                  styles.container__inputWrap,
+                  styles.container__inputWrap__first,
+                ]}>
                 <CustomInput />
               </View>
               <View style={styles.container__inputWrap}>
                 <CustomInput />
               </View>
               <View style={styles.container__inputWrap}>
-                <CustomButton title='Sign In' />
+                <CustomButton title="Sign In" />
               </View>
-              <Image style={styles.container__img} source={require('./../../assets/img/bg-signIn.png')} />
+              <Image
+                style={styles.container__img}
+                source={require('./../../assets/img/bg-signIn.png')}
+              />
             </View>
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -65,6 +83,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingHorizontal: 30,
     paddingTop: 50,
+  },
+
+  body: {
+    flex: 1,
   },
 
   container__topPart: {
@@ -109,5 +131,5 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'relative',
     bottom: Platform.OS === 'ios' ? -26 : 0,
-  }
+  },
 });

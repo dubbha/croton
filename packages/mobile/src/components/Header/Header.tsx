@@ -11,7 +11,7 @@ export const Header = () => {
       <Logo />
       <Search />
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 10,
-    borderStyle: "solid",
-    borderColor: "#fff",
+    borderStyle: 'solid',
+    borderColor: '#fff',
     borderRadius: 5,
-  }
+  },
 });

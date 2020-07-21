@@ -12,8 +12,8 @@
     "start:ios": "run-p dev ios",
     "studio": "studio android",
     "xcode": "open ios/myprojectname.xcworkspace",
-    "lint": "eslint .",
-    "test": "jest",
+    "lint": "eslint ./src --ext .jsx,.js,.tsx,.ts",
+    "test": "jest --silent",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
