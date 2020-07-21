@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "cross-env PORT=8080 react-scripts start",
-    "start:https": "cross-env HTTPS=true PORT=8081 react-scripts start",
+    "start:https": "cross-env HTTPS=true PORT=4430 react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test --watchAll=false",
