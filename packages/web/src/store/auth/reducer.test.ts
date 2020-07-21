@@ -20,6 +20,9 @@ import {
   AUTH_FACEBOOK,
   AUTH_EMAIL_CONFIRM_ERROR,
   AUTH_FACEBOOK_ERROR,
+  AUTH_GOOGLE,
+  AUTH_GOOGLE_ERROR,
+  AUTH_GOOGLE_SUCCESS,
 } from './actions';
 
 describe('store/auth/reducer', () => {
@@ -43,6 +46,7 @@ describe('store/auth/reducer', () => {
       AUTH_FACEBOOK,
       AUTH_REGISTER,
       AUTH_LOGIN,
+      AUTH_GOOGLE,
     ];
 
     actions.forEach((action) => {
@@ -68,6 +72,7 @@ describe('store/auth/reducer', () => {
       AUTH_EMAIL_CONFIRM_SUCCESS,
       AUTH_FACEBOOK_SUCCESS,
       AUTH_LOGIN_SUCCESS,
+      AUTH_GOOGLE_SUCCESS,
     ];
 
     actions.forEach((action) => {
@@ -98,6 +103,7 @@ describe('store/auth/reducer', () => {
       AUTH_REGISTER_ERROR,
       AUTH_LOGIN_ERROR,
       AUTH_FACEBOOK_ERROR,
+      AUTH_GOOGLE_ERROR,
     ];
     actions.forEach((action) => {
       describe(action, () => {

@@ -148,7 +148,21 @@ exports[`pages/SignIn should render successfully 1`] = `
         </span>
       </button>
     </form>
-    <button />
+    <div
+      class="auth-separator"
+    >
+      or
+    </div>
+    <div
+      class="authButtonContainer"
+    >
+      <button />
+    </div>
+    <div
+      class="authButtonContainer"
+    >
+      <button />
+    </div>
   </div>
   <div
     class="signin-register"

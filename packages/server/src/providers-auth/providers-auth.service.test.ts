@@ -25,9 +25,9 @@ const mockFbProfile = {
   displayName,
   name: {
     firstName,
-    familyName,
+    familyName
   },
-  emails: [email1, email2],
+  emails: [email1, email2]
 };
 const mockDone = jest.fn();
 
@@ -51,6 +51,14 @@ jest.mock(
       return config;
     }
 );
+
+jest.mock('passport-google-token', () => ({
+  Strategy: function(config: any, callback: any) {
+    callback(accessToken, refreshToken, mockFbProfile, mockDone);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return config;
+  }
+}));
 
 describe('ProvidersAuthService', () => {
   afterEach(() => {

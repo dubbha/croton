@@ -21,6 +21,9 @@ import {
   AUTH_FACEBOOK,
   AUTH_FACEBOOK_SUCCESS,
   AUTH_FACEBOOK_ERROR,
+  AUTH_GOOGLE,
+  AUTH_GOOGLE_SUCCESS,
+  AUTH_GOOGLE_ERROR,
   AUTH_UPDATE_PROFILE,
   AUTH_UPDATE_PROFILE_SUCCESS,
   AUTH_UPDATE_PROFILE_ERROR,
@@ -45,6 +48,7 @@ export function authReducer(
     case AUTH_UPDATE_PASSWORD:
     case AUTH_RESET_PASSWORD:
     case AUTH_FACEBOOK:
+    case AUTH_GOOGLE:
     case AUTH_REGISTER:
     case AUTH_LOGIN:
     case AUTH_UPDATE_PROFILE:
@@ -56,6 +60,7 @@ export function authReducer(
       };
     case AUTH_EMAIL_CONFIRM_SUCCESS:
     case AUTH_FACEBOOK_SUCCESS:
+    case AUTH_GOOGLE_SUCCESS:
     case AUTH_LOGIN_SUCCESS: {
       const { id, firstName, lastName, email } = action.payload;
       return {
@@ -72,6 +77,7 @@ export function authReducer(
     case AUTH_REGISTER_ERROR:
     case AUTH_LOGIN_ERROR:
     case AUTH_FACEBOOK_ERROR:
+    case AUTH_GOOGLE_ERROR:
       return {
         ...state,
         isLoading: false,

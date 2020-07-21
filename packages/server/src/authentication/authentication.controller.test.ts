@@ -8,8 +8,9 @@ import AuthenticationController from './authentication.controller';
 (typeorm as any).getRepository = jest.fn();
 
 const mockApi = {
+  handleAuthResult: jest.fn(),
   verifyFacebookLogin: jest.fn(),
-  handleFacebookAuthResult: jest.fn(),
+  verifyGoogleLogin: jest.fn(),
 };
 
 jest.mock('../providers-auth/providers-auth.service');

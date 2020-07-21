@@ -107,7 +107,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="spinner-container"
     />
     <span>
-      Sing Up
+      Sign Up
     </span>
   </button>
 </form>
@@ -220,7 +220,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="spinner-container"
     />
     <span>
-      Sing Up
+      Sign Up
     </span>
   </button>
 </form>
@@ -333,7 +333,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="spinner-container"
     />
     <span>
-      Sing Up
+      Sign Up
     </span>
   </button>
 </form>

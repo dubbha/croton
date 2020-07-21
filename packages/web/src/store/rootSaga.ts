@@ -7,6 +7,7 @@ import {
   authUpdatePasswordSaga,
   authEmailConfirmSaga,
   authFacebook,
+  authGoogle,
   authUpdateProfileSaga,
 } from './auth/sagas';
 
@@ -19,6 +20,7 @@ export function* rootSaga() {
     authUpdatePasswordSaga(),
     authEmailConfirmSaga(),
     authFacebook(),
+    authGoogle(),
     authUpdateProfileSaga(),
   ]);
 }
