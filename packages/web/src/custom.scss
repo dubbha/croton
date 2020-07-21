@@ -44,13 +44,27 @@ footer {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: $color-grass-dark;
+  &, &:focus {
+    color: $color-grass-dark;
+  }
   &.active {
     color: $color-grass;
   }
   &:hover {
     color: $color-grass-light;
   }
+
+  @media (min-width: 992px) {
+    padding: 0.5em 0.75em;
+  }
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.row {
+  margin: 0;
 }
 
 .btn .spinner-container {
@@ -163,7 +177,7 @@ footer {
   }
 }
 /* About Section */
-#about {
+.about {
   h2 {
     &:after {
       bottom: 0;
@@ -249,9 +263,6 @@ footer {
     line-height: 24px;
     margin: 30px 0;
   }
-}
-
-.join-us {
 }
 
 .signup-button {

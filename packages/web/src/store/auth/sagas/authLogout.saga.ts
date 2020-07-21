@@ -5,7 +5,7 @@ function* handle() {
   try {
     yield call([localStorage, localStorage.clear]);
   } catch (e) {
-    yield call(console.log, 'log', e);
+    yield call(console.error, e);
   }
 }
 
