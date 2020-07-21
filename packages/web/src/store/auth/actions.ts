@@ -1,6 +1,6 @@
 export interface AuthState {
   isLoading: boolean;
-  isAuthenticated: boolean | null;
+  isAuthenticated: boolean;
   id: number | null;
   firstName: string | null;
   lastName: string | null;
@@ -38,6 +38,10 @@ export const AUTH_FACEBOOK_ERROR = 'AUTH_FACEBOOK_ERROR';
 export const AUTH_GOOGLE = 'AUTH_GOOGLE';
 export const AUTH_GOOGLE_SUCCESS = 'AUTH_GOOGLE_SUCCESS';
 export const AUTH_GOOGLE_ERROR = 'AUTH_GOOGLE_ERROR';
+
+export const AUTH_UPDATE_PROFILE = 'AUTH_UPDATE_PROFILE';
+export const AUTH_UPDATE_PROFILE_SUCCESS = 'AUTH_UPDATE_PROFILE_SUCCESS';
+export const AUTH_UPDATE_PROFILE_ERROR = 'AUTH_UPDATE_PROFILE_ERROR';
 
 interface AuthLoginSuccessPayload {
   id: number;
@@ -160,6 +164,21 @@ export interface AuthGoogleError {
   payload: { error: string };
 }
 
+export interface AuthUpdateProfile {
+  type: typeof AUTH_UPDATE_PROFILE,
+  payload: { firstName: string, lastName: string }
+}
+
+export interface AuthUpdateProfileSuccess {
+  type: typeof AUTH_UPDATE_PROFILE_SUCCESS,
+  payload: { firstName: string, lastName: string, info: string }
+}
+
+export interface AuthUpdateProfileError {
+  type: typeof AUTH_UPDATE_PROFILE_ERROR,
+  payload: { error: string }
+}
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
@@ -182,4 +201,7 @@ export type AuthActionTypes =
   | AuthFacebookError
   | AuthGoogle
   | AuthGoogleSuccess
-  | AuthGoogleError;
+  | AuthGoogleError
+  | AuthUpdateProfile
+  | AuthUpdateProfileSuccess
+  | AuthUpdateProfileError;

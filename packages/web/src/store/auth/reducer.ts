@@ -24,6 +24,9 @@ import {
   AUTH_GOOGLE,
   AUTH_GOOGLE_SUCCESS,
   AUTH_GOOGLE_ERROR,
+  AUTH_UPDATE_PROFILE,
+  AUTH_UPDATE_PROFILE_SUCCESS,
+  AUTH_UPDATE_PROFILE_ERROR,
 } from './actions';
 
 export const initialState: AuthState = {
@@ -48,6 +51,7 @@ export function authReducer(
     case AUTH_GOOGLE:
     case AUTH_REGISTER:
     case AUTH_LOGIN:
+    case AUTH_UPDATE_PROFILE:
       return {
         ...state,
         isLoading: true,
@@ -81,16 +85,27 @@ export function authReducer(
       };
     case AUTH_UPDATE_PASSWORD_SUCCESS:
     case AUTH_RESET_PASSWORD_SUCCESS:
-    case AUTH_REGISTER_SUCCESS: {
+    case AUTH_REGISTER_SUCCESS:
       return {
         ...state,
         isLoading: false,
         info: action.payload.info,
       };
+
+    case AUTH_UPDATE_PROFILE_SUCCESS: {
+      const { firstName, lastName, info } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        info,
+        firstName,
+        lastName,
+      };
     }
 
     case AUTH_UPDATE_PASSWORD_ERROR:
     case AUTH_RESET_PASSWORD_ERROR:
+    case AUTH_UPDATE_PROFILE_ERROR:
       return {
         ...state,
         isLoading: false,

@@ -18,24 +18,21 @@ exports[`pages/SignUp should render successfully 1`] = `
           <img
             alt="logo"
             class="d-inline-block align-top"
-            height="30"
+            height="60"
             src="logo.svg"
-            width="30"
+            width="60"
           />
-           
-          <span
-            class="companyName"
-          >
-            Croton
-          </span>
+          <img
+            alt="Croton. Care. Free."
+            src="croton.png"
+          />
         </a>
         <div
           class="nav-item"
         >
           <a
             class="nav-link"
-            data-rb-event-key="#features"
-            href="#features"
+            href="/#features"
           >
             Features
           </a>
@@ -45,8 +42,7 @@ exports[`pages/SignUp should render successfully 1`] = `
         >
           <a
             class="nav-link"
-            data-rb-event-key="#about"
-            href="#about"
+            href="/#about"
           >
             About
           </a>
@@ -56,8 +52,7 @@ exports[`pages/SignUp should render successfully 1`] = `
         >
           <a
             class="nav-link"
-            data-rb-event-key="#services"
-            href="#services"
+            href="/#services"
           >
             Services
           </a>
@@ -207,11 +202,11 @@ exports[`pages/SignUp should render successfully 1`] = `
   <div
     class="signup-login"
   >
-    Already have an account ?
+    Already have an account? 
     <a
       href="/signin"
     >
-       Sign In
+      Sign In
     </a>
   </div>
   <footer>
