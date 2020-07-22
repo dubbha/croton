@@ -21,6 +21,7 @@ export function App() {
             component={AutorizationScreen}
             options={{
               headerTitle: () => <Header />,
+              headerShown: false,
             }}
           />
           <Stack.Screen name="Sign In" component={SignInScreen} />

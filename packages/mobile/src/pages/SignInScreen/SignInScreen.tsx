@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
 
-  body: {
+  container__body: {
     flex: 1,
   },
 
