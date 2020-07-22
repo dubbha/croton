@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Text, StyleSheet, View } from 'react-native';
+import { TextInput, StyleSheet, View } from 'react-native';
 
 import { THEME } from '../../styles/Theme';
 
@@ -15,7 +15,7 @@ export const CustomInput = () => {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
     borderColor: THEME.greyLight,
     borderWidth: 1,
     shadowColor: '#000',
-    shadowOffset: { 
+    shadowOffset: {
       width: 0,
-      height: -3
+      height: -3,
     },
     shadowOpacity: 0.2,
     shadowRadius: 4,

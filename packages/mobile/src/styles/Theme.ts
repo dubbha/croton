@@ -4,8 +4,8 @@ export const THEME = {
   greenLight: '#95e083',
   grey: '#333',
   greyLight: '#a2a2a2',
-}
+};
 
 export const COMPONENTS_STYLE = {
   buttonHeight: 50,
-}
+};

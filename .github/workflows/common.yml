@@ -3,11 +3,11 @@ name: CI-common
 on:
   push:
     paths:
-      - "packages/web/**"
+      - "packages/**"
       - ".github/workflows/**"
 
 jobs:
-  build:
+  common-check:
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,5 +20,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn install
-      - run: yarn cpd:ci
+      - name: detect copy/paste, lint, test
+        run: |
+          yarn install
+          yarn cpd:ci
+          yarn lint
+          yarn test

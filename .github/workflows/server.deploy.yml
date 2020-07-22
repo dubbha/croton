@@ -1,4 +1,4 @@
-name: SERVER-CI-deploy
+name: CI-server-deploy
 
 on:
   push:
@@ -11,15 +11,15 @@ on:
       - prod
 
 jobs:
-  deploy:
+  server-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Extract branch name
+      - name: extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: SSH and deploy croton server app
+      - name: ssh, fetch repo, build, restart service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
