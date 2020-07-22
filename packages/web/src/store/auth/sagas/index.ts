@@ -7,3 +7,5 @@ export * from './authEmailConfirm.saga';
 export * from './authFacebook.saga';
 export * from './authGoogle.saga';
 export * from './authUpdateProfile.saga';
+export * from './authEmailReset.saga';
+export * from './authEmailUpdate.saga';

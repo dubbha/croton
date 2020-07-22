@@ -1,5 +1,11 @@
 import React from 'react';
-import { ImageBackground, View, Text, StyleSheet, Platform } from 'react-native';
+import {
+  ImageBackground,
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 
 const autorizationBgImg = require('../../assets/img/bg-home.jpg');
 import { THEME } from '../../styles';
@@ -22,19 +28,30 @@ export const AutorizationScreen = ({ navigation }: any) => {
           <View style={styles.bottomPart}>
             <View style={styles.buttonsWrap}>
               <View style={styles.button}>
-                <CustomButton style={styles.androidButton} title='Sing In' action={() => navigation.navigate('Sign In')} />
+                <CustomButton
+                  style={styles.androidButton}
+                  title="Sing In"
+                  action={() => navigation.navigate('Sign In')}
+                />
               </View>
               <View style={styles.button}>
-                <CustomButton title='Sign Up' action={() => navigation.navigate('Sign Up')} />
+                <CustomButton
+                  title="Sign Up"
+                  action={() => navigation.navigate('Sign Up')}
+                />
               </View>
             </View>
             <Divider />
             <View style={styles.buttonsWrap}>
               <View style={styles.button}>
-                <CustomButton isOutline={true} icon='iconFb' title='Facebook' />
+                <CustomButton isOutline={true} icon="iconFb" title="Facebook" />
               </View>
               <View style={styles.button}>
-                <CustomButton isOutline={true} icon='iconGoogle' title='Google' />
+                <CustomButton
+                  isOutline={true}
+                  icon="iconGoogle"
+                  title="Google"
+                />
               </View>
             </View>
           </View>
@@ -51,9 +68,9 @@ const styles = StyleSheet.create({
 
   container__bg: {
     flex: 1,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
-  
+
   container__body: {
     flex: 1,
     flexDirection: 'column',
@@ -77,17 +94,17 @@ const styles = StyleSheet.create({
 
   buttonsWrap: {
     flex: 0.4,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     width: '80%',
   },
 
   button: {
-    flex:  Platform.OS === 'android' ? 0.45 : 0.5,
+    flex: Platform.OS === 'android' ? 0.45 : 0.5,
   },
 
   mainText: {
     color: THEME.green,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 24,
   },
   additionText: {
@@ -97,5 +114,5 @@ const styles = StyleSheet.create({
   },
   androidButton: {
     marginTop: 10,
-  }
+  },
 });

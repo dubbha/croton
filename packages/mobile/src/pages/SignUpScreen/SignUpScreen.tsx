@@ -1,5 +1,14 @@
 import React from 'react';
-import { KeyboardAvoidingView, ScrollView, View, Text, TouchableWithoutFeedback, StyleSheet, Platform, Keyboard } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Platform,
+  Keyboard,
+} from 'react-native';
 
 import { COMPONENTS_STYLE } from '../../styles';
 import { CustomButton } from '../../components/Button';
@@ -11,18 +20,21 @@ export const SignUpScreen = () => {
   const termsConditions = 'By signing up, you agree to the Terms of Service.';
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={styles.container__topPart}>
             <View style={styles.container__socials}>
               <View style={styles.container__social}>
-                <CustomButton icon='iconFb' isOutline={true} title='Facebook' />
+                <CustomButton icon="iconFb" isOutline={true} title="Facebook" />
               </View>
               <View style={styles.container__social}>
-                <CustomButton icon='iconGoogle' isOutline={true}  title='Google' />
+                <CustomButton
+                  icon="iconGoogle"
+                  isOutline={true}
+                  title="Google"
+                />
               </View>
             </View>
           </View>
@@ -30,7 +42,11 @@ export const SignUpScreen = () => {
             <Divider isDark={true} />
           </View>
           <View style={styles.container__bottomPart}>
-            <View style={[styles.container__inputWrap, styles.container__inputWrap__first]}>
+            <View
+              style={[
+                styles.container__inputWrap,
+                styles.container__inputWrap__first,
+              ]}>
               <CustomInput />
             </View>
             <View style={styles.container__inputWrap}>
@@ -43,9 +59,9 @@ export const SignUpScreen = () => {
               <CustomInput />
             </View>
             <View style={styles.container__submit}>
-              <Text >{termsConditions}</Text>
+              <Text>{termsConditions}</Text>
               <View style={styles.container__button}>
-                <CustomButton title='Create an Account' />
+                <CustomButton title="Create an Account" />
               </View>
             </View>
           </View>
@@ -53,8 +69,7 @@ export const SignUpScreen = () => {
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -91,7 +106,7 @@ const styles = StyleSheet.create({
 
   container__submit: {
     marginTop: 50,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   container__button: {

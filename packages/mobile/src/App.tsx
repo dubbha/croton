@@ -11,11 +11,6 @@ import { SignUpScreen } from './pages/SignUpScreen';
 
 const Stack = createStackNavigator();
 
-// TODO:
-// Hide title on first tree screen, need hide title on first (opacity? )
-// Make multiple groups of screen
-// https://reactnavigation.org/docs/nesting-navigators  
-
 export function App() {
   return (
     <>
@@ -24,10 +19,10 @@ export function App() {
           <Stack.Screen
             name="Autorization screen"
             component={AutorizationScreen}
-            options={{ 
-              headerTitle: props => <Header />,
+            options={{
+              headerTitle: () => <Header />,
+              headerShown: false,
             }}
-
           />
           <Stack.Screen name="Sign In" component={SignInScreen} />
           <Stack.Screen name="Sign Up" component={SignUpScreen} />

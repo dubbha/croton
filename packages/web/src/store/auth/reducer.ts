@@ -1,32 +1,38 @@
 import { LOCATION_CHANGE, LocationChangeAction } from 'connected-react-router';
 import {
-  AuthState,
-  AuthActionTypes,
   AUTH_EMAIL_CONFIRM,
   AUTH_EMAIL_CONFIRM_ERROR,
   AUTH_EMAIL_CONFIRM_SUCCESS,
-  AUTH_LOGIN,
-  AUTH_LOGIN_SUCCESS,
-  AUTH_LOGIN_ERROR,
-  AUTH_REGISTER,
-  AUTH_REGISTER_SUCCESS,
-  AUTH_REGISTER_ERROR,
-  AUTH_LOGOUT,
-  AUTH_RESET_PASSWORD,
-  AUTH_RESET_PASSWORD_SUCCESS,
-  AUTH_RESET_PASSWORD_ERROR,
-  AUTH_UPDATE_PASSWORD,
-  AUTH_UPDATE_PASSWORD_SUCCESS,
-  AUTH_UPDATE_PASSWORD_ERROR,
   AUTH_FACEBOOK,
-  AUTH_FACEBOOK_SUCCESS,
   AUTH_FACEBOOK_ERROR,
+  AUTH_FACEBOOK_SUCCESS,
   AUTH_GOOGLE,
-  AUTH_GOOGLE_SUCCESS,
   AUTH_GOOGLE_ERROR,
+  AUTH_GOOGLE_SUCCESS,
+  AUTH_LOGIN,
+  AUTH_LOGIN_ERROR,
+  AUTH_LOGIN_SUCCESS,
+  AUTH_LOGOUT,
+  AUTH_REGISTER,
+  AUTH_REGISTER_ERROR,
+  AUTH_REGISTER_SUCCESS,
+  AUTH_RESET_EMAIL,
+  AUTH_RESET_EMAIL_ERROR,
+  AUTH_RESET_EMAIL_SUCCESS,
+  AUTH_RESET_PASSWORD,
+  AUTH_RESET_PASSWORD_ERROR,
+  AUTH_RESET_PASSWORD_SUCCESS,
+  AUTH_UPDATE_EMAIL,
+  AUTH_UPDATE_EMAIL_ERROR,
+  AUTH_UPDATE_EMAIL_SUCCESS,
+  AUTH_UPDATE_PASSWORD,
+  AUTH_UPDATE_PASSWORD_ERROR,
+  AUTH_UPDATE_PASSWORD_SUCCESS,
   AUTH_UPDATE_PROFILE,
-  AUTH_UPDATE_PROFILE_SUCCESS,
   AUTH_UPDATE_PROFILE_ERROR,
+  AUTH_UPDATE_PROFILE_SUCCESS,
+  AuthActionTypes,
+  AuthState
 } from './actions';
 
 export const initialState: AuthState = {
@@ -37,7 +43,7 @@ export const initialState: AuthState = {
   email: null,
   isLoading: false,
   error: null,
-  info: null,
+  info: null
 };
 
 export function authReducer(
@@ -52,16 +58,19 @@ export function authReducer(
     case AUTH_REGISTER:
     case AUTH_LOGIN:
     case AUTH_UPDATE_PROFILE:
+    case AUTH_RESET_EMAIL:
+    case AUTH_UPDATE_EMAIL:
       return {
         ...state,
         isLoading: true,
         error: null,
-        info: null,
+        info: null
       };
     case AUTH_EMAIL_CONFIRM_SUCCESS:
     case AUTH_FACEBOOK_SUCCESS:
     case AUTH_GOOGLE_SUCCESS:
-    case AUTH_LOGIN_SUCCESS: {
+    case AUTH_LOGIN_SUCCESS:
+    case AUTH_UPDATE_EMAIL_SUCCESS: {
       const { id, firstName, lastName, email } = action.payload;
       return {
         ...state,
@@ -70,7 +79,7 @@ export function authReducer(
         firstName,
         lastName,
         email,
-        isLoading: false,
+        isLoading: false
       };
     }
     case AUTH_EMAIL_CONFIRM_ERROR:
@@ -81,15 +90,16 @@ export function authReducer(
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error,
+        error: action.payload.error
       };
     case AUTH_UPDATE_PASSWORD_SUCCESS:
     case AUTH_RESET_PASSWORD_SUCCESS:
     case AUTH_REGISTER_SUCCESS:
+    case AUTH_RESET_EMAIL_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        info: action.payload.info,
+        info: action.payload.info
       };
 
     case AUTH_UPDATE_PROFILE_SUCCESS: {
@@ -99,31 +109,33 @@ export function authReducer(
         isLoading: false,
         info,
         firstName,
-        lastName,
+        lastName
       };
     }
 
     case AUTH_UPDATE_PASSWORD_ERROR:
     case AUTH_RESET_PASSWORD_ERROR:
     case AUTH_UPDATE_PROFILE_ERROR:
+    case AUTH_RESET_EMAIL_ERROR:
+    case AUTH_UPDATE_EMAIL_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload.error,
-        info: null,
+        info: null
       };
 
     case AUTH_EMAIL_CONFIRM:
       return {
         ...state,
         isLoading: true,
-        error: null,
+        error: null
       };
 
     case AUTH_LOGOUT:
       return {
         ...initialState,
-        isAuthenticated: false,
+        isAuthenticated: false
       };
 
     case LOCATION_CHANGE:
@@ -131,7 +143,7 @@ export function authReducer(
         ...state,
         isLoading: false,
         error: null,
-        info: null,
+        info: null
       };
     default:
       return state;

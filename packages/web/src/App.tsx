@@ -4,7 +4,16 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { history, persistor } from 'store';
-import { Home, SignIn, SignUp, PasswordReset, Profile, SignOut, EmailConfirm } from 'pages';
+import {
+  Home,
+  SignIn,
+  SignUp,
+  PasswordReset,
+  Profile,
+  SignOut,
+  EmailConfirm,
+  EmailReset
+} from 'pages';
 import './custom.scss';
 
 const App = () => (
@@ -18,6 +27,7 @@ const App = () => (
           <Route path="/signup" component={SignUp} />
           <Route path="/reset" component={PasswordReset} />
           <Route path="/confirm" component={EmailConfirm} />
+          <Route path="/email-reset" component={EmailReset} />
           <Route path="/" component={Home} />
         </Switch>
       </ConnectedRouter>

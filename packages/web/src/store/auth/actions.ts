@@ -43,6 +43,14 @@ export const AUTH_UPDATE_PROFILE = 'AUTH_UPDATE_PROFILE';
 export const AUTH_UPDATE_PROFILE_SUCCESS = 'AUTH_UPDATE_PROFILE_SUCCESS';
 export const AUTH_UPDATE_PROFILE_ERROR = 'AUTH_UPDATE_PROFILE_ERROR';
 
+export const AUTH_RESET_EMAIL = 'AUTH_RESET_EMAIL';
+export const AUTH_RESET_EMAIL_SUCCESS = 'AUTH_RESET_EMAIL_SUCCESS';
+export const AUTH_RESET_EMAIL_ERROR = 'AUTH_RESET_EMAIL_ERROR';
+
+export const AUTH_UPDATE_EMAIL = 'AUTH_UPDATE_EMAIL';
+export const AUTH_UPDATE_EMAIL_SUCCESS = 'AUTH_UPDATE_EMAIL_SUCCESS';
+export const AUTH_UPDATE_EMAIL_ERROR = 'AUTH_UPDATE_EMAIL_ERROR';
+
 interface AuthLoginSuccessPayload {
   id: number;
   firstName: string;
@@ -165,18 +173,47 @@ export interface AuthGoogleError {
 }
 
 export interface AuthUpdateProfile {
-  type: typeof AUTH_UPDATE_PROFILE,
-  payload: { firstName: string, lastName: string }
+  type: typeof AUTH_UPDATE_PROFILE;
+  payload: { firstName: string; lastName: string };
 }
 
 export interface AuthUpdateProfileSuccess {
-  type: typeof AUTH_UPDATE_PROFILE_SUCCESS,
-  payload: { firstName: string, lastName: string, info: string }
+  type: typeof AUTH_UPDATE_PROFILE_SUCCESS;
+  payload: { firstName: string; lastName: string; info: string };
 }
 
 export interface AuthUpdateProfileError {
-  type: typeof AUTH_UPDATE_PROFILE_ERROR,
-  payload: { error: string }
+  type: typeof AUTH_UPDATE_PROFILE_ERROR;
+  payload: { error: string };
+}
+
+export interface AuthResetEmail {
+  type: typeof AUTH_RESET_EMAIL;
+}
+
+export interface AuthResetEmailSuccess {
+  type: typeof AUTH_RESET_EMAIL_SUCCESS;
+  payload: { info: string };
+}
+
+export interface AuthResetEmailError {
+  type: typeof AUTH_RESET_EMAIL_ERROR;
+  payload: { error: string };
+}
+
+export interface AuthUpdateEmail {
+  type: typeof AUTH_UPDATE_EMAIL;
+  payload: { emailResetToken: string; email: string };
+}
+
+export interface AuthUpdateEmailSuccess {
+  type: typeof AUTH_UPDATE_EMAIL_SUCCESS;
+  payload: AuthLoginSuccessPayload;
+}
+
+export interface AuthUpdateEmailError {
+  type: typeof AUTH_UPDATE_EMAIL_ERROR;
+  payload: { error: string };
 }
 
 export type AuthActionTypes =
@@ -204,4 +241,10 @@ export type AuthActionTypes =
   | AuthGoogleError
   | AuthUpdateProfile
   | AuthUpdateProfileSuccess
-  | AuthUpdateProfileError;
+  | AuthUpdateProfileError
+  | AuthResetEmail
+  | AuthResetEmailSuccess
+  | AuthResetEmailError
+  | AuthUpdateEmail
+  | AuthUpdateEmailSuccess
+  | AuthUpdateEmailError;

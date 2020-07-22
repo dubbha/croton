@@ -3,12 +3,19 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { THEME } from '../../styles/Theme';
 
-export const Divider = ({ isDark }: {isDark?: boolean}) => {
-  return(
+export const Divider = ({ isDark }: { isDark?: boolean }) => {
+  return (
     <View style={styles.divider}>
-      <View style={[styles.divider__line, isDark && styles.divider__line__dark]} />
-      <Text style={[styles.divider__text, isDark && styles.divider__text__dark]}>or</Text>
-      <View style={[styles.divider__line, isDark && styles.divider__line__dark]} />
+      <View
+        style={[styles.divider__line, isDark && styles.divider__line__dark]}
+      />
+      <Text
+        style={[styles.divider__text, isDark && styles.divider__text__dark]}>
+        or
+      </Text>
+      <View
+        style={[styles.divider__line, isDark && styles.divider__line__dark]}
+      />
     </View>
   );
 };
@@ -27,7 +34,7 @@ const styles = StyleSheet.create({
     letterSpacing: 3,
   },
   divider__text__dark: {
-   color: THEME.grey, 
+    color: THEME.grey,
   },
   divider__line: {
     flex: 0.5,

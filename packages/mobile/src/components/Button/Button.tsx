@@ -4,8 +4,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text, 
-  StyleSheet
+  Text,
+  StyleSheet,
 } from 'react-native';
 
 import { THEME, COMPONENTS_STYLE } from '../../styles';
@@ -13,10 +13,10 @@ import { ICONS } from '../../assets/icons';
 
 type MyProps = {
   title: string;
-  icon? : string;
+  icon?: string;
   isOutline?: boolean;
   action?: any;
-  style?: object,
+  style?: object;
 };
 
 export class CustomButton extends Component<MyProps> {
@@ -30,18 +30,28 @@ export class CustomButton extends Component<MyProps> {
     this.icon = props.icon;
     this.isOutline = props.isOutline;
     this.action = props.action;
-    
-  };
+  }
 
   render() {
     const icon = this.icon && ICONS[this.icon];
 
-    return(
-      <View style = {styles.button}>
-        <TouchableOpacity onPress = {this.action ? this.action : () => alert('Button')}>
-          <View style={[styles.button__body, this.isOutline && styles.button__body__outline]}>
-            {icon && <Image style={styles.button__icon} source={icon}/> }
-            <Text style = {[styles.button__text, this.isOutline && styles.button__text__outline]}>{this.title}</Text>
+    return (
+      <View style={styles.button}>
+        <TouchableOpacity
+          onPress={this.action ? this.action : () => console.log('Button')}>
+          <View
+            style={[
+              styles.button__body,
+              this.isOutline && styles.button__body__outline,
+            ]}>
+            {icon && <Image style={styles.button__icon} source={icon} />}
+            <Text
+              style={[
+                styles.button__text,
+                this.isOutline && styles.button__text__outline,
+              ]}>
+              {this.title}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -54,9 +64,9 @@ const styles = StyleSheet.create({
     flex: 1,
     maxHeight: COMPONENTS_STYLE.buttonHeight,
   },
-  
+
   button__body: {
-    flexDirection: "row",
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     height: COMPONENTS_STYLE.buttonHeight,
