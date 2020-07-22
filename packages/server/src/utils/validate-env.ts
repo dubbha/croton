@@ -17,7 +17,6 @@ export function validateEnv(): void {
     EMAIL_USER: str(),
     EMAIL_PASS: str(),
     HTTPS_PORT: port(),
-    APP_HOST: str(),
     HOME: str(),
     FACEBOOK_APP_ID: str(),
     FACEBOOK_APP_SECRET: str(),
