@@ -1,15 +1,30 @@
 export const environments = {
-  local: {
+  local: { // local devServer@HTTP using dev env API, started using `yarn start`
     protocol: 'http:',
     host: 'localhost:8080',
     api: 'http://croton.cf:3000/api',
   },
-  localServer: {
+  localHttps: { // local devServer@HTTPS using dev env API, started using `yarn start:https`
+    protocol: 'https:',
+    host: 'localhost:4430',
+    api: 'https://croton.cf:4000/api',
+  },
+  localUsingLocalApi: { // local devServer@HTTP using local API, started using `yarn start:local`
+    protocol: 'http:',
+    host: 'localhost:8081',
+    api: 'http://localhost:3000/api',
+  },
+  localUsingLocalApiHttps: { // local devServer@HTTPS using local API, started using `yarn start:local:https`
+    protocol: 'https:',
+    host: 'localhost:4431',
+    api: 'https://localhost:4000/api',
+  },
+  localBuildServe: { // local build statically served using `yarn serve`, using dev env API, HTTP part
     protocol: 'http:',
     host: 'localhost',
     api: 'http://croton.cf:3000/api',
   },
-  localServerHttps: {
+  localBuildServeHttps: { // local build statically served using `yarn serve`, using dev env API, HTTPS part
     protocol: 'https:',
     host: 'localhost',
     api: 'https://croton.cf:4000/api',
