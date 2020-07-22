@@ -9,7 +9,8 @@ export const useScrollIntoView = (refs: Dictionary<React.RefObject<HTMLElement>>
     Object.entries(refs).forEach(([hash, ref]) => {
       if (`#${hash}` === window.location.hash) {
         ref.current?.scrollIntoView({
-          behavior: 'smooth'
+          behavior: 'smooth',
+          block: 'center',
         });
       }
     });

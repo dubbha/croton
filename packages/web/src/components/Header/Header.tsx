@@ -14,7 +14,7 @@ export const Header = () => {
     <header>
       <Navbar expand="lg">
         <Nav className="mr-auto">
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/#intro">
             <img
               alt="logo"
               src={logo}

@@ -5,11 +5,13 @@ import { useScrollIntoView } from 'hooks';
 import aboutImg from './about.jpg';
 
 export const Home = () => {
+  const introRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
 
   useScrollIntoView({
+    intro: introRef,
     features: featuresRef,
     about: aboutRef,
     services: servicesRef,
@@ -19,7 +21,7 @@ export const Home = () => {
     <>
       <Header />
       <div className="home-page">
-        <div className="intro">
+        <div className="intro" ref={introRef}>
           <div className="overlay">
             <div className="row">
               <div className="col-md-10 col-md-offset-2 intro-text ml-sm-5">

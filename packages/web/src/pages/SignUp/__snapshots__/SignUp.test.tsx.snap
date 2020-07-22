@@ -13,7 +13,7 @@ exports[`pages/SignUp should render successfully 1`] = `
       >
         <a
           class="navbar-brand"
-          href="/"
+          href="/#intro"
         >
           <img
             alt="logo"
