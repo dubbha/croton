@@ -11,6 +11,7 @@ import WrongEmailResetToken from '../exceptions/wrong-email-reset-token.exceptio
 import EmailResetTokenExpired from '../exceptions/email-reset-token-expired.exception';
 import { createTokenizedUser } from '../utils/create-tokenized-user';
 import UserUpdateDto from './user-update.dto';
+import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
 
 export default class UserManagementService {
   private userRepository = getRepository(UserEntity);
@@ -57,6 +58,10 @@ export default class UserManagementService {
 
     if (emailVerification.expiresIn < Date.now()) {
       throw new EmailResetTokenExpired();
+    }
+
+    if (await this.userRepository.findOne({ email })) {
+      throw new UserWithThatEmailAlreadyExists(email);
     }
 
     const user = await this.userRepository.findOne({

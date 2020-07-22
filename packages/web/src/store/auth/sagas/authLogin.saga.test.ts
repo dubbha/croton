@@ -6,12 +6,12 @@ import { authLoginSaga } from './authLogin.saga';
 
 jest.mock('services', () => ({
   http: {
-    post: jest.fn(),
+    post: jest.fn()
   }
 }));
 
 jest.mock('connected-react-router', () => ({
-  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } }),
+  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
 }));
 
 const data = {
@@ -19,54 +19,54 @@ const data = {
   fistName: 'FIRST_NAME',
   lastName: 'LAST_NAME',
   email: 'EMAIL',
-  token: 'TOKEN',
+  token: 'TOKEN'
 };
 const loginPayload = { email: 'admin@admin.com', password: 'admin' };
 
 describe('system/authLoginSaga', () => {
   it('should call api', () => {
-    jest.spyOn(http, 'post').mockImplementationOnce(() =>
-      Promise.resolve({ data })
-    );
+    jest
+      .spyOn(http, 'post')
+      .mockImplementationOnce(() => Promise.resolve({ data }));
 
     const { token, ...userData } = data;
 
     return expectSaga(authLoginSaga)
       .call(http.post, '/auth/login', {
-        ...loginPayload,
+        ...loginPayload
       })
       .call([localStorage, localStorage.setItem], 'authToken', token)
       .put({
         type: AUTH_LOGIN_SUCCESS,
-        payload: { ...userData },
+        payload: { ...userData }
       })
       .put(push('/profile'))
       .dispatch({
         type: AUTH_LOGIN,
-        payload: { ...loginPayload },
+        payload: { ...loginPayload }
       })
       .silentRun();
   });
 
-  it('should hanlde error', () => {
+  it('should handle error', () => {
     jest.spyOn(http, 'post').mockImplementationOnce(() =>
       Promise.reject({
         response: {
           data: {
-            message: 'Error',
-          },
-        },
+            message: 'Error'
+          }
+        }
       })
     );
 
     return expectSaga(authLoginSaga)
       .put({
         type: AUTH_LOGIN_ERROR,
-        payload: { error: 'Error' },
+        payload: { error: 'Error' }
       })
       .dispatch({
         type: AUTH_LOGIN,
-        payload: { ...loginPayload },
+        payload: { ...loginPayload }
       })
       .silentRun();
   });
