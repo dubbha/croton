@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { UserStatuses } from '../constants/user-statuses';
+
+import SocialProfile from './social-profile.entity';
 
 @Entity()
 export default class User {
@@ -18,11 +27,9 @@ export default class User {
   public password: string;
 
   @Column()
-  public status: string;
+  public status: UserStatuses;
 
-  @Column({ update: false, nullable: true })
-  public facebookId?: string;
-
-  @Column({ update: false, nullable: true })
-  public googleId?: string;
+  @OneToOne(() => SocialProfile, { nullable: true })
+  @JoinColumn()
+  public socialProfile?: SocialProfile;
 }

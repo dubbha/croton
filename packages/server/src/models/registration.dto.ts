@@ -1,6 +1,10 @@
 import { IsString } from 'class-validator';
+import { UserStatuses } from '../constants/user-statuses';
 
 export default class RegistrationDto {
+  @IsString()
+  public id?: string;
+
   @IsString()
   public firstName: string;
 
@@ -14,5 +18,5 @@ export default class RegistrationDto {
   public password: string;
 
   @IsString()
-  public facebookId?: string;
+  public status?: UserStatuses;
 }
