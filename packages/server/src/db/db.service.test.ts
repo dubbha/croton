@@ -3,6 +3,7 @@ import * as typeorm from 'typeorm';
 import UserEntity from '../models/user.entity';
 import EmailVerificationEntity from '../models/email-verification.entity';
 import PasswordResetEntity from '../models/password-reset.entity';
+import SocialProfileEntity from '../models/social-profile.entity';
 
 import DBService from './db.service';
 import { UserStatuses } from '../constants/user-statuses';
@@ -11,7 +12,8 @@ import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfa
 type GetRepositoryPayload =
   | typeof UserEntity
   | typeof EmailVerificationEntity
-  | typeof PasswordResetEntity;
+  | typeof PasswordResetEntity
+  | typeof SocialProfileEntity;
 
 const mockUserRepository = {
   findOne: jest.fn(),
@@ -30,6 +32,11 @@ const mockPasswordResetRepository = {
   findOne: jest.fn(),
   save: jest.fn(),
   delete: jest.fn(),
+};
+
+const mockSocialProfileRepository = {
+  findOne: jest.fn(),
+  save: jest.fn(),
 };
 
 const id = 'mock123456765';
@@ -81,6 +88,8 @@ jest
         return mockEmailVerificationRepository;
       case PasswordResetEntity:
         return mockPasswordResetRepository;
+      case SocialProfileEntity:
+        return mockSocialProfileRepository;
     }
   } as any);
 
@@ -115,7 +124,7 @@ describe('DBService', () => {
       ProvidersIdDBFieldName.FACEBOOK,
       facebookId
     );
-    expect(mockUserRepository.findOne).toBeCalledWith({ facebookId });
+    expect(mockSocialProfileRepository.findOne).toBeCalledWith({ facebookId });
   });
 
   it('should get email verification by token', async () => {

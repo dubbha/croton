@@ -61,15 +61,15 @@ export default class ProvidersAuthService {
     accessToken: string,
     profile: Profile,
     passportIdKeyName: ProvidersIdDBFieldName
-) {
-      let user = await this.findUserByProviderId(profile.id, passportIdKeyName);
-      if(!user) {
-        const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken);
-        const socialProfile = this.formatProviderProfileToDto(profile, passportIdKeyName)
-        user = await this.createUserWithSocialProfile(registrationDto, socialProfile)
-      }
-      return createTokenizedUser(user)
+  ) {
+    let user = await this.findUserByProviderId(profile.id, passportIdKeyName);
+    if(!user) {
+      const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken);
+      const socialProfile = this.formatProviderProfileToDto(profile, passportIdKeyName)
+      user = await this.createUserWithSocialProfile(registrationDto, socialProfile)
     }
+    return createTokenizedUser(user)
+  }
 
 
   private getHandleProviderLogin(providersIdDBFieldName: ProvidersIdDBFieldName) {
@@ -78,19 +78,19 @@ export default class ProvidersAuthService {
       _: string,
       profile: Profile,
       done: any
-      ) {
-        try {
-          const loggedInOrRegisteredUser = await this.registerOrLoginUserByProviderProfile(
-            accessToken,
-            profile,
-            providersIdDBFieldName
-            );
-            return done(null, loggedInOrRegisteredUser)
-          } catch (err) {
-            done(err)
-          }
-        }.bind(this)
+    ) {
+      try {
+        const loggedInOrRegisteredUser = await this.registerOrLoginUserByProviderProfile(
+          accessToken,
+          profile,
+          providersIdDBFieldName
+        );
+        return done(null, loggedInOrRegisteredUser)
+      } catch (err) {
+        done(err)
       }
+    }.bind(this)
+  }
 
   private initFacebookProviderLogin () {
     const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env;
@@ -101,7 +101,7 @@ export default class ProvidersAuthService {
       fbGraphVersion: 'v3.0'
     },
     this.getHandleProviderLogin(ProvidersIdDBFieldName.FACEBOOK)
-  ));
+    ));
   }
 
   private initGoogleProviderLogin () {
@@ -112,7 +112,7 @@ export default class ProvidersAuthService {
       clientSecret: GOOGLE_CLIENT_SECRET
     },
     this.getHandleProviderLogin(ProvidersIdDBFieldName.GOOGLE)
-  ));
+    ));
   }
 
   public handleAuthResult(req: Request, res:Response) {

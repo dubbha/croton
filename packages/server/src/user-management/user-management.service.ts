@@ -1,18 +1,19 @@
-import { getRepository } from 'typeorm';
-
-import EmailResetEntity from '../models/email-reset.entity';
 import User from '../interfaces/user.interface';
+import UserWithToken from '../interfaces/tokenized.user.interface';
+
 import { createRandomString } from '../utils/create-random-string';
-import EmailSendingService from '../services/email-sending.service';
 import { createExpiresInHours } from '../utils/create-expires-in-hourse';
+import { createTokenizedUser } from '../utils/create-tokenized-user';
+
 import WrongEmailResetToken from '../exceptions/wrong-email-reset-token.exception';
 import EmailResetTokenExpired from '../exceptions/email-reset-token-expired.exception';
-import { createTokenizedUser } from '../utils/create-tokenized-user';
+import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
+
+import EmailSendingService from '../services/email-sending.service';
 import DBService from '../db/db.service';
 
 import EmailUpdateDto from './email-update.dto';
 import UserUpdateDto from './user-update.dto';
-import UserWithToken from 'interfaces/tokenized.user.interface';
 
 export default class UserManagementService {
   private emailSendingService = new EmailSendingService();
@@ -57,6 +58,10 @@ export default class UserManagementService {
 
     if (emailVerification.expiresIn < Date.now()) {
       throw new EmailResetTokenExpired();
+    }
+
+    if (await this.dbService.getUserByEmail(email)) {
+      throw new UserWithThatEmailAlreadyExists(email);
     }
 
     const user = await this.dbService.getUserById(emailVerification.userId);
