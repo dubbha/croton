@@ -12,6 +12,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
+    indent: ['error', 2, { SwitchCase: 1 }],
     quotes: ['error', 'single'],
     'object-curly-spacing': ['error', 'always'],
     'no-undef': 'off',

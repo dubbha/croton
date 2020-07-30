@@ -140,4 +140,4 @@ export const Home = () => {
       <Footer />
     </>
   );
- }
+}

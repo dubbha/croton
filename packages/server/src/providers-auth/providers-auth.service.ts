@@ -50,14 +50,14 @@ export default class ProvidersAuthService {
     accessToken: string,
     profile: Profile,
     passportIdKeyName: ProvidersIdDBFieldName
-) {
-      let user = await this.findUserByProviderId(profile.id, passportIdKeyName);
-      if(!user) {
-        const socialRegistrationDto = this.formatProviderProfileToSocialRegistrationDto(profile, accessToken, passportIdKeyName);
-        user = await this.createUserBySocialRegistrationDto(socialRegistrationDto)
-      }
-      return createTokenizedUser(user)
+  ) {
+    let user = await this.findUserByProviderId(profile.id, passportIdKeyName);
+    if(!user) {
+      const socialRegistrationDto = this.formatProviderProfileToSocialRegistrationDto(profile, accessToken, passportIdKeyName);
+      user = await this.createUserBySocialRegistrationDto(socialRegistrationDto)
     }
+    return createTokenizedUser(user)
+  }
 
   private getHandleProviderLogin(providersIdDBFieldName: ProvidersIdDBFieldName) {return async function(
     accessToken: string,
@@ -70,11 +70,11 @@ export default class ProvidersAuthService {
         accessToken,
         profile,
         providersIdDBFieldName
-        );
-        return done(null, loggedInOrRegisteredUser)
-      } catch (err) {
-        done(err)
-      }
+      );
+      return done(null, loggedInOrRegisteredUser)
+    } catch (err) {
+      done(err)
+    }
   }}
 
   private initFacebookProviderLogin () {
@@ -86,7 +86,7 @@ export default class ProvidersAuthService {
       fbGraphVersion: 'v3.0'
     },
     this.getHandleProviderLogin(ProvidersIdDBFieldName.FACEBOOK).bind(this)
-  ));
+    ));
   }
 
   private initGoogleProviderLogin () {
@@ -97,7 +97,7 @@ export default class ProvidersAuthService {
       clientSecret: GOOGLE_CLIENT_SECRET
     },
     this.getHandleProviderLogin(ProvidersIdDBFieldName.GOOGLE).bind(this)
-  ));
+    ));
   }
 
   public handleAuthResult(req: Request, res:Response) {

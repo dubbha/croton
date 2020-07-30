@@ -17,8 +17,8 @@ export const FbAuth = () => {
     const payload = accessToken
       ? { accessToken }
       : {
-          error: 'Sorry, something went wrong with logging you in via Facebook '
-        };
+        error: 'Sorry, something went wrong with logging you in via Facebook '
+      };
 
     dispatch({
       type,
