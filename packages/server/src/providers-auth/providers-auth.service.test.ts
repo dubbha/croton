@@ -25,9 +25,9 @@ const mockFbProfile = {
   displayName,
   name: {
     firstName,
-    familyName
+    familyName,
   },
-  emails: [email1, email2]
+  emails: [email1, email2],
 };
 const mockDone = jest.fn();
 
@@ -38,7 +38,7 @@ const mockDone = jest.fn();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 jest
   .spyOn(passport, 'authenticate')
-  .mockImplementation(() => () => mockPassportAuthenticate);
+  .mockImplementation(() => mockPassportAuthenticate);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (tokenizedUserApi as any).createTokenizedUser = mockCreateTokenizedUser;
 
@@ -57,15 +57,11 @@ jest.mock('passport-google-token', () => ({
     callback(accessToken, refreshToken, mockFbProfile, mockDone);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return config;
-  }
+  },
 }));
 
 describe('ProvidersAuthService', () => {
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  it.only('should create', () => {
+  it('should create', () => {
     const providersAuthService = new ProvidersAuthService();
     expect(providersAuthService).toBeTruthy();
   });
