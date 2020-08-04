@@ -11,6 +11,7 @@ const authPasswordUpdate = `${auth}/password-update`;
 const userManagementEmailReset = `${management}/email-reset`;
 const userManagementEmailUpdate = `${management}/email-update`;
 const userManagementUserUpdate = `${management}/user-update`;
+const userManagementMergeWithSocial = `${management}/merge-with-social`;
 const healthCheck = '/health-check';
 
 export const api = {
@@ -27,6 +28,7 @@ export const api = {
   userManagementEmailReset,
   userManagementEmailUpdate,
   userManagementUserUpdate,
+  userManagementMergeWithSocial,
 };
 
 export type Api = typeof api;

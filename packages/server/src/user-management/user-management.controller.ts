@@ -35,6 +35,12 @@ export default class UserManagementController extends BaseController {
       validationMiddleware(UserUpdateDto),
       this.userUpdateHandler
     );
+
+    this.router.post(
+      this.serverApi.userManagementMergeWithSocial,
+      authMiddleware,
+      this.mergeUserProfilesHandler
+    );
   }
 
   private emailResetHandler = async (
@@ -59,7 +65,9 @@ export default class UserManagementController extends BaseController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const updatedUser = await this.userManagementService.updateEmail(request.body);
+      const updatedUser = await this.userManagementService.updateEmail(
+        request.body
+      );
       response.send(updatedUser);
     } catch (error) {
       next(error);
@@ -74,9 +82,24 @@ export default class UserManagementController extends BaseController {
     try {
       const updatedUser = await this.userManagementService.updateUser(
         request.body,
-        request.user.id,
+        request.user.id
       );
       response.send(updatedUser);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private mergeUserProfilesHandler = async (
+    request: RequestWithUser,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const mergedUser = await this.userManagementService.mergeUserWithSocialByEmail(
+        request.body.email
+      );
+      response.send(mergedUser);
     } catch (error) {
       next(error);
     }
