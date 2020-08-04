@@ -3,14 +3,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export default class PasswordReset {
   @PrimaryGeneratedColumn()
-  public id: string;
+  id: number;
 
   @Column()
-  public userId: string;
+  userId: number;
 
   @Column()
-  public passwordResetToken: string;
+  passwordResetToken: string;
 
   @Column('bigint')
-  public expiresIn: number;
+  expiresIn: number;
 }

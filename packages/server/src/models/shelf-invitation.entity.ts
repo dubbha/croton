@@ -1,15 +1,18 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export default class EmailVerification {
+export default class ShelfInvitation {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  userId: number;
+  userEmail: string;
 
   @Column()
-  emailVerificationToken: string;
+  shelfId: number;
+
+  @Column()
+  shelfInvitationToken: string;
 
   @Column('bigint')
   expiresIn: number;

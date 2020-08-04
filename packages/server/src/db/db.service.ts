@@ -30,8 +30,8 @@ export default class DBService {
     this.socialProfileRepository = getRepository(SocialProfileEntity);
   }
 
-  public getUserById(id: string) {
-    return this.userRepository.findOne({ id });
+  public getUserById(id: number) {
+    return this.userRepository.findOne(id);
   }
 
   public getUserByEmail(email: string) {

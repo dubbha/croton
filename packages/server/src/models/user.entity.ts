@@ -3,33 +3,38 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   OneToOne,
+  OneToMany,
   JoinColumn,
 } from 'typeorm';
 
 import { UserStatuses } from '../constants/user-statuses';
 import SocialProfile from './social-profile.entity';
+import UserToShelf from './user-to-shelf.entity'
 
 @Entity()
 export default class User {
   @PrimaryGeneratedColumn()
-  public id: string;
+  id: number;
 
   @Column()
-  public firstName: string;
+  firstName: string;
 
   @Column()
-  public lastName: string;
+  lastName: string;
 
   @Column()
-  public email: string;
+  email: string;
 
   @Column()
-  public password: string;
+  password: string;
 
-  @Column('simple-enum')
-  public status: UserStatuses;
+  @Column({ type: 'simple-enum', enum: UserStatuses })
+  status: UserStatuses;
 
   @OneToOne(() => SocialProfile, { nullable: true })
   @JoinColumn()
-  public socialProfile?: SocialProfile;
+  socialProfile?: SocialProfile;
+
+  @OneToMany(() => UserToShelf, userToShelf => userToShelf.user)
+  userToShelf: UserToShelf[];
 }

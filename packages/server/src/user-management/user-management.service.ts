@@ -19,7 +19,7 @@ export default class UserManagementService {
   private emailSendingService = new EmailSendingService();
   private dbService = new DBService();
 
-  async resetEmail(id: string, host: string): Promise<void> {
+  async resetEmail(id: number, host: string): Promise<void> {
     const user = await this.dbService.getUserById(id);
 
     if (user) {
@@ -75,7 +75,7 @@ export default class UserManagementService {
 
   async updateUser(
     { lastName, firstName }: UserUpdateDto,
-    id: string
+    id: number
   ): Promise<User> {
     const user = await this.dbService.getUserById(id);
     const updatedUser = {
