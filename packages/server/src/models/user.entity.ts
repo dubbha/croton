@@ -5,8 +5,8 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { UserStatuses } from '../constants/user-statuses';
 
+import { UserStatuses } from '../constants/user-statuses';
 import SocialProfile from './social-profile.entity';
 
 @Entity()
@@ -26,7 +26,7 @@ export default class User {
   @Column()
   public password: string;
 
-  @Column()
+  @Column('simple-enum')
   public status: UserStatuses;
 
   @OneToOne(() => SocialProfile, { nullable: true })
