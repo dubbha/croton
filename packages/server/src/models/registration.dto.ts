@@ -1,7 +1,8 @@
-import { IsString } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 import { UserStatuses } from '../constants/user-statuses';
 
 export default class RegistrationDto {
+  @IsOptional()
   @IsString()
   public id?: string;
 
@@ -17,6 +18,7 @@ export default class RegistrationDto {
   @IsString()
   public password: string;
 
+  @IsOptional()
   @IsString()
   public status?: UserStatuses;
 }
