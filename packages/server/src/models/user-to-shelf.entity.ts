@@ -5,7 +5,7 @@ import Shelf from './shelf.entity';
 @Entity()
 export default class UserToShelf {
   @PrimaryGeneratedColumn()
-  userToShelfId!: number;
+  userToShelfId: number;
 
   @Column()
   userId: number;
