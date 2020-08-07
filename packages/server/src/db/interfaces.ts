@@ -2,8 +2,7 @@ interface CreateUserAuthEntityPayload {
   userId: string;
   expiresIn: number;
 }
-export interface CreateEmailVerificationPayload
-  extends CreateUserAuthEntityPayload {
+export interface CreateEmailRelatedPayload extends CreateUserAuthEntityPayload {
   emailVerificationToken?: string;
   emailResetToken?: string;
 }

@@ -33,7 +33,7 @@ export default class UserManagementService {
     const expiresInHours = createExpiresInHours(
       Number(EMAIL_RESET_EXPIRATION_TIME)
     );
-    await this.dbService.createEmailVerification({
+    await this.dbService.createEmailReset({
       userId: id,
       emailResetToken,
       expiresIn: Date.now() + expiresInHours,
@@ -48,15 +48,15 @@ export default class UserManagementService {
   }
 
   async updateEmail({ emailResetToken, email }: EmailUpdateDto): Promise<User> {
-    const emailVerification = await this.dbService.getEmailVerificationByToken(
+    const emailReset = await this.dbService.getEmailResetByToken(
       emailResetToken
     );
 
-    if (!emailVerification) {
+    if (!emailReset) {
       throw new WrongEmailResetToken();
     }
 
-    if (emailVerification.expiresIn < Date.now()) {
+    if (emailReset.expiresIn < Date.now()) {
       throw new EmailResetTokenExpired();
     }
 
@@ -64,10 +64,10 @@ export default class UserManagementService {
       throw new UserWithThatEmailAlreadyExists(email);
     }
 
-    const user = await this.dbService.getUserById(emailVerification.userId);
+    const user = await this.dbService.getUserById(emailReset.userId);
     user.email = email;
 
-    await this.dbService.removeEmailVerification(emailVerification);
+    await this.dbService.removeEmailReset(emailReset);
     await this.dbService.updateUser(user);
 
     return createTokenizedUser(user);

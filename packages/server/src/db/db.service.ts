@@ -4,13 +4,14 @@ import UserEntity from '../models/user.entity';
 import EmailVerificationEntity from '../models/email-verification.entity';
 import PasswordResetEntity from '../models/password-reset.entity';
 import SocialProfileEntity from '../models/social-profile.entity';
+import EmailResetEntity from '../models/email-reset.entity';
 import SocialProfileDto from '../models/social-profile.dto';
 import RegistrationDto from '../models/registration.dto';
 
 import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfaces';
 
 import {
-  CreateEmailVerificationPayload,
+  CreateEmailRelatedPayload,
   CreatePasswordResetPayload,
 } from './interfaces';
 
@@ -19,9 +20,11 @@ export default class DBService {
   private emailVerificationRepository: Repository<EmailVerificationEntity>;
   private passwordResetRepository: Repository<PasswordResetEntity>;
   private socialProfileRepository: Repository<SocialProfileEntity>;
+  private emailResetRepository: Repository<EmailResetEntity>;
 
   constructor() {
     this.userRepository = getRepository(UserEntity);
+    this.emailResetRepository = getRepository(EmailResetEntity);
     this.emailVerificationRepository = getRepository(EmailVerificationEntity);
     this.passwordResetRepository = getRepository(PasswordResetEntity);
     this.socialProfileRepository = getRepository(SocialProfileEntity);
@@ -89,13 +92,11 @@ export default class DBService {
     return this.emailVerificationRepository.findOne({ emailVerificationToken });
   }
 
-  public removeEmailVerification(
-    emailVerification: EmailVerificationEntity
-  ) {
+  public removeEmailVerification(emailVerification: EmailVerificationEntity) {
     return this.emailVerificationRepository.delete(emailVerification.id);
   }
 
-  public createEmailVerification(config: CreateEmailVerificationPayload) {
+  public createEmailVerification(config: CreateEmailRelatedPayload) {
     return this.emailVerificationRepository.save(config);
   }
 
@@ -109,5 +110,17 @@ export default class DBService {
 
   public createPasswordReset(config: CreatePasswordResetPayload) {
     return this.passwordResetRepository.save(config);
+  }
+
+  public getEmailResetByToken(emailResetToken: string) {
+    return this.emailResetRepository.findOne({ emailResetToken });
+  }
+
+  public createEmailReset(config: CreateEmailRelatedPayload) {
+    return this.emailResetRepository.save(config);
+  }
+
+  public removeEmailReset({ id }: EmailResetEntity) {
+    return this.emailResetRepository.delete(id);
   }
 }

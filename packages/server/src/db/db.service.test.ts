@@ -4,6 +4,7 @@ import UserEntity from '../models/user.entity';
 import EmailVerificationEntity from '../models/email-verification.entity';
 import PasswordResetEntity from '../models/password-reset.entity';
 import SocialProfileEntity from '../models/social-profile.entity';
+import EmailResetEntity from '../models/email-reset.entity';
 
 import DBService from './db.service';
 import { UserStatuses } from '../constants/user-statuses';
@@ -13,7 +14,8 @@ type GetRepositoryPayload =
   | typeof UserEntity
   | typeof EmailVerificationEntity
   | typeof PasswordResetEntity
-  | typeof SocialProfileEntity;
+  | typeof SocialProfileEntity
+  | typeof EmailResetEntity;
 
 const mockUserRepository = {
   findOne: jest.fn(),
@@ -39,6 +41,12 @@ const mockSocialProfileRepository = {
   save: jest.fn(),
 };
 
+const mockResetEmailRepository = {
+  findOne: jest.fn(),
+  save: jest.fn(),
+  delete: jest.fn(),
+};
+
 const id = 'mock123456765';
 const email = 'some_mock@test.com';
 const firstName = 'John';
@@ -49,6 +57,7 @@ const password = 'qwertyu12345678';
 const status = UserStatuses.PENDING_VERIFICATION;
 const emailVerificationToken = 'emailVerificationToken';
 const passwordResetToken = 'passwordResetToken';
+const emailResetToken = 'emailResetToken';
 
 const mockUser = {
   id,
@@ -72,6 +81,11 @@ const mockEmailVerificationEntity = {
   emailVerificationToken,
 };
 
+const mockResetEmailEntity = {
+  ...mockEmailVerificationEntity,
+  emailResetToken,
+};
+
 const mockPasswordResetEntity = {
   ...mockBaseUserRelatedEntity,
   passwordResetToken,
@@ -90,6 +104,8 @@ jest
         return mockPasswordResetRepository;
       case SocialProfileEntity:
         return mockSocialProfileRepository;
+      case EmailResetEntity:
+        return mockResetEmailRepository;
     }
   } as any);
 
@@ -166,6 +182,25 @@ describe('DBService', () => {
     await new DBService().createPasswordReset(mockPasswordResetEntity);
     expect(mockPasswordResetRepository.save).toBeCalledWith(
       mockPasswordResetEntity
+    );
+  });
+
+  it('should create email reset', async () => {
+    await new DBService().createEmailReset(mockResetEmailEntity);
+    expect(mockResetEmailRepository.save).toBeCalledWith(mockResetEmailEntity);
+  });
+
+  it('should find email reset by token', async () => {
+    await new DBService().getEmailResetByToken(emailResetToken);
+    expect(mockResetEmailRepository.findOne).toBeCalledWith({
+      emailResetToken,
+    });
+  });
+
+  it('should remove email reset', async () => {
+    await new DBService().removeEmailReset(mockResetEmailEntity);
+    expect(mockResetEmailRepository.delete).toBeCalledWith(
+      mockResetEmailEntity.id
     );
   });
 });
