@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { AddNewShelfForm } from './AddNewShelvesForm';
+import { AddNewShelfForm } from './AddNewShelfForm';
 
-describe('components/addNewShelfForm', () => {
+describe('components/AddNewShelfForm', () => {
   const fn = jest.fn();
 
   const props = {
@@ -42,6 +42,6 @@ describe('components/addNewShelfForm', () => {
     expect(submitButton).toBeEnabled();
 
     fireEvent.click(submitButton);
-    // expect(fn).toBeCalled();
+    expect(fn).toBeCalled();
   });
 });

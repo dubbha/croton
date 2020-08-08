@@ -8,13 +8,10 @@ export const ProfileHeader = () => {
     <Navbar className="profile-nav">
       <Nav>
         <Nav.Item>
-          <NavLink to="/profile" exact>My Profile</NavLink>
+          <NavLink to="/profile" exact>Profile</NavLink>
         </Nav.Item>
         <Nav.Item>
-          <NavLink to="/profile/shelves-management">Create a New Shelf</NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <NavLink to="/profile/my-shelves">My Flower Shelves</NavLink>
+          <NavLink to="/profile/shelves">Shelves</NavLink>
         </Nav.Item>
       </Nav>
     </Navbar>

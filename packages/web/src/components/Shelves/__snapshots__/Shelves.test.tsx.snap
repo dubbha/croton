@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pages/FlowerShelvesManagement should render successfully if user is logged in 1`] = `
+exports[`components/Shelves should render successfully 1`] = `
 <div
-  class="shelves-management"
+  class="shelves"
 >
   <h4>
     Create a New Shelf
@@ -66,7 +66,7 @@ exports[`pages/FlowerShelvesManagement should render successfully if user is log
         id="formDescription"
         name="description"
         placeholder="Enter description"
-        type="description"
+        type="text"
         value=""
       />
     </div>

@@ -1,10 +1,7 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import {
-  Form,
-  SubmitButton,
-} from 'elements';
+import { Form, SubmitButton } from 'elements';
+import useCustomForm from 'hooks/useCustomForm';
 import './styles.scss';
-import useCustomForm from '../../hooks/useCustomForm';
 
 type Props = {
   onSubmit: (name: string, location: string, description: string) => void;
@@ -24,15 +21,15 @@ export const AddNewShelfForm = ({ onSubmit }: Props) => {
   };
 
   const nameErrorMessage = (name: string): string | null => {
-    if (name.length < 3 || name.length > 15) {
-      return 'Name is required and has to be in range of 3-15 symbols.';
+    if (name.length < 3 || name.length > 256) {
+      return 'Name is required and has to be in range of 3-256 symbols.';
     }
     return null;
   };
 
   const locationErrorMessage = (location: string): string | null => {
-    if (location.length < 3 || location.length > 20) {
-      return 'Location is required and has to be in range of 3-20 symbols.';
+    if (location.length < 3 || location.length > 256) {
+      return 'Location is required and has to be in range of 3-256 symbols.';
     }
     return null;
   };
@@ -61,7 +58,8 @@ export const AddNewShelfForm = ({ onSubmit }: Props) => {
 
   useEffect(() => {
     setIsValid(
-      !!values.name && !!values.location && !errors.name && !errors.location
+      !!values.name && !!values.location && !!values.description
+      && !errors.name && !errors.location && !errors.description
     );
   }, [errors, values]);
 
@@ -111,7 +109,7 @@ export const AddNewShelfForm = ({ onSubmit }: Props) => {
       <Form.Group controlId="formDescription">
         <Form.Label>Description</Form.Label>
         <Form.Control
-          type="description"
+          type="text"
           placeholder="Enter description"
           value={values.description}
           name="description"

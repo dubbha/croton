@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pages/MyFlowerShelves should render successfully if user is logged in 1`] = `
+exports[`components/ShelfList should render successfully 1`] = `
 <div
-  class="my-flower-shelves"
+  class="shelf-list"
 >
   <h5>
     You don't have any flower pots shelves yet.

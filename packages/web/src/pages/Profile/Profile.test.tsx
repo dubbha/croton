@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('components/Header', () => {
   const React = require('react');
@@ -42,7 +43,7 @@ describe('pages/Profile', () => {
 
       const { Profile } = require('./Profile');
 
-      const { container } = render(<Profile />);
+      const { container } = render(<Profile match={{ path: '/profile' }} />, { wrapper: MemoryRouter });
 
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -63,7 +64,7 @@ describe('pages/Profile', () => {
 
       const { Profile } = require('./Profile');
 
-      render(<Profile />);
+      render(<Profile match={{ path: '/profile' }} />, { wrapper: MemoryRouter });
 
       expect(fn).toBeCalledWith({
         type: 'callHistoryMethod',

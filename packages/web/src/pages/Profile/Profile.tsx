@@ -1,24 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { Route, Switch, RouteComponentProps } from 'react-router-dom';
 import {
   Container,
   Header,
   Footer,
   ProfileHeader,
   ProfileUserDetails,
+  Shelves,
 } from 'components';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
-import { MyFlowerShelves, FlowerShelvesManagement } from 'pages';
 
-export const Profile = ({ match: { path } }) => {
+export const Profile = ({ match: { path } }: RouteComponentProps) => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector(getAuth);
 
@@ -31,11 +26,7 @@ export const Profile = ({ match: { path } }) => {
       <Header />
       <ProfileHeader />
       <Switch>
-        <Route
-          path={`${path}/shelves-management`}
-          component={FlowerShelvesManagement}
-        />
-        <Route path={`${path}/my-shelves`} component={MyFlowerShelves} />
+        <Route path={`${path}/shelves`} component={Shelves} />
         <Route path={path} component={ProfileUserDetails} />
       </Switch>
       <Footer />

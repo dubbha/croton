@@ -6,5 +6,3 @@ export * from './SignOut';
 export * from './Profile';
 export * from './EmailConfirm';
 export * from './EmailReset';
-export * from './MyFlowerShelves';
-export * from './FlowerShelvesManagement';

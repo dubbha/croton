@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/addNewShelfForm should call onSubmit prop on submit 1`] = `
+exports[`components/AddNewShelfForm should call onSubmit prop on submit 1`] = `
 <form
   class=""
 >
@@ -57,7 +57,7 @@ exports[`components/addNewShelfForm should call onSubmit prop on submit 1`] = `
       id="formDescription"
       name="description"
       placeholder="Enter description"
-      type="description"
+      type="text"
       value=""
     />
   </div>
@@ -77,7 +77,7 @@ exports[`components/addNewShelfForm should call onSubmit prop on submit 1`] = `
 </form>
 `;
 
-exports[`components/addNewShelfForm should render submit button disabled by default 1`] = `
+exports[`components/AddNewShelfForm should render submit button disabled by default 1`] = `
 <form
   class=""
 >
@@ -134,7 +134,7 @@ exports[`components/addNewShelfForm should render submit button disabled by defa
       id="formDescription"
       name="description"
       placeholder="Enter description"
-      type="description"
+      type="text"
       value=""
     />
   </div>
@@ -154,7 +154,7 @@ exports[`components/addNewShelfForm should render submit button disabled by defa
 </form>
 `;
 
-exports[`components/addNewShelfForm should render successfully 1`] = `
+exports[`components/AddNewShelfForm should render successfully 1`] = `
 <form
   class=""
 >
@@ -211,7 +211,7 @@ exports[`components/addNewShelfForm should render successfully 1`] = `
       id="formDescription"
       name="description"
       placeholder="Enter description"
-      type="description"
+      type="text"
       value=""
     />
   </div>
