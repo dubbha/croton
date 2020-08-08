@@ -47,12 +47,11 @@ const mockResetEmailRepository = {
   delete: jest.fn(),
 };
 
-const id = 'mock123456765';
+const id = 123456789;
 const email = 'some_mock@test.com';
 const firstName = 'John';
 const lastName = 'Doe';
 const facebookId = 'someMockFacebook123456765';
-const googleId = 'someMockGoogle123456765';
 const password = 'qwertyu12345678';
 const status = UserStatuses.PENDING_VERIFICATION;
 const emailVerificationToken = 'emailVerificationToken';
@@ -64,14 +63,12 @@ const mockUser = {
   email,
   firstName,
   lastName,
-  facebookId,
-  googleId,
   password,
   status,
-};
+} as UserEntity;
 
 const mockBaseUserRelatedEntity = {
-  id: 'ergrthtyjyj234567',
+  id: 987654321,
   userId: id,
   expiresIn: 100050005,
 };
@@ -117,7 +114,7 @@ describe('DBService', () => {
 
   it('should get user by id', async () => {
     await new DBService().getUserById(id);
-    expect(mockUserRepository.findOne).toBeCalledWith({ id });
+    expect(mockUserRepository.findOne).toBeCalledWith(id);
   });
 
   it('should get user by email', async () => {

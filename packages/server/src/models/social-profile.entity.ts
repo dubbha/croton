@@ -5,17 +5,17 @@ import User from './user.entity';
 @Entity()
 export default class SocialProfile {
   @PrimaryGeneratedColumn()
-  public id: string;
+  id: number;
 
   @Column()
-  public pictureUrl: string;
+  pictureUrl: string;
 
   @Column({ update: false, nullable: true })
-  public facebookId?: string;
+  facebookId?: string;
 
   @Column({ update: false, nullable: true })
-  public googleId?: string;
+  googleId?: string;
 
   @OneToOne(() => User)
-  public user: User;
+  user: User;
 }

@@ -1,5 +1,5 @@
 interface CreateUserAuthEntityPayload {
-  userId: string;
+  userId: number;
   expiresIn: number;
 }
 export interface CreateEmailRelatedPayload extends CreateUserAuthEntityPayload {

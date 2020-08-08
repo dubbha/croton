@@ -1,10 +1,10 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 import { UserStatuses } from '../constants/user-statuses';
 
 export default class RegistrationDto {
   @IsOptional()
-  @IsString()
-  public id?: string;
+  @IsNumber()
+  public id?: number;
 
   @IsString()
   public firstName: string;
