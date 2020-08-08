@@ -15,18 +15,11 @@ jest.mock('components/Footer', () => {
   };
 });
 
-jest.mock('components/ProfileHeader', () => {
-  const React = require('react');
-  return {
-    ProfileHeader: () => <div>ProfileHeader</div>
-  };
-});
-
 jest.mock('connected-react-router', () => ({
   push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
 }));
 
-describe('pages/Profile', () => {
+describe('pages/FlowerShelfsManagement', () => {
   it('should render successfully if user is logged in', () => {
     jest.isolateModules(() => {
       const fn = jest.fn();
@@ -40,9 +33,9 @@ describe('pages/Profile', () => {
         })
       }));
 
-      const { Profile } = require('./Profile');
+      const { FlowerShelfsManagement } = require('./FlowerShelfsManagement');
 
-      const { container } = render(<Profile />);
+      const { container } = render(<FlowerShelfsManagement />);
 
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -61,9 +54,9 @@ describe('pages/Profile', () => {
         })
       }));
 
-      const { Profile } = require('./Profile');
+      const { FlowerShelfsManagement } = require('./FlowerShelfsManagement');
 
-      render(<Profile />);
+      render(<FlowerShelfsManagement />);
 
       expect(fn).toBeCalledWith({
         type: 'callHistoryMethod',

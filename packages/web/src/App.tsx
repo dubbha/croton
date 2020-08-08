@@ -12,7 +12,8 @@ import {
   Profile,
   SignOut,
   EmailConfirm,
-  EmailReset
+  EmailReset,
+  MyFlowerShelfs
 } from 'pages';
 import './custom.scss';
 
@@ -22,7 +23,8 @@ const App = () => (
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/signin" component={SignIn} />
-          <Route path="/signout" component={SignOut} />
+          <Route path="/my-shelfs" component={MyFlowerShelfs} />
+          <Route path="/signout" component={SignOut} /> 
           <Route path="/profile" component={Profile} />
           <Route path="/signup" component={SignUp} />
           <Route path="/reset" component={PasswordReset} />

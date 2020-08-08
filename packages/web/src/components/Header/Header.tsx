@@ -38,7 +38,7 @@ export const Header = () => {
           {isAuthenticated ? (
             <>
               <Nav.Item>
-                <NavLink to="/profile">{`${firstName} ${lastName}`.trim()}</NavLink>
+                <NavLink to="/profile/me">{`${firstName} ${lastName}`.trim()}</NavLink>
               </Nav.Item>
               <NavLink to="/signout">Sign Out</NavLink>
             </>

@@ -1,0 +1,12 @@
+@import '../../custom.scss';
+
+.shelfs-management {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 70%;
+
+  form {
+    min-width: 100%;
+  }
+}
