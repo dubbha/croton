@@ -19,9 +19,9 @@ export default class UserToShelf {
   @Column()
   order: number;
 
-  @ManyToOne(() => User, user => user.userToShelf)
+  @ManyToOne(() => User, user => user.userToShelf, { onDelete: 'CASCADE' })
   user: User;
 
-  @ManyToOne(() => Shelf, shelf => shelf.userToShelf)
+  @ManyToOne(() => Shelf, shelf => shelf.userToShelf, { onDelete: 'CASCADE' })
   shelf: Shelf;
 }

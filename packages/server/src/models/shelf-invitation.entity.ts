@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import Shelf from './shelf.entity';
 
 @Entity()
 export default class ShelfInvitation {
@@ -9,11 +10,11 @@ export default class ShelfInvitation {
   userEmail: string;
 
   @Column()
-  shelfId: number;
-
-  @Column()
   shelfInvitationToken: string;
 
   @Column('bigint')
   expiresIn: number;
+
+  @ManyToOne(() => Shelf, shelf => shelf.invitations, { onDelete: 'CASCADE' })
+  shelf: Shelf;
 }

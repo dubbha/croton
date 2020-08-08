@@ -8,9 +8,6 @@ export default class Flower {
   id: number;
 
   @Column()
-  shelfId: number;
-
-  @Column()
   order: number;
 
   @Column()
@@ -25,6 +22,6 @@ export default class Flower {
   @Column('simple-json')
   rrules: { [key in Actions]: string }
 
-  @ManyToOne(() => Shelf, shelf => shelf.flowers)
+  @ManyToOne(() => Shelf, shelf => shelf.flowers, { onDelete: 'CASCADE' })
   shelf: Shelf;
 }
