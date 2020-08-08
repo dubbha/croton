@@ -11,7 +11,7 @@ export const ProfileHeader = () => {
           <NavLink to="./me">My Profile</NavLink>
         </Nav.Item>
         <Nav.Item>
-          <NavLink to="./shelfs-management">Create a New Shelfs</NavLink>
+          <NavLink to="./shelfs-management">Create a New Shelf</NavLink>
         </Nav.Item>
         <Nav.Item>
           <NavLink to="./my-shelfs">My Flower Shelfs</NavLink>
