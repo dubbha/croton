@@ -7,12 +7,18 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { Container, Header, Footer, ProfileHeader, ProfileUserDetails } from 'components';
+import {
+  Container,
+  Header,
+  Footer,
+  ProfileHeader,
+  ProfileUserDetails,
+} from 'components';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
-import { MyFlowerShelfs, FlowerShelfsManagement } from 'pages';
+import { MyFlowerShelves, FlowerShelvesManagement } from 'pages';
 
-export const Profile = () => {
+export const Profile = ({ match: { path } }) => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector(getAuth);
 
@@ -24,19 +30,14 @@ export const Profile = () => {
     <Container>
       <Header />
       <ProfileHeader />
-      <Router>
-        <Switch>
-          <Route exact path="/profile">
-            <Redirect push to="/profile/me" />
-          </Route>
-          <Route
-            path="/profile/shelfs-management"
-            component={FlowerShelfsManagement}
-          />
-          <Route path="/profile/my-shelfs" component={MyFlowerShelfs} />
-          <Route path="/profile/me" component={ProfileUserDetails} />
-        </Switch>
-      </Router>
+      <Switch>
+        <Route
+          path={`${path}/shelves-management`}
+          component={FlowerShelvesManagement}
+        />
+        <Route path={`${path}/my-shelves`} component={MyFlowerShelves} />
+        <Route path={path} component={ProfileUserDetails} />
+      </Switch>
       <Footer />
     </Container>
   );

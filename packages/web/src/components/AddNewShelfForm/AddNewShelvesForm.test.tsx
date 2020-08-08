@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { AddNewShelfForm } from './AddNewShelfForm';
+import { AddNewShelfForm } from './AddNewShelvesForm';
 
 describe('components/addNewShelfForm', () => {
   const fn = jest.fn();

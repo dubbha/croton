@@ -6,7 +6,7 @@ import { getAuth } from 'store/auth/selectors';
 
 import './styles.scss';
 
-export const FlowerShelfsManagement = () => {
+export const FlowerShelvesManagement = () => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector(getAuth);
 
@@ -19,7 +19,7 @@ export const FlowerShelfsManagement = () => {
   };
 
   return (
-    <div className="shelfs-management">
+    <div className="shelves-management">
       <h4>Create a New Shelf</h4>
       <p>Add new flower shelf, describe location and small description.</p>
       <AddNewShelfForm onSubmit={handleSubmit} />

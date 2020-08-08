@@ -19,7 +19,7 @@ jest.mock('connected-react-router', () => ({
   push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
 }));
 
-describe('pages/MyFlowerShelfs', () => {
+describe('pages/MyFlowerShelves', () => {
   it('should render successfully if user is logged in', () => {
     jest.isolateModules(() => {
       const fn = jest.fn();
@@ -33,9 +33,9 @@ describe('pages/MyFlowerShelfs', () => {
         })
       }));
 
-      const { MyFlowerShelfs } = require('./MyFlowerShelfs');
+      const { MyFlowerShelves } = require('./MyFlowerShelves');
 
-      const { container } = render(<MyFlowerShelfs />);
+      const { container } = render(<MyFlowerShelves />);
 
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -54,9 +54,9 @@ describe('pages/MyFlowerShelfs', () => {
         })
       }));
 
-      const { MyFlowerShelfs } = require('./MyFlowerShelfs');
+      const { MyFlowerShelves } = require('./MyFlowerShelves');
 
-      render(<MyFlowerShelfs />);
+      render(<MyFlowerShelves />);
 
       expect(fn).toBeCalledWith({
         type: 'callHistoryMethod',

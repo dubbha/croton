@@ -1,1 +1,1 @@
-export * from './AddNewShelfForm';
+export * from './AddNewShelvesForm';

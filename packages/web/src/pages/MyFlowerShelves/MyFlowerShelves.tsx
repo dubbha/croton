@@ -5,7 +5,7 @@ import { getAuth } from 'store/auth/selectors';
 
 import './styles.scss';
 
-export const MyFlowerShelfs = () => {
+export const MyFlowerShelves = () => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector(getAuth);
 
@@ -14,8 +14,8 @@ export const MyFlowerShelfs = () => {
   }, [isAuthenticated, dispatch]);
 
   return (
-    <div className="my-flower-shelfs">
-      <h5>You don&apos;t have any flower pots shelfs yet.</h5>
+    <div className="my-flower-shelves">
+      <h5>You don&apos;t have any flower pots shelves yet.</h5>
     </div>
   );
 };
