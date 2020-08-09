@@ -5,6 +5,11 @@ import EmailVerificationEntity from '../models/email-verification.entity';
 import PasswordResetEntity from '../models/password-reset.entity';
 import SocialProfileEntity from '../models/social-profile.entity';
 import EmailResetEntity from '../models/email-reset.entity';
+import ShelfEntity from '../models/shelf.entity';
+import FlowerEntity from '../models/flower.entity';
+import ShelfInvitationEntity from '../models/shelf-invitation.entity';
+import UserToShelfEntity from '../models/user-to-shelf.entity';
+
 import SocialProfileDto from '../models/social-profile.dto';
 import RegistrationDto from '../models/registration.dto';
 
@@ -13,6 +18,7 @@ import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfa
 import {
   CreateEmailRelatedPayload,
   CreatePasswordResetPayload,
+  ShelfInvitationPayload,
 } from './interfaces';
 
 export default class DBService {
@@ -21,6 +27,10 @@ export default class DBService {
   private passwordResetRepository: Repository<PasswordResetEntity>;
   private socialProfileRepository: Repository<SocialProfileEntity>;
   private emailResetRepository: Repository<EmailResetEntity>;
+  private shelfRepository: Repository<ShelfEntity>;
+  private flowerRepository: Repository<FlowerEntity>;
+  private shelfInvitationRepository: Repository<ShelfInvitationEntity>;
+  private userToShelfRepository: Repository<UserToShelfEntity>;
 
   constructor() {
     this.userRepository = getRepository(UserEntity);
@@ -28,6 +38,10 @@ export default class DBService {
     this.emailVerificationRepository = getRepository(EmailVerificationEntity);
     this.passwordResetRepository = getRepository(PasswordResetEntity);
     this.socialProfileRepository = getRepository(SocialProfileEntity);
+    this.shelfRepository = getRepository(ShelfEntity);
+    this.flowerRepository = getRepository(FlowerEntity);
+    this.shelfInvitationRepository = getRepository(ShelfInvitationEntity);
+    this.userToShelfRepository = getRepository(UserToShelfEntity);
   }
 
   public getUserById(id: number) {
@@ -122,5 +136,59 @@ export default class DBService {
 
   public removeEmailReset({ id }: EmailResetEntity) {
     return this.emailResetRepository.delete(id);
+  }
+
+  getShelfInvitationByToken(shelfInvitationToken: string) {
+    return this.shelfInvitationRepository.findOne(
+      { shelfInvitationToken },
+      { relations: ['shelf'] },
+    );
+  }
+
+  async saveShelfInvitation(config: ShelfInvitationPayload) {
+    const shelfInvitation = this.shelfInvitationRepository.create(config);
+    shelfInvitation.shelf = await this.shelfRepository.findOne(config.shelfId);
+    return this.shelfInvitationRepository.save(shelfInvitation);
+  }
+
+  deleteShelfInvitation(id: number) {
+    return this.shelfInvitationRepository.delete(id);
+  }
+
+  getShelfInvitationsByUserEmail(userEmail: string) {
+    return this.shelfInvitationRepository.find({ userEmail })
+  }
+
+  getUserToShelf(userId: number, shelfId: number) {
+    return this.userToShelfRepository.findOne({ where: { userId, shelfId } })
+  }
+
+  async saveUserToShelf(userId: number, shelfId: number, isAdmin = false) {
+    const user = await this.userRepository.findOne(userId);
+    const shelf = await this.shelfRepository.findOne(shelfId);
+
+    const userShelvesCount = await this.userToShelfRepository.count({ where: { userId } })
+
+    return this.userToShelfRepository.save({
+      user,
+      shelf,
+      isAdmin,
+      order: userShelvesCount,
+    })
+  }
+
+  async deleteUserToShelf(userId: number, shelfId: number) {
+    const user = await this.userRepository.findOne(userId);
+    const shelf = await this.shelfRepository.findOne(shelfId);
+
+    return this.userToShelfRepository.delete({ user, shelf });
+  }
+
+  getShelfById(id: number) {
+    return this.shelfRepository.findOne(id, { relations: ['flowers'] });
+  }
+
+  getFlowerById(id: number) {
+    return this.flowerRepository.findOne(id);
   }
 }
