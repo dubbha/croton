@@ -22,7 +22,7 @@ const App = () => (
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/signin" component={SignIn} />
-          <Route path="/signout" component={SignOut} /> 
+          <Route path="/signout" component={SignOut} />
           <Route path="/profile" component={Profile} />
           <Route path="/signup" component={SignUp} />
           <Route path="/reset" component={PasswordReset} />
