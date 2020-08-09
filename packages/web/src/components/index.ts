@@ -9,3 +9,6 @@ export * from './EmailConfirmMessage';
 export * from './FbAuth';
 export * from './EmailResetForm';
 export * from './GoogleAuth';
+export * from './ProfileHeader';
+export * from './ProfileUserDetails';
+export * from './Shelves';

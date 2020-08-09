@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ShelfList should render successfully 1`] = `
+<div
+  class="shelf-list"
+>
+  <h5>
+    You don't have any flower pots shelves yet.
+  </h5>
+</div>
+`;

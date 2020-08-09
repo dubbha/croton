@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/AddNewShelfForm should call onSubmit prop on submit 1`] = `
+<form
+  class=""
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formName"
+    >
+      Shelf Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__name"
+      id="formName"
+      name="name"
+      placeholder="Enter Shelf Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formLocation"
+    >
+      Shelf Location
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__location"
+      id="formLocation"
+      name="location"
+      placeholder="Enter Last Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formDescription"
+    >
+      Description
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__description"
+      id="formDescription"
+      name="description"
+      placeholder="Enter description"
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    disabled=""
+    type="submit"
+  >
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Create
+    </span>
+  </button>
+</form>
+`;
+
+exports[`components/AddNewShelfForm should render submit button disabled by default 1`] = `
+<form
+  class=""
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formName"
+    >
+      Shelf Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__name"
+      id="formName"
+      name="name"
+      placeholder="Enter Shelf Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formLocation"
+    >
+      Shelf Location
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__location"
+      id="formLocation"
+      name="location"
+      placeholder="Enter Last Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formDescription"
+    >
+      Description
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__description"
+      id="formDescription"
+      name="description"
+      placeholder="Enter description"
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    disabled=""
+    type="submit"
+  >
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Create
+    </span>
+  </button>
+</form>
+`;
+
+exports[`components/AddNewShelfForm should render successfully 1`] = `
+<form
+  class=""
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formName"
+    >
+      Shelf Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__name"
+      id="formName"
+      name="name"
+      placeholder="Enter Shelf Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formLocation"
+    >
+      Shelf Location
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__location"
+      id="formLocation"
+      name="location"
+      placeholder="Enter Last Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formDescription"
+    >
+      Description
+    </label>
+    <input
+      class="form-control"
+      data-testid="addNewShelfForm__description"
+      id="formDescription"
+      name="description"
+      placeholder="Enter description"
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    disabled=""
+    type="submit"
+  >
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Create
+    </span>
+  </button>
+</form>
+`;
