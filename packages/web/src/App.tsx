@@ -12,7 +12,8 @@ import {
   Profile,
   SignOut,
   EmailConfirm,
-  EmailReset
+  EmailReset,
+  ShelfInvitationAccept,
 } from 'pages';
 import './custom.scss';
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/reset" component={PasswordReset} />
           <Route path="/confirm" component={EmailConfirm} />
           <Route path="/email-reset" component={EmailReset} />
+          <Route path="/shelf-invitation-accept" component={ShelfInvitationAccept} />
           <Route path="/" component={Home} />
         </Switch>
       </ConnectedRouter>

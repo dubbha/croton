@@ -22,7 +22,7 @@ export const EmailConfirmMessage = ({ onInit, error, isLoading }: Props) => {
   return (
     <>
       {error && <ErrorAlert>{error}</ErrorAlert>}
-      {isLoading && <InfoAlert>We are about to activate yor account!</InfoAlert>}
+      {isLoading && <InfoAlert>We are about to activate your account!</InfoAlert>}
       {!error && !isLoading && <AlertPlaceholder />}
     </>
   );

@@ -12,6 +12,11 @@ import {
   authEmailResetSaga,
   authEmailUpdateSaga
 } from './auth/sagas';
+import {
+  shelfInviteSaga,
+  shelfInviteAcceptSaga,
+  shelfDeleteUserSaga,
+} from './shelf/sagas';
 
 export function* rootSaga() {
   yield all([
@@ -25,6 +30,9 @@ export function* rootSaga() {
     authGoogle(),
     authUpdateProfileSaga(),
     authEmailResetSaga(),
-    authEmailUpdateSaga()
+    authEmailUpdateSaga(),
+    shelfInviteSaga(),
+    shelfInviteAcceptSaga(),
+    shelfDeleteUserSaga(),
   ]);
 }
