@@ -30,7 +30,7 @@ export const DeleteUserFromShelf = ({ shelfId, userId }: Props) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete user from shelf</button>
+      <button type="button" onClick={() => setShowModal(true)}>Delete user from shelf</button>
       <Modal
         show={showModal}
         onHide={handleClose}

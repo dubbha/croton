@@ -32,7 +32,7 @@ export const InviteUserToShelf = ({ shelfId }: Props) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Add user to shelf</button>
+      <button type="button" onClick={() => setShowModal(true)}>Add user to shelf</button>
       <Modal
         show={showModal}
         onHide={handleClose}
