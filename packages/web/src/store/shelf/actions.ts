@@ -1,6 +1,7 @@
 export const SHELF_INVITE = 'SHELF_INVITE';
 export const SHELF_INVITE_SUCCESS = 'SHELF_INVITE_SUCCESS';
 export const SHELF_INVITE_ERROR = 'SHELF_INVITE_ERROR';
+export const SHELF_INVITE_RESET = 'SHELF_INVITE_RESET';
 
 export const SHELF_INVITE_ACCEPT = 'SHELF_INVITE_ACCEPT';
 export const SHELF_INVITE_ACCEPT_SUCCESS = 'SHELF_INVITE_ACCEPT_SUCCESS';
@@ -9,6 +10,8 @@ export const SHELF_INVITE_ACCEPT_ERROR = 'SHELF_INVITE_ACCEPT_ERROR';
 export const SHELF_DELETE_USER = 'SHELF_DELETE_USER';
 export const SHELF_DELETE_USER_SUCCESS = 'SHELF_DELETE_USER_SUCCESS';
 export const SHELF_DELETE_USER_ERROR = 'SHELF_DELETE_USER_ERROR';
+
+export const SHELF_RESET = 'SHELF_RESET';
 
 export interface ShelfInvite {
   type: typeof SHELF_INVITE;
@@ -55,6 +58,10 @@ export interface ShelfDeleteUserError {
   payload: { error: string };
 }
 
+export interface ShelfReset {
+  type: typeof SHELF_RESET;
+}
+
 export type ShelfActionTypes =
   | ShelfInvite
   | ShelfInviteSuccess
@@ -64,4 +71,5 @@ export type ShelfActionTypes =
   | ShelfInviteAcceptError
   | ShelfDeleteUser
   | ShelfDeleteUserSuccess
-  | ShelfDeleteUserError;
+  | ShelfDeleteUserError
+  | ShelfReset;

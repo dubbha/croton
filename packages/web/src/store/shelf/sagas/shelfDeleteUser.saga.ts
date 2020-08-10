@@ -17,7 +17,7 @@ function* handle(action: ShelfDeleteUser) {
     });
     yield put({
       type: SHELF_DELETE_USER_SUCCESS,
-      payload: { info: 'Invitation sent successfully' }
+      payload: { info: 'User deleted successfully' }
     });
   } catch (e) {
     yield put({

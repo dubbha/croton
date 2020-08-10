@@ -9,6 +9,7 @@ import {
   SHELF_DELETE_USER,
   SHELF_DELETE_USER_SUCCESS,
   SHELF_DELETE_USER_ERROR,
+  SHELF_RESET,
   ShelfActionTypes,
 } from './actions';
 
@@ -55,6 +56,7 @@ export function shelfReducer(
         error: action.payload.error,
         info: null
       };
+    case SHELF_RESET:
     case LOCATION_CHANGE:
       return {
         ...state,
