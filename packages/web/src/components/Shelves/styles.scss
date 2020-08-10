@@ -1,12 +1,22 @@
 @import '../../custom.scss';
 
 .shelves {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  min-width: 70%;
+  &.container {
+    justify-content: start;
+    max-width: 80%;
+    margin-bottom: 50px;
+  }
 
-  form {
-    min-width: 100%;
+  &-empty {
+    margin: 30px auto;
+    min-width: 70%;
+
+    form {
+      max-width: 100%;
+    }
+  }
+
+  &-header {
+    color: $color-grass-dark;
   }
 }

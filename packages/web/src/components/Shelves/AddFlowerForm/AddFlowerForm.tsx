@@ -15,7 +15,7 @@ interface FormFields {
   description?: string;
 }
 
-export const AddNewShelfForm = ({ onSubmit }: Props) => {
+export const AddFlowerForm = ({ onSubmit }: Props) => {
   const initialValues = {
     name: '',
     location: '',
@@ -73,43 +73,24 @@ export const AddNewShelfForm = ({ onSubmit }: Props) => {
   };
 
   return (
-    <div className="container new-shelf">
+    <div className="container new-flower">
       <h1>
         <FontAwesomeIcon icon={faBookmark} />
-        <span className="icon-prefix">Add New Shelf</span>
+        <span className="icon-prefix">Add New Flower</span>
       </h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
-          <Form.Label>Shelf Name</Form.Label>
+          <Form.Label>Flower Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter Shelf Name"
+            placeholder="Enter Flower Name"
             value={values.name}
             name="name"
             onChange={handleChange}
             onBlur={handleBlur}
-            data-testid="addNewShelfForm__name"
           />
           {touched.name && errors.name && (
             <Form.Text className="form-error-message">{errors.name}</Form.Text>
-          )}
-        </Form.Group>
-
-        <Form.Group controlId="formLocation">
-          <Form.Label>Shelf Location</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Last Name"
-            value={values.location}
-            name="location"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            data-testid="addNewShelfForm__location"
-          />
-          {touched.location && errors.location && (
-            <Form.Text className="form-error-message">
-              {errors.location}
-            </Form.Text>
           )}
         </Form.Group>
 
@@ -122,7 +103,6 @@ export const AddNewShelfForm = ({ onSubmit }: Props) => {
             name="description"
             onChange={handleChange}
             onBlur={handleBlur}
-            data-testid="addNewShelfForm__description"
           />
           {touched.description && errors.description && (
             <Form.Text className="form-error-message">

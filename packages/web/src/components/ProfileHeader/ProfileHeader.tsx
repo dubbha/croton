@@ -13,6 +13,12 @@ export const ProfileHeader = () => {
         <Nav.Item>
           <NavLink to="/profile/shelves">Shelves</NavLink>
         </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/profile/shelf/key0">Mock Shelf</NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink to="/profile/add-shelf">Create Shelf</NavLink>
+        </Nav.Item>
       </Nav>
     </Navbar>
   );

@@ -1,0 +1,26 @@
+@import '../../../custom';
+
+.shelf {
+  &.container {
+    margin: 10px auto;
+    justify-content: start;
+  }
+
+  &-header {
+    color: $color-grass-dark;
+  }
+
+  &-empty {
+    margin: 30px auto;
+  }
+
+  &-actions {
+    margin: 0 auto;
+
+    button {
+      display: inline-block;
+      margin: 0 10px;
+      width: 150px;
+    }
+  }
+}

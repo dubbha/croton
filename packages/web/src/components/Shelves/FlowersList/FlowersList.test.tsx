@@ -1,27 +1,23 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ShelfList } from './ShelfList';
+import { FlowersList } from './FlowersList';
 
 jest.mock('connected-react-router', () => ({
   push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
 }));
 
-describe('components/ShelfList', () => {
+describe('components/FlowersList', () => {
   const props = {
     shelvesList: [{
       id: '',
       name: '',
-      location: '',
-      description: '',
-      addNew: false
+      description: ''
     }]
   }
   it('should render successfully', () => {
-    jest.doMock('react-redux', () => ({
-      useDispatch: () => jest.fn()
-    }));
-    const { container } = render(<ShelfList {...props} />);
+    const { container } = render(<FlowersList {...props} />);
 
     expect(container.firstChild).toMatchSnapshot();
+
   });
 });
