@@ -1,0 +1,20 @@
+@import 'assets/styles/theme.scss';
+
+.new-flower {
+  &.container{
+    justify-content: start;
+  }
+
+  h1 {
+    color: $color-grass-dark;
+  }
+
+  form {
+    width: 70%;
+    margin-bottom: 76px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

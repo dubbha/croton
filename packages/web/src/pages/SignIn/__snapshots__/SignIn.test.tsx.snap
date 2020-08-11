@@ -4,150 +4,16 @@ exports[`pages/SignIn should render successfully 1`] = `
 <div
   class="container"
 >
-  <header>
-    <nav
-      class="navbar navbar-expand-lg navbar-light"
-    >
-      <div
-        class="mr-auto navbar-nav"
-      >
-        <a
-          class="navbar-brand"
-          href="/"
-        >
-          <img
-            alt="logo"
-            class="d-inline-block align-top"
-            height="60"
-            src="logo.svg"
-            width="60"
-          />
-          <img
-            alt="Croton. Care. Free."
-            src="croton.png"
-          />
-        </a>
-        <div
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            href="/#features"
-          >
-            Features
-          </a>
-        </div>
-        <div
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            href="/#about"
-          >
-            About
-          </a>
-        </div>
-        <div
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            href="/#services"
-          >
-            Services
-          </a>
-        </div>
-      </div>
-      <div
-        class="navbar-nav"
-      >
-        <div
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            href="/signin"
-          >
-            Sign In
-          </a>
-        </div>
-        <div
-          class="nav-item"
-        >
-          <a
-            class="nav-link"
-            href="/signup"
-          >
-            Sign Up
-          </a>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <div>
+    Header
+  </div>
   <div
     class="signInConrollersContainer"
   >
-    <form
-      class="signinForm"
-    >
-      <div
-        style="height: 50px; margin-bottom: 16px;"
-      />
-      <div
-        class="form-group"
-      >
-        <label
-          class="form-label"
-        >
-          Email address
-        </label>
-        <input
-          class="form-control"
-          data-testid="signInForm__email"
-          placeholder="Enter email"
-          type="email"
-          value=""
-        />
-      </div>
-      <div
-        class="form-group"
-      >
-        <label
-          class="form-label"
-        >
-          Password
-        </label>
-        <input
-          class="form-control"
-          data-testid="signInForm__password"
-          placeholder="Enter password"
-          type="password"
-          value=""
-        />
-        <small
-          class="reset-password-link form-text"
-        >
-          <a
-            href="/reset"
-          >
-            Forgot password?
-          </a>
-        </small>
-      </div>
-      <button
-        class="btn btn-primary"
-        data-testid="submitButton"
-        disabled=""
-        type="submit"
-      >
-        <div
-          class="spinner-container"
-        />
-        <span>
-          Sign In
-        </span>
-      </button>
-    </form>
+    <button
+      class="signInForm"
+      data-testid="submitButton"
+    />
     <div
       class="auth-separator"
     >
@@ -156,12 +22,16 @@ exports[`pages/SignIn should render successfully 1`] = `
     <div
       class="authButtonContainer"
     >
-      <button />
+      <div>
+        FbAuth
+      </div>
     </div>
     <div
       class="authButtonContainer"
     >
-      <button />
+      <div>
+        GoogleAuth
+      </div>
     </div>
   </div>
   <div
@@ -174,63 +44,8 @@ exports[`pages/SignIn should render successfully 1`] = `
        Register
     </a>
   </div>
-  <footer>
-    <div
-      class="container-fluid"
-    >
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <div
-            class="copyright"
-          >
-            © 
-            2020
-             
-            <a
-              href="https://github.com/dubbha/croton"
-            >
-              Croton
-            </a>
-          </div>
-        </div>
-        <div
-          class="col"
-        >
-          <div
-            class="justify-content-end nav"
-          >
-            <div
-              class="nav-item"
-            >
-              <a
-                class="nav-link"
-                data-rb-event-key="https://opensource.org/licenses/MIT"
-                href="https://opensource.org/licenses/MIT"
-                target="_blank"
-              >
-                MIT License
-              </a>
-            </div>
-            <div
-              class="nav-item"
-            >
-              <a
-                class="nav-link"
-                href="#"
-                role="button"
-                target="_blank"
-              >
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div>
+    Footer
+  </div>
 </div>
 `;

@@ -1,5 +1,9 @@
-@import '../../../custom.scss';
-
 .shelf-list {
   margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: space-around;
+  min-width: 70%;
 }

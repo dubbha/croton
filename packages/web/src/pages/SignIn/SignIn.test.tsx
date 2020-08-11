@@ -2,26 +2,16 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
+jest.mock('components', () => ({
+  Container: ({ children }) => <div className="container">{children}</div>,
+  Header: () => <div>Header</div>,
+  Footer: () => <div>Footer</div>,
+  FbAuth: () => <div>FbAuth</div>,
+  GoogleAuth: () => <div>GoogleAuth</div>,
+  SignInForm: ({ onSubmit }) => <button onClick={onSubmit} data-testid="submitButton" className="signInForm" />,
+}));
+
 describe('pages/SignIn', () => {
-  beforeEach(() => {
-    jest.doMock('components/FbAuth', () => {
-      const React = require('react');
-      return {
-        FbAuth: () => <button />
-      };
-    });
-    jest.doMock('components/GoogleAuth', () => {
-      const React = require('react');
-      return {
-        GoogleAuth: () => <button />
-      };
-    });
-  });
-
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should render successfully', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
@@ -43,14 +33,7 @@ describe('pages/SignIn', () => {
         useDispatch: () => fn,
         useSelector: () => false
       }));
-      jest.doMock('components/SignInForm', () => {
-        const React = require('react');
-        return {
-          SignInForm: ({ onSubmit }) => (
-            <button onClick={onSubmit} data-testid="submitButton" />
-          )
-        };
-      });
+
       const { SignIn } = require('./SignIn');
 
       const { getByTestId } = render(<SignIn />, { wrapper: MemoryRouter });

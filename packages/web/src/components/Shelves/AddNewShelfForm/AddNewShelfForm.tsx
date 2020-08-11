@@ -1,4 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { Form, SubmitButton } from 'elements';
 import useCustomForm from 'hooks/useCustomForm';
 import './styles.scss';
@@ -71,63 +73,69 @@ export const AddNewShelfForm = ({ onSubmit }: Props) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formName">
-        <Form.Label>Shelf Name</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Shelf Name"
-          value={values.name}
-          name="name"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          data-testid="addNewShelfForm__name"
-        />
-        {touched.name && errors.name && (
-          <Form.Text className="form-error-message">{errors.name}</Form.Text>
-        )}
-      </Form.Group>
+    <div className="container new-shelf">
+      <h1>
+        <FontAwesomeIcon icon={faBookmark} />
+        <span className="icon-prefix">Add New Shelf</span>
+      </h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formName">
+          <Form.Label>Shelf Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Shelf Name"
+            value={values.name}
+            name="name"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            data-testid="addNewShelfForm__name"
+          />
+          {touched.name && errors.name && (
+            <Form.Text className="form-error-message">{errors.name}</Form.Text>
+          )}
+        </Form.Group>
 
-      <Form.Group controlId="formLocation">
-        <Form.Label>Shelf Location</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Last Name"
-          value={values.location}
-          name="location"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          data-testid="addNewShelfForm__location"
-        />
-        {touched.location && errors.location && (
-          <Form.Text className="form-error-message">
-            {errors.location}
-          </Form.Text>
-        )}
-      </Form.Group>
+        <Form.Group controlId="formLocation">
+          <Form.Label>Shelf Location</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Last Name"
+            value={values.location}
+            name="location"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            data-testid="addNewShelfForm__location"
+          />
+          {touched.location && errors.location && (
+            <Form.Text className="form-error-message">
+              {errors.location}
+            </Form.Text>
+          )}
+        </Form.Group>
 
-      <Form.Group controlId="formDescription">
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter description"
-          value={values.description}
-          name="description"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          data-testid="addNewShelfForm__description"
-        />
-        {touched.description && errors.description && (
-          <Form.Text className="form-error-message">
-            {errors.description}
-          </Form.Text>
-        )}
-      </Form.Group>
+        <Form.Group controlId="formDescription">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter description"
+            value={values.description}
+            name="description"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            data-testid="addNewShelfForm__description"
+          />
+          {touched.description && errors.description && (
+            <Form.Text className="form-error-message">
+              {errors.description}
+            </Form.Text>
+          )}
+        </Form.Group>
 
-      <SubmitButton disabled={!isValid}>
-        <div className="spinner-container" />
-        <span>Create</span>
-      </SubmitButton>
-    </Form>
+        <SubmitButton disabled={!isValid}>
+          <div className="spinner-container" />
+          <span>Create</span>
+        </SubmitButton>
+      </Form>
+    </div>
   );
 };

@@ -2,87 +2,34 @@
 
 exports[`components/Shelves should render successfully 1`] = `
 <div
-  class="shelves"
+  class="container shelves"
 >
-  <h4>
-    Create a New Shelf
-  </h4>
-  <p>
-    Add new flower shelf, describe location and small description.
-  </p>
-  <form
-    class=""
+  <h1
+    class="shelves-header"
   >
-    <div
-      class="form-group"
+    <svg
+      aria-hidden="true"
+      class="svg-inline--fa fa-seedling fa-w-16 "
+      data-icon="seedling"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <label
-        class="form-label"
-        for="formName"
-      >
-        Shelf Name
-      </label>
-      <input
-        class="form-control"
-        data-testid="addNewShelfForm__name"
-        id="formName"
-        name="name"
-        placeholder="Enter Shelf Name"
-        type="text"
-        value=""
+      <path
+        d="M64 96H0c0 123.7 100.3 224 224 224v144c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V320C288 196.3 187.7 96 64 96zm384-64c-84.2 0-157.4 46.5-195.7 115.2 27.7 30.2 48.2 66.9 59 107.6C424 243.1 512 147.9 512 32h-64z"
+        fill="currentColor"
       />
-    </div>
-    <div
-      class="form-group"
+    </svg>
+    <span
+      class="icon-prefix"
     >
-      <label
-        class="form-label"
-        for="formLocation"
-      >
-        Shelf Location
-      </label>
-      <input
-        class="form-control"
-        data-testid="addNewShelfForm__location"
-        id="formLocation"
-        name="location"
-        placeholder="Enter Last Name"
-        type="text"
-        value=""
-      />
-    </div>
-    <div
-      class="form-group"
-    >
-      <label
-        class="form-label"
-        for="formDescription"
-      >
-        Description
-      </label>
-      <input
-        class="form-control"
-        data-testid="addNewShelfForm__description"
-        id="formDescription"
-        name="description"
-        placeholder="Enter description"
-        type="text"
-        value=""
-      />
-    </div>
-    <button
-      class="btn btn-primary"
-      data-testid="submitButton"
-      disabled=""
-      type="submit"
-    >
-      <div
-        class="spinner-container"
-      />
-      <span>
-        Create
-      </span>
-    </button>
-  </form>
+      My Shelves
+    </span>
+  </h1>
+  <div>
+    Shelf List
+  </div>
 </div>
 `;
