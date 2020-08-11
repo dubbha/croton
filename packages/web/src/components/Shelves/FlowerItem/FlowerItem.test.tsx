@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { FlowerItem } from '../FlowerItem';
+import { FlowerItem } from './FlowerItem';
 
 describe('components/FlowerItem', () => {
   const props = {

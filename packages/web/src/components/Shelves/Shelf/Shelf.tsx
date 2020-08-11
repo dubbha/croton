@@ -9,13 +9,7 @@ import './styles.scss';
 import { Link } from 'react-router-dom';
 import { FlowersList } from '../FlowersList';
 
-type Props = {
-  id: string
-}
-
-export const Shelf = ({
-  id
-}: Props) => {
+export const Shelf = () => {
   // const {
   //   isLoading,
   //   error,
