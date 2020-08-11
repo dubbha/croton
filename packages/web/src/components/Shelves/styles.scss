@@ -1,4 +1,4 @@
-@import '../../custom.scss';
+@import 'assets/styles/theme.scss';
 
 .shelves {
   &.container {
@@ -18,5 +18,28 @@
 
   &-header {
     color: $color-grass-dark;
+  }
+}
+
+.shelf-item,
+.flower-item {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 10px;
+  min-height: 140px;
+
+  &-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    min-width: 100%;
+    color: $color-grass;
+
+    &:hover {
+      color: $color-grass-dark;
+    }
   }
 }

@@ -1,19 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { FlowerItem } from '../FlowerItem';
+import { FlowerItemAdd } from '../FlowerItemAdd';
 
-describe('components/FlowerItem', () => {
+describe('components/FlowerItemAdd', () => {
   const props = {
-    id: 0,
-    name: '',
-    location: '',
-    description: '',
-    addNew: false,
     onSelect: () => {},
   };
 
   it('should render successfully', () => {
-    const { container } = render(<FlowerItem {...props} />);
+    const { container } = render(<FlowerItemAdd {...props} />);
 
     expect(container.firstChild).toMatchSnapshot();
   });

@@ -6,12 +6,16 @@ jest.mock('connected-react-router', () => ({
   push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
 }));
 
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn()
+}));
+
 describe('components/FlowersList', () => {
   const props = {
-    shelvesList: [{
-      id: '',
-      name: '',
-      description: ''
+    flowers: [{
+      id: 1,
+      name: 'name',
+      description: 'desc'
     }]
   }
   it('should render successfully', () => {

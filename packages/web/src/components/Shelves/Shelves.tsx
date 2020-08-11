@@ -9,61 +9,61 @@ export const Shelves = () => {
   // mock data
   const shelves = [
     {
-      id: 'key1',
+      id: 1,
       name: 'qweqe',
       location: 'some location',
       description: 'description'
     },
     {
-      id: 'key2',
+      id: 2,
       name: 'My awesome Shelf',
       location: 'Super Location',
       description: 'Description of my awesome shelf'
     },
     {
-      id: 'key3',
+      id: 3,
       name: 'qweqe',
       location: 'some location',
       description: 'description'
     },
     {
-      id: 'key4',
+      id: 4,
       name: 'My awesome Shelf',
       location: 'Super Location',
       description: 'Description of my awesome shelfDescription of my awesome shelfDescription of my awesome shelfDescription of my awesome shelfDescription of my awesome shelfDescription of my awesome shelf'
     },
     {
-      id: 'key5',
+      id: 5,
       name: 'qweqe',
       location: 'some location',
       description: 'description'
     },
     {
-      id: 'key6',
+      id: 6,
       name: 'My awesome Shelf',
       location: 'Super Location',
       description: 'Description of my awesome shelf'
     },
     {
-      id: 'key7',
+      id: 7,
       name: 'qweqe',
       location: 'some location',
       description: 'description'
     },
     {
-      id: 'key8',
+      id: 8,
       name: 'My awesome Shelf',
       location: 'Super Location',
       description: 'Description of my awesome shelf'
     },
     {
-      id: 'key9',
+      id: 9,
       name: 'qweqe',
       location: 'some location',
       description: 'description'
     },
     {
-      id: 'key10',
+      id: 10,
       name: 'My awesome Shelf',
       location: 'Super Location',
       description: 'Description of my awesome shelfDescription of my awesome shelfDescription of my awesome shelfDescription of my awesome shelf'
@@ -78,7 +78,7 @@ export const Shelves = () => {
         <span className="icon-prefix">My Shelves</span>
       </h1>
       { shelves.length
-        ? <ShelfList shelvesList={shelves} />
+        ? <ShelfList shelves={shelves} />
         : (
           <div className="shelves-empty">
             <h4>You Don&#39;t Have Any Shelves Yet</h4>

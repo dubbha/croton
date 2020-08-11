@@ -2,20 +2,21 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { FlowerItem } from '../FlowerItem';
+import { FlowerItemAdd } from '../FlowerItemAdd';
 
 import './styles.scss';
 
-type FlowerProp = {
-  id: string,
+type Flower = {
+  id: number,
   name: string,
   description: string
 }
 
 type Props = {
-  flowersList: FlowerProp[]
+  flowers?: Flower[]
 }
 
-export const FlowersList = ({ flowersList }: Props) => {
+export const FlowersList = ({ flowers = [] }: Props) => {
   const dispatch = useDispatch();
 
   const selectFlower = (id) => dispatch(push(`/profile/flower/${id}`));
@@ -23,16 +24,16 @@ export const FlowersList = ({ flowersList }: Props) => {
 
   return (
     <div className="flowers-list row">
-      {flowersList.map((flower) => (
+      {flowers.map(({ id, name, description }) => (
         <FlowerItem
-          key={flower.id}
-          id={flower.id}
-          name={flower.name}
-          description={flower.description}
+          key={id}
+          id={id}
+          name={name}
+          description={description}
           onSelect={selectFlower}
         />
       ))}
-      <FlowerItem id="" name="" description="" addNew onSelect={addFlower} />
+      <FlowerItemAdd onSelect={addFlower} />
     </div>
   );
 };

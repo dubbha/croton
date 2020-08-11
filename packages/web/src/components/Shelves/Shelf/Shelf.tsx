@@ -9,23 +9,30 @@ import './styles.scss';
 import { Link } from 'react-router-dom';
 import { FlowersList } from '../FlowersList';
 
-export type ShelfProps = {
+type Props = {
   id: string
 }
 
 export const Shelf = ({
   id
-} :ShelfProps) => {
+}: Props) => {
   // const {
   //   isLoading,
   //   error,
   //   info
   // } = useSelector(getShelf);
-  const flowers = [{
-    id: 'flowerId',
-    name: 'flowerName',
-    description: 'Very Important Description'
-  }];
+  const flowers = [
+    {
+      id: 0,
+      name: 'flowerName',
+      description: 'Very Important Description',
+    },
+    {
+      id: 1,
+      name: 'anotherFlower',
+      description: 'Another Description',
+    },
+  ];
 
   return (
     <div className="container shelf">
@@ -38,7 +45,7 @@ export const Shelf = ({
         <Button variant="outline-primary">Add People</Button>
       </div>
       { flowers.length
-        ? <FlowersList flowersList={flowers} />
+        ? <FlowersList flowers={flowers} />
         : (
           <div className="shelf-empty">
             <h4>You Don&#39;t Have Any Flower In This Shelf Yet</h4>
