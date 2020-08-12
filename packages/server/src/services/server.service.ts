@@ -10,7 +10,7 @@ export default class HttpsServerService {
       const { HOME } = process.env;
       return {
         key: readFileSync(path.resolve(`${HOME}/server.key`), 'utf8'),
-        cert: readFileSync(path.resolve(`${HOME}/server.crt`), 'utf8'),
+        cert: readFileSync(path.resolve(`${HOME}/server.cert`), 'utf8'),
       };
     } catch (err) {
       console.error(
