@@ -5,6 +5,10 @@ import { QueryParams } from '../constants/query-params';
 import { createActivationEmail } from '../utils/create-activation-email';
 import { createPasswordResetEmail } from '../utils/create-password-reset-email';
 import { createEmailResetEmail } from '../utils/create-email-reset-email';
+import {
+  createShelfInvitationEmail,
+  createShelfInvitationEmailUnknownUser,
+} from '../utils/create-shelf-invitation-email';
 
 export default class EmailSendingService {
   public async sendEmail(mailOptions: Record<string, unknown>): Promise<void> {
@@ -59,6 +63,36 @@ export default class EmailSendingService {
       to: userEmail,
       subject: 'You are about to change your email',
       html: createEmailResetEmail(name, link)
+    };
+
+    await this.sendEmail(mailOptions);
+  }
+
+  public async sendShelfInvitationMessageUnknownUser(
+    userEmail: string,
+    host: string,
+  ): Promise<void> {
+    const link = `${host}${Pages.SIGNUP_PAGE}`;
+    const mailOptions = {
+      to: userEmail,
+      subject: 'You have been invited to take care of a flower shelf',
+      html: createShelfInvitationEmailUnknownUser(link)
+    };
+
+    await this.sendEmail(mailOptions);
+  }
+
+  public async sendShelfInvitationMessage(
+    userEmail: string,
+    name: string,
+    host: string,
+    shelfInvitationToken: string
+  ): Promise<void> {
+    const link = `${host}${Pages.SHELF_INVITATION_ACCEPT_PAGE}?${QueryParams.SHELF_INVITATION_TOKEN}=${shelfInvitationToken}`;
+    const mailOptions = {
+      to: userEmail,
+      subject: 'You have been invited to take care of a flower shelf',
+      html: createShelfInvitationEmail(name, link)
     };
 
     await this.sendEmail(mailOptions);

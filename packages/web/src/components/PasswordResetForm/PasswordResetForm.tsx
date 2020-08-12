@@ -38,7 +38,7 @@ export const PasswordResetForm = ({
     <Form onSubmit={handleSubmit}>
       {error && <ErrorAlert>{error}</ErrorAlert>}
       {info && <InfoAlert>{info}</InfoAlert>}
-      {!error && !info && <AlertPlaceholder height="74px" />}
+      {!error && !info && <AlertPlaceholder height="62px" />}
       <Form.Group controlId="formEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control

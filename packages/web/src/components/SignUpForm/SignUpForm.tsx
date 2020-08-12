@@ -8,8 +8,8 @@ import {
   LoadingSpinner,
 } from 'elements';
 import './styles.scss';
-import useCustomForm from '../../hooks/useCustomForm';
-import { isEmail } from '../../helpers/validators';
+import { useCustomForm } from 'hooks';
+import { isEmail } from 'helpers/validators';
 
 type Props = {
   isLoading: boolean;

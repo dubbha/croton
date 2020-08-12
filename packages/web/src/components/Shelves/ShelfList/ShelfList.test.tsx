@@ -7,20 +7,13 @@ jest.mock('connected-react-router', () => ({
 }));
 
 jest.mock('react-redux', () => ({
-  useDispatch: () => jest.fn()
+  useDispatch: () => jest.fn(),
+  useSelector: () => ({ shelves: [{ id: 'id', name: 'name', location: 'description' }] })
 }));
 
 describe('components/ShelfList', () => {
-  const props = {
-    shelves: [{
-      id: 0,
-      name: 'name',
-      location: 'location',
-      description: 'description',
-    }]
-  }
   it('should render successfully', () => {
-    const { container } = render(<ShelfList {...props} />);
+    const { container } = render(<ShelfList />);
 
     expect(container.firstChild).toMatchSnapshot();
   });

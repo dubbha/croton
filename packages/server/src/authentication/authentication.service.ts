@@ -3,7 +3,7 @@ import { compare } from 'bcrypt';
 import { createRandomString } from '../utils/create-random-string';
 import { createTokenizedUser } from '../utils/create-tokenized-user';
 import { createNewPassword } from '../utils/create-new-password';
-import { createExpiresInHours } from '../utils/create-expires-in-hourse';
+import { createExpiresInHours } from '../utils/create-expires-in-hours';
 
 import User from '../interfaces/db.user.interface';
 import UserWithToken from '../interfaces/tokenized.user.interface';

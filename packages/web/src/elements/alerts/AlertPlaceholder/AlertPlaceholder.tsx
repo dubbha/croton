@@ -4,6 +4,6 @@ type Props = {
   height?: string;
 };
 
-export const AlertPlaceholder = ({ height = '50px' }: Props) => (
-  <div style={{ height, marginBottom: '16px' }} />
+export const AlertPlaceholder = ({ height = '38px' }: Props) => (
+  <div style={{ height }} />
 );

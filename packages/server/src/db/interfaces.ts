@@ -10,3 +10,10 @@ export interface CreatePasswordResetPayload
   extends CreateUserAuthEntityPayload {
   passwordResetToken: string;
 }
+
+export interface ShelfInvitationPayload {
+  userEmail: string;
+  shelfInvitationToken: string;
+  expiresIn: number;
+  shelfId: number;
+}

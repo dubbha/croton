@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FlowerForm should render successfully 1`] = `
+<form
+  class="flower-form"
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formName"
+    >
+      Flower Name
+    </label>
+    <input
+      class="form-control"
+      id="formName"
+      name="name"
+      placeholder="Enter Flower Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formDescription"
+    >
+      Description
+    </label>
+    <input
+      class="form-control"
+      id="formDescription"
+      name="description"
+      placeholder="Enter description"
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    disabled=""
+    type="submit"
+  >
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Create
+    </span>
+  </button>
+</form>
+`;

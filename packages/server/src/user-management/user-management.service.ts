@@ -2,7 +2,7 @@ import User from '../interfaces/user.interface';
 import UserWithToken from '../interfaces/tokenized.user.interface';
 
 import { createRandomString } from '../utils/create-random-string';
-import { createExpiresInHours } from '../utils/create-expires-in-hourse';
+import { createExpiresInHours } from '../utils/create-expires-in-hours';
 import { createTokenizedUser } from '../utils/create-tokenized-user';
 
 import WrongEmailResetToken from '../exceptions/wrong-email-reset-token.exception';

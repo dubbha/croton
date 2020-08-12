@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 
 import '../styles.scss';
 
-export type ShelfItemProps = {
+export type Props = {
   id: number,
   name: string,
   location: string,
@@ -19,7 +19,7 @@ export const ShelfItem = ({
   location,
   description,
   onSelect,
-} :ShelfItemProps) => {
+}: Props) => {
   return (
     <div className="shelf-item">
       <Card text="primary" onClick={() => onSelect(id)}>
