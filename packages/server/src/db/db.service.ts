@@ -1,4 +1,4 @@
-import { getRepository, Repository, IsNull } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import UserEntity from '../models/user.entity';
 import EmailVerificationEntity from '../models/email-verification.entity';
@@ -16,6 +16,7 @@ import RegistrationDto from '../models/registration.dto';
 import { Actions } from '../constants/actions';
 
 import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfaces';
+import UserWithToken from '../interfaces/tokenized.user.interface';
 
 import {
   CreateEmailRelatedPayload,
@@ -51,7 +52,10 @@ export default class DBService {
   }
 
   public getUserByEmail(email: string) {
-    return this.userRepository.findOne({ email });
+    return this.userRepository.findOne(
+      { email },
+      { relations: ['socialProfile'] }
+    );
   }
 
   public updateUser(user: UserEntity) {
@@ -63,13 +67,13 @@ export default class DBService {
   }
 
   public async saveUserWithSocialAccount(
-    userDetails: RegistrationDto,
+    userDetails: RegistrationDto | UserEntity,
     socialDetails: SocialProfileDto | SocialProfileEntity
   ) {
     const socialProfile = await this.socialProfileRepository.save(
       socialDetails
     );
-    return this.userRepository.save({ ...userDetails, socialProfile });
+    return await this.userRepository.save({ ...userDetails, socialProfile });
   }
 
   public async getUserBySocialProvider(
@@ -80,28 +84,29 @@ export default class DBService {
       [providerIdKeyName]: id,
     });
     if (socialProfile) {
-      const user = await this.userRepository.findOne({
-        where: { socialProfile },
-      });
+      const { user } = socialProfile;
       return { ...user, socialProfile };
     }
   }
 
-  public async mergeUsersByEmail(email: string) {
-    const manuallyCreatedUser = await this.userRepository.findOne({
-      where: { email, socialProfile: IsNull() },
+  public async updateUserWithSocialAccount(
+    userWithToken: UserWithToken,
+    email: string
+  ) {
+    const userCreatedWithSocial = await this.getUserByEmail(
+      userWithToken.email
+    );
+    if (userCreatedWithSocial) {
+      await this.userRepository.remove(userCreatedWithSocial);
+    }
+    const { facebookId, googleId, pictureUrl } = userWithToken.socialProfile;
+    const user = await this.getUserByEmail(email);
+    return await this.saveUserWithSocialAccount(user, {
+      facebookId,
+      googleId,
+      pictureUrl,
+      user,
     });
-    const userWithSocialAccount = await this.userRepository.findOne({
-      relations: ['socialProfile'],
-      where: { email },
-    });
-    const mergedUser = {
-      ...manuallyCreatedUser,
-      socialProfile: userWithSocialAccount.socialProfile,
-    };
-    await this.userRepository.delete(userWithSocialAccount);
-    await this.userRepository.update(manuallyCreatedUser.id, mergedUser);
-    return mergedUser;
   }
 
   public getEmailVerificationByToken(emailVerificationToken: string) {

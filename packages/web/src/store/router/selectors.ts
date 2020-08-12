@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
-import { AppState } from '../index';
+
+import { AppState } from '../interfaces';
 
 export const getRouter = (state: AppState) => state.router;
 

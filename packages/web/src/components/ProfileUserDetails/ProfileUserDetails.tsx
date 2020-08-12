@@ -1,11 +1,10 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container } from 'components';
+import { Container, AddSocialToProfile } from 'components';
 import { Form, ErrorAlert, InfoAlert, AlertPlaceholder } from 'elements';
 import { AUTH_RESET_EMAIL, AUTH_UPDATE_PROFILE } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
-
 
 export const ProfileUserDetails = () => {
   const dispatch = useDispatch();
@@ -15,6 +14,7 @@ export const ProfileUserDetails = () => {
     email,
     error,
     info,
+    socialProfile,
   } = useSelector(getAuth);
 
   const initials = `${
@@ -47,8 +47,12 @@ export const ProfileUserDetails = () => {
 
   return (
     <Container>
+      {socialProfile?.pictureUrl  ? (
+        <img alt={initials} className="circle" src={socialProfile.pictureUrl} />
 
-      <div className="circle">{initials}</div>
+      ) : (
+        <div className="circle">{initials}</div>
+      )}
       <Form>
         {error && <ErrorAlert>{error}</ErrorAlert>}
         {info && <InfoAlert>{info}</InfoAlert>}
@@ -59,7 +63,7 @@ export const ProfileUserDetails = () => {
             type="text"
             placeholder="First Name"
             value={fName}
-            onChange={(e) => setFName(e.target.value)}
+            onChange={e => setFName(e.target.value)}
             onBlur={changeFirstName}
           />
           <Form.Label>Last Name</Form.Label>
@@ -67,7 +71,7 @@ export const ProfileUserDetails = () => {
             type="text"
             placeholder="Last Name"
             value={lName}
-            onChange={(e) => setLName(e.target.value)}
+            onChange={e => setLName(e.target.value)}
             onBlur={changeLastName}
           />
           <Form.Label>Email</Form.Label>
@@ -79,7 +83,7 @@ export const ProfileUserDetails = () => {
           />
         </Form.Group>
       </Form>
-      
+      <AddSocialToProfile />
     </Container>
   );
 };

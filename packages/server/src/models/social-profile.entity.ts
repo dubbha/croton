@@ -16,6 +16,6 @@ export default class SocialProfile {
   @Column({ update: false, nullable: true })
   googleId?: string;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, user => user.socialProfile)
   user: User;
 }

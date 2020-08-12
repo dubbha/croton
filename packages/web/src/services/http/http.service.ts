@@ -3,7 +3,7 @@ import { api } from 'config';
 
 export const http = axios.create({
   baseURL: api,
-})
+});
 
 http.interceptors.request.use(
   config => {
@@ -13,5 +13,5 @@ http.interceptors.request.use(
     }
     return config;
   },
-  error => Promise.reject(error),
+  error => Promise.reject(error)
 );

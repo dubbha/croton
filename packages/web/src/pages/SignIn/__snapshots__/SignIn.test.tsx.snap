@@ -19,16 +19,10 @@ exports[`pages/SignIn should render successfully 1`] = `
     >
       or
     </div>
-    <div
-      class="authButtonContainer"
-    >
+    <div>
       <div>
         FbAuth
       </div>
-    </div>
-    <div
-      class="authButtonContainer"
-    >
       <div>
         GoogleAuth
       </div>

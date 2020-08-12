@@ -1,13 +1,4 @@
-export interface AuthState {
-  isLoading: boolean;
-  isAuthenticated: boolean;
-  id: number | null;
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  error: string | null;
-  info: string | null;
-}
+import { SocialProfile } from './interfaces';
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
@@ -35,9 +26,17 @@ export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
 export const AUTH_FACEBOOK_SUCCESS = 'AUTH_FACEBOOK_SUCCESS';
 export const AUTH_FACEBOOK_ERROR = 'AUTH_FACEBOOK_ERROR';
 
+export const ADD_FACEBOOK = 'ADD_FACEBOOK';
+export const ADD_FACEBOOK_SUCCESS = 'ADD_FACEBOOK_SUCCESS';
+export const ADD_FACEBOOK_ERROR = 'ADD_FACEBOOK_ERROR';
+
 export const AUTH_GOOGLE = 'AUTH_GOOGLE';
 export const AUTH_GOOGLE_SUCCESS = 'AUTH_GOOGLE_SUCCESS';
 export const AUTH_GOOGLE_ERROR = 'AUTH_GOOGLE_ERROR';
+
+export const ADD_GOOGLE = 'ADD_GOOGLE';
+export const ADD_GOOGLE_SUCCESS = 'ADD_GOOGLE_SUCCESS';
+export const ADD_GOOGLE_ERROR = 'ADD_GOOGLE_ERROR';
 
 export const AUTH_UPDATE_PROFILE = 'AUTH_UPDATE_PROFILE';
 export const AUTH_UPDATE_PROFILE_SUCCESS = 'AUTH_UPDATE_PROFILE_SUCCESS';
@@ -56,6 +55,11 @@ interface AuthLoginSuccessPayload {
   firstName: string;
   lastName: string;
   email: string;
+  socialProfile: SocialProfile | null;
+}
+
+interface AuthLoginWithSocialSuccessPayload extends AuthLoginSuccessPayload {
+  socialProfile: SocialProfile;
 }
 
 export interface AuthLogin {
@@ -149,11 +153,26 @@ export interface AuthFacebook {
 
 export interface AuthFacebookSuccess {
   type: typeof AUTH_FACEBOOK_SUCCESS;
-  payload: AuthLoginSuccessPayload;
+  payload: AuthLoginWithSocialSuccessPayload;
 }
 
 export interface AuthFacebookError {
   type: typeof AUTH_FACEBOOK_ERROR;
+  payload: { error: string };
+}
+
+export interface AddFacebook {
+  type: typeof ADD_FACEBOOK;
+  payload: { accessToken: string };
+}
+
+export interface AddFacebookSuccess {
+  type: typeof ADD_FACEBOOK_SUCCESS;
+  payload: AuthLoginWithSocialSuccessPayload;
+}
+
+export interface AddFacebookError {
+  type: typeof ADD_FACEBOOK_ERROR;
   payload: { error: string };
 }
 
@@ -164,11 +183,26 @@ export interface AuthGoogle {
 
 export interface AuthGoogleSuccess {
   type: typeof AUTH_GOOGLE_SUCCESS;
-  payload: AuthLoginSuccessPayload;
+  payload: AuthLoginWithSocialSuccessPayload;
 }
 
 export interface AuthGoogleError {
   type: typeof AUTH_GOOGLE_ERROR;
+  payload: { error: string };
+}
+
+export interface AddGoogle {
+  type: typeof ADD_GOOGLE;
+  payload: { accessToken: string };
+}
+
+export interface AddGoogleSuccess {
+  type: typeof ADD_GOOGLE_SUCCESS;
+  payload: AuthLoginWithSocialSuccessPayload;
+}
+
+export interface AddGoogleError {
+  type: typeof ADD_GOOGLE_ERROR;
   payload: { error: string };
 }
 
@@ -236,9 +270,15 @@ export type AuthActionTypes =
   | AuthFacebook
   | AuthFacebookSuccess
   | AuthFacebookError
+  | AddFacebook
+  | AddFacebookSuccess
+  | AddFacebookError
   | AuthGoogle
   | AuthGoogleSuccess
   | AuthGoogleError
+  | AddGoogle
+  | AddGoogleSuccess
+  | AddGoogleError
   | AuthUpdateProfile
   | AuthUpdateProfileSuccess
   | AuthUpdateProfileError

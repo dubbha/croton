@@ -3,7 +3,6 @@ import passport, { Profile } from 'passport';
 import FacebookTokenStrategy from 'passport-facebook-token';
 import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 
-import UserEntity from '../models/user.entity';
 import RegistrationDto from '../models/registration.dto';
 import SocialProfileDto from '../models/social-profile.dto'
 
@@ -32,27 +31,22 @@ export default class ProvidersAuthService {
     return this
   }
 
-  private async findUserByProviderId(id: string, providerIdKeyName: ProvidersIdDBFieldName): Promise<UserEntity> {
-    return await this.dbService.getUserBySocialProvider(providerIdKeyName, id);
-  }
-
-  private async createUserWithSocialProfile(registrationDto: RegistrationDto, socialProfile: SocialProfileDto): Promise<UserEntity> {
-    return await this.dbService.saveUserWithSocialAccount(registrationDto, socialProfile);
-  }
-
   private formatProviderProfileToRegistrationDto(profile: Profile, accessToken: string): RegistrationDto {
     return {
       firstName: profile.name?.givenName || profile.displayName,
       lastName: profile.name?.familyName || profile.displayName,
-      email: profile.emails[0].value,
+      email: profile?.emails[0].value,
       password: accessToken,
       status: UserStatuses.ACTIVE
     }
   }
 
   private formatProviderProfileToDto(profile: Profile, passportIdKeyName: ProvidersIdDBFieldName): SocialProfileDto {
+    const { photos } = profile;
+    const { picture } = profile['_json'];
+    const pictureUrl = photos ? photos[0].value : picture || '';
     return {
-      pictureUrl: profile?.photos[0].value,
+      pictureUrl,
       [passportIdKeyName]: profile.id,
     }
   }
@@ -62,11 +56,11 @@ export default class ProvidersAuthService {
     profile: Profile,
     passportIdKeyName: ProvidersIdDBFieldName
   ) {
-    let user = await this.findUserByProviderId(profile.id, passportIdKeyName);
+    const user = await this.dbService.getUserBySocialProvider(passportIdKeyName, profile.id);
     if(!user) {
-      const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken);
       const socialProfile = this.formatProviderProfileToDto(profile, passportIdKeyName)
-      user = await this.createUserWithSocialProfile(registrationDto, socialProfile)
+      const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken);
+      await this.dbService.saveUserWithSocialAccount(registrationDto, socialProfile);
     }
     return createTokenizedUser(user)
   }

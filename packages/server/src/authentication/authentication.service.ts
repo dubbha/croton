@@ -19,6 +19,7 @@ import EmailNotVerified from '../exceptions/email-not-verified.exception';
 import UserIsSuspended from '../exceptions/user-is-suspended.exception';
 import WrongPasswordResetToken from '../exceptions/wrong-password-reset-token.exception';
 import PasswordResetTokenExpired from '../exceptions/password-reset-token-expired.exception';
+import UserWithThatEmailAlreadyRegisteredBySocial from '../exceptions/user-with-that-email-already-registered-by-social';
 
 import { UserStatuses } from '../constants/user-statuses';
 
@@ -35,18 +36,26 @@ export default class AuthenticationService {
     registrationData: RegistrationDto,
     host: string
   ): Promise<void> {
-    if (await this.dbService.getUserByEmail(registrationData.email)) {
-      throw new UserWithThatEmailAlreadyExists(registrationData.email);
-    } else {
+    const { email } = registrationData;
+    const existingUser = await this.dbService.getUserByEmail(email);
+    if (!existingUser) {
       const hashedPassword = await createNewPassword(registrationData.password);
       const user = await this.dbService.saveUser({
         ...registrationData,
         status: UserStatuses.PENDING_VERIFICATION,
         password: hashedPassword,
       });
-
       await this.sendActivationMessage(user, host);
+      return;
     }
+    if (existingUser.socialProfile) {
+      throw new UserWithThatEmailAlreadyRegisteredBySocial({
+        email,
+        googleId: existingUser.socialProfile.googleId,
+        facebookId: existingUser.socialProfile.facebookId,
+      });
+    }
+    throw new UserWithThatEmailAlreadyExists(existingUser.email);
   }
 
   public async resetPassword(email: string, host: string): Promise<void> {
@@ -81,11 +90,8 @@ export default class AuthenticationService {
 
   public async login(loginData: LoginDto): Promise<UserWithToken> {
     const user = await this.dbService.getUserByEmail(loginData.email);
-
     this.validateUser(user);
-
     const isPasswordMatching = await compare(loginData.password, user.password);
-
     if (!isPasswordMatching) {
       throw new WrongCredentials();
     }

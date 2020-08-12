@@ -5,14 +5,19 @@ import GoogleLogin, {
 } from 'react-google-login';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { AUTH_GOOGLE, AUTH_GOOGLE_ERROR } from 'store/auth/actions';
-import { getAuth } from 'store/auth/selectors';
-
+import { getAuth } from '../../store/auth/selectors';
 import { clientId } from '../../constants/google-login-props';
+
+import { AuthButtonContainerProps } from './interfaces';
 
 import './styles.scss';
 
-export const GoogleAuth = () => {
+export const GoogleAuth = ({
+  onResponseAction,
+  onErrorAction,
+  errorMessage,
+  buttonText,
+}: AuthButtonContainerProps) => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector(getAuth);
 
@@ -20,16 +25,16 @@ export const GoogleAuth = () => {
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
     dispatch({
-      type: AUTH_GOOGLE,
+      type: onResponseAction,
       payload: { accessToken: (response as GoogleLoginResponse).accessToken },
     });
   };
 
   const responseGoogleFailure = () => {
     dispatch({
-      type: AUTH_GOOGLE_ERROR,
+      type: onErrorAction,
       payload: {
-        error: 'Sorry, something went wrong with logging you in via Google',
+        error: errorMessage,
       },
     });
   };
@@ -37,7 +42,7 @@ export const GoogleAuth = () => {
   return (
     <GoogleLogin
       clientId={clientId}
-      buttonText="Login with Google"
+      buttonText={buttonText}
       onSuccess={responseGoogleSuccess}
       onFailure={responseGoogleFailure}
       disabled={isLoading}

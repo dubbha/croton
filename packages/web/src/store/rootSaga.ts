@@ -8,6 +8,8 @@ import {
   authEmailConfirmSaga,
   authFacebook,
   authGoogle,
+  addFacebook,
+  addGoogle,
   authUpdateProfileSaga,
   authEmailResetSaga,
   authEmailUpdateSaga
@@ -36,6 +38,8 @@ export function* rootSaga() {
     authEmailConfirmSaga(),
     authFacebook(),
     authGoogle(),
+    addFacebook(),
+    addGoogle(),
     authUpdateProfileSaga(),
     authEmailResetSaga(),
     authEmailUpdateSaga(),
