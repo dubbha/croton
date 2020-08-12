@@ -75,7 +75,7 @@ export default class EmailSendingService {
     const link = `${host}${Pages.SIGNUP_PAGE}`;
     const mailOptions = {
       to: userEmail,
-      subject: 'You have been invited to a take care of a flower shelf',
+      subject: 'You have been invited to take care of a flower shelf',
       html: createShelfInvitationEmailUnknownUser(link)
     };
 
@@ -91,7 +91,7 @@ export default class EmailSendingService {
     const link = `${host}${Pages.SHELF_INVITATION_ACCEPT_PAGE}?${QueryParams.SHELF_INVITATION_TOKEN}=${shelfInvitationToken}`;
     const mailOptions = {
       to: userEmail,
-      subject: 'You have been invited to a take care of a flower shelf',
+      subject: 'You have been invited to take care of a flower shelf',
       html: createShelfInvitationEmail(name, link)
     };
 

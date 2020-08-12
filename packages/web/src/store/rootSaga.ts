@@ -16,6 +16,14 @@ import {
   shelfInviteSaga,
   shelfInviteAcceptSaga,
   shelfDeleteUserSaga,
+  shelfAddShelfSaga,
+  shelfEditShelfSaga,
+  shelfDeleteShelfSaga,
+  shelfGetShelvesSaga,
+  shelfAddFlowerSaga,
+  shelfEditFlowerSaga,
+  shelfDeleteFlowerSaga,
+  shelfGetFlowersSaga,
 } from './shelf/sagas';
 
 export function* rootSaga() {
@@ -34,5 +42,13 @@ export function* rootSaga() {
     shelfInviteSaga(),
     shelfInviteAcceptSaga(),
     shelfDeleteUserSaga(),
+    shelfAddShelfSaga(),
+    shelfEditShelfSaga(),
+    shelfDeleteShelfSaga(),
+    shelfGetShelvesSaga(),
+    shelfAddFlowerSaga(),
+    shelfEditFlowerSaga(),
+    shelfDeleteFlowerSaga(),
+    shelfGetFlowersSaga(),
   ]);
 }

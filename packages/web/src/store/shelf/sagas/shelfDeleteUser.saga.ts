@@ -11,10 +11,11 @@ function* handle(action: ShelfDeleteUser) {
   const { shelfId, userId } = action.payload;
 
   try {
-    yield call(http.post, '/shelf/user-delete', {
-      shelfId,
-      userId,
-    });
+    yield call(
+      http.post,
+      '/shelf/user-delete',
+      { shelfId, userId }
+    );
     yield put({
       type: SHELF_DELETE_USER_SUCCESS,
       payload: { info: 'User deleted successfully' }
@@ -22,7 +23,7 @@ function* handle(action: ShelfDeleteUser) {
   } catch (e) {
     yield put({
       type: SHELF_DELETE_USER_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message || e.message }
     });
   }
 }

@@ -43,14 +43,12 @@ exports[`components/ShelfList should render successfully 1`] = `
           <span
             class="icon-prefix"
           >
-            location
+            description
           </span>
         </div>
         <p
           class="card-text"
-        >
-          description
-        </p>
+        />
       </div>
     </div>
   </div>
@@ -84,7 +82,7 @@ exports[`components/ShelfList should render successfully 1`] = `
           <span
             class="icon-prefix"
           >
-            Add New Shelf
+            Add Shelf
           </span>
         </div>
       </div>

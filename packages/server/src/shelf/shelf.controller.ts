@@ -36,6 +36,59 @@ export default class ShelfController extends BaseController {
       shelfAdminMiddleware,
       this.userDeleteHandler
     );
+
+    this.router.post(
+      this.serverApi.shelfAddShelf,
+      authMiddleware,
+      this.addShelfHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfEditShelf,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.editShelfHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfDeleteShelf,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.deleteShelfHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfGetShelves,
+      authMiddleware,
+      this.getShelvesHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfAddFlower,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.addFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfEditFlower,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.editFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfDeleteFlower,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.deleteFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfGetFlowers,
+      authMiddleware,
+      this.getFlowersHandler
+    );
   }
 
   private userInviteHanlder = async (
@@ -78,6 +131,113 @@ export default class ShelfController extends BaseController {
       const { shelfId, userId } = request.body;
       await this.shelfService.deleteUser(shelfId, userId)
       response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private addShelfHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.addShelf(
+        request.body,
+        request.headers.authorization,
+      );
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private editShelfHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.editShelf(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private deleteShelfHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.deleteShelf(request.body.id);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getShelvesHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const shelves = await this.shelfService.getShelves(request.headers.authorization);
+      response.status(200).send(shelves);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private addFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.addFlower(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private editFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.editFlower(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private deleteFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.deleteFlower(request.body.id);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getFlowersHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const flowers = await this.shelfService.getFlowers(request.body.shelfId);
+      response.status(200).send(flowers);
     } catch (error) {
       next(error);
     }

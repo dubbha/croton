@@ -16,7 +16,9 @@ exports[`components/ShelfItem should render successfully 1`] = `
     >
       <div
         class="card-title h5"
-      />
+      >
+        name
+      </div>
       <div
         class="mb-2 text-muted card-subtitle h6"
       >
@@ -37,11 +39,15 @@ exports[`components/ShelfItem should render successfully 1`] = `
         </svg>
         <span
           class="icon-prefix"
-        />
+        >
+          location
+        </span>
       </div>
       <p
         class="card-text"
-      />
+      >
+        description
+      </p>
     </div>
   </div>
 </div>

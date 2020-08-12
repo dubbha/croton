@@ -4,11 +4,11 @@ import { ShelfItem } from './ShelfItem';
 
 describe('components/ShelfItem', () => {
   const props = {
-    key: '',
-    name: '',
-    location: '',
-    description: '',
-    addNew: false
+    id: 12,
+    name: 'name',
+    location: 'location',
+    description: 'description',
+    onSelect: () => {},
   };
 
   it('should render successfully', () => {

@@ -11,10 +11,11 @@ function* handle(action: ShelfInvite) {
   const { userEmail, shelfId } = action.payload;
 
   try {
-    yield call(http.post, '/shelf/user-invite', {
-      userEmail,
-      shelfId,
-    });
+    yield call(
+      http.post,
+      '/shelf/user-invite',
+      { userEmail, shelfId }
+    );
     yield put({
       type: SHELF_INVITE_SUCCESS,
       payload: { info: 'Invitation sent successfully' }
@@ -22,7 +23,7 @@ function* handle(action: ShelfInvite) {
   } catch (e) {
     yield put({
       type: SHELF_INVITE_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message || e.message }
     });
   }
 }

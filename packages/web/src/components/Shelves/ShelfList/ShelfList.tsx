@@ -1,27 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
+import { getShelf } from 'store/shelf/selectors';
+import { SHELF_GET_SHELVES } from 'store/shelf';
 import { ShelfItem } from '../ShelfItem';
-import { ShelfItemAdd } from '../ShelfItemAdd';
+import { AddShelf } from '../AddShelf';
 
 import './styles.scss';
 
-type Shelf = {
-  id: number,
-  name: string,
-  location: string,
-  description: string
-}
-
-type Props = {
-  shelves: Shelf[]
-}
-
-export const ShelfList = ({ shelves }: Props) => {
+export const ShelfList = () => {
   const dispatch = useDispatch();
+  const { shelves } = useSelector(getShelf);
 
-  const handleShelfSelect = (id: number) => dispatch(push(`/profile/shelf/${id}`));
-  const createShelf = () => dispatch(push('/profile/add-shelf'));
+  useEffect(() => {
+    dispatch({ type: SHELF_GET_SHELVES })
+  }, [dispatch]);
+
+  const selectShelf = (id: number) => dispatch(push(`/profile/shelf/${id}`));
+  const refreshShelves = () => dispatch({ type: SHELF_GET_SHELVES })
 
   return (
     <div className="shelf-list row">
@@ -32,10 +28,10 @@ export const ShelfList = ({ shelves }: Props) => {
           name={shelf.name}
           location={shelf.location}
           description={shelf.description}
-          onSelect={handleShelfSelect}
+          onSelect={selectShelf}
         />
       ))}
-      <ShelfItemAdd onSelect={createShelf} />
+      <AddShelf onClose={refreshShelves} />
     </div>
   );
 };

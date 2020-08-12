@@ -13,6 +13,8 @@ import UserToShelfEntity from '../models/user-to-shelf.entity';
 import SocialProfileDto from '../models/social-profile.dto';
 import RegistrationDto from '../models/registration.dto';
 
+import { Actions } from '../constants/actions';
+
 import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfaces';
 
 import {
@@ -188,7 +190,74 @@ export default class DBService {
     return this.shelfRepository.findOne(id, { relations: ['flowers'] });
   }
 
+  async getShelvesByUserId(userId: number) {
+    const userToShelves = await this.userToShelfRepository.find({ where: { userId }, relations: ['shelf'] });
+    return userToShelves.map(u2s => u2s.shelf);
+  }
+
+  saveShelf(
+    name: string,
+    location: string,
+    description: string,
+    pictureUrl: string,
+  ) {
+    return this.shelfRepository.save({ name, location, description, pictureUrl });
+  }
+
+  updateShelf(
+    id: number,
+    name: string,
+    location: string,
+    description: string,
+    pictureUrl: string,
+  ) {
+    return this.shelfRepository.update(id, { name, location, description, pictureUrl });
+  }
+
+  deleteShelf(id: number) {
+    return this.shelfRepository.delete(id);
+  }
+
   getFlowerById(id: number) {
     return this.flowerRepository.findOne(id);
+  }
+
+  async getFlowersByShelfId(shelfId: number) {
+    const shelf = await this.shelfRepository.findOne({ id: shelfId });
+    return this.flowerRepository.find({ where: { shelf } });
+  }
+
+  async countFlowers(shelfId: number) {
+    const shelf = await this.shelfRepository.findOne({ id: shelfId });
+    return this.flowerRepository.count({ where: { shelf } });
+  }
+
+  async saveFlower(
+    shelfId: number,
+    name: string,
+    description: string,
+    order: number,
+    rrules: { [key in Actions]: string },
+    pictureUrls: string[],
+  ) {
+    const shelf = await this.shelfRepository.findOne({ id: shelfId });
+    return this.flowerRepository.save({ shelf, name, description, order, rrules, pictureUrls });
+  }
+
+  async updateFlower(
+    id: number,
+    shelfId: number,
+    name: string,
+    description: string,
+    order: number,
+    rrules: { [key in Actions]: string },
+    pictureUrls: string[],
+  ) {
+    const shelf = await this.shelfRepository.findOne(shelfId);
+    return this.flowerRepository.update(id, { shelf, name, description, order, rrules, pictureUrls });
+  }
+
+  deleteFlower(id: number) {
+    return this.flowerRepository.delete(id);
   }
 }

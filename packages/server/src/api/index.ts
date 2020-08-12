@@ -16,6 +16,14 @@ const userManagementMergeWithSocial = `${management}/merge-with-social`;
 const shelfUserInvite = `${shelf}/user-invite`;
 const shelfUserInviteAccept = `${shelf}/user-invite-accept`;
 const shelfUserDelete = `${shelf}/user-delete`;
+const shelfAddShelf = `${shelf}/add-shelf`;
+const shelfEditShelf = `${shelf}/edit-shelf`;
+const shelfDeleteShelf = `${shelf}/delete-shelf`;
+const shelfGetShelves = `${shelf}/get-shelves`;
+const shelfAddFlower = `${shelf}/add-flower`;
+const shelfEditFlower = `${shelf}/edit-flower`;
+const shelfDeleteFlower = `${shelf}/delete-flower`;
+const shelfGetFlowers = `${shelf}/get-flowers`;
 const healthCheck = '/health-check';
 
 export const api = {
@@ -23,7 +31,6 @@ export const api = {
   auth,
   authLogin,
   authRegister,
-  healthCheck,
   authLoginFacebook,
   authLoginGoogle,
   authConfirm,
@@ -36,6 +43,15 @@ export const api = {
   shelfUserInvite,
   shelfUserInviteAccept,
   shelfUserDelete,
+  shelfAddShelf,
+  shelfEditShelf,
+  shelfDeleteShelf,
+  shelfGetShelves,
+  shelfAddFlower,
+  shelfEditFlower,
+  shelfDeleteFlower,
+  shelfGetFlowers,
+  healthCheck,
 };
 
 export type Api = typeof api;
