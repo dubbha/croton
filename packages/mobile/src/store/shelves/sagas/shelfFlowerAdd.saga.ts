@@ -9,15 +9,14 @@ import { httpSender } from '../../../services/http/http.service';
 
 function* handle(action: ShelfFlowerAdd) {
   try {
+    const accessForbiddenCode = 403;
     yield put({ type: INFORMATION_LOADER });
 
     const result = yield call(httpSender.send, {
       router: '/api/shelf/add-flower',
       body: action.payload,
     });
-
-    console.dir(result);
-    if (result.status === 403) {
+    if (result.status === accessForbiddenCode) {
       yield put({
         type: INFORMATION_NOTIFY,
         payload: { error: result.message },

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "480421853647",
+    "firebase_url": "https://croton.firebaseio.com",
+    "project_id": "croton",
+    "storage_bucket": "croton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480421853647:android:42e91486d8f9c51355faba",
+        "android_client_info": {
+          "package_name": "com.croton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480421853647-v2dsq3f2g4gabrsuuv5jsm78j7tgjqka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTeuGA6WkOvA3rHEO1K8__4s4JiaoZcQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480421853647-v2dsq3f2g4gabrsuuv5jsm78j7tgjqka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,8 +11,8 @@ import {
 import { connect } from 'react-redux';
 
 import styles from './styles';
-import { InterfaceStore } from './../../../store';
 import { AUTH_LOGIN, PayloadAuthLogin } from './../../../store/auth/actions';
+import { InterfaceStore } from './../../../store';
 import { SignInState, AuthorizationProps } from './../interfaces';
 import {
   inputValidatorClassComponent,
@@ -23,6 +23,8 @@ import { CustomInput } from './../../../components/Input';
 import { Divider } from './../../../components/Divider';
 import { SocialLogin } from './../../../components/SocialLogin';
 import { NotifyMessage } from './../../../components/NotifyMessage';
+
+const signInBg = require('./../../../assets/img/bg-signIn.png');
 
 class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
   constructor(props: AuthorizationProps) {
@@ -135,10 +137,7 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
                     onPress={() => this.submitForm()}
                   />
                 </View>
-                <Image
-                  style={styles.container__img}
-                  source={require('./../../../assets/img/bg-signIn.png')}
-                />
+                <Image style={styles.container__img} source={signInBg} />
               </View>
             </View>
           </ScrollView>
