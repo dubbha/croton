@@ -1,17 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+import { AUTH_LOGIN } from 'store/auth/actions';
+import { getAuth } from 'store/auth/selectors';
+
 import {
   Container,
   Header,
   Footer,
   SignInForm,
-  FbAuth,
-  GoogleAuth,
-} from 'components';
-import { Link } from 'react-router-dom';
-import { AUTH_LOGIN } from 'store/auth/actions';
-import { getAuth } from 'store/auth/selectors';
+  SignInWithSocial
+} from '../../components';
 
 import './styles.scss';
 
@@ -22,7 +22,7 @@ export const SignIn = () => {
   const handleSubmit = (email: string, password: string) => {
     dispatch({
       type: AUTH_LOGIN,
-      payload: { email, password },
+      payload: { email, password }
     });
   };
 
@@ -36,12 +36,7 @@ export const SignIn = () => {
           onSubmit={handleSubmit}
         />
         <div className="auth-separator">or</div>
-        <div className="authButtonContainer">
-          <FbAuth />
-        </div>
-        <div className="authButtonContainer">
-          <GoogleAuth />
-        </div>
+        <SignInWithSocial />
       </div>
       <div className="signin-register">
         Don&apos;t have an account? <Link to="/signup"> Register</Link>

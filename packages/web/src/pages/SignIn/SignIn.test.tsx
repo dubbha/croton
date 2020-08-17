@@ -6,9 +6,19 @@ jest.mock('components', () => ({
   Container: ({ children }) => <div className="container">{children}</div>,
   Header: () => <div>Header</div>,
   Footer: () => <div>Footer</div>,
-  FbAuth: () => <div>FbAuth</div>,
-  GoogleAuth: () => <div>GoogleAuth</div>,
-  SignInForm: ({ onSubmit }) => <button onClick={onSubmit} data-testid="submitButton" className="signInForm" />,
+  SignInForm: ({ onSubmit }) => (
+    <button
+      onClick={onSubmit}
+      data-testid="submitButton"
+      className="signInForm"
+    />
+  ),
+  SignInWithSocial: () => (
+    <div>
+      <div>FbAuth</div>
+      <div>GoogleAuth</div>
+    </div>
+  ),
 }));
 
 describe('pages/SignIn', () => {
@@ -16,7 +26,7 @@ describe('pages/SignIn', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useDispatch: () => jest.fn(),
-        useSelector: () => false
+        useSelector: () => false,
       }));
 
       const { SignIn } = require('./SignIn');
@@ -31,9 +41,8 @@ describe('pages/SignIn', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => false
+        useSelector: () => false,
       }));
-
       const { SignIn } = require('./SignIn');
 
       const { getByTestId } = render(<SignIn />, { wrapper: MemoryRouter });

@@ -180,7 +180,10 @@ describe('DBService', () => {
 
   it('should get user by email', async () => {
     await new DBService().getUserByEmail(email);
-    expect(mockUserRepository.findOne).toBeCalledWith({ email });
+    expect(mockUserRepository.findOne).toBeCalledWith(
+      { email },
+      { relations: ['socialProfile'] }
+    );
   });
 
   it('should update user', async () => {

@@ -2,27 +2,33 @@ import React from 'react';
 import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AUTH_FACEBOOK, AUTH_FACEBOOK_ERROR } from 'store/auth/actions';
-import { getAuth } from 'store/auth/selectors';
+import { getAuth } from '../../store/auth/selectors';
 import { appId, fields, scope, icon } from '../../constants/fb-login-props';
 
-export const FbAuth = () => {
+import { AuthButtonContainerProps } from './interfaces';
+
+export const FbAuth = ({
+  onResponseAction,
+  onErrorAction,
+  errorMessage,
+  buttonText,
+}: AuthButtonContainerProps) => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector(getAuth);
 
   const responseFacebook = (response: ReactFacebookLoginInfo) => {
     const { accessToken } = response;
-    const type = accessToken ? AUTH_FACEBOOK : AUTH_FACEBOOK_ERROR;
+    const type = accessToken ? onResponseAction : onErrorAction;
 
     const payload = accessToken
       ? { accessToken }
       : {
-        error: 'Sorry, something went wrong with logging you in via Facebook '
+        error: errorMessage,
       };
 
     dispatch({
       type,
-      payload
+      payload,
     });
   };
 
@@ -35,6 +41,7 @@ export const FbAuth = () => {
       callback={responseFacebook}
       isDisabled={isLoading}
       size="small"
+      textButton={buttonText}
       buttonStyle={{ width: '100%' }}
       containerStyle={{ width: '70%' }}
     />

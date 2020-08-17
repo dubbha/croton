@@ -4,22 +4,20 @@ import { http } from 'services';
 
 import { handleAuthViaSocials } from './handleAuthViaSocials.saga';
 
-jest.mock('services', () => ({
-  http: { post: jest.fn() }
-}));
-
 jest.mock('connected-react-router', () => ({
-  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
+  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } }),
 }));
 
 describe('system/handleAuthViaSocial', () => {
   const accessToken = 'someMock235678765t';
+  const email = 'somemockemail@mock.com';
+
   const data = {
     id: 'ID',
     fistName: 'FIRST_NAME',
     lastName: 'LAST_NAME',
-    email: 'EMAIL',
-    token: 'TOKEN'
+    token: 'TOKEN',
+    email,
   };
   const apiEndpoint = 'https://some-mock-api.endpoint.com';
   const successActionType = 'SOME_MOCK_SUCCESS_ACTION';
@@ -34,12 +32,13 @@ describe('system/handleAuthViaSocial', () => {
       accessToken,
       apiEndpoint,
       successActionType,
-      errorActionType
+      errorActionType,
+      email,
     })
-      .call(http.post, apiEndpoint, { access_token: accessToken })
+      .call(http.post, apiEndpoint, { access_token: accessToken, email })
       .put({
         type: successActionType,
-        payload: data
+        payload: data,
       })
       .put(push('/profile'))
       .silentRun();
@@ -50,9 +49,9 @@ describe('system/handleAuthViaSocial', () => {
       Promise.reject({
         response: {
           data: {
-            message: 'Error'
-          }
-        }
+            message: 'Error',
+          },
+        },
       })
     );
 
@@ -60,11 +59,11 @@ describe('system/handleAuthViaSocial', () => {
       accessToken,
       apiEndpoint,
       successActionType,
-      errorActionType
+      errorActionType,
     })
       .put({
         type: errorActionType,
-        payload: { error: 'Error' }
+        payload: { error: 'Error' },
       })
       .silentRun();
   });

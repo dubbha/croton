@@ -9,3 +9,5 @@ export * from './authGoogle.saga';
 export * from './authUpdateProfile.saga';
 export * from './authEmailReset.saga';
 export * from './authEmailUpdate.saga';
+export * from './addFacebook.saga';
+export * from './addGoogle.saga';

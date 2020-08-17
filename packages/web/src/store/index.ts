@@ -1,28 +1,22 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {
-  RouterState,
-  connectRouter,
-  routerMiddleware
-} from 'connected-react-router';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { AuthState, authReducer } from './auth';
-import { ShelfState, shelfReducer } from './shelf';
+import { authReducer } from './auth';
+import { shelfReducer } from './shelf';
 import { rootSaga } from './rootSaga';
-
-export interface AppState {
-  router: RouterState;
-  auth: AuthState;
-  shelf: ShelfState;
-}
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
-const authPersistConfig = { key: 'auth', storage, blacklist: ['isLoading', 'info', 'error'] };
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  blacklist: ['isLoading', 'info', 'error'],
+};
 
 const store = createStore(
   combineReducers({
@@ -32,7 +26,7 @@ const store = createStore(
   }),
   composeWithDevTools(
     applyMiddleware(routerMiddleware(history), sagaMiddleware)
-  ),
+  )
 );
 
 export default store;

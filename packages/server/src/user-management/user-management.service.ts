@@ -88,9 +88,14 @@ export default class UserManagementService {
     return createTokenizedUser(updatedUser);
   }
 
-  async mergeUserWithSocialByEmail(email: string): Promise<UserWithToken> {
-    const mergedUser = await this.dbService.mergeUsersByEmail(email);
-
+  async mergeUserWithSocial(
+    user: UserWithToken,
+    email: string
+  ): Promise<UserWithToken> {
+    const mergedUser = await this.dbService.updateUserWithSocialAccount(
+      user,
+      email
+    );
     return createTokenizedUser(mergedUser);
   }
 }

@@ -9,10 +9,10 @@ import {
 import { authGoogle } from './authGoogle.saga';
 import { handleAuthViaSocials } from './handleAuthViaSocials.saga';
 
-describe('system/authFacebook', () => {
+describe('system/authGoogle', () => {
   const accessToken = 'someMock235678765t';
 
-  it('should handle auth via socials with facebook creds', () => {
+  it('should handle auth via socials with google creds', () => {
     return expectSaga(authGoogle)
       .provide([
         [

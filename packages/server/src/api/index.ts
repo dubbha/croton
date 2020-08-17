@@ -24,6 +24,8 @@ const shelfAddFlower = `${shelf}/add-flower`;
 const shelfEditFlower = `${shelf}/edit-flower`;
 const shelfDeleteFlower = `${shelf}/delete-flower`;
 const shelfGetFlowers = `${shelf}/get-flowers`;
+const userManagementAddFacebook = `${management}/add-facebook`;
+const userManagementAddGoogle = `${management}/add-google`;
 const healthCheck = '/health-check';
 
 export const api = {
@@ -52,6 +54,8 @@ export const api = {
   shelfDeleteFlower,
   shelfGetFlowers,
   healthCheck,
+  userManagementAddFacebook,
+  userManagementAddGoogle,
 };
 
 export type Api = typeof api;
