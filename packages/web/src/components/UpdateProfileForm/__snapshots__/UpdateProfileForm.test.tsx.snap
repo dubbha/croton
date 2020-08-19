@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/UpdateProfileForm should display auth error 1`] = `
+<form
+  class=""
+>
+  <div
+    class="fade alert alert-danger show"
+    data-testid="errorAlert"
+    role="alert"
+  >
+    Has been defeated by Bruce Lee
+  </div>
+  
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      First Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__firstName"
+      placeholder="First Name"
+      title="Update my first name"
+      type="text"
+      value="Chuck"
+    />
+    <label
+      class="form-label"
+    >
+      Last Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__lastName"
+      placeholder="Last Name"
+      title="Update my last name"
+      type="text"
+      value="Norris"
+    />
+    <label
+      class="form-label"
+    >
+      Email
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__changeEmail"
+      placeholder="Email"
+      title="Update my email"
+      type="button"
+      value="bigbangkickedbyleg@hero.com"
+    />
+  </div>
+</form>
+`;
+
+exports[`components/UpdateProfileForm should display info if it is provided from auth 1`] = `
+<form
+  class=""
+>
+  <div
+    class="fade alert alert-info show"
+    data-testid="infoAlert"
+    role="alert"
+  >
+    Chuck Norris admits to having trained with Bruce Lee for approximately two years
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      First Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__firstName"
+      placeholder="First Name"
+      title="Update my first name"
+      type="text"
+      value="Chuck"
+    />
+    <label
+      class="form-label"
+    >
+      Last Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__lastName"
+      placeholder="Last Name"
+      title="Update my last name"
+      type="text"
+      value="Norris"
+    />
+    <label
+      class="form-label"
+    >
+      Email
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__changeEmail"
+      placeholder="Email"
+      title="Update my email"
+      type="button"
+      value="bigbangkickedbyleg@hero.com"
+    />
+  </div>
+</form>
+`;
+
+exports[`components/UpdateProfileForm should render successfully 1`] = `
+<form
+  class=""
+>
+  
+  <div
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
+  />
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      First Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__firstName"
+      placeholder="First Name"
+      title="Update my first name"
+      type="text"
+      value="Chuck"
+    />
+    <label
+      class="form-label"
+    >
+      Last Name
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__lastName"
+      placeholder="Last Name"
+      title="Update my last name"
+      type="text"
+      value="Norris"
+    />
+    <label
+      class="form-label"
+    >
+      Email
+    </label>
+    <input
+      class="form-control"
+      data-testid="updateProfileForm__changeEmail"
+      placeholder="Email"
+      title="Update my email"
+      type="button"
+      value="bigbangkickedbyleg@hero.com"
+    />
+  </div>
+</form>
+`;

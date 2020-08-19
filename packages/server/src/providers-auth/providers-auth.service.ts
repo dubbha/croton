@@ -56,11 +56,11 @@ export default class ProvidersAuthService {
     profile: Profile,
     passportIdKeyName: ProvidersIdDBFieldName
   ) {
-    const user = await this.dbService.getUserBySocialProvider(passportIdKeyName, profile.id);
+    let user = await this.dbService.getUserBySocialProvider(passportIdKeyName, profile.id);
     if(!user) {
       const socialProfile = this.formatProviderProfileToDto(profile, passportIdKeyName)
       const registrationDto = this.formatProviderProfileToRegistrationDto(profile, accessToken);
-      await this.dbService.saveUserWithSocialAccount(registrationDto, socialProfile);
+      user = await this.dbService.saveUserWithSocialAccount(registrationDto, socialProfile);
     }
     return createTokenizedUser(user)
   }

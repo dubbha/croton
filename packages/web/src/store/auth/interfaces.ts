@@ -14,4 +14,5 @@ export interface AuthState {
   error: string | null;
   info: string | null;
   socialProfile: SocialProfile | null;
+  isSignedInWithSocial: boolean;
 }
