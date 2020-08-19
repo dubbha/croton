@@ -12,3 +12,4 @@ export * from './ProfileUserDetails';
 export * from './Shelves';
 export * from './Confirm';
 export * from './ManageSocials';
+export * from './UpdateProfileForm';

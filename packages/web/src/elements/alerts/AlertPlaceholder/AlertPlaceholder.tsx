@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const AlertPlaceholder = ({ height = '38px' }: Props) => (
-  <div style={{ height }} />
+  <div style={{ height }} data-testid="alertPlaceholder" />
 );

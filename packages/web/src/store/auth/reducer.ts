@@ -51,6 +51,7 @@ export const initialState: AuthState = {
   error: null,
   info: null,
   socialProfile: null,
+  isSignedInWithSocial: false,
 };
 
 export function authReducer(
@@ -77,9 +78,7 @@ export function authReducer(
       };
     case AUTH_EMAIL_CONFIRM_SUCCESS:
     case AUTH_LOGIN_SUCCESS:
-    case AUTH_UPDATE_EMAIL_SUCCESS:
-    case AUTH_FACEBOOK_SUCCESS:
-    case AUTH_GOOGLE_SUCCESS: {
+    case AUTH_UPDATE_EMAIL_SUCCESS: {
       const {
         id,
         firstName,
@@ -96,6 +95,22 @@ export function authReducer(
         email,
         isLoading: false,
         socialProfile,
+      };
+    }
+
+    case AUTH_FACEBOOK_SUCCESS:
+    case AUTH_GOOGLE_SUCCESS: {
+      const { id, firstName, lastName, email, socialProfile } = action.payload;
+      return {
+        ...state,
+        isAuthenticated: true,
+        id,
+        firstName,
+        lastName,
+        email,
+        isLoading: false,
+        socialProfile,
+        isSignedInWithSocial: true,
       };
     }
     case ADD_FACEBOOK_SUCCESS:
