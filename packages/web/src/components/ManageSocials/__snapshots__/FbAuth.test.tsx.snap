@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FbAuth should render succesfully 1`] = `
+<div>
+  <div>
+    261355841829284
+  </div>
+  <div>
+    email,picture,first_name,last_name
+  </div>
+  <div>
+    public_profile,email
+  </div>
+  <div>
+    fa-facebook
+  </div>
+  <div>
+    small
+  </div>
+  <button
+    data-testid="facebookLoginBtn"
+  >
+    Auth with Facebook
+  </button>
+</div>
+`;

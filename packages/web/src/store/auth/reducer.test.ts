@@ -23,6 +23,7 @@ import {
   AUTH_GOOGLE,
   AUTH_GOOGLE_ERROR,
   AUTH_GOOGLE_SUCCESS,
+  AUTH_UPDATE_EMAIL_SUCCESS,
 } from './actions';
 
 describe('store/auth/reducer', () => {
@@ -32,6 +33,11 @@ describe('store/auth/reducer', () => {
     lastName: 'LAST_NAME',
     email: 'EMAIL',
     token: 'TOKEN',
+  };
+
+  const socialProfile = {
+    facebookId: 'someFacebookId',
+    pictureUrl: 'https://some-picture-url.com',
   };
 
   const authError = 'AUTH WENT WRONG!!!';
@@ -49,7 +55,7 @@ describe('store/auth/reducer', () => {
       AUTH_GOOGLE,
     ];
 
-    actions.forEach((action) => {
+    actions.forEach(action => {
       describe(action, () => {
         it('should start loading', () => {
           expect(
@@ -70,12 +76,11 @@ describe('store/auth/reducer', () => {
   describe('authantication result', () => {
     const actions = [
       AUTH_EMAIL_CONFIRM_SUCCESS,
-      AUTH_FACEBOOK_SUCCESS,
+      AUTH_UPDATE_EMAIL_SUCCESS,
       AUTH_LOGIN_SUCCESS,
-      AUTH_GOOGLE_SUCCESS,
     ];
 
-    actions.forEach((action) => {
+    actions.forEach(action => {
       describe(action, () => {
         it('should handle succesfull authantication', () => {
           const { token, ...userData } = authResult; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -97,6 +102,33 @@ describe('store/auth/reducer', () => {
     });
   });
 
+  describe('authantication with socials result', () => {
+    const actions = [AUTH_FACEBOOK_SUCCESS, AUTH_GOOGLE_SUCCESS];
+
+    actions.forEach(action => {
+      describe(action, () => {
+        it('should handle succesfull authantication', () => {
+          const { token, ...userData } = authResult; // eslint-disable-line @typescript-eslint/no-unused-vars
+          expect(
+            authReducer(
+              { ...initialState, isLoading: true },
+              {
+                type: action as any,
+                payload: { ...authResult, socialProfile },
+              }
+            )
+          ).toEqual({
+            ...initialState,
+            ...userData,
+            socialProfile,
+            isSignedInWithSocial: true,
+            isAuthenticated: true,
+          });
+        });
+      });
+    });
+  });
+
   describe('errors', () => {
     const actions = [
       AUTH_EMAIL_CONFIRM_ERROR,
@@ -105,7 +137,7 @@ describe('store/auth/reducer', () => {
       AUTH_FACEBOOK_ERROR,
       AUTH_GOOGLE_ERROR,
     ];
-    actions.forEach((action) => {
+    actions.forEach(action => {
       describe(action, () => {
         it('should handle errors during authantication', () => {
           expect(
@@ -131,7 +163,7 @@ describe('store/auth/reducer', () => {
       AUTH_RESET_PASSWORD_SUCCESS,
       AUTH_REGISTER_SUCCESS,
     ];
-    actions.forEach((action) => {
+    actions.forEach(action => {
       describe(action, () => {
         it('should save the info about result', () => {
           expect(
@@ -153,7 +185,7 @@ describe('store/auth/reducer', () => {
 
   describe('info + error', () => {
     const actions = [AUTH_UPDATE_PASSWORD_ERROR, AUTH_RESET_PASSWORD_ERROR];
-    actions.forEach((action) => {
+    actions.forEach(action => {
       describe(action, () => {
         it('should handle error and clean up info', () => {
           expect(

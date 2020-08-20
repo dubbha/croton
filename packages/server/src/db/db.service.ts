@@ -73,7 +73,10 @@ export default class DBService {
     const socialProfile = await this.socialProfileRepository.save(
       socialDetails
     );
-    return await this.userRepository.save({ ...userDetails, socialProfile });
+    return await this.userRepository.save({
+      ...userDetails,
+      socialProfile,
+    });
   }
 
   public async getUserBySocialProvider(
@@ -83,7 +86,7 @@ export default class DBService {
     const socialProfile = await this.socialProfileRepository.findOne({
       [providerIdKeyName]: id,
     });
-    if (socialProfile) {
+    if (socialProfile && socialProfile.user) {
       const { user } = socialProfile;
       return { ...user, socialProfile };
     }
@@ -148,7 +151,7 @@ export default class DBService {
   getShelfInvitationByToken(shelfInvitationToken: string) {
     return this.shelfInvitationRepository.findOne(
       { shelfInvitationToken },
-      { relations: ['shelf'] },
+      { relations: ['shelf'] }
     );
   }
 
@@ -163,25 +166,27 @@ export default class DBService {
   }
 
   getShelfInvitationsByUserEmail(userEmail: string) {
-    return this.shelfInvitationRepository.find({ userEmail })
+    return this.shelfInvitationRepository.find({ userEmail });
   }
 
   getUserToShelf(userId: number, shelfId: number) {
-    return this.userToShelfRepository.findOne({ where: { userId, shelfId } })
+    return this.userToShelfRepository.findOne({ where: { userId, shelfId } });
   }
 
   async saveUserToShelf(userId: number, shelfId: number, isAdmin = false) {
     const user = await this.userRepository.findOne(userId);
     const shelf = await this.shelfRepository.findOne(shelfId);
 
-    const userShelvesCount = await this.userToShelfRepository.count({ where: { userId } })
+    const userShelvesCount = await this.userToShelfRepository.count({
+      where: { userId },
+    });
 
     return this.userToShelfRepository.save({
       user,
       shelf,
       isAdmin,
       order: userShelvesCount,
-    })
+    });
   }
 
   async deleteUserToShelf(userId: number, shelfId: number) {
@@ -196,7 +201,10 @@ export default class DBService {
   }
 
   async getShelvesByUserId(userId: number) {
-    const userToShelves = await this.userToShelfRepository.find({ where: { userId }, relations: ['shelf'] });
+    const userToShelves = await this.userToShelfRepository.find({
+      where: { userId },
+      relations: ['shelf'],
+    });
     return userToShelves.map(u2s => u2s.shelf);
   }
 
@@ -204,9 +212,14 @@ export default class DBService {
     name: string,
     location: string,
     description: string,
-    pictureUrl: string,
+    pictureUrl: string
   ) {
-    return this.shelfRepository.save({ name, location, description, pictureUrl });
+    return this.shelfRepository.save({
+      name,
+      location,
+      description,
+      pictureUrl,
+    });
   }
 
   updateShelf(
@@ -214,9 +227,14 @@ export default class DBService {
     name: string,
     location: string,
     description: string,
-    pictureUrl: string,
+    pictureUrl: string
   ) {
-    return this.shelfRepository.update(id, { name, location, description, pictureUrl });
+    return this.shelfRepository.update(id, {
+      name,
+      location,
+      description,
+      pictureUrl,
+    });
   }
 
   deleteShelf(id: number) {
@@ -243,10 +261,17 @@ export default class DBService {
     description: string,
     order: number,
     rrules: { [key in Actions]: string },
-    pictureUrls: string[],
+    pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne({ id: shelfId });
-    return this.flowerRepository.save({ shelf, name, description, order, rrules, pictureUrls });
+    return this.flowerRepository.save({
+      shelf,
+      name,
+      description,
+      order,
+      rrules,
+      pictureUrls,
+    });
   }
 
   async updateFlower(
@@ -256,10 +281,17 @@ export default class DBService {
     description: string,
     order: number,
     rrules: { [key in Actions]: string },
-    pictureUrls: string[],
+    pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne(shelfId);
-    return this.flowerRepository.update(id, { shelf, name, description, order, rrules, pictureUrls });
+    return this.flowerRepository.update(id, {
+      shelf,
+      name,
+      description,
+      order,
+      rrules,
+      pictureUrls,
+    });
   }
 
   deleteFlower(id: number) {
