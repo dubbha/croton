@@ -74,7 +74,11 @@ describe('store/auth/reducer', () => {
   });
 
   describe('authantication result', () => {
-    const actions = [AUTH_EMAIL_CONFIRM_SUCCESS, AUTH_LOGIN_SUCCESS];
+    const actions = [
+      AUTH_EMAIL_CONFIRM_SUCCESS,
+      AUTH_UPDATE_EMAIL_SUCCESS,
+      AUTH_LOGIN_SUCCESS,
+    ];
 
     actions.forEach(action => {
       describe(action, () => {

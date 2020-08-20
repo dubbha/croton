@@ -46,15 +46,15 @@ export const UpdateProfileForm = () => {
 
   React.useEffect(() => {
     setDisplayedInfo(info || '');
-    if (info) {
-      return () => {
+    return info
+      ? () => {
         clearTimeout(
           setTimeout(() => {
             setDisplayedInfo('');
           }, INFO_DISPLAY_TIME_MS)
         );
-      };
-    }
+      }
+      : () => {};
   }, [info]);
 
   return (
