@@ -3,18 +3,18 @@ import { http } from 'services';
 import {
   AUTH_RESET_EMAIL,
   AUTH_RESET_EMAIL_SUCCESS,
-  AUTH_RESET_EMAIL_ERROR
+  AUTH_RESET_EMAIL_ERROR,
 } from '../actions';
 import { authEmailResetSaga } from './authEmailReset.saga';
 
 jest.mock('services', () => ({
   http: {
-    get: jest.fn()
-  }
+    get: jest.fn(),
+  },
 }));
 
 jest.mock('connected-react-router', () => ({
-  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
+  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } }),
 }));
 
 describe('system/authEmailResetSaga', () => {
@@ -27,11 +27,11 @@ describe('system/authEmailResetSaga', () => {
         type: AUTH_RESET_EMAIL_SUCCESS,
         payload: {
           info:
-            'Check your email for email change confirmation message and follow provided link!'
-        }
+            'Check your email for email change confirmation message and follow provided link!',
+        },
       })
       .dispatch({
-        type: AUTH_RESET_EMAIL
+        type: AUTH_RESET_EMAIL,
       })
       .silentRun();
   });
@@ -41,19 +41,18 @@ describe('system/authEmailResetSaga', () => {
       Promise.reject({
         response: {
           data: {
-            message: 'Error'
-          }
-        }
-      })
-    );
+            message: 'Error',
+          },
+        },
+      }));
 
     return expectSaga(authEmailResetSaga)
       .put({
         type: AUTH_RESET_EMAIL_ERROR,
-        payload: { error: 'Error' }
+        payload: { error: 'Error' },
       })
       .dispatch({
-        type: AUTH_RESET_EMAIL
+        type: AUTH_RESET_EMAIL,
       })
       .silentRun();
   });

@@ -4,8 +4,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { Shelves } from './Shelves';
 
 jest.mock('./ShelfList', () => ({
-  ShelfList: () => <div>Shelf List</div>
-}))
+  ShelfList: () => <div>Shelf List</div>,
+}));
 
 describe('components/Shelves', () => {
   it('should render successfully', () => {

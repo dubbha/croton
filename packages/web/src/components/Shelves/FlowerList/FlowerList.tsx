@@ -9,7 +9,7 @@ import { AddFlower } from '../AddFlower';
 import './styles.scss';
 
 type Props = {
-  shelfId: number,
+  shelfId: number;
 }
 
 export const FlowerList = ({ shelfId }: Props) => {
@@ -17,11 +17,11 @@ export const FlowerList = ({ shelfId }: Props) => {
   const { flowers } = useSelector(getShelf);
 
   useEffect(() => {
-    dispatch({ type: SHELF_GET_FLOWERS, payload: { shelfId } })
+    dispatch({ type: SHELF_GET_FLOWERS, payload: { shelfId } });
   }, [dispatch, shelfId]);
 
   const selectFlower = (id) => dispatch(push(`/profile/flower/${id}`));
-  const refreshFlowers = () => dispatch({ type: SHELF_GET_FLOWERS, payload: { shelfId } })
+  const refreshFlowers = () => dispatch({ type: SHELF_GET_FLOWERS, payload: { shelfId } });
 
   return (
     <div className="flowers-list row">

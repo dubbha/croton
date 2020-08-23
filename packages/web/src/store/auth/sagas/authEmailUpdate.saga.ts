@@ -5,7 +5,7 @@ import {
   AUTH_UPDATE_EMAIL,
   AUTH_UPDATE_EMAIL_SUCCESS,
   AUTH_UPDATE_EMAIL_ERROR,
-  AuthUpdateEmail
+  AuthUpdateEmail,
 } from '../actions';
 
 function* handle(action: AuthUpdateEmail) {
@@ -14,7 +14,7 @@ function* handle(action: AuthUpdateEmail) {
   if (!emailResetToken || !email) {
     yield put({
       type: AUTH_UPDATE_EMAIL_ERROR,
-      payload: { error: 'Token parse error' }
+      payload: { error: 'Token parse error' },
     });
 
     return;
@@ -22,21 +22,21 @@ function* handle(action: AuthUpdateEmail) {
   try {
     const result = yield call(http.post, '/management/email-update', {
       email,
-      emailResetToken
+      emailResetToken,
     });
     const {
-      data: { token, ...userData }
+      data: { token, ...userData },
     } = result;
     yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: AUTH_UPDATE_EMAIL_SUCCESS,
-      payload: userData
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
     yield put({
       type: AUTH_UPDATE_EMAIL_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

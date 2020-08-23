@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { LeafIcon } from 'elements';
-import { EditFlower } from '../EditFlower';
 import { Confirm } from 'components';
 import { SHELF_GET_FLOWER, SHELF_DELETE_FLOWER } from 'store/shelf';
 import { getFlower } from 'store/shelf/selectors';
+import { EditFlower } from '../EditFlower';
 import './styles.scss';
 
 export const Flower = () => {
@@ -21,12 +21,12 @@ export const Flower = () => {
     }
   }, [dispatch, flower, flowerId]);
 
-  const handleClose = () => dispatch({ type: SHELF_GET_FLOWER, payload: { id: flowerId } });;
+  const handleClose = () => dispatch({ type: SHELF_GET_FLOWER, payload: { id: flowerId } });
 
   const deleteFlower = () => dispatch({
     type: SHELF_DELETE_FLOWER,
     payload: { id: flowerId, shelfId: flower?.shelfId },
-  })
+  });
 
   return (
     <div className="container flower">

@@ -5,7 +5,7 @@ import {
   AUTH_EMAIL_CONFIRM,
   AUTH_EMAIL_CONFIRM_SUCCESS,
   AUTH_EMAIL_CONFIRM_ERROR,
-  AuthEmailConfirm
+  AuthEmailConfirm,
 } from '../actions';
 
 function* handle(action: AuthEmailConfirm) {
@@ -14,28 +14,28 @@ function* handle(action: AuthEmailConfirm) {
   if (!emailVerificationToken) {
     yield put({
       type: AUTH_EMAIL_CONFIRM_ERROR,
-      payload: { error: 'Token parse error' }
+      payload: { error: 'Token parse error' },
     });
     return;
   }
 
   try {
     const result = yield call(http.post, '/auth/confirm', {
-      emailVerificationToken
+      emailVerificationToken,
     });
     const {
-      data: { token, ...userData }
+      data: { token, ...userData },
     } = result;
     yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: AUTH_EMAIL_CONFIRM_SUCCESS,
-      payload: userData
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
     yield put({
       type: AUTH_EMAIL_CONFIRM_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

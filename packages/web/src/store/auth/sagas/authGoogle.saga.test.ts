@@ -4,7 +4,7 @@ import { call } from 'redux-saga/effects';
 import {
   AUTH_GOOGLE_ERROR,
   AUTH_GOOGLE_SUCCESS,
-  AUTH_GOOGLE
+  AUTH_GOOGLE,
 } from '../actions';
 import { authGoogle } from './authGoogle.saga';
 import { handleAuthViaSocials } from './handleAuthViaSocials.saga';

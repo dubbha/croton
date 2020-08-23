@@ -12,17 +12,17 @@ function* handle(action: ShelfGetFlowers) {
     const { data } = yield call(
       http.post,
       '/shelf/get-flowers',
-      { shelfId: action.payload.shelfId }
+      { shelfId: action.payload.shelfId },
     );
     yield put({
       type: SHELF_GET_FLOWERS_SUCCESS,
-      payload: { flowers: data }
+      payload: { flowers: data },
     });
   } catch (e) {
     console.error(e);
     yield put({
       type: SHELF_GET_FLOWERS_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

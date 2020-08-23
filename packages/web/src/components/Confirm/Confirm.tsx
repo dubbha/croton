@@ -23,7 +23,7 @@ export const Confirm = ({
   const handleClose = () => {
     setShowModal(false);
     onCancel();
-  }
+  };
 
   return (
     <>

@@ -4,7 +4,7 @@ import {
   SubmitButton,
   ErrorAlert,
   AlertPlaceholder,
-  LoadingSpinner
+  LoadingSpinner,
 } from 'elements';
 
 type Props = {

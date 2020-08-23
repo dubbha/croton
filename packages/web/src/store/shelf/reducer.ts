@@ -52,7 +52,7 @@ export const initialState: ShelfState = {
 
 export function shelfReducer(
   state = initialState,
-  action: ShelfActionTypes | LocationChangeAction
+  action: ShelfActionTypes | LocationChangeAction,
 ): ShelfState {
   switch (action.type) {
     case SHELF_INVITE:
@@ -71,7 +71,7 @@ export function shelfReducer(
         ...state,
         isLoading: true,
         error: null,
-        info: null
+        info: null,
       };
     case SHELF_INVITE_SUCCESS:
     case SHELF_INVITE_ACCEPT_SUCCESS:
@@ -85,26 +85,26 @@ export function shelfReducer(
       return {
         ...state,
         isLoading: false,
-        info: action.payload.info
+        info: action.payload.info,
       };
     case SHELF_GET_SHELVES_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        shelves: action.payload.shelves
-      }
+        shelves: action.payload.shelves,
+      };
     case SHELF_GET_FLOWERS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        flowers: action.payload.flowers
-      }
+        flowers: action.payload.flowers,
+      };
     case SHELF_GET_FLOWER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        flower: action.payload.flower
-      }
+        flower: action.payload.flower,
+      };
     case SHELF_INVITE_ERROR:
     case SHELF_INVITE_ACCEPT_ERROR:
     case SHELF_DELETE_USER_ERROR:
@@ -121,7 +121,7 @@ export function shelfReducer(
         ...state,
         isLoading: false,
         error: action.payload.error,
-        info: null
+        info: null,
       };
     case SHELF_RESET:
     case LOCATION_CHANGE:
@@ -129,7 +129,7 @@ export function shelfReducer(
         ...state,
         isLoading: false,
         error: null,
-        info: null
+        info: null,
       };
     default:
       return state;

@@ -38,13 +38,12 @@ export const useCustomForm = ({ initialValues, errorsRules }) => {
     handleErrors(name, value);
   };
 
-  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) : void  => {
+  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) : void => {
     const { target } = event;
     const { name, value } = target;
     setTouched({ ...touched, [name]: true });
     handleErrors(name, value);
   };
-
 
   return {
     values,

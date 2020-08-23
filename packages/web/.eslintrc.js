@@ -40,8 +40,9 @@ module.exports = {
           'services',
           'hooks',
           'helpers',
-        ],
-      },
+          'constants',
+        ]
+      }
     ],
     'react/jsx-filename-extension': [
       'warn',

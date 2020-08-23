@@ -25,8 +25,8 @@ const store = createStore(
     shelf: shelfReducer,
   }),
   composeWithDevTools(
-    applyMiddleware(routerMiddleware(history), sagaMiddleware)
-  )
+    applyMiddleware(routerMiddleware(history), sagaMiddleware),
+  ),
 );
 
 export default store;

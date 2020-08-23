@@ -6,7 +6,7 @@ describe('components/AddShelfForm', () => {
   const fn = jest.fn();
 
   const props = {
-    onSubmit: fn
+    onSubmit: fn,
   };
 
   afterEach(() => {

@@ -7,7 +7,7 @@ describe('pages/SignOut', () => {
     const dispatchFn = jest.fn();
     jest.doMock('react-redux', () => ({
       useDispatch: () => dispatchFn,
-      useSelector: () => false
+      useSelector: () => false,
     }));
 
     const pushFn = jest.fn(() => ({ type: 'PUSH_TYPE' }));

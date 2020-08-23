@@ -21,14 +21,14 @@ export const InviteUserToShelf = ({ shelfId }: Props) => {
     e.preventDefault();
     dispatch({
       type: SHELF_INVITE,
-      payload: { shelfId, userEmail }
+      payload: { shelfId, userEmail },
     });
   };
 
   const handleClose = () => {
     setShowModal(false);
     dispatch({ type: SHELF_RESET });
-  }
+  };
 
   return (
     <>

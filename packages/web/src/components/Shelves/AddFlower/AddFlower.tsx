@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal, PlusIcon, BookmarkIcon, Card } from 'elements';
 import { getShelf } from 'store/shelf/selectors';
 import { SHELF_ADD_FLOWER } from 'store/shelf';
-import { FlowerForm } from '../FlowerForm';
 import { Actions } from 'constants/actions';
+import { FlowerForm } from '../FlowerForm';
 
 type Props = {
   shelfId: number;
@@ -25,7 +25,7 @@ export const AddFlower = ({ shelfId, onClose = () => {} }: Props) => {
   const handleClose = () => {
     setShowModal(false);
     onClose();
-  }
+  };
 
   return (
     <>

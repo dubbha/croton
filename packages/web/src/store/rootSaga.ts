@@ -12,7 +12,7 @@ import {
   addGoogle,
   authUpdateProfileSaga,
   authEmailResetSaga,
-  authEmailUpdateSaga
+  authEmailUpdateSaga,
 } from './auth/sagas';
 import {
   shelfInviteSaga,

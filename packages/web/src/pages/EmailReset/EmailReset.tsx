@@ -14,10 +14,10 @@ export const EmailReset = () => {
     (email: string): void => {
       dispatch({
         type: AUTH_UPDATE_EMAIL,
-        payload: { email, emailResetToken }
+        payload: { email, emailResetToken },
       });
     },
-    [dispatch, emailResetToken]
+    [dispatch, emailResetToken],
   );
 
   return (

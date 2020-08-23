@@ -16,12 +16,12 @@ function* handle(action: ShelfEditFlower) {
     );
     yield put({
       type: SHELF_EDIT_FLOWER_SUCCESS,
-      payload: { info: 'Flower updated successfully' }
+      payload: { info: 'Flower updated successfully' },
     });
   } catch (e) {
     yield put({
       type: SHELF_EDIT_FLOWER_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

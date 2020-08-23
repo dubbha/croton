@@ -294,14 +294,10 @@ export default class DBService {
     pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne(shelfId);
-    return this.flowerRepository.update(id, {
-      shelf,
-      name,
-      description,
-      order,
-      rrules,
-      pictureUrls,
-    });
+    return this.flowerRepository.update(
+      id,
+      { shelf, name, description, order, rrules, pictureUrls },
+    );
   }
 
   deleteFlower(id: number) {

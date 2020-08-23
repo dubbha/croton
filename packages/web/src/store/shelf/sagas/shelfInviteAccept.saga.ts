@@ -4,7 +4,7 @@ import {
   SHELF_INVITE_ACCEPT,
   SHELF_INVITE_ACCEPT_SUCCESS,
   SHELF_INVITE_ACCEPT_ERROR,
-  ShelfInviteAccept
+  ShelfInviteAccept,
 } from '../actions';
 
 function* handle(action: ShelfInviteAccept) {
@@ -22,16 +22,16 @@ function* handle(action: ShelfInviteAccept) {
     yield call(
       http.post,
       '/shelf/user-invite-accept',
-      { shelfInvitationToken }
+      { shelfInvitationToken },
     );
     yield put({
       type: SHELF_INVITE_ACCEPT_SUCCESS,
-      payload: { info: 'Invitation accepted successfully' }
+      payload: { info: 'Invitation accepted successfully' },
     });
   } catch (e) {
     yield put({
       type: SHELF_INVITE_ACCEPT_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

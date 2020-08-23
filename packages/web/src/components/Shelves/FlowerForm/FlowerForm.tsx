@@ -31,7 +31,7 @@ export const FlowerForm = ({
       [Actions.WATERING]: '',
       [Actions.HYDRATION]: '',
       [Actions.FERTILIZING]: '',
-    }
+    },
   },
 }: Props) => {
   const nameErrorMessage = (name: string): string | null => {
@@ -73,7 +73,7 @@ export const FlowerForm = ({
   useEffect(() => {
     setIsValid(
       !!values.name && !!values.description
-      && !errors.name && !errors.description
+      && !errors.name && !errors.description,
     );
   }, [errors, values]);
 
@@ -81,15 +81,15 @@ export const FlowerForm = ({
 
   const handleRruleChange = action => rrule => {
     console.log(`${action} RRule changed, now it's ${rrule}`);
-    const dtstartNow = `${new Date(Date.now()).toISOString().replace(/[-:.]/g, '').slice(0,-4)}Z`;
+    const dtstartNow = `${new Date(Date.now()).toISOString().replace(/[-:.]/g, '').slice(0, -4)}Z`;
 
     setRrules({
       ...rrules,
-      [action]: `DTSTART:${dtstartNow}\n${rrule}`
-    })
+      [action]: `DTSTART:${dtstartNow}\n${rrule}`,
+    });
 
     console.log(rrules);
-  }
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -133,25 +133,25 @@ export const FlowerForm = ({
       <Form.Group>
         <Form.Label>Care schedules</Form.Label>
         <Accordion>
-          {Object.entries(rrules).map(([action, rrule]) =>
-              <Card key={action}>
-                <Accordion.Toggle as={Card.Header} eventKey={action}>
-                  {action}
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey={action}>
-                  <div className="rrule-generator">
-                    <RRuleGenerator
-                      config={{
-                        hideEnd: true,
-                        repeat: ['Monthly', 'Weekly', 'Daily', 'Hourly'],
-                      }}
-                      value={rrule}
-                      onChange={handleRruleChange(action)}
-                    />
-                  </div>
-                </Accordion.Collapse>
-              </Card>
-          )}
+          {Object.entries(rrules).map(([action, rrule]) => (
+            <Card key={action}>
+              <Accordion.Toggle as={Card.Header} eventKey={action}>
+                {action}
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey={action}>
+                <div className="rrule-generator">
+                  <RRuleGenerator
+                    config={{
+                      hideEnd: true,
+                      repeat: ['Monthly', 'Weekly', 'Daily', 'Hourly'],
+                    }}
+                    value={rrule}
+                    onChange={handleRruleChange(action)}
+                  />
+                </div>
+              </Accordion.Collapse>
+            </Card>
+          ))}
         </Accordion>
       </Form.Group>
 

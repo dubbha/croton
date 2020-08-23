@@ -4,7 +4,7 @@ import {
   AUTH_GOOGLE_ERROR,
   AuthGoogle,
   AUTH_GOOGLE_SUCCESS,
-  AUTH_GOOGLE
+  AUTH_GOOGLE,
 } from '../actions';
 
 import { handleAuthViaSocials } from './handleAuthViaSocials.saga';
@@ -14,7 +14,7 @@ function* handle(action: AuthGoogle) {
     accessToken: action.payload.accessToken,
     apiEndpoint: '/auth/google',
     successActionType: AUTH_GOOGLE_SUCCESS,
-    errorActionType: AUTH_GOOGLE_ERROR
+    errorActionType: AUTH_GOOGLE_ERROR,
   });
 }
 

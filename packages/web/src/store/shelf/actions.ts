@@ -1,5 +1,5 @@
-import { Shelf, Flower } from './interfaces';
 import { Actions } from 'constants/actions';
+import { Shelf, Flower } from './interfaces';
 
 export const SHELF_INVITE = 'SHELF_INVITE';
 export const SHELF_INVITE_SUCCESS = 'SHELF_INVITE_SUCCESS';
@@ -158,7 +158,12 @@ export interface ShelfGetShelvesError {
 
 export interface ShelfAddFlower {
   type: typeof SHELF_ADD_FLOWER;
-  payload: { shelfId: number, name: string, description: string, rrules: { [key in Actions]?: string } };
+  payload: {
+    shelfId: number,
+    name: string,
+    description: string,
+    rrules: { [key in Actions]?: string }
+  };
 }
 
 export interface ShelfAddFlowerSuccess {
@@ -178,7 +183,7 @@ export interface ShelfEditFlower {
     shelfId: number,
     name: string,
     description: string,
-    rrules: { [key in Actions]?: string }
+    rrules: { [key in Actions]?: string },
   };
 }
 
@@ -278,5 +283,4 @@ export type ShelfActionTypes =
   | ShelfGetFlower
   | ShelfGetFlowerSuccess
   | ShelfGetFlowerError
-  | ShelfReset
-;
+  | ShelfReset;

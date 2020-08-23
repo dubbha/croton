@@ -6,14 +6,14 @@ import { Home } from './Home';
 jest.mock('components/Header', () => {
   const React = require('react');
   return {
-    Header: () => <div>Header</div>
+    Header: () => <div>Header</div>,
   };
 });
 
 jest.mock('components/Footer', () => {
   const React = require('react');
   return {
-    Footer: () => <div>Footer</div>
+    Footer: () => <div>Footer</div>,
   };
 });
 

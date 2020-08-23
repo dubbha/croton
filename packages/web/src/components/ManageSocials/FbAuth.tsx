@@ -22,9 +22,7 @@ export const FbAuth = ({
 
     const payload = accessToken
       ? { accessToken }
-      : {
-        error: errorMessage,
-      };
+      : { error: errorMessage };
 
     dispatch({
       type,

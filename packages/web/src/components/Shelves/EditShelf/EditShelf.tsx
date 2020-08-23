@@ -26,7 +26,7 @@ export const EditShelf = ({ id, initialValues, onClose = () => {} }: Props) => {
   const handleClose = () => {
     setShowModal(false);
     onClose();
-  }
+  };
 
   return (
     <>

@@ -17,7 +17,6 @@ export type Flower = {
   shelfId: number,
 }
 
-
 export interface ShelfState {
   isLoading: boolean;
   error: string | null;

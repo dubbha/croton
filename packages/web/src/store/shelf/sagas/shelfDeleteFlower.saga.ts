@@ -15,17 +15,17 @@ function* handle(action: ShelfDeleteFlower) {
     yield call(
       http.post,
       '/shelf/delete-flower',
-      { id, shelfId }
+      { id, shelfId },
     );
     yield put({
       type: SHELF_DELETE_FLOWER_SUCCESS,
-      payload: { info: 'Shelf added successfully' }
+      payload: { info: 'Shelf added successfully' },
     });
     yield put(push(`/profile/shelf/${shelfId}`));
   } catch (e) {
     yield put({
       type: SHELF_DELETE_FLOWER_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

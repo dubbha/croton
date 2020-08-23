@@ -10,17 +10,17 @@ function* handle() {
   try {
     const { data } = yield call(
       http.post,
-      '/shelf/get-shelves'
+      '/shelf/get-shelves',
     );
     yield put({
       type: SHELF_GET_SHELVES_SUCCESS,
-      payload: { shelves: data }
+      payload: { shelves: data },
     });
   } catch (e) {
     console.error(e);
     yield put({
       type: SHELF_GET_SHELVES_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

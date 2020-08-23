@@ -20,12 +20,12 @@ export const Shelf = () => {
 
   useEffect(() => {
     if (!shelves.length) {
-      dispatch({ type: SHELF_GET_SHELVES })
+      dispatch({ type: SHELF_GET_SHELVES });
     }
   }, [dispatch, shelves.length]);
 
   const refreshShelves = () => dispatch({ type: SHELF_GET_SHELVES });
-  const deleteShelf = () => dispatch({ type: SHELF_DELETE_SHELF, payload: { id: shelfId } })
+  const deleteShelf = () => dispatch({ type: SHELF_DELETE_SHELF, payload: { id: shelfId } });
 
   const shelf = shelves.find(s => s.id === shelfId);
 

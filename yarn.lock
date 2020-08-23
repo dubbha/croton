@@ -14840,10 +14840,10 @@ roarr@^2.15.3:
     semver-compare "^1.0.0"
     sprintf-js "^1.1.2"
 
-rrule@^2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.6.5.tgz#712eb58681f13d2d78d44da68480c1be744efaea"
-  integrity sha512-F9Cnuj/Qgqja7c32+BFg7ahMYNiZDaX50mZadJrZtJpAE6ChOKjaXz4n3JwPn3Gc3LbHQQffwfkXT3IWIkcbqQ==
+rrule@2.6.4:
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.6.4.tgz#7f4f31fda12bc7249bb176c891109a9bc448e035"
+  integrity sha512-sLdnh4lmjUqq8liFiOUXD5kWp/FcnbDLPwq5YAc/RrN6120XOPb86Ae5zxF7ttBVq8O3LxjjORMEit1baluahA==
   dependencies:
     tslib "^1.10.0"
   optionalDependencies:
