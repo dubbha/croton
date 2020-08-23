@@ -1,3 +1,5 @@
+import { Actions } from 'constants/actions';
+
 export type Shelf = {
   id: number,
   name: string,
@@ -11,6 +13,8 @@ export type Flower = {
   name: string,
   description: string,
   pictureUrls: string[],
+  rrules: { [key in Actions]: string },
+  shelfId: number,
 }
 
 
@@ -20,4 +24,5 @@ export interface ShelfState {
   info: string | null;
   shelves: Shelf[];
   flowers: Flower[];
+  flower: Flower | null;
 }

@@ -10778,6 +10778,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+luxon@^1.21.3:
+  version "1.24.1"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.24.1.tgz#a8383266131ed4eaed4b5f430f96f3695403a52a"
+  integrity sha512-CgnIMKAWT0ghcuWFfCWBnWGOddM0zu6c4wZAWmD0NN7MZTnro0+833DF6tJep+xlxRPg4KtsYEHYLfTMBQKwYg==
+
 make-dir@^1.0.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.3.0.tgz#79c1033b80515bd6d24ec9933e860ca75ee27f0c"
@@ -14144,6 +14149,11 @@ react-router@5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-rrule-generator@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-rrule-generator/-/react-rrule-generator-1.2.0.tgz#66402b044c67d1b6a6a4536bc72f78d22e0e0d07"
+  integrity sha512-6gBsrbfGaShZ+a8ASOqHwRr8aM/Yfmo5cfQaCEDHd7vU7PRLt7Te/cQl+4r56uvDQihNJaKBXU65DY2oKjqq0w==
+
 react-scripts@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.1.tgz#f551298b5c71985cc491b9acf3c8e8c0ae3ada0a"
@@ -14829,6 +14839,15 @@ roarr@^2.15.3:
     json-stringify-safe "^5.0.1"
     semver-compare "^1.0.0"
     sprintf-js "^1.1.2"
+
+rrule@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.6.5.tgz#712eb58681f13d2d78d44da68480c1be744efaea"
+  integrity sha512-F9Cnuj/Qgqja7c32+BFg7ahMYNiZDaX50mZadJrZtJpAE6ChOKjaXz4n3JwPn3Gc3LbHQQffwfkXT3IWIkcbqQ==
+  dependencies:
+    tslib "^1.10.0"
+  optionalDependencies:
+    luxon "^1.21.3"
 
 rsvp@^4.8.4:
   version "4.8.5"

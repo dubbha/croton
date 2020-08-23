@@ -102,7 +102,7 @@ export default class ShelfService {
     }: ShelfAddFlowerDto,
   ): Promise<void> {
     if (order === undefined) {
-      order = await this.dbService.countFlowers(shelfId);
+      order = await this.dbService.countFlowersByShelfId(shelfId);
     }
     await this.dbService.saveFlower(shelfId, name, description, order, rrules, pictureUrls, );
   }
@@ -127,5 +127,9 @@ export default class ShelfService {
 
   getFlowers(shelfId: number) {
     return this.dbService.getFlowersByShelfId(shelfId);
+  }
+
+  getFlowerById(id: number) {
+    return this.dbService.getFlowerById(id);
   }
 }

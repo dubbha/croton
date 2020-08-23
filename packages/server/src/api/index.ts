@@ -13,6 +13,8 @@ const userManagementEmailReset = `${management}/email-reset`;
 const userManagementEmailUpdate = `${management}/email-update`;
 const userManagementUserUpdate = `${management}/user-update`;
 const userManagementMergeWithSocial = `${management}/merge-with-social`;
+const userManagementAddFacebook = `${management}/add-facebook`;
+const userManagementAddGoogle = `${management}/add-google`;
 const shelfUserInvite = `${shelf}/user-invite`;
 const shelfUserInviteAccept = `${shelf}/user-invite-accept`;
 const shelfUserDelete = `${shelf}/user-delete`;
@@ -24,8 +26,7 @@ const shelfAddFlower = `${shelf}/add-flower`;
 const shelfEditFlower = `${shelf}/edit-flower`;
 const shelfDeleteFlower = `${shelf}/delete-flower`;
 const shelfGetFlowers = `${shelf}/get-flowers`;
-const userManagementAddFacebook = `${management}/add-facebook`;
-const userManagementAddGoogle = `${management}/add-google`;
+const shelfGetFlower = `${shelf}/get-flower`;
 const healthCheck = '/health-check';
 
 export const api = {
@@ -53,6 +54,7 @@ export const api = {
   shelfEditFlower,
   shelfDeleteFlower,
   shelfGetFlowers,
+  shelfGetFlower,
   healthCheck,
   userManagementAddFacebook,
   userManagementAddGoogle,

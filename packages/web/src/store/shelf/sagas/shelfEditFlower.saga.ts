@@ -8,17 +8,15 @@ import {
 } from '../actions';
 
 function* handle(action: ShelfEditFlower) {
-  const { name, description } = action.payload;
-
   try {
     yield call(
       http.post,
       '/shelf/edit-flower',
-      { name, description }
+      { ...action.payload },
     );
     yield put({
       type: SHELF_EDIT_FLOWER_SUCCESS,
-      payload: { info: 'Flower added successfully' }
+      payload: { info: 'Flower updated successfully' }
     });
   } catch (e) {
     yield put({

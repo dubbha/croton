@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, PlusIcon, BookmarkIcon, Card } from 'elements';
+import { Modal, Button, BookmarkIcon } from 'elements';
 import { getShelf } from 'store/shelf/selectors';
-import { SHELF_ADD_FLOWER } from 'store/shelf';
+import { SHELF_EDIT_FLOWER } from 'store/shelf';
 import { FlowerForm } from '../FlowerForm';
 import { Actions } from 'constants/actions';
 
 type Props = {
-  shelfId: number;
+  id: number;
+  initialValues?: {
+    name?: string;
+    description?: string,
+    rrules?: { [key in Actions]?: string };
+    shelfId?: number;
+  };
+  onSubmit?: () => void;
   onClose?: () => void;
-}
+};
 
-export const AddFlower = ({ shelfId, onClose = () => {} }: Props) => {
+export const EditFlower = ({
+  initialValues,
+  onClose = () => {},
+}: Props) => {
+
   const [showModal, setShowModal] = useState(false);
+
   const { isLoading, info, error } = useSelector(getShelf);
   const dispatch = useDispatch();
 
-  const handleSubmit = (name: string, description: string, rrules: { [key in Actions]?: string }) =>
+  const handleSubmit = (name: string, description: string, rrules: { [key in Actions]?: string }) => {
     dispatch({
-      type: SHELF_ADD_FLOWER,
-      payload: { shelfId, name, description, rrules },
+      type: SHELF_EDIT_FLOWER,
+      payload: { ...initialValues, name, description, rrules },
     });
+  }
 
   const handleClose = () => {
     setShowModal(false);
@@ -29,18 +42,9 @@ export const AddFlower = ({ shelfId, onClose = () => {} }: Props) => {
 
   return (
     <>
-      <div className="shelf-item">
-        <Card text="primary" onClick={() => setShowModal(true)}>
-          <div className="shelf-item-new">
-            <Card.Title>
-              <PlusIcon />
-              <span className="icon-prefix">
-                Add Flower
-              </span>
-            </Card.Title>
-          </div>
-        </Card>
-      </div>
+      <Button variant="outline-primary" onClick={() => setShowModal(true)}>
+        Edit Flower
+      </Button>
       <Modal
         show={showModal}
         onHide={handleClose}
@@ -50,15 +54,18 @@ export const AddFlower = ({ shelfId, onClose = () => {} }: Props) => {
         <Modal.Header closeButton>
           <Modal.Title>
             <BookmarkIcon />
-            <span className="icon-prefix">Add Flower to Shelf</span>
+            <span className="icon-prefix">
+              Edit Flower
+            </span>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FlowerForm
             onSubmit={handleSubmit}
-            isLoading={isLoading}
             info={info}
             error={error}
+            isLoading={isLoading}
+            initialValues={initialValues}
           />
         </Modal.Body>
       </Modal>

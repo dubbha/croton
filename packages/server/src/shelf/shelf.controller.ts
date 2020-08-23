@@ -89,6 +89,12 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       this.getFlowersHandler
     );
+
+    this.router.post(
+      this.serverApi.shelfGetFlower,
+      authMiddleware,
+      this.getFlowerHandler
+    );
   }
 
   private userInviteHanlder = async (
@@ -237,6 +243,19 @@ export default class ShelfController extends BaseController {
   ): Promise<void> => {
     try {
       const flowers = await this.shelfService.getFlowers(request.body.shelfId);
+      response.status(200).send(flowers);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const flowers = await this.shelfService.getFlowerById(request.body.id);
       response.status(200).send(flowers);
     } catch (error) {
       next(error);

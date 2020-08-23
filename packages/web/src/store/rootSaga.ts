@@ -26,6 +26,7 @@ import {
   shelfEditFlowerSaga,
   shelfDeleteFlowerSaga,
   shelfGetFlowersSaga,
+  shelfGetFlowerSaga,
 } from './shelf/sagas';
 
 export function* rootSaga() {
@@ -54,5 +55,6 @@ export function* rootSaga() {
     shelfEditFlowerSaga(),
     shelfDeleteFlowerSaga(),
     shelfGetFlowersSaga(),
+    shelfGetFlowerSaga(),
   ]);
 }

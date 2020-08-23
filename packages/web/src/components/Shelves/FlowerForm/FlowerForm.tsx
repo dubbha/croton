@@ -1,31 +1,39 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { Form, SubmitButton, InfoAlert, ErrorAlert, LoadingSpinner } from 'elements';
+import RRuleGenerator from 'react-rrule-generator';
+import { Form, SubmitButton, InfoAlert, ErrorAlert, LoadingSpinner, Accordion, Card } from 'elements';
 import { useCustomForm } from 'hooks';
+import { Actions } from 'constants/actions';
 import './styles.scss';
-
-type Props = {
-  onSubmit: (name: string, description: string) => void;
-  isLoading?: boolean;
-  info?: string | null;
-  error?: string | null;
-};
 
 interface FormFields {
   name?: string;
   description?: string;
+  rrules?: { [key in Actions]?: string };
 }
+
+type Props = {
+  onSubmit: (name: string, description: string, rrules: { [key in Actions]?: string }) => void;
+  isLoading?: boolean;
+  info?: string | null;
+  error?: string | null;
+  initialValues?: FormFields;
+};
 
 export const FlowerForm = ({
   onSubmit,
   isLoading = false,
   info = null,
   error = null,
-}: Props) => {
-  const initialValues = {
+  initialValues = {
     name: '',
     description: '',
-  };
-
+    rrules: {
+      [Actions.WATERING]: '',
+      [Actions.HYDRATION]: '',
+      [Actions.FERTILIZING]: '',
+    }
+  },
+}: Props) => {
   const nameErrorMessage = (name: string): string | null => {
     if (name.length < 3 || name.length > 256) {
       return 'Name is required and has to be in range of 3-256 symbols.';
@@ -69,10 +77,24 @@ export const FlowerForm = ({
     );
   }, [errors, values]);
 
+  const [rrules, setRrules] = useState(initialValues.rrules || {});
+
+  const handleRruleChange = action => rrule => {
+    console.log(`${action} RRule changed, now it's ${rrule}`);
+    const dtstartNow = `${new Date(Date.now()).toISOString().replace(/[-:.]/g, '').slice(0,-4)}Z`;
+
+    setRrules({
+      ...rrules,
+      [action]: `DTSTART:${dtstartNow}\n${rrule}`
+    })
+
+    console.log(rrules);
+  }
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (values.name && values.description) {
-      onSubmit(values.name, values.description);
+      onSubmit(values.name, values.description, rrules);
     }
   };
 
@@ -108,6 +130,31 @@ export const FlowerForm = ({
         )}
       </Form.Group>
 
+      <Form.Group>
+        <Form.Label>Care schedules</Form.Label>
+        <Accordion>
+          {Object.entries(rrules).map(([action, rrule]) =>
+              <Card key={action}>
+                <Accordion.Toggle as={Card.Header} eventKey={action}>
+                  {action}
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey={action}>
+                  <div className="rrule-generator">
+                    <RRuleGenerator
+                      config={{
+                        hideEnd: true,
+                        repeat: ['Monthly', 'Weekly', 'Daily', 'Hourly'],
+                      }}
+                      value={rrule}
+                      onChange={handleRruleChange(action)}
+                    />
+                  </div>
+                </Accordion.Collapse>
+              </Card>
+          )}
+        </Accordion>
+      </Form.Group>
+
       {error && <ErrorAlert>{error}</ErrorAlert>}
       {info && <InfoAlert>{info}</InfoAlert>}
       {!info && !error && (
@@ -115,7 +162,7 @@ export const FlowerForm = ({
           <div className="spinner-container">
             {isLoading && <LoadingSpinner />}
           </div>
-          <span>Create</span>
+          <span>Submit</span>
         </SubmitButton>
       )}
     </Form>

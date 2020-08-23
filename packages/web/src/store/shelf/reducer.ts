@@ -33,6 +33,9 @@ import {
   SHELF_GET_FLOWERS,
   SHELF_GET_FLOWERS_SUCCESS,
   SHELF_GET_FLOWERS_ERROR,
+  SHELF_GET_FLOWER,
+  SHELF_GET_FLOWER_SUCCESS,
+  SHELF_GET_FLOWER_ERROR,
   SHELF_RESET,
   ShelfActionTypes,
 } from './actions';
@@ -44,6 +47,7 @@ export const initialState: ShelfState = {
   info: null,
   shelves: [],
   flowers: [],
+  flower: null,
 };
 
 export function shelfReducer(
@@ -62,6 +66,7 @@ export function shelfReducer(
     case SHELF_EDIT_FLOWER:
     case SHELF_DELETE_FLOWER:
     case SHELF_GET_FLOWERS:
+    case SHELF_GET_FLOWER:
       return {
         ...state,
         isLoading: true,
@@ -94,6 +99,12 @@ export function shelfReducer(
         isLoading: false,
         flowers: action.payload.flowers
       }
+    case SHELF_GET_FLOWER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        flower: action.payload.flower
+      }
     case SHELF_INVITE_ERROR:
     case SHELF_INVITE_ACCEPT_ERROR:
     case SHELF_DELETE_USER_ERROR:
@@ -105,6 +116,7 @@ export function shelfReducer(
     case SHELF_EDIT_FLOWER_ERROR:
     case SHELF_DELETE_FLOWER_ERROR:
     case SHELF_GET_FLOWERS_ERROR:
+    case SHELF_GET_FLOWER_ERROR:
       return {
         ...state,
         isLoading: false,

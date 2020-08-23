@@ -13,4 +13,14 @@
   &-empty {
     margin: 30px auto;
   }
+
+  &-actions {
+    margin: 0 auto;
+
+    button {
+      display: inline-block;
+      margin: 0 10px;
+      width: 150px;
+    }
+  }
 }

@@ -8,13 +8,13 @@ import {
 } from '../actions';
 
 function* handle(action: ShelfAddFlower) {
-  const { shelfId, name, description } = action.payload;
+  const { shelfId, name, description, rrules } = action.payload;
 
   try {
     yield call(
       http.post,
       '/shelf/add-flower',
-      { shelfId, name, description }
+      { shelfId, name, description, rrules }
     );
     yield put({
       type: SHELF_ADD_FLOWER_SUCCESS,

@@ -1,4 +1,30 @@
+@import 'assets/styles/theme';
+
 .flower-form {
   width: 100%;
   margin-bottom: 0;
+
+  .accordion {
+    margin-bottom: 1rem;
+    .card {
+      box-shadow: none;
+    }
+  }
+
+  .rrule-generator {
+    hr {
+      width: 100%;
+    }
+    .row {
+      margin: 1rem 0;
+    }
+    & > div > div {
+      border: none !important;
+    }
+    @media (min-width: 576px) {
+      .col-sm-1, col-sm-3, .px-3 {
+        padding: 0 !important;
+      }
+    }
+  }
 }

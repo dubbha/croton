@@ -9,3 +9,4 @@ export * from './shelfEditFlower.saga';
 export * from './shelfDeleteFlower.saga';
 export * from './shelfGetShelves.saga';
 export * from './shelfGetFlowers.saga';
+export * from './shelfGetFlower.saga';
