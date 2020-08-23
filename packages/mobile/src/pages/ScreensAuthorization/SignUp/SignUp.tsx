@@ -10,15 +10,18 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import styles from './styles';
+import { SCREEN_SIGN_UP, SCREEN_EMAIL_VERIFICATION } from '../../screens';
 import { InterfaceStore } from './../../../store';
 import {
   AUTH_REGISTER,
   PayloadAuthRegister,
 } from '../../../store/auth/actions';
 import { SignUpState, AuthorizationProps } from '../interfaces';
-import { validateInput, hideMessage } from './../helpers';
-import { SCREEN_SIGN_UP, SCREEN_EMAIL_VERIFICATION } from '../../screens';
-import styles from './styles';
+import {
+  hideMessageClassComponent,
+  inputValidatorClassComponent,
+} from '../../../components/Input/helpers';
 import { CustomButton } from './../../../components/Button';
 import { CustomInput } from './../../../components/Input';
 import { Divider } from '../../../components/Divider';
@@ -45,22 +48,6 @@ export class SignUpComponent extends React.Component<
     };
   }
 
-  getMessageOptions() {
-    let result: NotifyMessage = {
-      type: null,
-      message: null,
-    };
-    if (this.props.error) {
-      result.type = 'error';
-      result.message = this.props.error;
-    }
-    if (this.props.info) {
-      result.type = 'info';
-      result.message = this.props.info;
-    }
-    return result;
-  }
-
   resetForm() {
     this.setState({
       email: '',
@@ -72,31 +59,31 @@ export class SignUpComponent extends React.Component<
   }
 
   validateFields() {
-    const { status: isValidEmail } = validateInput(
+    const { status: isValidEmail } = inputValidatorClassComponent(
       this,
       'email',
       'validationStatusEmail',
       true,
     );
-    const { status: isValidPassword } = validateInput(
+    const { status: isValidPassword } = inputValidatorClassComponent(
       this,
       'password',
       'validationStatusPassword',
       true,
     );
-    const { status: isValidRepeatPassword } = validateInput(
+    const { status: isValidRepeatPassword } = inputValidatorClassComponent(
       this,
       'repeatPassword',
       'validationStatusRepeatPassword',
       true,
     );
-    const { status: isValidFirstName } = validateInput(
+    const { status: isValidFirstName } = inputValidatorClassComponent(
       this,
       'firstName',
       'validationStatusFirstName',
       true,
     );
-    const { status: isValidLastName } = validateInput(
+    const { status: isValidLastName } = inputValidatorClassComponent(
       this,
       'lastName',
       'validationStatusLastName',
@@ -117,7 +104,7 @@ export class SignUpComponent extends React.Component<
   }
 
   submitForm() {
-    const isValidFields = true;
+    const isValidFields = this.validateFields();
 
     if (isValidFields) {
       this.props.submitForm({
@@ -128,7 +115,7 @@ export class SignUpComponent extends React.Component<
       });
     } else {
       setTimeout(() => {
-        hideMessage(this, [
+        hideMessageClassComponent(this, [
           'validationStatusEmail',
           'validationStatusPassword',
           'validationStatusRepeatPassword',
@@ -139,11 +126,12 @@ export class SignUpComponent extends React.Component<
     }
   }
 
+  // TODO: When we get notify message scroll will be broken
   render() {
     if (this.props.isEmailVerification) {
       this.navigateToEmailVerification();
     }
-    const messageOptions = this.getMessageOptions();
+
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -165,10 +153,7 @@ export class SignUpComponent extends React.Component<
                     styles.container__inputWrap,
                     styles.container__inputWrap__first,
                   ]}>
-                  <NotifyMessage
-                    message={messageOptions.message}
-                    type={messageOptions.type}
-                  />
+                  <NotifyMessage />
                 </View>
                 <View
                   style={[
@@ -182,7 +167,7 @@ export class SignUpComponent extends React.Component<
                       this.setState({ firstName: data });
                     }}
                     onBlur={() => {
-                      validateInput(
+                      inputValidatorClassComponent(
                         this,
                         'firstName',
                         'validationStatusFirstName',
@@ -202,7 +187,7 @@ export class SignUpComponent extends React.Component<
                       this.setState({ lastName: data });
                     }}
                     onBlur={() => {
-                      validateInput(
+                      inputValidatorClassComponent(
                         this,
                         'lastName',
                         'validationStatusLastName',
@@ -222,7 +207,11 @@ export class SignUpComponent extends React.Component<
                       this.setState({ email: data });
                     }}
                     onBlur={() => {
-                      validateInput(this, 'email', 'validationStatusEmail');
+                      inputValidatorClassComponent(
+                        this,
+                        'email',
+                        'validationStatusEmail',
+                      );
                     }}
                   />
                 </View>
@@ -239,7 +228,7 @@ export class SignUpComponent extends React.Component<
                       this.setState({ password: data });
                     }}
                     onBlur={() => {
-                      validateInput(
+                      inputValidatorClassComponent(
                         this,
                         'password',
                         'validationStatusPassword',
@@ -260,7 +249,7 @@ export class SignUpComponent extends React.Component<
                       this.setState({ repeatPassword: data });
                     }}
                     onBlur={() => {
-                      validateInput(
+                      inputValidatorClassComponent(
                         this,
                         'repeatPassword',
                         'validationStatusRepeatPassword',

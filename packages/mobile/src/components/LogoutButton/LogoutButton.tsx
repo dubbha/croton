@@ -1,17 +1,29 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { AUTH_LOGOUT } from './../../store/auth/actions';
 
 export const LogoutButton = () => {
   const dispatch = useDispatch();
 
   return (
-    <Button
-      title="Logout"
-      onPress={() => {
-        dispatch({ type: AUTH_LOGOUT });
-      }}
-    />
+    <View style={styles.logout}>
+      <Text
+        style={styles.logout__text}
+        onPress={() => dispatch({ type: AUTH_LOGOUT })}>
+        Logout
+      </Text>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  logout: {
+    paddingHorizontal: 10,
+  },
+
+  logout__text: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+});

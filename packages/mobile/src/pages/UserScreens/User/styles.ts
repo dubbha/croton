@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { COMPONENTS_STYLE } from '../../../styles';
+import { COLORS, COMPONENTS_STYLE } from '../../../styles';
 
 export default StyleSheet.create({
   user: {
@@ -21,24 +21,6 @@ export default StyleSheet.create({
   user__pictureWrap: {
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-
-  user__field: {
-    minHeight: 50,
-    marginTop: 20,
-  },
-
-  user__field__first: {
-    marginTop: 0,
-  },
-
-  user__label: {
-    fontSize: 16,
-  },
-
-  user__input: {
-    height: 50,
-    marginTop: 5,
   },
 
   user__picture: {
@@ -64,13 +46,19 @@ export default StyleSheet.create({
     resizeMode: 'cover',
   },
 
-  user__notifyMessage: {
-    display: 'none',
-    height: 50,
-    marginVertical: 30,
+  user__nav: {
+    marginTop: 30,
   },
 
-  user__notifyMessage__isShow: {
-    display: 'flex',
+  user__nav__item: {
+    paddingVertical: 15,
+    paddingHorizontal: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.lightGrey,
+  },
+
+  user__nav__item__first: {
+    borderTopWidth: 1,
+    borderTopColor: COLORS.lightGrey,
   },
 });

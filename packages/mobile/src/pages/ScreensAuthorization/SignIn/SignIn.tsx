@@ -10,11 +10,14 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import styles from './styles';
 import { InterfaceStore } from './../../../store';
 import { AUTH_LOGIN, PayloadAuthLogin } from './../../../store/auth/actions';
 import { SignInState, AuthorizationProps } from './../interfaces';
-import { validateInput, hideMessage } from './../helpers';
-import styles from './styles';
+import {
+  inputValidatorClassComponent,
+  hideMessageClassComponent,
+} from '../../../components/Input/helpers';
 import { CustomButton } from './../../../components/Button';
 import { CustomInput } from './../../../components/Input';
 import { Divider } from './../../../components/Divider';
@@ -32,30 +35,14 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
     };
   }
 
-  getMessageOptions() {
-    let result: NotifyMessage = {
-      type: null,
-      message: null,
-    };
-    if (this.props.error) {
-      result.type = 'error';
-      result.message = this.props.error;
-    }
-    if (this.props.info) {
-      result.type = 'info';
-      result.message = this.props.info;
-    }
-    return result;
-  }
-
   submitForm() {
-    const { status: isValidEmail } = validateInput(
+    const { status: isValidEmail } = inputValidatorClassComponent(
       this,
       'email',
       'validationStatusEmail',
       true,
     );
-    const { status: isValidPassword } = validateInput(
+    const { status: isValidPassword } = inputValidatorClassComponent(
       this,
       'password',
       'validationStatusPassword',
@@ -69,7 +56,7 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
       this.props.submitForm({ email, password });
     } else {
       setTimeout(() => {
-        hideMessage(this, [
+        hideMessageClassComponent(this, [
           'validationStatusEmail',
           'validationStatusPassword',
         ]);
@@ -78,7 +65,6 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
   }
 
   render() {
-    const messageOptions = this.getMessageOptions();
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -100,10 +86,7 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
                     styles.container__inputWrap,
                     styles.container__inputWrap__first,
                   ]}>
-                  <NotifyMessage
-                    message={messageOptions.message}
-                    type={messageOptions.type}
-                  />
+                  <NotifyMessage />
                 </View>
                 <View
                   style={[
@@ -117,7 +100,11 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
                       this.setState({ email: data });
                     }}
                     onBlur={() => {
-                      validateInput(this, 'email', 'validationStatusEmail');
+                      inputValidatorClassComponent(
+                        this,
+                        'email',
+                        'validationStatusEmail',
+                      );
                     }}
                   />
                 </View>
@@ -134,7 +121,7 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
                       this.setState({ password: data })
                     }
                     onBlur={() => {
-                      validateInput(
+                      inputValidatorClassComponent(
                         this,
                         'password',
                         'validationStatusPassword',

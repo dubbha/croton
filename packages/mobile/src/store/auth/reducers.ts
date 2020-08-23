@@ -1,7 +1,6 @@
 import {
   AUTH_LOGOUT,
   AUTH_LOGIN_SUCCESS,
-  AUTH_NOTIFY,
   AUTH_PROFILE_UPDATE_INFO,
   AUTH_PROFILE_UPDATE_EMAIL,
   AUTH_CONFIRM_EMAIL,
@@ -46,15 +45,7 @@ export function authReducer(
       };
     }
 
-    case AUTH_NOTIFY: {
-      const { info = null, error = null } = action.payload;
-      return {
-        ...state,
-        info,
-        error,
-      };
-    }
-
+    // TODO: After logout we should clean shelves store too
     case AUTH_LOGOUT: {
       return {
         isAuthenticated: false,
@@ -69,6 +60,7 @@ export function authReducer(
       };
     }
 
+    // TODO: this is doesn't work
     case AUTH_PROFILE_UPDATE_INFO: {
       const data = action.payload;
       return {

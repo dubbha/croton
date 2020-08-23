@@ -2,7 +2,9 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import { rootSaga } from './rootSaga';
+import { informationReducer } from './information/reducers';
 import { authReducer } from './auth/reducers';
+import { shelvesReducer } from './shelves/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,6 +23,8 @@ export interface InterfaceStore {
 const store = createStore(
   combineReducers({
     auth: authReducer,
+    shelves: shelvesReducer,
+    information: informationReducer,
   }),
   applyMiddleware(sagaMiddleware),
 );

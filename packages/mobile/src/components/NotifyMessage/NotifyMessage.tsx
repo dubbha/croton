@@ -1,15 +1,23 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { FC } from 'react';
+import { View, Text } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { COLORS } from '../../styles/Theme';
+import styles from './styles';
+import { INFORMATION_HIDE } from '../../store/information/actions';
+import { MessageOptions, NotifyMessageProps } from './interfaces';
 
-type MessageType = 'info' | 'error';
-export interface NotifyMessage {
-  message: string | null;
-  type?: null | MessageType;
-}
+const renderLoader = () => {
+  return (
+    <View style={[styles.message, styles.message__loading]}>
+      <View style={styles.message__body}>
+        <Text style={styles.message__text}>Loading...</Text>
+      </View>
+    </View>
+  );
+};
 
-export const NotifyMessage = ({ type, message }: NotifyMessage) => {
+const renderMessage = (data: MessageOptions) => {
+  const { type = null, message } = data;
   return (
     <View
       style={[
@@ -24,33 +32,17 @@ export const NotifyMessage = ({ type, message }: NotifyMessage) => {
   );
 };
 
-const styles = StyleSheet.create({
-  message: {
-    flex: 1,
-    display: 'none',
-    width: '100%',
-    paddingHorizontal: 20,
-    paddingVertical: 7.5,
-    borderRadius: 20,
-  },
+export const NotifyMessage: FC<NotifyMessageProps> = ({ timer }) => {
+  const dispatch = useDispatch();
+  const information = useSelector(state => state.information);
+  const dispatchDelay = 1500;
+  const { type, message, isLoading } = information;
 
-  message__error: {
-    display: 'flex',
-    backgroundColor: COLORS.lightRed,
-  },
+  if (message) {
+    setTimeout(() => {
+      dispatch({ type: INFORMATION_HIDE });
+    }, timer || dispatchDelay);
+  }
 
-  message__info: {
-    display: 'flex',
-    backgroundColor: COLORS.lightGreen,
-  },
-
-  message__body: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  message__text: {
-    color: '#fff',
-  },
-});
+  return isLoading ? renderLoader() : renderMessage({ type, message });
+};
