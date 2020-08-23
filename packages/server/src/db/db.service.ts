@@ -23,6 +23,7 @@ import {
   CreatePasswordResetPayload,
   ShelfInvitationPayload,
 } from './interfaces';
+import NotificationToken from '../models/notification-token.entity';
 
 export default class DBService {
   private userRepository: Repository<UserEntity>;
@@ -34,6 +35,7 @@ export default class DBService {
   private flowerRepository: Repository<FlowerEntity>;
   private shelfInvitationRepository: Repository<ShelfInvitationEntity>;
   private userToShelfRepository: Repository<UserToShelfEntity>;
+  private notificationTokenRepository: Repository<NotificationToken>;
 
   constructor() {
     this.userRepository = getRepository(UserEntity);
@@ -45,6 +47,7 @@ export default class DBService {
     this.flowerRepository = getRepository(FlowerEntity);
     this.shelfInvitationRepository = getRepository(ShelfInvitationEntity);
     this.userToShelfRepository = getRepository(UserToShelfEntity);
+    this.notificationTokenRepository = getRepository(NotificationToken);
   }
 
   public getUserById(id: number) {
@@ -296,5 +299,28 @@ export default class DBService {
 
   deleteFlower(id: number) {
     return this.flowerRepository.delete(id);
+  }
+
+  findRegisterToken(user) {
+    return this.notificationTokenRepository.findOne({ user });
+  }
+
+  updateRegisterToken(registerToken: NotificationToken) {
+    return this.notificationTokenRepository.update(registerToken.notificationTokenId, registerToken);
+  }
+
+  async saveRegisterToken(userId: number, registrationToken: string) {
+    const user = await this.getUserById(userId);
+    const duplicateToken = await this.findRegisterToken(user);
+    if (duplicateToken) {
+      duplicateToken.registrationTokenLastUpdate = Date.now();
+      await this.updateRegisterToken(duplicateToken);
+    } else {
+      this.notificationTokenRepository.save({
+        registrationToken,
+        registrationTokenLastUpdate: Date.now(),
+        user
+      });
+    }
   }
 }

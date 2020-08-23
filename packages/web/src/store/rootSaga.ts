@@ -25,8 +25,9 @@ import {
   shelfAddFlowerSaga,
   shelfEditFlowerSaga,
   shelfDeleteFlowerSaga,
-  shelfGetFlowersSaga,
+  shelfGetFlowersSaga
 } from './shelf/sagas';
+import { notificationRegisterSaga } from './notification/sagas';
 
 export function* rootSaga() {
   yield all([
@@ -54,5 +55,6 @@ export function* rootSaga() {
     shelfEditFlowerSaga(),
     shelfDeleteFlowerSaga(),
     shelfGetFlowersSaga(),
+    notificationRegisterSaga()
   ]);
 }

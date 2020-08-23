@@ -10,10 +10,11 @@ import {
   ProfileUserDetails,
   Shelves,
   Shelf,
-  Flower,
+  Flower
 } from 'components';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';
+import { NOTIFICATION_REGISTER } from 'store/notification';
 
 export const Profile = ({ match: { path } }: RouteComponentProps) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const Profile = ({ match: { path } }: RouteComponentProps) => {
 
   useEffect(() => {
     if (!isAuthenticated) dispatch(push('/signin'));
+    dispatch({ type: NOTIFICATION_REGISTER });
   }, [isAuthenticated, dispatch]);
 
   return (
