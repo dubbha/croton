@@ -30,6 +30,7 @@ import {
   shelfActionSaga,
   shelfGetLastActionsSaga,
 } from './shelf/sagas';
+import { notificationRegisterSaga } from './notification/sagas';
 
 export function* rootSaga() {
   yield all([
@@ -60,5 +61,6 @@ export function* rootSaga() {
     shelfGetFlowerSaga(),
     shelfActionSaga(),
     shelfGetLastActionsSaga(),
+    notificationRegisterSaga()
   ]);
 }
