@@ -1,6 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { MapMarkerIcon } from 'elements';
 import { Card } from 'react-bootstrap';
 
 import '../styles.scss';
@@ -27,7 +26,7 @@ export const ShelfItem = ({
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+            <MapMarkerIcon />
             <span className="icon-prefix">{location}</span>
           </Card.Subtitle>
           <Card.Text>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
-import { LeafIcon } from 'elements';
+import { LeafIcon, MapMarkerIcon } from 'elements';
 import { Confirm } from 'components';
 import { getShelf } from 'store/shelf/selectors';
 import { SHELF_GET_SHELVES, SHELF_DELETE_SHELF } from 'store/shelf';
@@ -35,6 +35,11 @@ export const Shelf = () => {
         <LeafIcon />
         <span className="icon-prefix">{shelf?.name}</span>
       </h1>
+      <h4>
+        <MapMarkerIcon />
+        <span className="icon-prefix">{shelf?.location}</span>
+      </h4>
+      <p>{shelf?.description}</p>
       <div className="shelf-actions">
         <EditShelf
           id={shelfId}
