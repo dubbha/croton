@@ -35,10 +35,10 @@ export const Shelf = () => {
         <LeafIcon />
         <span className="icon-prefix">{shelf?.name}</span>
       </h1>
-      <h4>
+      <h5 className="shelf-location text-muted">
         <MapMarkerIcon />
         <span className="icon-prefix">{shelf?.location}</span>
-      </h4>
+      </h5>
       <p>{shelf?.description}</p>
       <div className="shelf-actions">
         <EditShelf

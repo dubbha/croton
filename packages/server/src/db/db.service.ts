@@ -310,7 +310,13 @@ export default class DBService {
     return userToShelves.map(u2s => u2s.user);
   }
 
-  async getLastAction(flowerId: number, action: Actions) {
+  async saveAction(userId: number, flowerId: number, action: Actions, timestamp: number) {
+    const user = await this.userRepository.findOne(userId);
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return this.actionRepository.save({ user, flower, action, timestamp });
+  }
+
+  async getLastAction(flowerId: number, action: Actions): Promise<ActionEntity> {
     const flower = await this.flowerRepository.findOne(flowerId);
     return this.actionRepository.findOne({
       where: {
@@ -320,6 +326,7 @@ export default class DBService {
       order: {
         timestamp: 'DESC'
       },
+      relations: ['user'],
     })
   }
 

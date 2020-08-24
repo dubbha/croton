@@ -132,4 +132,33 @@ export default class ShelfService {
   getFlowerById(id: number) {
     return this.dbService.getFlowerById(id);
   }
+
+  async addAction(
+    { action, flowerId }: { action: Actions, flowerId: number },
+    authToken: string,
+  ) {
+    const { id: userId } = verifyToken(authToken);
+    const timestamp = Math.ceil(Date.now() / 1000);
+    return this.dbService.saveAction(userId, flowerId, action, timestamp);
+  }
+
+  async getLastActions(flowerId: number) {
+    const lastActions = await Promise.all(
+      Object.values(Actions).map(action => this.dbService.getLastAction(flowerId, action))
+    );
+    return lastActions.filter(Boolean).reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur.action]: {
+          timestamp: cur.timestamp,
+          user: {
+            id: cur.user.id,
+            firstName: cur.user.firstName,
+            lastName: cur.user.lastName,
+          },
+        },
+      }),
+      {},
+    );
+  }
 }

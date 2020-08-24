@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, BookmarkIcon } from 'elements';
 import { getShelf } from 'store/shelf/selectors';
@@ -27,6 +27,12 @@ export const EditFlower = ({
   const { isLoading, info, error } = useSelector(getShelf);
   const dispatch = useDispatch();
 
+  const handleClose = () => {
+    setShowModal(false);
+    onClose();
+  };
+
+  let timer;
   const handleSubmit = (
     name: string,
     description: string,
@@ -36,12 +42,9 @@ export const EditFlower = ({
       type: SHELF_EDIT_FLOWER,
       payload: { ...initialValues, name, description, rrules },
     });
+    timer = setTimeout(() => handleClose(), 2000);
   };
-
-  const handleClose = () => {
-    setShowModal(false);
-    onClose();
-  };
+  useEffect(() => () => clearTimeout(timer), [timer]);
 
   return (
     <>

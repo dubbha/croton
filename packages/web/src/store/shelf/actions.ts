@@ -50,6 +50,14 @@ export const SHELF_GET_FLOWER = 'SHELF_GET_FLOWER';
 export const SHELF_GET_FLOWER_SUCCESS = 'SHELF_GET_FLOWER_SUCCESS';
 export const SHELF_GET_FLOWER_ERROR = 'SHELF_GET_FLOWER_ERROR';
 
+export const SHELF_ACTION = 'SHELF_ACTION';
+export const SHELF_ACTION_SUCCESS = 'SHELF_ACTION_SUCCESS';
+export const SHELF_ACTION_ERROR = 'SHELF_ACTION_ERROR';
+
+export const SHELF_GET_LAST_ACTIONS = 'SHELF_GET_LAST_ACTIONS';
+export const SHELF_GET_LAST_ACTIONS_SUCCESS = 'SHELF_GET_LAST_ACTIONS_SUCCESS';
+export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
+
 export const SHELF_RESET = 'SHELF_RESET';
 
 export interface ShelfInvite {
@@ -242,6 +250,41 @@ export interface ShelfGetFlowerError {
   payload: { error: string };
 }
 
+export interface ShelfAction {
+  type: typeof SHELF_ACTION;
+  payload: { action: Actions, flowerId: number, shelfId: number };
+}
+
+export interface ShelfActionSuccess {
+  type: typeof SHELF_ACTION_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfActionError {
+  type: typeof SHELF_ACTION_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfGetLastActions {
+  type: typeof SHELF_GET_LAST_ACTIONS;
+  payload: { flowerId: number, shelfId: number };
+}
+
+export interface ShelfGetLastActionsSuccess {
+  type: typeof SHELF_GET_LAST_ACTIONS_SUCCESS;
+  payload: {
+    [key in Actions]: {
+      timestamp: number;
+      user: { id: number, firstName: string, lastName: string };
+    }
+  }
+}
+
+export interface ShelfGetLastActionsError {
+  type: typeof SHELF_GET_LAST_ACTIONS_ERROR;
+  payload: { error: string };
+}
+
 export interface ShelfReset {
   type: typeof SHELF_RESET;
 }
@@ -283,4 +326,10 @@ export type ShelfActionTypes =
   | ShelfGetFlower
   | ShelfGetFlowerSuccess
   | ShelfGetFlowerError
+  | ShelfAction
+  | ShelfActionSuccess
+  | ShelfActionError
+  | ShelfGetLastActions
+  | ShelfGetLastActionsSuccess
+  | ShelfGetLastActionsError
   | ShelfReset;

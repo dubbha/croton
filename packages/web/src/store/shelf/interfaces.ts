@@ -9,12 +9,18 @@ export type Shelf = {
 }
 
 export type Flower = {
-  id: number,
-  name: string,
-  description: string,
-  pictureUrls: string[],
-  rrules: { [key in Actions]: string },
-  shelfId: number,
+  id: number;
+  name: string;
+  description: string;
+  pictureUrls: string[];
+  rrules: { [key in Actions]: string };
+  lastActions: {
+    [key in Actions]: {
+      timestamp: number;
+      user: { id: number, firstName: string, lastName: string };
+    }
+  };
+  shelfId: number;
 }
 
 export interface ShelfState {
