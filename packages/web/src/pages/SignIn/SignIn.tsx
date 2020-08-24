@@ -10,7 +10,7 @@ import {
   Header,
   Footer,
   SignInForm,
-  SignInWithSocial
+  SignInWithSocial,
 } from '../../components';
 
 import './styles.scss';
@@ -22,7 +22,7 @@ export const SignIn = () => {
   const handleSubmit = (email: string, password: string) => {
     dispatch({
       type: AUTH_LOGIN,
-      payload: { email, password }
+      payload: { email, password },
     });
   };
 

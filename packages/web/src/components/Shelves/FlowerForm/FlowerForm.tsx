@@ -80,15 +80,12 @@ export const FlowerForm = ({
   const [rrules, setRrules] = useState(initialValues.rrules || {});
 
   const handleRruleChange = action => rrule => {
-    console.log(`${action} RRule changed, now it's ${rrule}`);
     const dtstartNow = `${new Date(Date.now()).toISOString().replace(/[-:.]/g, '').slice(0, -4)}Z`;
 
     setRrules({
       ...rrules,
       [action]: `DTSTART:${dtstartNow}\n${rrule}`,
     });
-
-    console.log(rrules);
   };
 
   const handleSubmit = (e: FormEvent) => {

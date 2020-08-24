@@ -21,6 +21,7 @@ module.exports = {
     }],
     'object-curly-spacing': ['error', 'always'],
     'object-curly-newline': 'off',
+    'no-confusing-arrow': 'off',
     'no-undef': 'off',
     'no-console': 'off',
     'implicit-arrow-linebreak': 'off',

@@ -51,7 +51,7 @@ export const UpdateProfileForm = () => {
         clearTimeout(
           setTimeout(() => {
             setDisplayedInfo('');
-          }, INFO_DISPLAY_TIME_MS)
+          }, INFO_DISPLAY_TIME_MS),
         );
       }
       : () => {};

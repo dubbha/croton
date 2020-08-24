@@ -114,8 +114,8 @@ describe('store/auth/reducer', () => {
               {
                 type: action as any,
                 payload: { ...authResult, socialProfile },
-              }
-            )
+              },
+            ),
           ).toEqual({
             ...initialState,
             ...userData,

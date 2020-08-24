@@ -15,32 +15,30 @@ describe('system/addFacebook', () => {
   const accessToken = 'someMock235678765t';
   const email = 'somemockemail@mock.com';
 
-  it('should handle add Facebook profile with creds', () => {
-    return expectSaga(addFacebook)
-      .provide([
-        [select(getAuth), { email }],
-        [
-          call(handleAuthViaSocials, {
-            accessToken,
-            apiEndpoint: '/management/add-facebook',
-            successActionType: ADD_FACEBOOK_SUCCESS,
-            errorActionType: ADD_FACEBOOK_ERROR,
-            email,
-          }),
-          undefined,
-        ],
-      ])
-      .call(handleAuthViaSocials, {
-        accessToken,
-        apiEndpoint: '/management/add-facebook',
-        successActionType: ADD_FACEBOOK_SUCCESS,
-        errorActionType: ADD_FACEBOOK_ERROR,
-        email,
-      })
-      .dispatch({
-        type: ADD_FACEBOOK,
-        payload: { accessToken },
-      })
-      .silentRun();
-  });
+  it('should handle add Facebook profile with creds', () => expectSaga(addFacebook)
+    .provide([
+      [select(getAuth), { email }],
+      [
+        call(handleAuthViaSocials, {
+          accessToken,
+          apiEndpoint: '/management/add-facebook',
+          successActionType: ADD_FACEBOOK_SUCCESS,
+          errorActionType: ADD_FACEBOOK_ERROR,
+          email,
+        }),
+        undefined,
+      ],
+    ])
+    .call(handleAuthViaSocials, {
+      accessToken,
+      apiEndpoint: '/management/add-facebook',
+      successActionType: ADD_FACEBOOK_SUCCESS,
+      errorActionType: ADD_FACEBOOK_ERROR,
+      email,
+    })
+    .dispatch({
+      type: ADD_FACEBOOK,
+      payload: { accessToken },
+    })
+    .silentRun());
 });

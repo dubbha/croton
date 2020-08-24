@@ -39,7 +39,6 @@ createPostgresConnection().then(async () => {
     );
 
   await Promise.all(flowerRules.map(async flowerRule => {
-    console.log(flowerRule);
     const { id, name, shelf, action, rrule } = flowerRule;
     const rule = rrulestr(rrule);
 
@@ -58,7 +57,6 @@ createPostgresConnection().then(async () => {
         new Date(lastAction.timestamp * 1000),
         new Date(Date.now()),
       );
-      console.log('missedRecurrences', missedRecurrences);
       if (!missedRecurrences.length) return;
       message += `. Times missed: ${missedRecurrences.length}`;
     } else { // action was never performed yet
