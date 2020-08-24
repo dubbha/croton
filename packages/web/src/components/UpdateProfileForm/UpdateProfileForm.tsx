@@ -46,22 +46,19 @@ export const UpdateProfileForm = () => {
 
   React.useEffect(() => {
     setDisplayedInfo(info || '');
-    return info
-      ? () => {
-        clearTimeout(
-          setTimeout(() => {
-            setDisplayedInfo('');
-          }, INFO_DISPLAY_TIME_MS),
-        );
-      }
-      : () => {};
+
+    const timer = setTimeout(() => {
+      setDisplayedInfo('');
+    }, INFO_DISPLAY_TIME_MS);
+
+    return () => clearTimeout(timer);
   }, [info]);
 
   return (
     <Form>
       {error && <ErrorAlert>{error}</ErrorAlert>}
       {displayedInfo && <InfoAlert>{displayedInfo}</InfoAlert>}
-      {!error && !info && <AlertPlaceholder />}
+      {!error && !displayedInfo && <AlertPlaceholder />}
       <Form.Group>
         <Form.Label>First Name</Form.Label>
         <Form.Control
