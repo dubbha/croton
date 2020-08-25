@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Table, Tabs, Tab } from 'react-bootstrap';
 import { Modal, Button } from 'elements';
 import { SHELF_RESET } from 'store/shelf';
-import './styles.scss';
 import { InviteUserToShelf } from '../InviteUserToShelf';
 
 type Props = {
