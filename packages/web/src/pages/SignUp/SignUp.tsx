@@ -12,7 +12,7 @@ export const SignUp = () => {
   const handleSubmit = (email: string, password: string, firstName: string, lastName: string) => {
     dispatch({
       type: AUTH_REGISTER,
-      payload: { email, password, firstName, lastName }
+      payload: { email, password, firstName, lastName },
     });
   };
 

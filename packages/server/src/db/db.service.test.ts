@@ -342,7 +342,10 @@ describe('DBService', () => {
     expect(mockUserRepository.findOne).toBeCalledWith(userId);
     expect(mockShelfRepository.findOne).toBeCalledWith(shelfId);
 
-    expect(mockUserToShelfRepository.delete).toBeCalledWith({ user: mockUser, shelf: mockShelfEntity });
+    expect(mockUserToShelfRepository.delete).toBeCalledWith({
+      user: mockUser,
+      shelf: mockShelfEntity
+    });
   });
 
   it('should get shelf by id, including flower relations', async () => {
@@ -352,6 +355,6 @@ describe('DBService', () => {
 
   it('should get flower by id', async () => {
     await new DBService().getFlowerById(id);
-    expect(mockFlowerRepository.findOne).toBeCalledWith(id);
+    expect(mockFlowerRepository.findOne).toBeCalledWith(id, { relations: ['shelf'] });
   });
 });

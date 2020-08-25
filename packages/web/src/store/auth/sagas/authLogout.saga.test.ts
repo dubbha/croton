@@ -5,12 +5,10 @@ import { AUTH_LOGOUT } from '../actions';
 import { authLogoutSaga } from './authLogout.saga';
 
 describe('authUpdateProfileSaga', () => {
-  it('should logout', () => {
-    return expectSaga(authLogoutSaga)
-      .call([localStorage, localStorage.clear])
-      .dispatch({ type: AUTH_LOGOUT })
-      .silentRun();
-  });
+  it('should logout', () => expectSaga(authLogoutSaga)
+    .call([localStorage, localStorage.clear])
+    .dispatch({ type: AUTH_LOGOUT })
+    .silentRun());
 
   it('should handle error', () => {
     console.error = jest.fn();

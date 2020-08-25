@@ -23,15 +23,24 @@ export default class ProvidersAuthService {
 
 
   constructor() {
-    this.verifyFacebookLogin = passport.authenticate(ProvidersServiceName.FACEBOOK as string, { session: false });
-    this.verifyGoogleLogin = passport.authenticate(ProvidersServiceName.GOOGLE as string, { session: false });
+    this.verifyFacebookLogin = passport.authenticate(
+      ProvidersServiceName.FACEBOOK as string,
+      { session: false },
+    );
+    this.verifyGoogleLogin = passport.authenticate(
+      ProvidersServiceName.GOOGLE as string,
+      { session: false },
+    );
 
     this.initFacebookProviderLogin();
     this.initGoogleProviderLogin();
     return this
   }
 
-  private formatProviderProfileToRegistrationDto(profile: Profile, accessToken: string): RegistrationDto {
+  private formatProviderProfileToRegistrationDto(
+    profile: Profile,
+    accessToken: string
+  ): RegistrationDto {
     return {
       firstName: profile.name?.givenName || profile.displayName,
       lastName: profile.name?.familyName || profile.displayName,
@@ -41,7 +50,10 @@ export default class ProvidersAuthService {
     }
   }
 
-  private formatProviderProfileToDto(profile: Profile, passportIdKeyName: ProvidersIdDBFieldName): SocialProfileDto {
+  private formatProviderProfileToDto(
+    profile: Profile,
+    passportIdKeyName: ProvidersIdDBFieldName,
+  ): SocialProfileDto {
     const { photos } = profile;
     const { picture } = profile['_json'];
     const pictureUrl = photos ? photos[0].value : picture || '';

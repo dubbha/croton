@@ -52,10 +52,10 @@ describe('components/UserAvatarSection', () => {
       const pictureContainer = getByTestId('userAvatarSection__picture');
 
       expect(pictureContainer.getElementsByTagName('source')[0]['src']).toBe(
-        pictureUrl
+        pictureUrl,
       );
       expect(pictureContainer.getElementsByTagName('img')[0]['src']).toBe(
-        pictureUrl
+        pictureUrl,
       );
     });
   });

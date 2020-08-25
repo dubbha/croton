@@ -14,17 +14,17 @@ function* handle(action: ShelfAddShelf) {
     yield call(
       http.post,
       '/shelf/add-shelf',
-      { name, location, description }
+      { name, location, description },
     );
     yield put({
       type: SHELF_ADD_SHELF_SUCCESS,
-      payload: { info: 'Shelf added successfully' }
+      payload: { info: 'Shelf added successfully' },
     });
   } catch (e) {
     console.error(e);
     yield put({
       type: SHELF_ADD_SHELF_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

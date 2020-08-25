@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal, PlusIcon, BookmarkIcon, Card } from 'elements';
 import { getShelf } from 'store/shelf/selectors';
 import { SHELF_ADD_FLOWER } from 'store/shelf';
+import { Actions } from 'constants/actions';
 import { FlowerForm } from '../FlowerForm';
 
 type Props = {
@@ -15,16 +16,16 @@ export const AddFlower = ({ shelfId, onClose = () => {} }: Props) => {
   const { isLoading, info, error } = useSelector(getShelf);
   const dispatch = useDispatch();
 
-  const handleSubmit = (name: string, description: string) =>
+  const handleSubmit = (name: string, description: string, rrules: { [key in Actions]?: string }) =>
     dispatch({
       type: SHELF_ADD_FLOWER,
-      payload: { shelfId, name, description },
+      payload: { shelfId, name, description, rrules },
     });
 
   const handleClose = () => {
     setShowModal(false);
     onClose();
-  }
+  };
 
   return (
     <>
@@ -43,7 +44,7 @@ export const AddFlower = ({ shelfId, onClose = () => {} }: Props) => {
       <Modal
         show={showModal}
         onHide={handleClose}
-        size="lg"
+        size="xl"
         centered
       >
         <Modal.Header closeButton>

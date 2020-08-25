@@ -8,22 +8,22 @@ import {
 } from '../actions';
 
 function* handle(action: ShelfAddFlower) {
-  const { shelfId, name, description } = action.payload;
+  const { shelfId, name, description, rrules } = action.payload;
 
   try {
     yield call(
       http.post,
       '/shelf/add-flower',
-      { shelfId, name, description }
+      { shelfId, name, description, rrules },
     );
     yield put({
       type: SHELF_ADD_FLOWER_SUCCESS,
-      payload: { info: 'Flower added successfully' }
+      payload: { info: 'Flower added successfully' },
     });
   } catch (e) {
     yield put({
       type: SHELF_ADD_FLOWER_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

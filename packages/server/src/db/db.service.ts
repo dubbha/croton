@@ -9,6 +9,8 @@ import ShelfEntity from '../models/shelf.entity';
 import FlowerEntity from '../models/flower.entity';
 import ShelfInvitationEntity from '../models/shelf-invitation.entity';
 import UserToShelfEntity from '../models/user-to-shelf.entity';
+import ActionEntity from '../models/action.entity';
+import NotificationEntity from '../models/notification.entity';
 
 import SocialProfileDto from '../models/social-profile.dto';
 import RegistrationDto from '../models/registration.dto';
@@ -34,6 +36,8 @@ export default class DBService {
   private flowerRepository: Repository<FlowerEntity>;
   private shelfInvitationRepository: Repository<ShelfInvitationEntity>;
   private userToShelfRepository: Repository<UserToShelfEntity>;
+  private actionRepository: Repository<ActionEntity>;
+  private notificationRepository: Repository<NotificationEntity>;
 
   constructor() {
     this.userRepository = getRepository(UserEntity);
@@ -45,6 +49,8 @@ export default class DBService {
     this.flowerRepository = getRepository(FlowerEntity);
     this.shelfInvitationRepository = getRepository(ShelfInvitationEntity);
     this.userToShelfRepository = getRepository(UserToShelfEntity);
+    this.actionRepository = getRepository(ActionEntity);
+    this.notificationRepository = getRepository(NotificationEntity);
   }
 
   public getUserById(id: number) {
@@ -241,8 +247,12 @@ export default class DBService {
     return this.shelfRepository.delete(id);
   }
 
+  getFlowers() {
+    return this.flowerRepository.find({ relations: ['shelf'] });
+  }
+
   getFlowerById(id: number) {
-    return this.flowerRepository.findOne(id);
+    return this.flowerRepository.findOne(id, { relations: ['shelf'] });
   }
 
   async getFlowersByShelfId(shelfId: number) {
@@ -250,7 +260,7 @@ export default class DBService {
     return this.flowerRepository.find({ where: { shelf } });
   }
 
-  async countFlowers(shelfId: number) {
+  async countFlowersByShelfId(shelfId: number) {
     const shelf = await this.shelfRepository.findOne({ id: shelfId });
     return this.flowerRepository.count({ where: { shelf } });
   }
@@ -284,17 +294,61 @@ export default class DBService {
     pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne(shelfId);
-    return this.flowerRepository.update(id, {
-      shelf,
-      name,
-      description,
-      order,
-      rrules,
-      pictureUrls,
-    });
+    return this.flowerRepository.update(
+      id,
+      { shelf, name, description, order, rrules, pictureUrls },
+    );
   }
 
   deleteFlower(id: number) {
     return this.flowerRepository.delete(id);
+  }
+
+  async getUsersByFlowerId(id: number) {
+    const { shelf: { id: shelfId } } = await this.flowerRepository.findOne(id, { relations: ['shelf'] });
+    const userToShelves = await this.userToShelfRepository.find({ where: { shelfId }, relations: ['user'] });
+    return userToShelves.map(u2s => u2s.user);
+  }
+
+  async saveAction(userId: number, flowerId: number, action: Actions, timestamp: number) {
+    const user = await this.userRepository.findOne(userId);
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return this.actionRepository.save({ user, flower, action, timestamp });
+  }
+
+  async getLastAction(flowerId: number, action: Actions): Promise<ActionEntity> {
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return this.actionRepository.findOne({
+      where: {
+        flower,
+        action,
+      },
+      order: {
+        timestamp: 'DESC'
+      },
+      relations: ['user'],
+    })
+  }
+
+  async getLastNotification(flowerId: number, action: Actions) {
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return this.notificationRepository.findOne({
+      where: {
+        flower,
+        action,
+      },
+      order: {
+        timestamp: 'DESC'
+      },
+    })
+  }
+
+  async saveNotification(flowerId: number, action: Actions, timestamp: number) {
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return this.notificationRepository.save({ flower, action, timestamp });
+  }
+
+  updateNotification(id: number, timestamp: number) {
+    return this.notificationRepository.update(id, { timestamp });
   }
 }

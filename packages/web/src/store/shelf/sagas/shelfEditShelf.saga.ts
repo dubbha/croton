@@ -14,16 +14,16 @@ function* handle(action: ShelfEditShelf) {
     yield call(
       http.post,
       '/shelf/edit-shelf',
-      { id, name, location, description }
+      { id, name, location, description },
     );
     yield put({
       type: SHELF_EDIT_SHELF_SUCCESS,
-      payload: { info: 'Shelf updated successfully' }
+      payload: { info: 'Shelf updated successfully' },
     });
   } catch (e) {
     yield put({
       type: SHELF_EDIT_SHELF_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }

@@ -4,7 +4,7 @@ import {
   AUTH_RESET_PASSWORD,
   AUTH_RESET_PASSWORD_SUCCESS,
   AUTH_RESET_PASSWORD_ERROR,
-  AuthResetPassword
+  AuthResetPassword,
 } from '../actions';
 
 function* handle(action: AuthResetPassword) {
@@ -16,13 +16,13 @@ function* handle(action: AuthResetPassword) {
       type: AUTH_RESET_PASSWORD_SUCCESS,
       payload: {
         info: `If an account exists for ${email}, you will get an email with instructions on resetting your password.
-          If it doesn't arrive, be sure to check your spam folder.`
-      }
+          If it doesn't arrive, be sure to check your spam folder.`,
+      },
     });
   } catch (e) {
     yield put({
       type: AUTH_RESET_PASSWORD_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

@@ -52,8 +52,7 @@ describe('system/handleAuthViaSocial', () => {
             message: 'Error',
           },
         },
-      })
-    );
+      }));
 
     return expectSaga(handleAuthViaSocials, {
       accessToken,

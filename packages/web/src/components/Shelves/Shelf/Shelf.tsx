@@ -20,12 +20,12 @@ export const Shelf = () => {
 
   useEffect(() => {
     if (!shelves.length) {
-      dispatch({ type: SHELF_GET_SHELVES })
+      dispatch({ type: SHELF_GET_SHELVES });
     }
   }, [dispatch, shelves.length]);
 
   const refreshShelves = () => dispatch({ type: SHELF_GET_SHELVES });
-  const deleteShelf = () => dispatch({ type: SHELF_DELETE_SHELF, payload: { id: shelfId } })
+  const deleteShelf = () => dispatch({ type: SHELF_DELETE_SHELF, payload: { id: shelfId } });
 
   const shelf = shelves.find(s => s.id === shelfId);
 
@@ -35,10 +35,10 @@ export const Shelf = () => {
         <LeafIcon />
         <span className="icon-prefix">{shelf?.name}</span>
       </h1>
-      <h4>
+      <h5 className="shelf-location text-muted">
         <MapMarkerIcon />
         <span className="icon-prefix">{shelf?.location}</span>
-      </h4>
+      </h5>
       <p>{shelf?.description}</p>
       <div className="shelf-actions">
         <EditShelf

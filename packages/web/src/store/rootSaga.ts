@@ -12,7 +12,7 @@ import {
   addGoogle,
   authUpdateProfileSaga,
   authEmailResetSaga,
-  authEmailUpdateSaga
+  authEmailUpdateSaga,
 } from './auth/sagas';
 import {
   shelfInviteSaga,
@@ -26,6 +26,9 @@ import {
   shelfEditFlowerSaga,
   shelfDeleteFlowerSaga,
   shelfGetFlowersSaga,
+  shelfGetFlowerSaga,
+  shelfActionSaga,
+  shelfGetLastActionsSaga,
 } from './shelf/sagas';
 
 export function* rootSaga() {
@@ -54,5 +57,8 @@ export function* rootSaga() {
     shelfEditFlowerSaga(),
     shelfDeleteFlowerSaga(),
     shelfGetFlowersSaga(),
+    shelfGetFlowerSaga(),
+    shelfActionSaga(),
+    shelfGetLastActionsSaga(),
   ]);
 }

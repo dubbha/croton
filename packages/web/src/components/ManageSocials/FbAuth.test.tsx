@@ -52,7 +52,7 @@ describe('components/FbAuth', () => {
         onErrorAction={onErrorAction}
         errorMessage={errorMessage}
         buttonText={buttonText}
-      />
+      />,
     );
     return { container, mockDispatch, getByTestId };
   };

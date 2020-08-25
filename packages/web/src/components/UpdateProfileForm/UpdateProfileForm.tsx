@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, ErrorAlert, InfoAlert, AlertPlaceholder } from 'elements';
 import { AUTH_RESET_EMAIL, AUTH_UPDATE_PROFILE } from 'store/auth/actions';
@@ -44,24 +44,21 @@ export const UpdateProfileForm = () => {
 
   const nameFieldsType = isSignedInWithSocial ? 'button' : 'text';
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDisplayedInfo(info || '');
-    return info
-      ? () => {
-        clearTimeout(
-          setTimeout(() => {
-            setDisplayedInfo('');
-          }, INFO_DISPLAY_TIME_MS)
-        );
-      }
-      : () => {};
+
+    const timer = setTimeout(() => {
+      setDisplayedInfo('');
+    }, INFO_DISPLAY_TIME_MS);
+
+    return () => clearTimeout(timer);
   }, [info]);
 
   return (
     <Form>
       {error && <ErrorAlert>{error}</ErrorAlert>}
       {displayedInfo && <InfoAlert>{displayedInfo}</InfoAlert>}
-      {!error && !info && <AlertPlaceholder />}
+      {!error && !displayedInfo && <AlertPlaceholder />}
       <Form.Group>
         <Form.Label>First Name</Form.Label>
         <Form.Control

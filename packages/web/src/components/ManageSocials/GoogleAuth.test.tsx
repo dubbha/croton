@@ -57,7 +57,7 @@ describe('components/GoogleAuth', () => {
         onErrorAction={onErrorAction}
         errorMessage={errorMessage}
         buttonText={buttonText}
-      />
+      />,
     );
     return { container, mockDispatch, getByTestId };
   };

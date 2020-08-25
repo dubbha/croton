@@ -22,7 +22,7 @@ export const GoogleAuth = ({
   const { isLoading } = useSelector(getAuth);
 
   const responseGoogleSuccess = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
+    response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
     dispatch({
       type: onResponseAction,

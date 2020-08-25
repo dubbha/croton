@@ -89,6 +89,24 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       this.getFlowersHandler
     );
+
+    this.router.post(
+      this.serverApi.shelfGetFlower,
+      authMiddleware,
+      this.getFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfAction,
+      authMiddleware,
+      this.actionHanlder
+    );
+
+    this.router.post(
+      this.serverApi.shelfGetLastActions,
+      authMiddleware,
+      this.getLastActionsHanlder
+    )
   }
 
   private userInviteHanlder = async (
@@ -238,6 +256,50 @@ export default class ShelfController extends BaseController {
     try {
       const flowers = await this.shelfService.getFlowers(request.body.shelfId);
       response.status(200).send(flowers);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const flowers = await this.shelfService.getFlowerById(request.body.id);
+      response.status(200).send(flowers);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private actionHanlder = async(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const flowers = await this.shelfService.addAction(
+        request.body,
+        request.headers.authorization,
+      );
+      response.status(200).send(flowers);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getLastActionsHanlder = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const lastActions = await this.shelfService.getLastActions(
+        request.body.flowerId,
+      );
+      response.status(200).send(lastActions);
     } catch (error) {
       next(error);
     }

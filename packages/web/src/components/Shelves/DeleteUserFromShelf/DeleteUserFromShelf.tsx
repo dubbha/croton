@@ -5,8 +5,8 @@ import { getShelf } from 'store/shelf/selectors';
 import { SHELF_DELETE_USER, SHELF_RESET } from 'store/shelf';
 
 type Props = {
-  shelfId: number,
-  userId: number,
+  shelfId: number;
+  userId: number;
 }
 
 export const DeleteUserFromShelf = ({ shelfId, userId }: Props) => {
@@ -19,14 +19,14 @@ export const DeleteUserFromShelf = ({ shelfId, userId }: Props) => {
     e.preventDefault();
     dispatch({
       type: SHELF_DELETE_USER,
-      payload: { shelfId, userId }
+      payload: { shelfId, userId },
     });
   };
 
   const handleClose = () => {
     setShowModal(false);
     dispatch({ type: SHELF_RESET });
-  }
+  };
 
   return (
     <>

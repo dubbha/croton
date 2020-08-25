@@ -4,7 +4,7 @@ import {
   AUTH_FACEBOOK_ERROR,
   AuthFacebook,
   AUTH_FACEBOOK_SUCCESS,
-  AUTH_FACEBOOK
+  AUTH_FACEBOOK,
 } from '../actions';
 
 import { handleAuthViaSocials } from './handleAuthViaSocials.saga';
@@ -14,7 +14,7 @@ function* handle(action: AuthFacebook) {
     accessToken: action.payload.accessToken,
     apiEndpoint: '/auth/facebook',
     successActionType: AUTH_FACEBOOK_SUCCESS,
-    errorActionType: AUTH_FACEBOOK_ERROR
+    errorActionType: AUTH_FACEBOOK_ERROR,
   });
 }
 

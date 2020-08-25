@@ -102,7 +102,7 @@ export default class ShelfService {
     }: ShelfAddFlowerDto,
   ): Promise<void> {
     if (order === undefined) {
-      order = await this.dbService.countFlowers(shelfId);
+      order = await this.dbService.countFlowersByShelfId(shelfId);
     }
     await this.dbService.saveFlower(shelfId, name, description, order, rrules, pictureUrls, );
   }
@@ -127,5 +127,38 @@ export default class ShelfService {
 
   getFlowers(shelfId: number) {
     return this.dbService.getFlowersByShelfId(shelfId);
+  }
+
+  getFlowerById(id: number) {
+    return this.dbService.getFlowerById(id);
+  }
+
+  async addAction(
+    { action, flowerId }: { action: Actions, flowerId: number },
+    authToken: string,
+  ) {
+    const { id: userId } = verifyToken(authToken);
+    const timestamp = Math.ceil(Date.now() / 1000);
+    return this.dbService.saveAction(userId, flowerId, action, timestamp);
+  }
+
+  async getLastActions(flowerId: number) {
+    const lastActions = await Promise.all(
+      Object.values(Actions).map(action => this.dbService.getLastAction(flowerId, action))
+    );
+    return lastActions.filter(Boolean).reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur.action]: {
+          timestamp: cur.timestamp,
+          user: {
+            id: cur.user.id,
+            firstName: cur.user.firstName,
+            lastName: cur.user.lastName,
+          },
+        },
+      }),
+      {},
+    );
   }
 }

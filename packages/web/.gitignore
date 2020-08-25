@@ -30,3 +30,5 @@ cypress/screenshots
 # stryker
 stryker-tmp
 reports
+
+.env

@@ -19,7 +19,7 @@ type Props = {
     email: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
   ) => void;
 };
 
@@ -95,16 +95,16 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
 
   useEffect(() => {
     setIsValid(
-      !!values.email &&
-        !!values.password &&
-        !!values.firstName &&
-        !!values.lastName &&
-        !errors.email &&
-        !errors.email &&
-        !errors.password &&
-        !passwordMatchError &&
-        !errors.firstName &&
-        !errors.lastName
+      !!values.email
+        && !!values.password
+        && !!values.firstName
+        && !!values.lastName
+        && !errors.email
+        && !errors.email
+        && !errors.password
+        && !passwordMatchError
+        && !errors.firstName
+        && !errors.lastName,
     );
   }, [errors, passwordMatchError, values]);
 
@@ -120,16 +120,16 @@ export const SignUpForm = ({ isLoading, error, info, onSubmit }: Props) => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (
-      values.email &&
-      values.password &&
-      values.firstName &&
-      values.lastName
+      values.email
+      && values.password
+      && values.firstName
+      && values.lastName
     ) {
       onSubmit(
         values.email,
         values.password,
         values.firstName,
-        values.lastName
+        values.lastName,
       );
     }
   };

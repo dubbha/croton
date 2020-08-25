@@ -42,8 +42,7 @@ describe('store/auth/reducer', () => {
 
   const authError = 'AUTH WENT WRONG!!!';
 
-  const info =
-    'Some succesful auth event probably has happened, but details are not important';
+  const info = 'Some succesful auth event probably has happened, but details are not important';
 
   describe('loading start', () => {
     const actions = [
@@ -61,7 +60,7 @@ describe('store/auth/reducer', () => {
           expect(
             authReducer(initialState, {
               type: action as any,
-            })
+            }),
           ).toEqual({
             ...initialState,
             isLoading: true,
@@ -90,8 +89,8 @@ describe('store/auth/reducer', () => {
               {
                 type: action as any,
                 payload: { ...authResult },
-              }
-            )
+              },
+            ),
           ).toEqual({
             ...initialState,
             ...userData,
@@ -115,8 +114,8 @@ describe('store/auth/reducer', () => {
               {
                 type: action as any,
                 payload: { ...authResult, socialProfile },
-              }
-            )
+              },
+            ),
           ).toEqual({
             ...initialState,
             ...userData,
@@ -146,8 +145,8 @@ describe('store/auth/reducer', () => {
               {
                 type: action as any,
                 payload: { error: authError },
-              }
-            )
+              },
+            ),
           ).toEqual({
             ...initialState,
             error: authError,
@@ -172,8 +171,8 @@ describe('store/auth/reducer', () => {
               {
                 type: action as any,
                 payload: { info },
-              }
-            )
+              },
+            ),
           ).toEqual({
             ...initialState,
             info,
@@ -194,8 +193,8 @@ describe('store/auth/reducer', () => {
               {
                 type: action as any,
                 payload: { error: authError },
-              }
-            )
+              },
+            ),
           ).toEqual({
             ...initialState,
             error: authError,
@@ -209,7 +208,7 @@ describe('store/auth/reducer', () => {
     expect(
       authReducer({ ...initialState, isLoading: false, error: authError }, {
         type: AUTH_EMAIL_CONFIRM,
-      } as any)
+      } as any),
     ).toEqual({
       ...initialState,
       isLoading: true,
@@ -245,7 +244,7 @@ describe('store/auth/reducer', () => {
           },
           action: 'PUSH',
         },
-      })
+      }),
     ).toEqual({
       ...initialState,
       isLoading: false,

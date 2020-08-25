@@ -15,7 +15,7 @@ export const ShelfInvitationAccept = () => {
     if (shelfInvitationToken) {
       dispatch({
         type: SHELF_INVITE_ACCEPT,
-        payload: { shelfInvitationToken }
+        payload: { shelfInvitationToken },
       });
     }
   }, [dispatch, shelfInvitationToken]);

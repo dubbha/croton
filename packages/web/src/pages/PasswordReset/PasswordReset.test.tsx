@@ -15,13 +15,13 @@ describe('pages/PasswordReset', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useDispatch: () => jest.fn(),
-        useSelector: () => false
+        useSelector: () => false,
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { container } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -32,13 +32,13 @@ describe('pages/PasswordReset', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => false
+        useSelector: () => false,
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { getByTestId } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
       const submitButton = getByTestId('submitButton');
 
@@ -51,13 +51,13 @@ describe('pages/PasswordReset', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useDispatch: () => jest.fn(),
-        useSelector: () => ({ passwordResetToken: 'TOKEN' })
+        useSelector: () => ({ passwordResetToken: 'TOKEN' }),
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { container } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -68,13 +68,13 @@ describe('pages/PasswordReset', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => ({ passwordResetToken: 'TOKEN' })
+        useSelector: () => ({ passwordResetToken: 'TOKEN' }),
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { getByTestId } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
       const submitButton = getByTestId('submitButton');
 

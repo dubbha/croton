@@ -35,7 +35,12 @@ export default class EmailSendingService {
     }
   }
 
-  public async sendActivationMessage(userEmail: string, name: string, host: string, emailVerificationToken: string): Promise<void> {
+  public async sendActivationMessage(
+    userEmail: string,
+    name: string,
+    host: string,
+    emailVerificationToken: string
+  ): Promise<void> {
     const link = `${host}${Pages.EMAIL_CONFIRMATION_PAGE}?${QueryParams.EMAIL_VERIFICATION_TOKEN}=${emailVerificationToken}`;
     const mailOptions = {
       to: userEmail,
@@ -46,7 +51,12 @@ export default class EmailSendingService {
     await this.sendEmail(mailOptions);
   }
 
-  public async sendPasswordResetMessage(userEmail: string, name: string, host: string, passwordResetToken: string): Promise<void> {
+  public async sendPasswordResetMessage(
+    userEmail: string,
+    name: string,
+    host: string,
+    passwordResetToken: string,
+  ): Promise<void> {
     const link = `${host}${Pages.PASSWORD_RESET_PAGE}?${QueryParams.PASSWORD_RESET_TOKEN}=${passwordResetToken}`;
     const mailOptions = {
       to: userEmail,
@@ -57,7 +67,12 @@ export default class EmailSendingService {
     await this.sendEmail(mailOptions);
   }
 
-  public async sendEmailResetMessage(userEmail: string, name: string, host: string, emailResetToken: string): Promise<void> {
+  public async sendEmailResetMessage(
+    userEmail: string,
+    name: string,
+    host: string,
+    emailResetToken: string,
+  ): Promise<void> {
     const link = `${host}${Pages.EMAIL_RESET_PAGE}?${QueryParams.EMAIL_RESET_TOKEN}=${emailResetToken}`;
     const mailOptions = {
       to: userEmail,
@@ -86,7 +101,7 @@ export default class EmailSendingService {
     userEmail: string,
     name: string,
     host: string,
-    shelfInvitationToken: string
+    shelfInvitationToken: string,
   ): Promise<void> {
     const link = `${host}${Pages.SHELF_INVITATION_ACCEPT_PAGE}?${QueryParams.SHELF_INVITATION_TOKEN}=${shelfInvitationToken}`;
     const mailOptions = {

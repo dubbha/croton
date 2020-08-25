@@ -1,3 +1,4 @@
+import { Actions } from 'constants/actions';
 import { Shelf, Flower } from './interfaces';
 
 export const SHELF_INVITE = 'SHELF_INVITE';
@@ -44,6 +45,18 @@ export const SHELF_DELETE_FLOWER_ERROR = 'SHELF_DELETE_FLOWER_ERROR';
 export const SHELF_GET_FLOWERS = 'SHELF_GET_FLOWERS';
 export const SHELF_GET_FLOWERS_SUCCESS = 'SHELF_GET_FLOWERS_SUCCESS';
 export const SHELF_GET_FLOWERS_ERROR = 'SHELF_GET_FLOWERS_ERROR';
+
+export const SHELF_GET_FLOWER = 'SHELF_GET_FLOWER';
+export const SHELF_GET_FLOWER_SUCCESS = 'SHELF_GET_FLOWER_SUCCESS';
+export const SHELF_GET_FLOWER_ERROR = 'SHELF_GET_FLOWER_ERROR';
+
+export const SHELF_ACTION = 'SHELF_ACTION';
+export const SHELF_ACTION_SUCCESS = 'SHELF_ACTION_SUCCESS';
+export const SHELF_ACTION_ERROR = 'SHELF_ACTION_ERROR';
+
+export const SHELF_GET_LAST_ACTIONS = 'SHELF_GET_LAST_ACTIONS';
+export const SHELF_GET_LAST_ACTIONS_SUCCESS = 'SHELF_GET_LAST_ACTIONS_SUCCESS';
+export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
 
 export const SHELF_RESET = 'SHELF_RESET';
 
@@ -153,7 +166,12 @@ export interface ShelfGetShelvesError {
 
 export interface ShelfAddFlower {
   type: typeof SHELF_ADD_FLOWER;
-  payload: { shelfId: number, name: string, description: string };
+  payload: {
+    shelfId: number,
+    name: string,
+    description: string,
+    rrules: { [key in Actions]?: string }
+  };
 }
 
 export interface ShelfAddFlowerSuccess {
@@ -168,7 +186,13 @@ export interface ShelfAddFlowerError {
 
 export interface ShelfEditFlower {
   type: typeof SHELF_EDIT_FLOWER;
-  payload: { id: number, name: string, description: string };
+  payload: {
+    id: number,
+    shelfId: number,
+    name: string,
+    description: string,
+    rrules: { [key in Actions]?: string },
+  };
 }
 
 export interface ShelfEditFlowerSuccess {
@@ -183,7 +207,7 @@ export interface ShelfEditFlowerError {
 
 export interface ShelfDeleteFlower {
   type: typeof SHELF_DELETE_FLOWER;
-  payload: { id: number };
+  payload: { id: number, shelfId: number };
 }
 
 export interface ShelfDeleteFlowerSuccess {
@@ -208,6 +232,56 @@ export interface ShelfGetFlowersSuccess {
 
 export interface ShelfGetFlowersError {
   type: typeof SHELF_GET_FLOWERS_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfGetFlower {
+  type: typeof SHELF_GET_FLOWER;
+  payload: { id: number };
+}
+
+export interface ShelfGetFlowerSuccess {
+  type: typeof SHELF_GET_FLOWER_SUCCESS;
+  payload: { flower: Flower };
+}
+
+export interface ShelfGetFlowerError {
+  type: typeof SHELF_GET_FLOWER_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfAction {
+  type: typeof SHELF_ACTION;
+  payload: { action: Actions, flowerId: number, shelfId: number };
+}
+
+export interface ShelfActionSuccess {
+  type: typeof SHELF_ACTION_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfActionError {
+  type: typeof SHELF_ACTION_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfGetLastActions {
+  type: typeof SHELF_GET_LAST_ACTIONS;
+  payload: { flowerId: number, shelfId: number };
+}
+
+export interface ShelfGetLastActionsSuccess {
+  type: typeof SHELF_GET_LAST_ACTIONS_SUCCESS;
+  payload: {
+    [key in Actions]: {
+      timestamp: number;
+      user: { id: number, firstName: string, lastName: string };
+    }
+  }
+}
+
+export interface ShelfGetLastActionsError {
+  type: typeof SHELF_GET_LAST_ACTIONS_ERROR;
   payload: { error: string };
 }
 
@@ -249,5 +323,13 @@ export type ShelfActionTypes =
   | ShelfGetFlowers
   | ShelfGetFlowersSuccess
   | ShelfGetFlowersError
-  | ShelfReset
-;
+  | ShelfGetFlower
+  | ShelfGetFlowerSuccess
+  | ShelfGetFlowerError
+  | ShelfAction
+  | ShelfActionSuccess
+  | ShelfActionError
+  | ShelfGetLastActions
+  | ShelfGetLastActionsSuccess
+  | ShelfGetLastActionsError
+  | ShelfReset;

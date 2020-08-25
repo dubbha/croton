@@ -59,11 +59,11 @@ export const environments = {
     host: 'croton.cf',
     api: 'https://croton.cf:4002/api',
   },
-}
+};
 
 export const getEnvironment = () =>
   Object.values(environments).find(
-    env => window.location.protocol === env.protocol && window.location.host === env.host
+    env => window.location.protocol === env.protocol && window.location.host === env.host,
   ) || environments.local;
 
 export const { api } = getEnvironment();

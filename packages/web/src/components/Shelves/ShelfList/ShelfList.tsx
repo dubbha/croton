@@ -13,11 +13,11 @@ export const ShelfList = () => {
   const { shelves } = useSelector(getShelf);
 
   useEffect(() => {
-    dispatch({ type: SHELF_GET_SHELVES })
+    dispatch({ type: SHELF_GET_SHELVES });
   }, [dispatch]);
 
   const selectShelf = (id: number) => dispatch(push(`/profile/shelf/${id}`));
-  const refreshShelves = () => dispatch({ type: SHELF_GET_SHELVES })
+  const refreshShelves = () => dispatch({ type: SHELF_GET_SHELVES });
 
   return (
     <div className="shelf-list row">

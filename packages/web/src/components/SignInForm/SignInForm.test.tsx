@@ -9,7 +9,7 @@ describe('components/SignInForm', () => {
   it('should render successfully', () => {
     const { container } = render(
       <SignInForm onSubmit={fn} isLoading={false} error={null} />,
-      { wrapper: MemoryRouter }
+      { wrapper: MemoryRouter },
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -17,7 +17,7 @@ describe('components/SignInForm', () => {
   it('should render submit button disabled by default', () => {
     const { container, getByTestId } = render(
       <SignInForm onSubmit={fn} isLoading={false} error={null} />,
-      { wrapper: MemoryRouter }
+      { wrapper: MemoryRouter },
     );
     expect(container.firstChild).toMatchSnapshot();
 
@@ -28,7 +28,7 @@ describe('components/SignInForm', () => {
   it('should call onSubmit prop on submit', () => {
     const { container, getByTestId } = render(
       <SignInForm onSubmit={fn} isLoading={false} error={null} />,
-      { wrapper: MemoryRouter }
+      { wrapper: MemoryRouter },
     );
     expect(container.firstChild).toMatchSnapshot();
 
@@ -49,12 +49,11 @@ describe('components/SignInForm', () => {
     const error = 'ERROR';
     const { getByTestId } = render(
       <SignInForm onSubmit={fn} isLoading={false} error={error} />,
-      { wrapper: MemoryRouter }
+      { wrapper: MemoryRouter },
     );
 
     const errorAlert = getByTestId('errorAlert');
 
     expect(errorAlert.textContent).toBe('ERROR');
-
-  })
+  });
 });

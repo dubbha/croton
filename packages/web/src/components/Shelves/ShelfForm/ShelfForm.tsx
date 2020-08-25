@@ -71,7 +71,7 @@ export const ShelfForm = ({
   useEffect(() => {
     setIsValid(
       !!values.name && !!values.location && !!values.description
-      && !errors.name && !errors.location && !errors.description
+      && !errors.name && !errors.location && !errors.description,
     );
   }, [errors, values]);
 

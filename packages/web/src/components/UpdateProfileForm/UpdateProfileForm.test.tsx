@@ -8,8 +8,7 @@ describe('components/UpdateProfileForm', () => {
   const lastName = 'Norris';
   const email = 'bigbangkickedbyleg@hero.com';
   const error = 'Has been defeated by Bruce Lee';
-  const info =
-    'Chuck Norris admits to having trained with Bruce Lee for approximately two years';
+  const info = 'Chuck Norris admits to having trained with Bruce Lee for approximately two years';
 
   const setUpMocks = ({ isSignedInWithSocial, info, error }) => {
     const mockDispatch = jest.fn();
@@ -144,7 +143,7 @@ describe('components/UpdateProfileForm', () => {
       });
 
       expect(getByTestId('updateProfileForm__changeEmail')['disabled']).toBe(
-        false
+        false,
       );
     });
   });

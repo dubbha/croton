@@ -13,18 +13,18 @@ function* handle(action: AuthUpdatePassword) {
   try {
     yield call(http.post, '/auth/password-update', {
       passwordResetToken: token,
-      password
+      password,
     });
     yield put({
       type: AUTH_UPDATE_PASSWORD_SUCCESS,
       payload: {
-        info: 'Password updated'
-      }
+        info: 'Password updated',
+      },
     });
   } catch (e) {
     yield put({
       type: AUTH_UPDATE_PASSWORD_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

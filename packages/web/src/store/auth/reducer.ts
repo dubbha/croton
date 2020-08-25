@@ -56,7 +56,7 @@ export const initialState: AuthState = {
 
 export function authReducer(
   state = initialState,
-  action: AuthActionTypes | LocationChangeAction
+  action: AuthActionTypes | LocationChangeAction,
 ): AuthState {
   switch (action.type) {
     case AUTH_UPDATE_PASSWORD:

@@ -24,7 +24,7 @@ export const AddShelf = ({ onClose = () => {} }: Props) => {
   const handleClose = () => {
     setShowModal(false);
     onClose();
-  }
+  };
 
   return (
     <>

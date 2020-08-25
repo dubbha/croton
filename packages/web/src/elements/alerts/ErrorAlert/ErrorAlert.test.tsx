@@ -7,5 +7,5 @@ describe('elements/ErrorAlert', () => {
     const { getByTestId } = render(<ErrorAlert />);
     const errorAlert = getByTestId('errorAlert');
     expect(errorAlert.textContent).toBe('Error');
-  })
-})
+  });
+});

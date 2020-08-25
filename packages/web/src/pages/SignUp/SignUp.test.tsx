@@ -14,7 +14,7 @@ describe('pages/SignUp', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useDispatch: () => jest.fn(),
-        useSelector: () => false
+        useSelector: () => false,
       }));
 
       const { SignUp } = require('./SignUp');
@@ -29,7 +29,7 @@ describe('pages/SignUp', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => false
+        useSelector: () => false,
       }));
 
       jest.doMock('components/SignUpForm', () => {
@@ -37,7 +37,7 @@ describe('pages/SignUp', () => {
         return {
           SignUpForm: ({ onSubmit }) => (
             <button onClick={onSubmit} data-testid="submitButton" />
-          )
+          ),
         };
       });
 

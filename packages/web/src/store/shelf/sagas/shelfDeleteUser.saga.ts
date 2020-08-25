@@ -14,16 +14,16 @@ function* handle(action: ShelfDeleteUser) {
     yield call(
       http.post,
       '/shelf/user-delete',
-      { shelfId, userId }
+      { shelfId, userId },
     );
     yield put({
       type: SHELF_DELETE_USER_SUCCESS,
-      payload: { info: 'User deleted successfully' }
+      payload: { info: 'User deleted successfully' },
     });
   } catch (e) {
     yield put({
       type: SHELF_DELETE_USER_ERROR,
-      payload: { error: e.response.data.message || e.message }
+      payload: { error: e.response.data.message || e.message },
     });
   }
 }
