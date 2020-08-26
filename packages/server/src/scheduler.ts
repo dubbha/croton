@@ -4,7 +4,7 @@ import createPostgresConnection from './utils/createPostgresConnection';
 import DBService from './db/db.service';
 import NotificationService from './services/notification.service';
 
-createPostgresConnection().then(async () => {
+createPostgresConnection().then(async (connection) => {
   const dbService = new DBService();
   const notificationService = new NotificationService();
 
@@ -82,7 +82,8 @@ createPostgresConnection().then(async () => {
     } else {
       await dbService.saveNotification(id, action, timestamp)
     }
-  }))
+  }));
 
+  await connection.close();
   exit();
 });
