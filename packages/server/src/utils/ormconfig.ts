@@ -16,7 +16,10 @@ const config: ConnectionOptions = {
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  synchronize: false
+  synchronize: false,
+  extra: {
+    max: 3
+  }
 };
 
 export default config;
