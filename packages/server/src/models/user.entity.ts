@@ -11,6 +11,7 @@ import { UserStatuses } from '../constants/user-statuses';
 import SocialProfile from './social-profile.entity';
 import UserToShelf from './user-to-shelf.entity'
 import Action from './action.entity';
+import NotificationToken from './notification-token.entity';
 
 @Entity()
 export default class User {
@@ -41,4 +42,7 @@ export default class User {
 
   @OneToMany(() => Action, actions => actions.user)
   actions: Action[];
+
+  @OneToMany(() => NotificationToken, notificationToken => notificationToken.user)
+  notificationTokens: NotificationToken[];
 }

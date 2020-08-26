@@ -2,6 +2,8 @@ const root = '/api';
 const auth = '/auth';
 const management = '/management';
 const shelf = '/shelf';
+const notification = '/notification';
+const internal = '/internal';
 const authLogin = `${auth}/login`;
 const authLoginFacebook = `${auth}/facebook`;
 const authLoginGoogle = `${auth}/google`;
@@ -29,6 +31,8 @@ const shelfGetFlowers = `${shelf}/get-flowers`;
 const shelfGetFlower = `${shelf}/get-flower`;
 const shelfAction = `${shelf}/action`;
 const shelfGetLastActions = `${shelf}/get-last-actions`;
+const notificationRegister = `${notification}/register`;
+const internalNotification = `${internal}/notification`;
 const healthCheck = '/health-check';
 
 export const api = {
@@ -62,6 +66,8 @@ export const api = {
   shelfAction,
   shelfGetLastActions,
   healthCheck,
+  notificationRegister,
+  internalNotification,
 };
 
 export type Api = typeof api;
