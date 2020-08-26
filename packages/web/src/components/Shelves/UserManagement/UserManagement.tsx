@@ -7,7 +7,7 @@ import { InviteUserToShelf } from '../InviteUserToShelf';
 
 type Props = {
   shelfId: number;
-}
+};
 
 export const UserManagement = ({ shelfId }: Props) => {
   const [showModal, setShowModal] = useState(false);
@@ -16,22 +16,14 @@ export const UserManagement = ({ shelfId }: Props) => {
   const handleClose = () => {
     setShowModal(false);
     dispatch({ type: SHELF_RESET });
-  }
+  };
 
   return (
     <>
-      <Button
-        variant="outline-primary"
-        onClick={() => setShowModal(true)}
-      >
+      <Button variant="outline-primary" onClick={() => setShowModal(true)}>
         Users
       </Button>
-      <Modal
-        show={showModal}
-        onHide={handleClose}
-        size="lg"
-        centered
-      >
+      <Modal show={showModal} onHide={handleClose} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>
             <span>Users</span>
@@ -56,8 +48,7 @@ export const UserManagement = ({ shelfId }: Props) => {
               </Table>
             </Tab>
             <Tab eventKey="invitations" title="Invitations">
-              {/* InviteUserToShelf Should be rework and moved here */}
-              {/* <InviteUserToShelf shelfId={shelfId} /> */}
+              <InviteUserToShelf shelfId={shelfId} />
               <Table striped>
                 <thead>
                   <th>Email</th>
