@@ -7,6 +7,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth';
 import { shelfReducer } from './shelf';
+import { notificationReducer } from './notification';
 import { rootSaga } from './rootSaga';
 
 export const history = createBrowserHistory();
@@ -23,6 +24,7 @@ const store = createStore(
     router: connectRouter(history),
     auth: persistReducer(authPersistConfig, authReducer),
     shelf: shelfReducer,
+    notification: notificationReducer,
   }),
   composeWithDevTools(
     applyMiddleware(routerMiddleware(history), sagaMiddleware),
