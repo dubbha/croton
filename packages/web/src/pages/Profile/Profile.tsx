@@ -10,7 +10,7 @@ import {
   ProfileUserDetails,
   Shelves,
   Shelf,
-  Flower
+  Flower,
 } from 'components';
 import { getAuth } from 'store/auth/selectors';
 import './styles.scss';

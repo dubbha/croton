@@ -16,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 const authPersistConfig = {
   key: 'auth',
   storage,
-  blacklist: ['isLoading', 'info', 'error']
+  blacklist: ['isLoading', 'info', 'error'],
 };
 
 const store = createStore(
@@ -24,7 +24,7 @@ const store = createStore(
     router: connectRouter(history),
     auth: persistReducer(authPersistConfig, authReducer),
     shelf: shelfReducer,
-    notification: notificationReducer
+    notification: notificationReducer,
   }),
   composeWithDevTools(
     applyMiddleware(routerMiddleware(history), sagaMiddleware),

@@ -2,9 +2,11 @@ import { exit } from 'process';
 import { rrulestr } from 'rrule';
 import createPostgresConnection from './utils/createPostgresConnection';
 import DBService from './db/db.service';
+import NotificationService from './services/notification.service';
 
 createPostgresConnection().then(async () => {
   const dbService = new DBService();
+  const notificationService = new NotificationService();
 
   const flowers = await dbService.getFlowers();
 
@@ -63,11 +65,17 @@ createPostgresConnection().then(async () => {
       const lastMissedRecurrence = rule.before(new Date(Date.now()));
       if (!lastMissedRecurrence) return;
     }
-
-    usersByFlowerId[id].forEach(user => {
-      console.log(user.email, message); // TODO: use notification service
-    })
-
+    usersByFlowerId[id].map(async (user) => {
+      const notificationTokens = Array.from(await dbService.findRegisterTokens(user))
+        .flat()
+        .map(({ registrationToken }) => registrationToken);
+      await notificationService.sendNotificationWithOptions(
+        notificationTokens,
+        message,
+        `Croton ${action} notification`,
+        {}
+      );
+    });
     const timestamp = Math.ceil(Date.now() / 1000); // unix timestamp, seconds, utc
     if (lastNotification) {
       await dbService.updateNotification(lastNotification.notificationId, timestamp);

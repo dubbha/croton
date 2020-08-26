@@ -1,4 +1,4 @@
-import { messaging } from '../../config';
+import { messaging } from 'config';
 
 export const waitForNotificationClicked = () =>
   new Promise((resolve, reject) => {
@@ -7,16 +7,8 @@ export const waitForNotificationClicked = () =>
         return;
       }
       messaging.onMessage(payload => {
-        const notificationTitle = payload.title;
-        const notificationOptions = {
-          body: payload.data,
-          tag: payload.tag,
-        };
-
-        const notification = new Notification(
-          notificationTitle,
-          notificationOptions
-        );
+        const { body, title } = payload.notification;
+        const notification = new Notification(title, { body });
 
         notification.onclick = event => {
           console.log('The event on clicking', event);

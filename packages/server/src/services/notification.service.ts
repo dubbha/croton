@@ -24,9 +24,9 @@ export default class NotificationService {
     await this.sendNotification(registrationTokens, message_notification);
   }
 
-  public async sendNotificationWithOptions(registrationTokens: string[], message, title, options) {
+  public async sendNotificationWithOptions(registrationTokens: string[], body, title, options) {
     const notification = {
-      message,
+      body,
       title,
       ...options
     };

@@ -7,7 +7,7 @@ export const environments = {
   localHttps: { // local devServer@HTTPS using dev env API, started using `yarn start:https`
     protocol: 'https:',
     host: 'localhost:4430',
-    api: 'https://croton.cf:4000/api',
+    api: 'https://localhost:4000/api',
   },
   localUsingLocalApi: { // local devServer@HTTP using local API, started using `yarn start:local`
     protocol: 'http:',

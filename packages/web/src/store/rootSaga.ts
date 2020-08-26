@@ -61,6 +61,6 @@ export function* rootSaga() {
     shelfGetFlowerSaga(),
     shelfActionSaga(),
     shelfGetLastActionsSaga(),
-    notificationRegisterSaga()
+    notificationRegisterSaga(),
   ]);
 }

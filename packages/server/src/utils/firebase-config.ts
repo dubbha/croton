@@ -15,7 +15,6 @@ fs.readFile(`${HOME}/${fileName}`, (loadError, data) => {
   }
   try {
     const firebaseAdminCredentialCert = JSON.parse(data.toString('utf-8'));
-    console.log(firebaseAdminCredentialCert);
     admin.initializeApp({
       credential: admin.credential.cert(firebaseAdminCredentialCert as any),
       databaseURL: process.env.FIREBASE_DATABASE_URL,

@@ -1,7 +1,6 @@
-import { call, put, fork, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   http,
-  notificationListener,
   notificationPermissionRequest,
 } from 'services';
 import {
@@ -19,7 +18,6 @@ function* handle() {
     yield put({
       type: NOTIFICATION_REGISTER_SUCCESS,
     });
-    yield fork(notificationListener);
     yield call(monitorNotificationClick);
   } catch (e) {
     yield put({

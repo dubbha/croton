@@ -3,6 +3,7 @@
     "sourceMap": false,
     "inlineSourceMap": false,
     "target": "es2015",
+    "lib": ["es2019"],
     "outDir": "./dist",
     "baseUrl": "./src",
     "rootDir": "./src",

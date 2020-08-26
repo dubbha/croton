@@ -16,7 +16,7 @@ const getMessaging = () => {
     });
     const messaging = initializedFirebaseApp.messaging();
     messaging.usePublicVapidKey(
-      'BJf6pLUPJm5CCtZkm0oOd3iJ4Un2Tb0gtY_ZsFeDsP0E4BQ06MLz780vg-7qOCWLooovhw21G7xQ1osZt2RamAc'
+      'BJf6pLUPJm5CCtZkm0oOd3iJ4Un2Tb0gtY_ZsFeDsP0E4BQ06MLz780vg-7qOCWLooovhw21G7xQ1osZt2RamAc',
     );
     return messaging;
   } catch {

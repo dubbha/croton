@@ -17,7 +17,8 @@
     "migration:run:linux": "ts-node ./node_modules/.bin/typeorm migration:run",
     "migration:run:windows": "ts-node ../../node_modules/typeorm/cli.js migration:run",
     "migration:revert:linux": "ts-node ./node_modules/.bin/typeorm migration:revert",
-    "migration:revert:windows": "ts-node ../../node_modules/typeorm/cli.js migration:revert"
+    "migration:revert:windows": "ts-node ../../node_modules/typeorm/cli.js migration:revert",
+    "notifications:run": "ts-node ./src/scheduler.ts"
   },
   "keywords": [],
   "author": "",

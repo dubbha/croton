@@ -355,17 +355,25 @@ export default class DBService {
     return this.notificationRepository.update(id, { timestamp });
   }
 
-  findRegisterToken(user) {
-    return this.notificationTokenRepository.findOne({ user });
+  async findDuplicatedRegisterToken(user, registrationToken) {
+    const list = await this.findRegisterTokens(user);
+    return list.find((registerToken) => registerToken.registrationToken === registrationToken);
+  }
+
+  findRegisterTokens(user): Promise<NotificationToken[]> {
+    return this.notificationTokenRepository.find({ user });
   }
 
   updateRegisterToken(registerToken: NotificationToken) {
-    return this.notificationTokenRepository.update(registerToken.notificationTokenId, registerToken);
+    return this.notificationTokenRepository.update(
+      registerToken.notificationTokenId,
+      registerToken
+    );
   }
 
   async saveRegisterToken(userId: number, registrationToken: string) {
     const user = await this.getUserById(userId);
-    const duplicateToken = await this.findRegisterToken(user);
+    const duplicateToken = await this.findDuplicatedRegisterToken(user, registrationToken);
     if (duplicateToken) {
       duplicateToken.registrationTokenLastUpdate = Date.now();
       await this.updateRegisterToken(duplicateToken);
