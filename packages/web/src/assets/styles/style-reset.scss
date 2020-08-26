@@ -1,0 +1,76 @@
+body, html {
+  font-family: 'Open Sans', sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  color: #777;
+  font-weight: 400;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+h2, h3, h4 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+  font-size: 36px;
+  color: #333;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+h4 {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+h5 {
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+p {
+  font-size: 15px;
+
+  &.intro {
+    margin: 12px 0 0;
+    line-height: 24px;
+  }
+}
+
+a {
+  color: #608dfd;
+  font-weight: 400;
+
+  &:hover, &:focus {
+    text-decoration: none;
+    color: #608dfd;
+  }
+}
+
+ul, ol {
+  list-style: none;
+}
+
+ul, ol {
+  padding: 0;
+}
+
+hr {
+  height: 2px;
+  width: 70px;
+  text-align: center;
+  position: relative;
+  background: #1E7A46;
+  margin-bottom: 20px;
+  border: 0;
+}

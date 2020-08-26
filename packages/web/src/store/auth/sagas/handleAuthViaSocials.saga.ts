@@ -18,13 +18,16 @@ export function* handleAuthViaSocials({
   email,
 }: HandleAuthViaSocialsPayload) {
   try {
-    const result = yield call(http.post, apiEndpoint, {
+    const {
+      data: { token, ...userData },
+    } = yield call(http.post, apiEndpoint, {
       access_token: accessToken,
       email,
     });
+    yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: successActionType,
-      payload: result.data,
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
