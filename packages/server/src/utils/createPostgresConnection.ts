@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-import {Connection, createConnection} from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
 import { validateEnv } from './validate-env';
 
