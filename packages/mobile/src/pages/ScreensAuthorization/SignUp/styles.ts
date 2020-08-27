@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
 
   container__bottomPart: {
-    flex: 1,
+    flex: 0.5,
     flexDirection: 'column',
     alignItems: 'center',
   },

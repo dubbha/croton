@@ -23,10 +23,15 @@ const validatorCode = (code: string): boolean => {
   return code.length > 2;
 };
 
+const validatorLength = (value: string): boolean => {
+  return value.length > 3;
+};
+
 export {
   validatorEmail,
   validatorPassword,
   validatorRepeatPassword,
   validatorName,
   validatorCode,
+  validatorLength,
 };

@@ -36,7 +36,7 @@ export default StyleSheet.create({
   input__message: {
     position: 'absolute',
     bottom: -40,
-    left: -25,
+    left: -15,
     minWidth: '35%',
     paddingVertical: Platform.OS === 'android' ? 5 : 10,
     paddingHorizontal: Platform.OS === 'android' ? 2.5 : 5,

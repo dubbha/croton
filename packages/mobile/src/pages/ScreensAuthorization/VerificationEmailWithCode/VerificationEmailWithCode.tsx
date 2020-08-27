@@ -30,12 +30,11 @@ export const VerificationEmailWithCode = () => {
       isShowMessage: false,
     };
     if (!code.length) {
-      console.log(code);
       setValidationStatus(result);
       return;
     }
 
-    const validator = InputConfigs.VerificationEmailWithCode.validator;
+    const validator = InputConfigs.verificationEmailWithCode.validator;
     const status = validator(code);
 
     result.status = status;
@@ -61,9 +60,8 @@ export const VerificationEmailWithCode = () => {
 
   const submitForm = () => {
     const status = validateInput();
-    // TODO: navigate to SCREEN_USER_PROFILE or show message
+    // TODO: navigate to SCREEN_USER or show message
     if (status) {
-      console.log('Navigate to SCREEN_USER_PROFILE');
       navigation.navigate(SCREEN_AUTHORIZATION);
     }
   };
@@ -77,7 +75,7 @@ export const VerificationEmailWithCode = () => {
           <Text style={styles.code__text}>Pls write code from your email</Text>
           <View style={styles.code__field}>
             <CustomInput
-              inputType="VerificationEmailWithCode"
+              inputType="verificationEmailWithCode"
               validationStatus={validationStatus}
               onChangeText={(value: string) => setCode(value)}
               onBlur={() => validateInput()}

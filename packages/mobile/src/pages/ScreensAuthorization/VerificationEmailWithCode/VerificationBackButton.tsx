@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { HeaderBackButton } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
-import { AUTH_CONFIRM_EMAIL, AUTH_NOTIFY } from '../../../store/auth/actions';
+import { AUTH_CONFIRM_EMAIL } from '../../../store/auth/actions';
+import { INFORMATION_HIDE } from '../../../store/information/actions';
 
 export const VerificationBackButton = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,7 @@ export const VerificationBackButton = () => {
         isEmailVerification: false,
       },
     });
-    dispatch({
-      type: AUTH_NOTIFY,
-      payload: {
-        info: null,
-      },
-    });
+    dispatch({ type: INFORMATION_HIDE });
   };
 
   return <HeaderBackButton onPress={() => gotToMainScreen()} />;

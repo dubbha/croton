@@ -48,11 +48,13 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
   },
+
   additionText: {
     marginTop: 20,
     color: COLORS.green,
     fontSize: 18,
   },
+
   androidButton: {
     marginTop: 10,
   },

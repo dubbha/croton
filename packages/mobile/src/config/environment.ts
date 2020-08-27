@@ -1,7 +1,10 @@
+// TODO: this is only for test android emulator
+const fakeEnv: string = 'ngrok_example';
+
 export const environments = {
   dev: {
-    protocol: 'http',
-    host: 'localhost',
+    protocol: 'https',
+    host: `${fakeEnv}.ngrok.io`,
     port: '3000',
     api: 'http://croton.cf:3000/api',
   },

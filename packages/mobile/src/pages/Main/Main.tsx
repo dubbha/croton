@@ -9,7 +9,12 @@ import {
   SCREEN_EMAIL_VERIFICATION,
   SCREEN_SIGN_IN,
   SCREEN_SIGN_UP,
-  SCREEN_USER_PROFILE,
+  SCREEN_USER,
+  SCREEN_USER_SETTINGS,
+  SCREEN_USER_SHELVES,
+  SCREEN_USER_FLOWERS,
+  SCREEN_USER_SHELF,
+  SCREEN_USER_FLOWER,
 } from '../screens';
 import { Authorization } from '../ScreensAuthorization/Authorization';
 import { SignIn } from '../ScreensAuthorization/SignIn';
@@ -20,8 +25,13 @@ import {
   VerificationBackButton,
   VerificationEmailWithCode,
 } from '../ScreensAuthorization/VerificationEmailWithCode';
+import { Settings } from '../UserScreens/Settings';
+import { Shelves } from '../UserScreens/Shelves';
+import { Shelf } from '../UserScreens/Shelf';
+import { Flowers } from '../UserScreens/Flowers';
+import { Flower } from '../UserScreens/Flower';
 
-const Stack = createStackNavigator();
+export const Stack = createStackNavigator();
 
 const renderScreensAuthorization = () => {
   return (
@@ -62,10 +72,29 @@ const renderScreensUser = () => {
   return (
     <>
       <Stack.Screen
-        name={SCREEN_USER_PROFILE}
+        name={SCREEN_USER}
         component={User}
         options={{
-          headerRight: () => <LogoutButton title="Info" />,
+          headerRight: () => <LogoutButton />,
+        }}
+      />
+      <Stack.Screen name={SCREEN_USER_SETTINGS} component={Settings} />
+      <Stack.Screen name={SCREEN_USER_SHELVES} component={Shelves} />
+      <Stack.Screen
+        name={SCREEN_USER_SHELF}
+        component={Shelf}
+        options={({ route }) => {
+          let title = route.params ? route.params.name : route.name;
+          return { title };
+        }}
+      />
+      <Stack.Screen name={SCREEN_USER_FLOWERS} component={Flowers} />
+      <Stack.Screen
+        name={SCREEN_USER_FLOWER}
+        component={Flower}
+        options={({ route }) => {
+          let title = route.params ? route.params.name : route.name;
+          return { title };
         }}
       />
     </>

@@ -1,4 +1,4 @@
-import { ValidationStatus } from '../../../components/Input/interfaces';
+import { ValidationResult } from '../../../components/Input/interfaces';
 
 export interface AuthorizationProps {
   error: string;
@@ -10,15 +10,15 @@ export interface AuthorizationProps {
 export type SignInState = {
   email: string;
   password: string;
-  validationStatusEmail: ValidationStatus;
-  validationStatusPassword: ValidationStatus;
+  validationStatusEmail: ValidationResult;
+  validationStatusPassword: ValidationResult;
 };
 
 export interface SignUpState extends SignInState {
   repeatPassword: string;
   firstName: string;
   lastName: string;
-  validationStatusRepeatPassword: ValidationStatus;
-  validationStatusFirstName: ValidationStatus;
-  validationStatusLastName: ValidationStatus;
+  validationStatusRepeatPassword: ValidationResult;
+  validationStatusFirstName: ValidationResult;
+  validationStatusLastName: ValidationResult;
 }

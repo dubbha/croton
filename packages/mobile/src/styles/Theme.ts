@@ -7,9 +7,10 @@ export const COLORS = {
   lightGrey: '#a2a2a2',
   hideGrey: '#ced4da',
   lightRed: '#f55',
+  lightBlue: '#2196f3',
 };
 
 export const COMPONENTS_STYLE = {
-  mainPaddingHorizontal: 30,
+  mainPaddingHorizontal: 20,
   buttonHeight: 50,
 };

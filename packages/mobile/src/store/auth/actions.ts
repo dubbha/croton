@@ -17,8 +17,6 @@ export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 export const AUTH_REGISTER = 'AUTH_REGISTER';
 export const AUTH_CONFIRM_EMAIL = 'AUTH_CONFIRM_EMAIL';
 
-export const AUTH_NOTIFY = 'AUTH_NOTIFY';
-
 export const AUTH_PROFILE_UPDATE = 'AUTH_PROFILE_UPDATE';
 export const AUTH_PROFILE_UPDATE_INFO = 'AUTH_PROFILE_UPDATE_INFO';
 export const AUTH_PROFILE_UPDATE_EMAIL = 'AUTH_PROFILE_UPDATE_EMAIL';
@@ -46,11 +44,6 @@ export interface PayloadAuthConfirmEmail {
   isEmailVerification: boolean;
 }
 
-interface PayloadAuthNotify {
-  info?: string;
-  error?: string;
-}
-
 export interface PayloadAuthProfileUpdate {
   id: string;
   token: string;
@@ -76,6 +69,7 @@ export interface AuthLogin {
 export interface AuthLogout {
   type: typeof AUTH_LOGOUT;
 }
+
 export interface AuthLoginSuccess {
   type: typeof AUTH_LOGIN_SUCCESS;
   payload: PayloadAuthSuccessLogin;
@@ -89,11 +83,6 @@ export interface AuthRegister {
 export interface AuthConfirmEmail {
   type: typeof AUTH_CONFIRM_EMAIL;
   payload: PayloadAuthConfirmEmail;
-}
-
-export interface AuthNotify {
-  type: typeof AUTH_NOTIFY;
-  payload: PayloadAuthNotify;
 }
 
 export interface AuthProfileUpdate {
@@ -117,6 +106,5 @@ export type AuthActionTypes =
   | AuthLogout
   | AuthRegister
   | AuthConfirmEmail
-  | AuthNotify
   | AuthProfileUpdateInfo
   | AuthProfileUpdateEmail;

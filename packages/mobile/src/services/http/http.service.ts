@@ -7,22 +7,23 @@ type httpCongis = {
 };
 
 class HttpSender {
+  token: string | null;
+  constructor() {
+    this.token = null;
+  }
+
   send = async (data: httpCongis) => {
     try {
       const { router, body } = data;
-      const fullUrl = `${api.protocol}://${api.host}:${api.port}`;
+      const fullUrl = `${api.protocol}://${api.host}`;
       const address = `${fullUrl}${router}`;
-      // TODO: currentUrl should be dinamic
-      const currentUrl = 'http://localhost:8081';
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        origin: currentUrl,
       };
-      const { token } = data;
-      if (token) {
-        delete data.token;
-        headers.authorization = token;
+
+      if (this.token) {
+        headers.authorization = this.token;
       }
 
       const resp = await fetch(address, {
@@ -39,22 +40,27 @@ class HttpSender {
 
   handleHttpResponse = async (resp: any) => {
     try {
-      // TODO: Shame block. We should get resp from server
       if (resp.status === 204) {
-        return this.sendSuccessRegistrationResp();
+        return this.sendSuccessStatus();
       } else {
         return await resp.json();
       }
     } catch (e) {
       console.error(e);
+      return this.sendFailedStatus();
     }
   };
 
-  sendSuccessRegistrationResp = () => {
-    return {
-      status: true,
-      message: 'Please check your email for verification before signing in',
-    };
+  sendSuccessStatus = () => ({
+    status: true,
+  });
+
+  sendFailedStatus = () => ({
+    status: false,
+  });
+
+  setAuthorizationToken = (token: string) => {
+    this.token = token;
   };
 }
 
