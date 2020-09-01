@@ -14,6 +14,7 @@ import DBService from '../db/db.service';
 
 import EmailUpdateDto from './email-update.dto';
 import UserUpdateDto from './user-update.dto';
+import ShelfInvitation from '../models/shelf-invitation.entity';
 
 export default class UserManagementService {
   private emailSendingService = new EmailSendingService();
@@ -97,5 +98,9 @@ export default class UserManagementService {
       email
     );
     return createTokenizedUser(mergedUser);
+  }
+
+  async getUserShelfInvites(userEmail: string): Promise<ShelfInvitation[]> {
+    return await this.dbService.getShelfInvitationsByUserEmail(userEmail);
   }
 }
