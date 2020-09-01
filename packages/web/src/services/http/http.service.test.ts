@@ -3,6 +3,10 @@ import axios from 'axios';
 jest.mock('config', () => ({ api: 'BASE' }));
 
 describe('http.service', () => {
+  afterEach(() => {
+    global.localStorage.clear();
+  });
+
   it('should set baseUrl', () => {
     jest.spyOn(axios, 'create');
     const { http } = require('./http.service');
@@ -40,7 +44,7 @@ describe('http.service', () => {
 
   it('should clear local storage and redirect on 401 Unauthorized response error', () => {
     delete global.location;
-    global.location = { href: '/profile' } as Location;
+    global.location = { pathname: '/profile' } as Location;
 
     const { http } = require('./http.service');
 
@@ -55,7 +59,26 @@ describe('http.service', () => {
 
     expect(global.localStorage.length).toBe(0);
     expect(global.localStorage.getItem('authToken')).toBe(null);
-    expect(global.location.href).toBe('/signin');
+    expect(global.location.pathname).toBe('/signin');
+  });
+
+  it('should not clear local storage or redirect on 401 Unauthorized response error when trying to sing in', () => {
+    delete global.location;
+    global.location = { pathname: '/signin' } as Location;
+
+    const { http } = require('./http.service');
+
+    global.localStorage.setItem('answer', '42');
+
+    expect(global.localStorage.length).toBe(1);
+
+    const error = { response: { status: 401 } };
+    http.interceptors.response.handlers[0].rejected(error)
+      .catch(e => expect(e).toBe(error));
+
+    expect(global.localStorage.length).toBe(1);
+    expect(global.localStorage.getItem('answer')).toBe('42');
+    expect(global.location.pathname).toBe('/signin');
   });
 
   it('should pass other response errors through', () => {

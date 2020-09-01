@@ -20,8 +20,10 @@ http.interceptors.response.use(
   response => response,
   error => {
     if (error.response.status === 401) {
-      localStorage.clear();
-      window.location.href = '/signin';
+      if (window.location.pathname !== '/signin') {
+        localStorage.clear();
+        window.location.pathname = '/signin';
+      }
     }
     return Promise.reject(error);
   },
