@@ -65,7 +65,8 @@ createPostgresConnection().then(async (connection) => {
       const lastMissedRecurrence = rule.before(new Date(Date.now()));
       if (!lastMissedRecurrence) return;
     }
-    usersByFlowerId[id].map(async (user) => {
+
+    await Promise.all(usersByFlowerId[id].map(async (user) => {
       const notificationTokens = Array.from(await dbService.findRegisterTokens(user))
         .flat()
         .map(({ registrationToken }) => registrationToken);
@@ -75,7 +76,8 @@ createPostgresConnection().then(async (connection) => {
         `Croton ${action} notification`,
         {}
       );
-    });
+      console.log(`user ${user.id} notified by ${notificationTokens.length} tokens`);
+    }));
     const timestamp = Math.ceil(Date.now() / 1000); // unix timestamp, seconds, utc
     if (lastNotification) {
       await dbService.updateNotification(lastNotification.notificationId, timestamp);
