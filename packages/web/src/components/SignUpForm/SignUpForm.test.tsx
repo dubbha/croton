@@ -9,7 +9,7 @@ describe('components/SignUpForm', () => {
     isLoading: false,
     error: null,
     info: null,
-    onSubmit: fn
+    onSubmit: fn,
   };
 
   afterEach(() => {

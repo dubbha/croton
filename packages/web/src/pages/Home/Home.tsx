@@ -13,7 +13,7 @@ export const Home = () => {
     features: featuresRef,
     about: aboutRef,
     services: servicesRef,
-  })
+  });
 
   return (
     <>
@@ -140,4 +140,4 @@ export const Home = () => {
       <Footer />
     </>
   );
- }
+};

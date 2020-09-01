@@ -5,7 +5,8 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
   class=""
 >
   <div
-    style="height: 50px; margin-bottom: 16px;"
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
   />
   <div
     class="form-group"
@@ -123,7 +124,8 @@ exports[`components/SignUpForm should render submit button disabled by default 1
   class=""
 >
   <div
-    style="height: 50px; margin-bottom: 16px;"
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
   />
   <div
     class="form-group"
@@ -241,7 +243,8 @@ exports[`components/SignUpForm should render successfully 1`] = `
   class=""
 >
   <div
-    style="height: 50px; margin-bottom: 16px;"
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
   />
   <div
     class="form-group"

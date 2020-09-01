@@ -13,7 +13,7 @@ type LinkProps = {
 }
 
 export const Link = ({ to, children }: LinkProps) =>
-  <Nav.Link as={RouterLink} to={to}>{children}</Nav.Link>
+  <Nav.Link as={RouterLink} to={to}>{children}</Nav.Link>;
 
 type NavLinkProps = {
   to: string;
@@ -26,4 +26,3 @@ export const NavLink = ({ to, children, exact = false }: NavLinkProps) => (
     {children}
   </Nav.Link>
 );
-

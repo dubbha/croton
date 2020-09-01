@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FlowerForm should render successfully 1`] = `
+<form
+  class="flower-form"
+>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formName"
+    >
+      Flower Name
+    </label>
+    <input
+      class="form-control"
+      id="formName"
+      name="name"
+      placeholder="Enter Flower Name"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+      for="formDescription"
+    >
+      Description
+    </label>
+    <input
+      class="form-control"
+      id="formDescription"
+      name="description"
+      placeholder="Enter description"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Care schedules
+    </label>
+    <div
+      class="accordion"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-header"
+        >
+          watering
+        </div>
+        <div
+          class="collapse"
+        >
+          <div
+            class="rrule-generator"
+          >
+            <div>
+              RRuleGenerator
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card"
+      >
+        <div
+          class="card-header"
+        >
+          hydration
+        </div>
+        <div
+          class="collapse"
+        >
+          <div
+            class="rrule-generator"
+          >
+            <div>
+              RRuleGenerator
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card"
+      >
+        <div
+          class="card-header"
+        >
+          fertilizing
+        </div>
+        <div
+          class="collapse"
+        >
+          <div
+            class="rrule-generator"
+          >
+            <div>
+              RRuleGenerator
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    disabled=""
+    type="submit"
+  >
+    <div
+      class="spinner-container"
+    />
+    <span>
+      Submit
+    </span>
+  </button>
+</form>
+`;

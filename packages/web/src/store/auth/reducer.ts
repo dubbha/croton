@@ -1,4 +1,5 @@
 import { LOCATION_CHANGE, LocationChangeAction } from 'connected-react-router';
+import { AuthState } from './interfaces';
 import {
   AUTH_EMAIL_CONFIRM,
   AUTH_EMAIL_CONFIRM_ERROR,
@@ -6,9 +7,15 @@ import {
   AUTH_FACEBOOK,
   AUTH_FACEBOOK_ERROR,
   AUTH_FACEBOOK_SUCCESS,
+  ADD_FACEBOOK,
+  ADD_FACEBOOK_ERROR,
+  ADD_FACEBOOK_SUCCESS,
   AUTH_GOOGLE,
   AUTH_GOOGLE_ERROR,
   AUTH_GOOGLE_SUCCESS,
+  ADD_GOOGLE,
+  ADD_GOOGLE_ERROR,
+  ADD_GOOGLE_SUCCESS,
   AUTH_LOGIN,
   AUTH_LOGIN_ERROR,
   AUTH_LOGIN_SUCCESS,
@@ -32,7 +39,6 @@ import {
   AUTH_UPDATE_PROFILE_ERROR,
   AUTH_UPDATE_PROFILE_SUCCESS,
   AuthActionTypes,
-  AuthState
 } from './actions';
 
 export const initialState: AuthState = {
@@ -43,18 +49,22 @@ export const initialState: AuthState = {
   email: null,
   isLoading: false,
   error: null,
-  info: null
+  info: null,
+  socialProfile: null,
+  isSignedInWithSocial: false,
 };
 
 export function authReducer(
   state = initialState,
-  action: AuthActionTypes | LocationChangeAction
+  action: AuthActionTypes | LocationChangeAction,
 ): AuthState {
   switch (action.type) {
     case AUTH_UPDATE_PASSWORD:
     case AUTH_RESET_PASSWORD:
     case AUTH_FACEBOOK:
+    case ADD_FACEBOOK:
     case AUTH_GOOGLE:
+    case ADD_GOOGLE:
     case AUTH_REGISTER:
     case AUTH_LOGIN:
     case AUTH_UPDATE_PROFILE:
@@ -64,14 +74,18 @@ export function authReducer(
         ...state,
         isLoading: true,
         error: null,
-        info: null
+        info: null,
       };
     case AUTH_EMAIL_CONFIRM_SUCCESS:
-    case AUTH_FACEBOOK_SUCCESS:
-    case AUTH_GOOGLE_SUCCESS:
     case AUTH_LOGIN_SUCCESS:
     case AUTH_UPDATE_EMAIL_SUCCESS: {
-      const { id, firstName, lastName, email } = action.payload;
+      const {
+        id,
+        firstName,
+        lastName,
+        email,
+        socialProfile = initialState.socialProfile,
+      } = action.payload;
       return {
         ...state,
         isAuthenticated: true,
@@ -79,18 +93,47 @@ export function authReducer(
         firstName,
         lastName,
         email,
-        isLoading: false
+        isLoading: false,
+        socialProfile,
       };
     }
+
+    case AUTH_FACEBOOK_SUCCESS:
+    case AUTH_GOOGLE_SUCCESS: {
+      const { id, firstName, lastName, email, socialProfile } = action.payload;
+      return {
+        ...state,
+        isAuthenticated: true,
+        id,
+        firstName,
+        lastName,
+        email,
+        isLoading: false,
+        socialProfile,
+        isSignedInWithSocial: true,
+      };
+    }
+    case ADD_FACEBOOK_SUCCESS:
+    case ADD_GOOGLE_SUCCESS: {
+      const { socialProfile } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        socialProfile,
+      };
+    }
+
     case AUTH_EMAIL_CONFIRM_ERROR:
     case AUTH_REGISTER_ERROR:
     case AUTH_LOGIN_ERROR:
     case AUTH_FACEBOOK_ERROR:
     case AUTH_GOOGLE_ERROR:
+    case ADD_FACEBOOK_ERROR:
+    case ADD_GOOGLE_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
     case AUTH_UPDATE_PASSWORD_SUCCESS:
     case AUTH_RESET_PASSWORD_SUCCESS:
@@ -99,7 +142,7 @@ export function authReducer(
       return {
         ...state,
         isLoading: false,
-        info: action.payload.info
+        info: action.payload.info,
       };
 
     case AUTH_UPDATE_PROFILE_SUCCESS: {
@@ -109,7 +152,7 @@ export function authReducer(
         isLoading: false,
         info,
         firstName,
-        lastName
+        lastName,
       };
     }
 
@@ -122,20 +165,20 @@ export function authReducer(
         ...state,
         isLoading: false,
         error: action.payload.error,
-        info: null
+        info: null,
       };
 
     case AUTH_EMAIL_CONFIRM:
       return {
         ...state,
         isLoading: true,
-        error: null
+        error: null,
       };
 
     case AUTH_LOGOUT:
       return {
         ...initialState,
-        isAuthenticated: false
+        isAuthenticated: false,
       };
 
     case LOCATION_CHANGE:
@@ -143,7 +186,7 @@ export function authReducer(
         ...state,
         isLoading: false,
         error: null,
-        info: null
+        info: null,
       };
     default:
       return state;

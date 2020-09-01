@@ -9,7 +9,7 @@ describe('components/PasswordUpdateForm', () => {
     isLoading: false,
     error: null,
     info: null,
-    onSubmit: fn
+    onSubmit: fn,
   };
 
   afterEach(() => {
@@ -23,7 +23,7 @@ describe('components/PasswordUpdateForm', () => {
 
   it('should render submit button disabled by default', () => {
     const { container, getByTestId } = render(
-      <PasswordUpdateForm {...props} />
+      <PasswordUpdateForm {...props} />,
     );
     expect(container.firstChild).toMatchSnapshot();
 
@@ -33,7 +33,7 @@ describe('components/PasswordUpdateForm', () => {
 
   it('should call onSubmit prop on submit', () => {
     const { container, getByTestId } = render(
-      <PasswordUpdateForm {...props} />
+      <PasswordUpdateForm {...props} />,
     );
     expect(container.firstChild).toMatchSnapshot();
 
@@ -52,7 +52,7 @@ describe('components/PasswordUpdateForm', () => {
 
   it('should enforce matching passwords', () => {
     const { getByTestId, getByText } = render(
-      <PasswordUpdateForm {...props} />
+      <PasswordUpdateForm {...props} />,
     );
 
     const passwordInput = getByTestId('passwordUpdateForm__password');
@@ -77,7 +77,7 @@ describe('components/PasswordUpdateForm', () => {
 
   it('should display error alert', () => {
     const { getByTestId } = render(
-      <PasswordUpdateForm {...props} error="ERROR" />
+      <PasswordUpdateForm {...props} error="ERROR" />,
     );
     const errorAlert = getByTestId('errorAlert');
     expect(errorAlert.textContent).toBe('ERROR');
@@ -85,7 +85,7 @@ describe('components/PasswordUpdateForm', () => {
 
   it('should display info alert', () => {
     const { getByTestId } = render(
-      <PasswordUpdateForm {...props} info="INFO" />
+      <PasswordUpdateForm {...props} info="INFO" />,
     );
     const infoAlert = getByTestId('infoAlert');
     expect(infoAlert.textContent).toBe('INFO');

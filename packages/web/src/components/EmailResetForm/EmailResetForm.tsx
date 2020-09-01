@@ -4,7 +4,7 @@ import {
   SubmitButton,
   ErrorAlert,
   AlertPlaceholder,
-  LoadingSpinner
+  LoadingSpinner,
 } from 'elements';
 
 type Props = {
@@ -24,7 +24,7 @@ export const EmailResetForm = ({ isLoading, error, onSubmit }: Props) => {
   return (
     <Form onSubmit={handleSubmit}>
       {error && <ErrorAlert>{error}</ErrorAlert>}
-      {!error && <AlertPlaceholder height="74px" />}
+      {!error && <AlertPlaceholder />}
       <Form.Group controlId="formResetEmail">
         <Form.Label>You are about to change your email address</Form.Label>
         <Form.Control

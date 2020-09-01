@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Nav } from 'elements';
 import './styles.scss';
@@ -10,7 +12,10 @@ export const Footer = () => (
         <Col>
           <div className="copyright">
             © {new Date().getFullYear()}{' '}
-            <a href="https://github.com/dubbha/croton">Croton</a>
+            <a href="https://github.com/dubbha/croton">
+              <FontAwesomeIcon icon={faGithub} />
+              <span className="icon-prefix">Croton</span>
+            </a>
           </div>
         </Col>
         <Col>

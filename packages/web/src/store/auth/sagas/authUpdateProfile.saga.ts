@@ -21,12 +21,12 @@ function* handle(action: AuthUpdateProfile) {
         info: 'Profile updated',
         firstName,
         lastName,
-      }
+      },
     });
   } catch (e) {
     yield put({
       type: AUTH_UPDATE_PROFILE_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

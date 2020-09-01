@@ -9,12 +9,12 @@ import { authResetPasswordSaga } from './authResetPassword.saga';
 
 jest.mock('services', () => ({
   http: {
-    post: jest.fn()
-  }
+    post: jest.fn(),
+  },
 }));
 
 jest.mock('connected-react-router', () => ({
-  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
+  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } }),
 }));
 
 describe('authResetPasswordSaga', () => {
@@ -29,12 +29,12 @@ describe('authResetPasswordSaga', () => {
         type: AUTH_RESET_PASSWORD_SUCCESS,
         payload: {
           info: `If an account exists for admin@admin.com, you will get an email with instructions on resetting your password.
-          If it doesn't arrive, be sure to check your spam folder.`
-        }
+          If it doesn't arrive, be sure to check your spam folder.`,
+        },
       })
       .dispatch({
         type: AUTH_RESET_PASSWORD,
-        payload: { email: 'admin@admin.com' }
+        payload: { email: 'admin@admin.com' },
       })
       .silentRun();
   });
@@ -44,20 +44,19 @@ describe('authResetPasswordSaga', () => {
       Promise.reject({
         response: {
           data: {
-            message: 'Error'
-          }
-        }
-      })
-    );
+            message: 'Error',
+          },
+        },
+      }));
 
     return expectSaga(authResetPasswordSaga)
       .put({
         type: AUTH_RESET_PASSWORD_ERROR,
-        payload: { error: 'Error' }
+        payload: { error: 'Error' },
       })
       .dispatch({
         type: AUTH_RESET_PASSWORD,
-        payload: { email: 'admin@admin.com' }
+        payload: { email: 'admin@admin.com' },
       })
       .silentRun();
   });

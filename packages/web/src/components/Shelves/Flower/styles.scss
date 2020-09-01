@@ -1,0 +1,64 @@
+@import '../../../assets/styles/theme';
+
+.flower {
+  &.container {
+    margin: 10px auto;
+    justify-content: start;
+  }
+
+  &-header {
+    color: $color-grass-dark;
+  }
+
+  &-menu {
+    margin: 0;
+
+    button {
+      display: inline-block;
+      margin: 0 10px;
+      width: 150px;
+    }
+  }
+
+  &-actions {
+    margin: 1rem auto 0 auto;
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        margin: 0 0 0 1rem;
+        width: 150px;
+      }
+      .spinner-button {
+        position: relative;
+
+        .spinner-container {
+          position: absolute;
+          width: 100%;
+          margin-left: calc(-24px/2 - 6px + 1px);
+        }
+      }
+    }
+  }
+
+  &-action {
+    &-name {
+      text-transform: capitalize;
+      font-weight: 500;
+      color: $color-grass-dark;
+
+      &-missed {
+        color: $color-danger;
+      }
+    }
+
+    &-icon-container {
+      display: inline-flex;
+      justify-content: center;
+      min-width: 22px;
+    }
+  }
+}

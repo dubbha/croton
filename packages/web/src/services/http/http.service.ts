@@ -3,7 +3,7 @@ import { api } from 'config';
 
 export const http = axios.create({
   baseURL: api,
-})
+});
 
 http.interceptors.request.use(
   config => {
@@ -14,4 +14,15 @@ http.interceptors.request.use(
     return config;
   },
   error => Promise.reject(error),
+);
+
+http.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status === 401) {
+      localStorage.clear();
+      window.location.href = '/signin';
+    }
+    return Promise.reject(error);
+  },
 );

@@ -2,32 +2,38 @@ import { call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { http } from 'services';
 
-interface handleAuthViaSocialsPayload {
+interface HandleAuthViaSocialsPayload {
   accessToken: string;
   apiEndpoint: string;
   successActionType: string;
   errorActionType: string;
+  email?: string;
 }
 
 export function* handleAuthViaSocials({
   accessToken,
   apiEndpoint,
   successActionType,
-  errorActionType
-}: handleAuthViaSocialsPayload) {
+  errorActionType,
+  email,
+}: HandleAuthViaSocialsPayload) {
   try {
-    const result = yield call(http.post, apiEndpoint, {
-      access_token: accessToken
+    const {
+      data: { token, ...userData },
+    } = yield call(http.post, apiEndpoint, {
+      access_token: accessToken,
+      email,
     });
+    yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: successActionType,
-      payload: result.data
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
     yield put({
       type: errorActionType,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

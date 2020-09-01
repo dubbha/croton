@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { THEME } from '../../styles/Theme';
+import { COLORS } from '../../styles/Theme';
 
 export const Divider = ({ isDark }: { isDark?: boolean }) => {
   return (
@@ -27,22 +27,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   divider__text: {
-    color: THEME.mainLight,
+    color: COLORS.lightMain,
     fontSize: 12,
     fontWeight: '500',
     textTransform: 'uppercase',
     letterSpacing: 3,
   },
   divider__text__dark: {
-    color: THEME.grey,
+    color: COLORS.grey,
   },
   divider__line: {
     flex: 0.5,
     height: 1,
-    backgroundColor: THEME.mainLight,
+    backgroundColor: COLORS.lightMain,
     marginHorizontal: 10,
   },
   divider__line__dark: {
-    backgroundColor: THEME.greyLight,
+    backgroundColor: COLORS.lightGrey,
   },
 });

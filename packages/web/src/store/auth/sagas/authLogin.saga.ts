@@ -5,7 +5,7 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_ERROR,
   AuthLogin,
-  AUTH_LOGIN_SUCCESS
+  AUTH_LOGIN_SUCCESS,
 } from '../actions';
 
 function* handle(action: AuthLogin) {
@@ -13,19 +13,19 @@ function* handle(action: AuthLogin) {
   try {
     const result = yield call(http.post, '/auth/login', {
       email,
-      password
+      password,
     });
-    const { data: { token, ...userData } } =  result;
+    const { data: { token, ...userData } } = result;
     yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: AUTH_LOGIN_SUCCESS,
-      payload: userData
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
     yield put({
       type: AUTH_LOGIN_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

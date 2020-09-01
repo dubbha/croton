@@ -1,55 +1,65 @@
 import { compare } from 'bcrypt';
-import { getRepository } from 'typeorm';
 
-import UserEntity from '../models/user.entity';
-import RegistrationDto from '../models/registration.dto';
-import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
-import { createTokenizedUser } from '../utils/create-tokenized-user';
-import UserWithToken from '../interfaces/tokenized.user.interface';
-import LoginDto from '../models/login.dto';
-import WrongCredentials from '../exceptions/wrong-creditionals.exception';
-import User from '../interfaces/db.user.interface';
-import { UserStatuses } from '../constants/user-statuses';
 import { createRandomString } from '../utils/create-random-string';
-import EmailVerificationEntity from '../models/email-verification.entity';
+import { createTokenizedUser } from '../utils/create-tokenized-user';
+import { createNewPassword } from '../utils/create-new-password';
+import { createExpiresInHours } from '../utils/create-expires-in-hours';
+
+import User from '../interfaces/db.user.interface';
+import UserWithToken from '../interfaces/tokenized.user.interface';
+
+import RegistrationDto from '../models/registration.dto';
+import LoginDto from '../models/login.dto';
+
+import UserWithThatEmailAlreadyExists from '../exceptions/user-with-that-email-already-exists.exception';
+import WrongCredentials from '../exceptions/wrong-creditionals.exception';
 import WrongEmailVerificationToken from '../exceptions/wrong-email-verification-token.exception';
 import EmailVerificationTokenExpired from '../exceptions/email-verification-token-expired.exception';
 import EmailNotVerified from '../exceptions/email-not-verified.exception';
 import UserIsSuspended from '../exceptions/user-is-suspended.exception';
-import EmailSendingService from '../services/email-sending.service';
-import PasswordResetEntity from '../models/password-reset.entity';
-import PasswordUpdateDto from './password-update.dto';
 import WrongPasswordResetToken from '../exceptions/wrong-password-reset-token.exception';
 import PasswordResetTokenExpired from '../exceptions/password-reset-token-expired.exception';
-import { createNewPassword } from '../utils/create-new-password';
-import { createExpiresInHours } from '../utils/create-expires-in-hourse';
+import UserWithThatEmailAlreadyRegisteredBySocial from '../exceptions/user-with-that-email-already-registered-by-social';
+
+import { UserStatuses } from '../constants/user-statuses';
+
+import EmailSendingService from '../services/email-sending.service';
+import DBService from '../db/db.service';
+
+import PasswordUpdateDto from './password-update.dto';
 
 export default class AuthenticationService {
-  private userRepository = getRepository(UserEntity);
-  private emailVerificationRepository = getRepository(EmailVerificationEntity);
-  private passwordResetRepository = getRepository(PasswordResetEntity);
   private emailSendingService = new EmailSendingService();
+  private dbService = new DBService();
 
   public async register(
     registrationData: RegistrationDto,
     host: string
   ): Promise<void> {
-    if (await this.userRepository.findOne({ email: registrationData.email })) {
-      throw new UserWithThatEmailAlreadyExists(registrationData.email);
-    } else {
+    const { email } = registrationData;
+    const existingUser = await this.dbService.getUserByEmail(email);
+    if (!existingUser) {
       const hashedPassword = await createNewPassword(registrationData.password);
-      const user = await this.userRepository.save({
+      const user = await this.dbService.saveUser({
         ...registrationData,
         status: UserStatuses.PENDING_VERIFICATION,
         password: hashedPassword,
       });
-
       await this.sendActivationMessage(user, host);
+      return;
     }
+    if (existingUser.socialProfile) {
+      throw new UserWithThatEmailAlreadyRegisteredBySocial({
+        email,
+        googleId: existingUser.socialProfile.googleId,
+        facebookId: existingUser.socialProfile.facebookId,
+      });
+    }
+    throw new UserWithThatEmailAlreadyExists(existingUser.email);
   }
 
   public async resetPassword(email: string, host: string): Promise<void> {
-    const user = await this.userRepository.findOne({ email });
+    const user = await this.dbService.getUserByEmail(email);
 
     if (user) {
       await this.sendPasswordResetMessage(user, host);
@@ -59,9 +69,9 @@ export default class AuthenticationService {
   public async updatePassword(
     passwordUpdateData: PasswordUpdateDto
   ): Promise<void> {
-    const passwordVerification = await this.passwordResetRepository.findOne({
-      passwordResetToken: passwordUpdateData.passwordResetToken,
-    });
+    const passwordVerification = await this.dbService.getPasswordResetByToken(
+      passwordUpdateData.passwordResetToken
+    );
 
     if (!passwordVerification) {
       throw new WrongPasswordResetToken();
@@ -71,22 +81,17 @@ export default class AuthenticationService {
       throw new PasswordResetTokenExpired();
     }
 
-    const user = await this.userRepository.findOne({
-      id: passwordVerification.userId,
-    });
+    const user = await this.dbService.getUserById(passwordVerification.userId);
     user.password = await createNewPassword(passwordUpdateData.password);
 
-    await this.userRepository.update(user.id, user);
-    await this.passwordResetRepository.delete(passwordVerification.id);
+    await this.dbService.updateUser(user);
+    await this.dbService.removePasswordReset(passwordVerification);
   }
 
   public async login(loginData: LoginDto): Promise<UserWithToken> {
-    const user = await this.userRepository.findOne({ email: loginData.email });
-
+    const user = await this.dbService.getUserByEmail(loginData.email);
     this.validateUser(user);
-
     const isPasswordMatching = await compare(loginData.password, user.password);
-
     if (!isPasswordMatching) {
       throw new WrongCredentials();
     }
@@ -95,9 +100,9 @@ export default class AuthenticationService {
   }
 
   public async verify(emailVerificationToken: string): Promise<UserWithToken> {
-    const emailVerification = await this.emailVerificationRepository.findOne({
-      emailVerificationToken,
-    });
+    const emailVerification = await this.dbService.getEmailVerificationByToken(
+      emailVerificationToken
+    );
 
     if (!emailVerification) {
       throw new WrongEmailVerificationToken();
@@ -107,12 +112,10 @@ export default class AuthenticationService {
       throw new EmailVerificationTokenExpired();
     }
 
-    const user = await this.userRepository.findOne({
-      id: emailVerification.userId,
-    });
+    const user = await this.dbService.getUserById(emailVerification.userId);
     user.status = UserStatuses.ACTIVE;
-    await this.userRepository.update(user.id, user);
-    await this.emailVerificationRepository.delete(emailVerification.id);
+    await this.dbService.updateUser(user);
+    await this.dbService.removeEmailVerification(emailVerification);
 
     return createTokenizedUser(user);
   }
@@ -137,8 +140,10 @@ export default class AuthenticationService {
   ) {
     const { PASSWORD_RESET_EXPIRATION_TIME } = process.env;
     const passwordResetToken = createRandomString(64);
-    const expiresInHours = createExpiresInHours(Number(PASSWORD_RESET_EXPIRATION_TIME));
-    await this.passwordResetRepository.save({
+    const expiresInHours = createExpiresInHours(
+      Number(PASSWORD_RESET_EXPIRATION_TIME)
+    );
+    await this.dbService.createPasswordReset({
       userId: id,
       passwordResetToken,
       expiresIn: Date.now() + expiresInHours,
@@ -154,12 +159,14 @@ export default class AuthenticationService {
 
   private async sendActivationMessage(
     { id, email, firstName }: User,
-    host
+    host: string
   ): Promise<void> {
     const { EMAIL_VERIFICATION_EXPIRATION_TIME } = process.env;
     const emailVerificationToken = createRandomString(64);
-    const expiresInHours = createExpiresInHours(Number(EMAIL_VERIFICATION_EXPIRATION_TIME));
-    await this.emailVerificationRepository.save({
+    const expiresInHours = createExpiresInHours(
+      Number(EMAIL_VERIFICATION_EXPIRATION_TIME)
+    );
+    await this.dbService.createEmailVerification({
       userId: id,
       emailVerificationToken,
       expiresIn: Date.now() + expiresInHours,

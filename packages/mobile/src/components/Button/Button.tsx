@@ -1,63 +1,55 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
   View,
-  TouchableOpacity,
+  TouchableHighlight,
   Image,
   Text,
   StyleSheet,
+  ButtonProps,
 } from 'react-native';
 
-import { THEME, COMPONENTS_STYLE } from '../../styles';
+import { COLORS, COMPONENTS_STYLE } from '../../styles';
 import { ICONS } from '../../assets/icons';
 
-type MyProps = {
+interface CustomButtonProps extends ButtonProps {
   title: string;
+  variant?: 'default' | 'primary';
   icon?: string;
-  isOutline?: boolean;
-  action?: any;
-  style?: object;
-};
-
-export class CustomButton extends Component<MyProps> {
-  title: string;
-  icon: string;
-  isOutline: boolean;
-  action: any;
-  constructor(props: any) {
-    super(props);
-    this.title = props.title;
-    this.icon = props.icon;
-    this.isOutline = props.isOutline;
-    this.action = props.action;
-  }
-
-  render() {
-    const icon = this.icon && ICONS[this.icon];
-
-    return (
-      <View style={styles.button}>
-        <TouchableOpacity
-          onPress={this.action ? this.action : () => console.log('Button')}>
-          <View
-            style={[
-              styles.button__body,
-              this.isOutline && styles.button__body__outline,
-            ]}>
-            {icon && <Image style={styles.button__icon} source={icon} />}
-            <Text
-              style={[
-                styles.button__text,
-                this.isOutline && styles.button__text__outline,
-              ]}>
-              {this.title}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
 }
+
+export const CustomButton = ({
+  variant,
+  title,
+  icon,
+  ...buttonProps
+}: CustomButtonProps) => {
+  const isPrimary = variant === 'primary' ? true : false;
+  const iconSource = icon && ICONS[icon];
+
+  return (
+    <View style={styles.button}>
+      <TouchableHighlight underlayColor={COLORS.lightGreen} {...buttonProps}>
+        <View
+          style={[
+            styles.button__body,
+            isPrimary && styles.button__body__outline,
+          ]}>
+          {iconSource && (
+            <Image style={styles.button__icon} source={iconSource} />
+          )}
+          <Text
+            style={[
+              styles.button__text,
+              isPrimary && styles.button__text__outline,
+            ]}>
+            {title}
+          </Text>
+        </View>
+      </TouchableHighlight>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -71,26 +63,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: COMPONENTS_STYLE.buttonHeight,
     borderRadius: 5,
-    backgroundColor: THEME.mainLight,
-    color: THEME.green,
+    backgroundColor: COLORS.lightMain,
+    color: COLORS.green,
   },
 
   button__body__outline: {
-    borderColor: THEME.green,
+    borderColor: COLORS.green,
     borderWidth: 2,
-    backgroundColor: THEME.mainLight,
+    backgroundColor: COLORS.lightMain,
   },
 
   button__text: {
     textTransform: 'uppercase',
     textAlign: 'center',
-    color: THEME.green,
+    color: COLORS.green,
     fontSize: 12,
     fontWeight: '500',
   },
 
   button__text__outline: {
-    color: THEME.green,
+    color: COLORS.green,
   },
 
   button__icon: {

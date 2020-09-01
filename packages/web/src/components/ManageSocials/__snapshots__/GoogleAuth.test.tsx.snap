@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/GoogleAuth should render succesfully 1`] = `
+<div>
+  <div>
+    480421853647-aihch4g2qqj5pndfadmdc9m7m7sts278.apps.googleusercontent.com
+  </div>
+  <div>
+    google-auth-btn
+  </div>
+  <button
+    data-testid="successGoogleLoginBtn"
+  >
+    Auth with Facebook
+  </button>
+  <button
+    data-testid="failureGoogleLoginBtn"
+  >
+    Auth with Facebook
+  </button>
+</div>
+`;

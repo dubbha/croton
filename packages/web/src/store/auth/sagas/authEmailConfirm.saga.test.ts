@@ -4,18 +4,18 @@ import { http } from 'services';
 import {
   AUTH_EMAIL_CONFIRM,
   AUTH_EMAIL_CONFIRM_SUCCESS,
-  AUTH_EMAIL_CONFIRM_ERROR
+  AUTH_EMAIL_CONFIRM_ERROR,
 } from '../actions';
 import { authEmailConfirmSaga } from './authEmailConfirm.saga';
 
 jest.mock('services', () => ({
   http: {
-    post: jest.fn()
-  }
+    post: jest.fn(),
+  },
 }));
 
 jest.mock('connected-react-router', () => ({
-  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } })
+  push: (path: string) => ({ type: 'callHistoryMethod', payload: { path } }),
 }));
 
 const data = {
@@ -23,10 +23,10 @@ const data = {
   fistName: 'FIRST_NAME',
   lastName: 'LAST_NAME',
   email: 'EMAIL',
-  token: 'TOKEN'
+  token: 'TOKEN',
 };
 const emailVerificationPayload = {
-  emailVerificationToken: 'emailVerificationToken'
+  emailVerificationToken: 'emailVerificationToken',
 };
 const errorMessage = 'Error';
 const tokenParseErrorMessage = 'Token parse error';
@@ -41,17 +41,17 @@ describe('system/authEmailConfirmSaga', () => {
 
     return expectSaga(authEmailConfirmSaga)
       .call(http.post, '/auth/confirm', {
-        ...emailVerificationPayload
+        ...emailVerificationPayload,
       })
       .call([localStorage, localStorage.setItem], 'authToken', token)
       .put({
         type: AUTH_EMAIL_CONFIRM_SUCCESS,
-        payload: { ...userData }
+        payload: { ...userData },
       })
       .put(push('/profile'))
       .dispatch({
         type: AUTH_EMAIL_CONFIRM,
-        payload: { ...emailVerificationPayload }
+        payload: { ...emailVerificationPayload },
       })
       .silentRun();
   });
@@ -61,34 +61,31 @@ describe('system/authEmailConfirmSaga', () => {
       Promise.reject({
         response: {
           data: {
-            message: errorMessage
-          }
-        }
-      })
-    );
+            message: errorMessage,
+          },
+        },
+      }));
 
     return expectSaga(authEmailConfirmSaga)
       .put({
         type: AUTH_EMAIL_CONFIRM_ERROR,
-        payload: { error: errorMessage }
+        payload: { error: errorMessage },
       })
       .dispatch({
         type: AUTH_EMAIL_CONFIRM,
-        payload: { ...emailVerificationPayload }
+        payload: { ...emailVerificationPayload },
       })
       .silentRun();
   });
 
-  it('should handle token parse error', () => {
-    return expectSaga(authEmailConfirmSaga)
-      .put({
-        type: AUTH_EMAIL_CONFIRM_ERROR,
-        payload: { error: tokenParseErrorMessage }
-      })
-      .dispatch({
-        type: AUTH_EMAIL_CONFIRM,
-        payload: { emailVerificationToken: '' }
-      })
-      .silentRun();
-  });
+  it('should handle token parse error', () => expectSaga(authEmailConfirmSaga)
+    .put({
+      type: AUTH_EMAIL_CONFIRM_ERROR,
+      payload: { error: tokenParseErrorMessage },
+    })
+    .dispatch({
+      type: AUTH_EMAIL_CONFIRM,
+      payload: { emailVerificationToken: '' },
+    })
+    .silentRun());
 });

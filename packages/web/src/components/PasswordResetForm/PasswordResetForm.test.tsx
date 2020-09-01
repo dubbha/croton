@@ -9,7 +9,7 @@ describe('components/PasswordResetForm', () => {
     isLoading: false,
     error: null,
     info: null,
-    onSubmit: fn
+    onSubmit: fn,
   };
 
   it('should render successfully', () => {

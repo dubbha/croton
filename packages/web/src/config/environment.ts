@@ -7,7 +7,7 @@ export const environments = {
   localHttps: { // local devServer@HTTPS using dev env API, started using `yarn start:https`
     protocol: 'https:',
     host: 'localhost:4430',
-    api: 'https://croton.cf:4000/api',
+    api: 'https://localhost:4000/api',
   },
   localUsingLocalApi: { // local devServer@HTTP using local API, started using `yarn start:local`
     protocol: 'http:',
@@ -59,11 +59,11 @@ export const environments = {
     host: 'croton.cf',
     api: 'https://croton.cf:4002/api',
   },
-}
+};
 
 export const getEnvironment = () =>
   Object.values(environments).find(
-    env => window.location.protocol === env.protocol && window.location.host === env.host
+    env => window.location.protocol === env.protocol && window.location.host === env.host,
   ) || environments.local;
 
 export const { api } = getEnvironment();

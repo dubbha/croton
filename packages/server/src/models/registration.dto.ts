@@ -1,6 +1,11 @@
-import { IsString } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { UserStatuses } from '../constants/user-statuses';
 
 export default class RegistrationDto {
+  @IsOptional()
+  @IsNumber()
+  public id?: number;
+
   @IsString()
   public firstName: string;
 
@@ -13,6 +18,7 @@ export default class RegistrationDto {
   @IsString()
   public password: string;
 
+  @IsOptional()
   @IsString()
-  public facebookId?: string;
+  public status?: UserStatuses;
 }

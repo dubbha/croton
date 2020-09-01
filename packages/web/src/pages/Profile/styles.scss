@@ -1,5 +1,4 @@
-
-@import '../../custom.scss';
+@import 'assets/styles/theme.scss';
 
 form {
   width: 70%;
@@ -24,4 +23,8 @@ input[type=button] {
   background-color: $color-grass-dark;
   background: url('./bg.png');
   user-select: none;
+}
+
+.circle.with-picture {
+  background: 'none';
 }
