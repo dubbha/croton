@@ -53,7 +53,10 @@ describe('http.service', () => {
 
     expect(global.localStorage.length).toBe(2);
 
-    const error = { response: { status: 401 } };
+    const error = {
+      response: { status: 401 },
+      config: {},
+    };
     http.interceptors.response.handlers[0].rejected(error)
       .catch(e => expect(e).toBe(error));
 
@@ -62,7 +65,7 @@ describe('http.service', () => {
     expect(global.location.pathname).toBe('/signin');
   });
 
-  it('should not clear local storage or redirect on 401 Unauthorized response error when trying to sing in', () => {
+  it('should not clear local storage or redirect on 401 Unauthorized response error if explicitly prevented', () => {
     delete global.location;
     global.location = { pathname: '/signin' } as Location;
 
@@ -72,7 +75,10 @@ describe('http.service', () => {
 
     expect(global.localStorage.length).toBe(1);
 
-    const error = { response: { status: 401 } };
+    const error = {
+      response: { status: 401 },
+      config: { preventUnauthorizedInterceptor: true },
+    };
     http.interceptors.response.handlers[0].rejected(error)
       .catch(e => expect(e).toBe(error));
 
@@ -92,7 +98,10 @@ describe('http.service', () => {
 
     expect(global.localStorage.length).toBe(2);
 
-    const error = { response: { status: 404 } };
+    const error = {
+      response: { status: 404 },
+      config: {},
+    };
     http.interceptors.response.handlers[0].rejected(error)
       .catch(e => expect(e).toBe(error));
 
