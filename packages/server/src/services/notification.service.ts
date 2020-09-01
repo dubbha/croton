@@ -10,6 +10,7 @@ export default class NotificationService {
     try {
       await admin.messaging().sendToDevice(registrationTokens, message, notificationOptions);
     } catch (error) {
+      console.log(error);
       throw new NotificationSendException(error);
     }
   }
@@ -26,8 +27,8 @@ export default class NotificationService {
 
   public async sendNotificationWithOptions(registrationTokens: string[], body, title, options) {
     const notification = {
-      body,
       title,
+      body,
       ...options
     };
     await this.sendNotification(registrationTokens, { notification });
