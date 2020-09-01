@@ -5,7 +5,7 @@ import {
   ErrorAlert,
   InfoAlert,
   AlertPlaceholder,
-  LoadingSpinner
+  LoadingSpinner,
 } from 'elements';
 import './styles.scss';
 
@@ -20,7 +20,7 @@ export const PasswordUpdateForm = ({
   isLoading,
   error,
   info,
-  onSubmit
+  onSubmit,
 }: Props) => {
   const [isValid, setIsValid] = useState(false);
   const [password, setPassword] = useState('');

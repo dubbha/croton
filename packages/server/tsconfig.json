@@ -3,6 +3,7 @@
     "sourceMap": false,
     "inlineSourceMap": false,
     "target": "es2015",
+    "lib": ["es2019"],
     "outDir": "./dist",
     "baseUrl": "./src",
     "rootDir": "./src",
@@ -13,7 +14,8 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "module": "CommonJS",
-    "types": ["node", "reflect-metadata", "jest"]
+    "types": ["node", "reflect-metadata", "jest"],
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "src/**/*.spec.*", "src/**/*.test.*"]

@@ -1,0 +1,30 @@
+@import '../../../assets/styles/theme';
+
+.shelf {
+  &.container {
+    margin: 10px auto;
+    justify-content: start;
+  }
+
+  &-header {
+    color: $color-grass-dark;
+  }
+
+  &-location {
+    text-transform: none;
+  }
+
+  &-empty {
+    margin: 30px auto;
+  }
+
+  &-actions {
+    margin: 0 auto;
+
+    button {
+      display: inline-block;
+      margin: 0 10px;
+      width: 150px;
+    }
+  }
+}

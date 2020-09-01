@@ -2,6 +2,25 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
+jest.mock('components', () => ({
+  Container: ({ children }) => <div className="container">{children}</div>,
+  Header: () => <div>Header</div>,
+  Footer: () => <div>Footer</div>,
+  SignInForm: ({ onSubmit }) => (
+    <button
+      onClick={onSubmit}
+      data-testid="submitButton"
+      className="signInForm"
+    />
+  ),
+  SignInWithSocial: () => (
+    <div>
+      <div>FbAuth</div>
+      <div>GoogleAuth</div>
+    </div>
+  ),
+}));
+
 describe('pages/SignIn', () => {
   it('should render successfully', () => {
     jest.isolateModules(() => {
@@ -11,8 +30,8 @@ describe('pages/SignIn', () => {
       }));
 
       const { SignIn } = require('./SignIn');
-
       const { container } = render(<SignIn />, { wrapper: MemoryRouter });
+
       expect(container.firstChild).toMatchSnapshot();
     });
   });
@@ -24,16 +43,6 @@ describe('pages/SignIn', () => {
         useDispatch: () => fn,
         useSelector: () => false,
       }));
-
-      jest.doMock('components/SignInForm', () => {
-        const React = require('react');
-        return {
-          SignInForm: ({ onSubmit }) => (
-            <button onClick={onSubmit} data-testid="submitButton" />
-          ),
-        };
-      });
-
       const { SignIn } = require('./SignIn');
 
       const { getByTestId } = render(<SignIn />, { wrapper: MemoryRouter });

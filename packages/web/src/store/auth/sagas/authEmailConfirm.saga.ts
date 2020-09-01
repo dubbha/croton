@@ -1,6 +1,5 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
-import axios from 'axios';
-import { api } from 'config';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { http } from 'services';
 import { push } from 'connected-react-router';
 import {
   AUTH_EMAIL_CONFIRM,
@@ -9,31 +8,34 @@ import {
   AuthEmailConfirm,
 } from '../actions';
 
-
 function* handle(action: AuthEmailConfirm) {
   const { emailVerificationToken } = action.payload;
 
   if (!emailVerificationToken) {
     yield put({
       type: AUTH_EMAIL_CONFIRM_ERROR,
-      payload: { error: 'Token parse error' }
+      payload: { error: 'Token parse error' },
     });
     return;
   }
 
   try {
-    const result = yield call(axios.post, `${api}/auth/confirm`,
-      { emailVerificationToken }
-    );
+    const result = yield call(http.post, '/auth/confirm', {
+      emailVerificationToken,
+    });
+    const {
+      data: { token, ...userData },
+    } = result;
+    yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({
       type: AUTH_EMAIL_CONFIRM_SUCCESS,
-      payload: result.data
+      payload: userData,
     });
     yield put(push('/profile'));
   } catch (e) {
     yield put({
       type: AUTH_EMAIL_CONFIRM_ERROR,
-      payload: { error: e.response.data.message }
+      payload: { error: e.response.data.message },
     });
   }
 }

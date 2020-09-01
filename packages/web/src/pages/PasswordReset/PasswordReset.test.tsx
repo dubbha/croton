@@ -2,25 +2,26 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
+jest.mock('components', () => ({
+  Container: ({ children }) => <div className="container">{children}</div>,
+  Header: () => <div>Header</div>,
+  Footer: () => <div>Footer</div>,
+  PasswordResetForm: ({ onSubmit }) => <button onClick={onSubmit} data-testid="submitButton" className="resetForm" />,
+  PasswordUpdateForm: ({ onSubmit }) => <button onClick={onSubmit} data-testid="submitButton" className="updateForm" />,
+}));
+
 describe('pages/PasswordReset', () => {
   it('should render password reset form successfully', () => {
     jest.isolateModules(() => {
-      jest.doMock('components/Header', () => ({
-        Header: () => <div>Header</div>
-      }));
-      jest.doMock('components/Footer', () => ({
-        Footer: () => <div>Footer</div>
-      }));
-
       jest.doMock('react-redux', () => ({
         useDispatch: () => jest.fn(),
-        useSelector: () => false
+        useSelector: () => false,
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { container } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -31,21 +32,15 @@ describe('pages/PasswordReset', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => false
-      }));
-
-      jest.doMock('components/PasswordResetForm', () => ({
-        PasswordResetForm: ({ onSubmit }) => (
-          <button onClick={onSubmit} data-testid="submit" />
-        )
+        useSelector: () => false,
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { getByTestId } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
-      const submitButton = getByTestId('submit');
+      const submitButton = getByTestId('submitButton');
 
       fireEvent.click(submitButton);
       expect(fn).toBeCalled();
@@ -56,13 +51,13 @@ describe('pages/PasswordReset', () => {
     jest.isolateModules(() => {
       jest.doMock('react-redux', () => ({
         useDispatch: () => jest.fn(),
-        useSelector: () => ({ passwordResetToken: 'TOKEN' })
+        useSelector: () => ({ passwordResetToken: 'TOKEN' }),
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { container } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
       expect(container.firstChild).toMatchSnapshot();
     });
@@ -73,21 +68,15 @@ describe('pages/PasswordReset', () => {
       const fn = jest.fn();
       jest.doMock('react-redux', () => ({
         useDispatch: () => fn,
-        useSelector: () => ({ passwordResetToken: 'TOKEN' })
-      }));
-
-      jest.doMock('components/PasswordUpdateForm', () => ({
-        PasswordUpdateForm: ({ onSubmit }) => (
-          <button onClick={onSubmit} data-testid="submit" />
-        )
+        useSelector: () => ({ passwordResetToken: 'TOKEN' }),
       }));
 
       const { PasswordReset } = require('./PasswordReset');
 
       const { getByTestId } = render(<PasswordReset />, {
-        wrapper: MemoryRouter
+        wrapper: MemoryRouter,
       });
-      const submitButton = getByTestId('submit');
+      const submitButton = getByTestId('submitButton');
 
       fireEvent.click(submitButton);
       expect(fn).toBeCalled();

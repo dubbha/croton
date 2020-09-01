@@ -3,14 +3,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export default class EmailVerification {
   @PrimaryGeneratedColumn()
-  public id: string;
+  id: number;
 
   @Column()
-  public userId: string;
+  userId: number;
 
   @Column()
-  public emailVerificationToken: string;
+  emailVerificationToken: string;
 
   @Column('bigint')
-  public expiresIn: number;
+  expiresIn: number;
 }

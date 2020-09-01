@@ -1,18 +1,66 @@
 import { all } from 'redux-saga/effects';
 import {
   authLoginSaga,
+  authLogoutSaga,
   authRegisterSaga,
   authResetPasswordSaga,
   authUpdatePasswordSaga,
-  authEmailConfirmSaga
+  authEmailConfirmSaga,
+  authFacebook,
+  authGoogle,
+  addFacebook,
+  addGoogle,
+  authUpdateProfileSaga,
+  authEmailResetSaga,
+  authEmailUpdateSaga,
 } from './auth/sagas';
+import {
+  shelfInviteSaga,
+  shelfInviteAcceptSaga,
+  shelfDeleteUserSaga,
+  shelfAddShelfSaga,
+  shelfEditShelfSaga,
+  shelfDeleteShelfSaga,
+  shelfGetShelvesSaga,
+  shelfAddFlowerSaga,
+  shelfEditFlowerSaga,
+  shelfDeleteFlowerSaga,
+  shelfGetFlowersSaga,
+  shelfGetFlowerSaga,
+  shelfActionSaga,
+  shelfGetLastActionsSaga,
+} from './shelf/sagas';
+import { notificationRegisterSaga } from './notification/sagas';
 
 export function* rootSaga() {
   yield all([
     authLoginSaga(),
+    authLogoutSaga(),
     authRegisterSaga(),
     authResetPasswordSaga(),
     authUpdatePasswordSaga(),
-    authEmailConfirmSaga()
-  ])
+    authEmailConfirmSaga(),
+    authFacebook(),
+    authGoogle(),
+    addFacebook(),
+    addGoogle(),
+    authUpdateProfileSaga(),
+    authEmailResetSaga(),
+    authEmailUpdateSaga(),
+    shelfInviteSaga(),
+    shelfInviteAcceptSaga(),
+    shelfDeleteUserSaga(),
+    shelfAddShelfSaga(),
+    shelfEditShelfSaga(),
+    shelfDeleteShelfSaga(),
+    shelfGetShelvesSaga(),
+    shelfAddFlowerSaga(),
+    shelfEditFlowerSaga(),
+    shelfDeleteFlowerSaga(),
+    shelfGetFlowersSaga(),
+    shelfGetFlowerSaga(),
+    shelfActionSaga(),
+    shelfGetLastActionsSaga(),
+    notificationRegisterSaga(),
+  ]);
 }

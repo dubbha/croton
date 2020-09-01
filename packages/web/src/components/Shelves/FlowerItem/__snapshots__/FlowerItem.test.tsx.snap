@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FlowerItem should render successfully 1`] = `
+<div
+  class="flower-item"
+>
+  <div
+    class="card text-primary"
+  >
+    <img
+      class="card-img-top"
+      src=""
+    />
+    <div
+      class="card-body"
+    >
+      <div
+        class="card-title h5"
+      />
+      <p
+        class="card-text"
+      />
+    </div>
+  </div>
+</div>
+`;

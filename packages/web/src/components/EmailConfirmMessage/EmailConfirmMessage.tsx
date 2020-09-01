@@ -14,13 +14,15 @@ export const EmailConfirmMessage = ({ onInit, error, isLoading }: Props) => {
   const { emailVerificationToken } = useSelector(getQuery);
 
   useEffect(() => {
-    onInit(emailVerificationToken);
+    if (emailVerificationToken) {
+      onInit(emailVerificationToken);
+    }
   }, [onInit, emailVerificationToken]);
 
   return (
     <>
       {error && <ErrorAlert>{error}</ErrorAlert>}
-      {isLoading && <InfoAlert>We are about to activate yor account!</InfoAlert>}
+      {isLoading && <InfoAlert>We are about to activate your account!</InfoAlert>}
       {!error && !isLoading && <AlertPlaceholder />}
     </>
   );

@@ -5,7 +5,7 @@ import {
   Header,
   Footer,
   PasswordResetForm,
-  PasswordUpdateForm
+  PasswordUpdateForm,
 } from 'components';
 import { AUTH_RESET_PASSWORD, AUTH_UPDATE_PASSWORD } from 'store/auth/actions';
 import { getAuth } from 'store/auth/selectors';
@@ -19,14 +19,14 @@ export const PasswordReset = () => {
   const handleReset = (email: string) => {
     dispatch({
       type: AUTH_RESET_PASSWORD,
-      payload: { email }
+      payload: { email },
     });
   };
 
   const handleUpdate = (password: string) => {
     dispatch({
       type: AUTH_UPDATE_PASSWORD,
-      payload: { password, token: passwordResetToken }
+      payload: { password, token: passwordResetToken },
     });
   };
 

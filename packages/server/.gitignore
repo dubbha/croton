@@ -108,3 +108,4 @@ web_modules/
 
 # prod build
 dist
+ormconfig.json

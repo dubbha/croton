@@ -5,7 +5,7 @@
 
 ![dev@github](https://github.com/dubbha/croton/workflows/WEB-CI-common/badge.svg?branch=dev)
 
-![lines](./packages/web/coverage/badge-lines.svg) ![functions](./packages/web/coverage/badge-functions.svg) ![branches](./packages/web/coverage/badge-branches.svg) ![statements](./packages/web/coverage/badge-statements.svg)
+![lines](http://croton.cf:8080/coverage/badge-lines.svg) ![functions](http://croton.cf:8080/coverage/badge-functions.svg) ![branches](http://croton.cf:8080/coverage/badge-branches.svg) ![statements](http://croton.cf:8080/coverage/badge-statements.svg)
 
 
 # Croton
@@ -39,6 +39,21 @@ Use root or package level commands to run mobile:
 [/] yarn workspace mobile start:android
 
 [/packages/mobile] yarn start:android
+```
+You can run iOS simulator only on macOS
+If you use macOS you should install dependencies for Swift/Objective-C for run iOS emulator
+```
+[/packages/mobile/ios] pod install
+```
+Use root or package level commands to run mobile:
+```
+[/] yarn workspace mobile start:ios
+
+[/packages/mobile] yarn start:ios
+```
+If you would like to start android simulator on macOS you should give permission for:
+```
+[/] chmod 755 packages/mobile/android/gradlew
 ```
 
 ### Monorepo

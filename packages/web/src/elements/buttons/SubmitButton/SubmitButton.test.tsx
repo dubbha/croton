@@ -7,5 +7,5 @@ describe('elements/SubmitButton', () => {
     const { getByTestId } = render(<SubmitButton />);
     const submitButton = getByTestId('submitButton');
     expect(submitButton).toBeEnabled();
-  })
-})
+  });
+});

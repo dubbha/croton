@@ -5,7 +5,8 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
   class=""
 >
   <div
-    style="height: 50px; margin-bottom: 16px;"
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
   />
   <div
     class="form-group"
@@ -20,6 +21,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="form-control"
       data-testid="signUpForm__firstName"
       id="formFirstName"
+      name="firstName"
       placeholder="Enter First Name"
       type="text"
       value=""
@@ -38,6 +40,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="form-control"
       data-testid="signUpForm__lastName"
       id="formLastName"
+      name="lastName"
       placeholder="Enter Last Name"
       type="text"
       value=""
@@ -56,6 +59,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="form-control"
       data-testid="signUpForm__email"
       id="formEmail"
+      name="email"
       placeholder="Enter Email"
       type="email"
       value=""
@@ -74,6 +78,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="form-control"
       data-testid="signUpForm__password"
       id="formPassword"
+      name="password"
       placeholder="Enter password"
       type="password"
       value=""
@@ -92,6 +97,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="form-control"
       data-testid="signUpForm__passwordMatch"
       id="formPasswordMatch"
+      name="passwordMatch"
       placeholder="Repeat password"
       type="password"
       value=""
@@ -107,7 +113,7 @@ exports[`components/SignUpForm should call onSubmit prop on submit 1`] = `
       class="spinner-container"
     />
     <span>
-      Sing Up
+      Sign Up
     </span>
   </button>
 </form>
@@ -118,7 +124,8 @@ exports[`components/SignUpForm should render submit button disabled by default 1
   class=""
 >
   <div
-    style="height: 50px; margin-bottom: 16px;"
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
   />
   <div
     class="form-group"
@@ -133,6 +140,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="form-control"
       data-testid="signUpForm__firstName"
       id="formFirstName"
+      name="firstName"
       placeholder="Enter First Name"
       type="text"
       value=""
@@ -151,6 +159,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="form-control"
       data-testid="signUpForm__lastName"
       id="formLastName"
+      name="lastName"
       placeholder="Enter Last Name"
       type="text"
       value=""
@@ -169,6 +178,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="form-control"
       data-testid="signUpForm__email"
       id="formEmail"
+      name="email"
       placeholder="Enter Email"
       type="email"
       value=""
@@ -187,6 +197,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="form-control"
       data-testid="signUpForm__password"
       id="formPassword"
+      name="password"
       placeholder="Enter password"
       type="password"
       value=""
@@ -205,6 +216,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="form-control"
       data-testid="signUpForm__passwordMatch"
       id="formPasswordMatch"
+      name="passwordMatch"
       placeholder="Repeat password"
       type="password"
       value=""
@@ -220,7 +232,7 @@ exports[`components/SignUpForm should render submit button disabled by default 1
       class="spinner-container"
     />
     <span>
-      Sing Up
+      Sign Up
     </span>
   </button>
 </form>
@@ -231,7 +243,8 @@ exports[`components/SignUpForm should render successfully 1`] = `
   class=""
 >
   <div
-    style="height: 50px; margin-bottom: 16px;"
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
   />
   <div
     class="form-group"
@@ -246,6 +259,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="form-control"
       data-testid="signUpForm__firstName"
       id="formFirstName"
+      name="firstName"
       placeholder="Enter First Name"
       type="text"
       value=""
@@ -264,6 +278,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="form-control"
       data-testid="signUpForm__lastName"
       id="formLastName"
+      name="lastName"
       placeholder="Enter Last Name"
       type="text"
       value=""
@@ -282,6 +297,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="form-control"
       data-testid="signUpForm__email"
       id="formEmail"
+      name="email"
       placeholder="Enter Email"
       type="email"
       value=""
@@ -300,6 +316,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="form-control"
       data-testid="signUpForm__password"
       id="formPassword"
+      name="password"
       placeholder="Enter password"
       type="password"
       value=""
@@ -318,6 +335,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="form-control"
       data-testid="signUpForm__passwordMatch"
       id="formPasswordMatch"
+      name="passwordMatch"
       placeholder="Repeat password"
       type="password"
       value=""
@@ -333,7 +351,7 @@ exports[`components/SignUpForm should render successfully 1`] = `
       class="spinner-container"
     />
     <span>
-      Sing Up
+      Sign Up
     </span>
   </button>
 </form>

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/AddSocialToProfile should render add social profile buttons if no social profile has been added yet 1`] = `
+<div
+  class="authButtonContainer"
+>
+  <div
+    data-testid="genericSocialApi"
+  >
+    <div>
+      ADD_FACEBOOK
+    </div>
+    <div>
+      ADD_FACEBOOK_ERROR
+    </div>
+    <div>
+      Sorry, something went wrong with adding your Facebook account
+    </div>
+    <div>
+      Add Facebook to profile
+    </div>
+  </div>
+</div>
+`;

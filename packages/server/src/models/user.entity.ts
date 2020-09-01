@@ -1,25 +1,48 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
+
+import { UserStatuses } from '../constants/user-statuses';
+import SocialProfile from './social-profile.entity';
+import UserToShelf from './user-to-shelf.entity'
+import Action from './action.entity';
+import NotificationToken from './notification-token.entity';
 
 @Entity()
 export default class User {
   @PrimaryGeneratedColumn()
-  public id: string;
+  id: number;
 
   @Column()
-  public firstName: string;
+  firstName: string;
 
   @Column()
-  public lastName: string;
+  lastName: string;
 
   @Column()
-  public email: string;
+  email: string;
 
   @Column()
-  public password: string;
+  password: string;
 
-  @Column()
-  public status: string;
+  @Column({ type: 'simple-enum', enum: UserStatuses })
+  status: UserStatuses;
 
-  @Column({ update: false, nullable: true })
-  public facebookId?: string;
+  @OneToOne(() => SocialProfile, { nullable: true })
+  @JoinColumn()
+  socialProfile?: SocialProfile;
+
+  @OneToMany(() => UserToShelf, userToShelf => userToShelf.user)
+  userToShelf: UserToShelf[];
+
+  @OneToMany(() => Action, actions => actions.user)
+  actions: Action[];
+
+  @OneToMany(() => NotificationToken, notificationToken => notificationToken.user)
+  notificationTokens: NotificationToken[];
 }

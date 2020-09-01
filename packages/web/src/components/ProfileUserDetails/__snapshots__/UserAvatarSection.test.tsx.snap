@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/UserAvatarSection should render successfully 1`] = `
+<picture
+  data-testid="userAvatarSection__picture"
+>
+  <source
+    class="circle with-picture"
+    src="https://my-pics/selfie-with-big-bang.png"
+  />
+  <img
+    alt="C N"
+    class="circle with-picture"
+    src="https://my-pics/selfie-with-big-bang.png"
+  />
+</picture>
+`;

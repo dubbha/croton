@@ -1,0 +1,26 @@
+name: CI-server-check
+
+on:
+  push:
+    paths:
+      - "packages/server/**"
+      - ".github/workflows/**"
+
+jobs:
+  server-check:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: use node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: build
+        run: |
+          yarn workspace server install
+          yarn workspace server build

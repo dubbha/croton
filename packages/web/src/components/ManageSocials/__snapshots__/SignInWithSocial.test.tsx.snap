@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/SignInWithSocial should render succesfully 1`] = `
+<div
+  class="authButtonContainer"
+>
+  <div
+    data-testid="genericSocialApi"
+  >
+    <div>
+      AUTH_FACEBOOK
+    </div>
+    <div>
+      AUTH_FACEBOOK_ERROR
+    </div>
+    <div>
+      Sorry, something went wrong with logging you in via Facebook
+    </div>
+    <div />
+  </div>
+</div>
+`;
