@@ -111,6 +111,7 @@ export const Flower = () => {
               {humanReadableRrules[action] && `: ${humanReadableRrules[action]}`}
             </span>
             <ButtonWithLoader
+              clickable={!actionMarked}
               isLoading={isLoading && actionMarked === action}
               isSuccess={!!info && actionMarked === action}
               isFailure={!!error && actionMarked === action}
