@@ -3027,6 +3027,11 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native-push-notification@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-push-notification/-/react-native-push-notification-5.0.0.tgz#434d46b309e88a5da4b9160d1cdb49ead6a68f30"
+  integrity sha512-9Uvs7jf3FarQPvHWoCrrao3MXU4p64j1EPoZV9Hv7FFbFu6skKxsUgfbsIqZ1ltVI/RTeP2/WxLr4utq1yoJyg==
+
 "@types/react-native@0.61.12":
   version "0.61.12"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.61.12.tgz#058c80f5aadb99b6cac1cf648e996b7795ca0fab"
