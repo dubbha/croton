@@ -17,7 +17,10 @@ const userManagementUserUpdate = `${management}/user-update`;
 const userManagementMergeWithSocial = `${management}/merge-with-social`;
 const userManagementAddFacebook = `${management}/add-facebook`;
 const userManagementAddGoogle = `${management}/add-google`;
+const userManagementShelfInvites = `${management}/user-invites`;
 const shelfUserInvite = `${shelf}/user-invite`;
+const shelfPendingInvites = `${shelf}/pending-invites`;
+const shelfRevokeInvite = `${shelf}/revoke-invite`;
 const shelfUserInviteAccept = `${shelf}/user-invite-accept`;
 const shelfUserDelete = `${shelf}/user-delete`;
 const shelfAddShelf = `${shelf}/add-shelf`;
@@ -51,7 +54,10 @@ export const api = {
   userManagementMergeWithSocial,
   userManagementAddFacebook,
   userManagementAddGoogle,
+  userManagementShelfInvites,
   shelfUserInvite,
+  shelfPendingInvites,
+  shelfRevokeInvite,
   shelfUserInviteAccept,
   shelfUserDelete,
   shelfAddShelf,

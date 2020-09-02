@@ -297,7 +297,7 @@ describe('DBService', () => {
   it('should get shelf invitation by user email', async () => {
     const { userEmail } = mockShelfInvitationEntity;
     await new DBService().getShelfInvitationsByUserEmail(userEmail);
-    expect(mockShelfInvitationRepository.find).toBeCalledWith({ userEmail });
+    expect(mockShelfInvitationRepository.find).toBeCalledWith({ where: { userEmail }, relations: ['shelf'] });
   });
 
   it('should get user-to-shelf', async () => {
