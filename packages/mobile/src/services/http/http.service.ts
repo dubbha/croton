@@ -26,6 +26,7 @@ class HttpSender {
         headers.authorization = this.token;
       }
 
+      console.log(address);
       const resp = await fetch(address, {
         method: 'POST',
         headers,

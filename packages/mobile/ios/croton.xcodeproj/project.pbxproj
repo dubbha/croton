@@ -7,19 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* myprojectnameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* myprojectnameTests.m */; };
+		00E356F31AD99517003FC87E /* crotonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* crotonTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1F4FDA501060227167961B9E /* libPods-myprojectnameTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB096A5BAF95E3F2E15D3B48 /* libPods-myprojectnameTests.a */; };
+		1F4FDA501060227167961B9E /* libPods-crotonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB096A5BAF95E3F2E15D3B48 /* libPods-crotonTests.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* myprojectnameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* myprojectnameTests.m */; };
-		79F22FDD448D66AAEA5EAC65 /* libPods-myprojectname-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C411AD4D876FF09C4145C7C1 /* libPods-myprojectname-tvOSTests.a */; };
-		EA96C3ADB0062FBBC713B357 /* libPods-myprojectname.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2A7911673BECF243AD0AFA /* libPods-myprojectname.a */; };
-		FFC6356B33C2913A7A459200 /* libPods-myprojectname-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456429721C6B23242C16220D /* libPods-myprojectname-tvOS.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* crotonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* crotonTests.m */; };
+		79F22FDD448D66AAEA5EAC65 /* libPods-croton-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C411AD4D876FF09C4145C7C1 /* libPods-croton-tvOSTests.a */; };
+		C63C29C224EBCBB000B416C9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C63C29C124EBCBB000B416C9 /* Default-568h@2x.png */; };
+		EA96C3ADB0062FBBC713B357 /* libPods-croton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2A7911673BECF243AD0AFA /* libPods-croton.a */; };
+		FFC6356B33C2913A7A459200 /* libPods-croton-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456429721C6B23242C16220D /* libPods-croton-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,43 +29,45 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = myprojectname;
+			remoteInfo = croton;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "myprojectname-tvOS";
+			remoteInfo = "croton-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* myprojectnameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myprojectnameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* crotonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = crotonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* myprojectnameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myprojectnameTests.m; sourceTree = "<group>"; };
-		0E31FC3EA7C7A08BAF37F522 /* Pods-myprojectname-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectname-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-myprojectname-tvOS/Pods-myprojectname-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* myprojectname.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myprojectname.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = myprojectname/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = myprojectname/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* crotonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = crotonTests.m; sourceTree = "<group>"; };
+		0E31FC3EA7C7A08BAF37F522 /* Pods-croton-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-croton-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-croton-tvOS/Pods-croton-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* croton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = croton.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = croton/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = croton/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = myprojectname/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = myprojectname/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = myprojectname/main.m; sourceTree = "<group>"; };
-		1888E6FC20CF78ACA5E89C41 /* Pods-myprojectname.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectname.debug.xcconfig"; path = "Target Support Files/Pods-myprojectname/Pods-myprojectname.debug.xcconfig"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* myprojectname-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "myprojectname-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* myprojectname-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "myprojectname-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E1217E1E81DD2A7519A8A58 /* Pods-myprojectname-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectname-tvOS.release.xcconfig"; path = "Target Support Files/Pods-myprojectname-tvOS/Pods-myprojectname-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		332F934DC8CB4922E8C2EB80 /* Pods-myprojectnameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectnameTests.release.xcconfig"; path = "Target Support Files/Pods-myprojectnameTests/Pods-myprojectnameTests.release.xcconfig"; sourceTree = "<group>"; };
-		38725D9BF24793FBEAF6D373 /* Pods-myprojectname-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectname-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-myprojectname-tvOSTests/Pods-myprojectname-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		456429721C6B23242C16220D /* libPods-myprojectname-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myprojectname-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		80A71BEBA18653AAC5A0EAE5 /* Pods-myprojectname-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectname-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-myprojectname-tvOSTests/Pods-myprojectname-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		BA0CB7250979924594CEDD19 /* Pods-myprojectname.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectname.release.xcconfig"; path = "Target Support Files/Pods-myprojectname/Pods-myprojectname.release.xcconfig"; sourceTree = "<group>"; };
-		C411AD4D876FF09C4145C7C1 /* libPods-myprojectname-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myprojectname-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D73BE9E1F71587306E251315 /* Pods-myprojectnameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myprojectnameTests.debug.xcconfig"; path = "Target Support Files/Pods-myprojectnameTests/Pods-myprojectnameTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EB096A5BAF95E3F2E15D3B48 /* libPods-myprojectnameTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myprojectnameTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB2A7911673BECF243AD0AFA /* libPods-myprojectname.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myprojectname.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = croton/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = croton/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = croton/main.m; sourceTree = "<group>"; };
+		1888E6FC20CF78ACA5E89C41 /* Pods-croton.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-croton.debug.xcconfig"; path = "Target Support Files/Pods-croton/Pods-croton.debug.xcconfig"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* croton-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "croton-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* croton-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "croton-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E1217E1E81DD2A7519A8A58 /* Pods-croton-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-croton-tvOS.release.xcconfig"; path = "Target Support Files/Pods-croton-tvOS/Pods-croton-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		332F934DC8CB4922E8C2EB80 /* Pods-crotonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crotonTests.release.xcconfig"; path = "Target Support Files/Pods-crotonTests/Pods-crotonTests.release.xcconfig"; sourceTree = "<group>"; };
+		38725D9BF24793FBEAF6D373 /* Pods-croton-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-croton-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-croton-tvOSTests/Pods-croton-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		456429721C6B23242C16220D /* libPods-croton-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-croton-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A71BEBA18653AAC5A0EAE5 /* Pods-croton-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-croton-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-croton-tvOSTests/Pods-croton-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		BA0CB7250979924594CEDD19 /* Pods-croton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-croton.release.xcconfig"; path = "Target Support Files/Pods-croton/Pods-croton.release.xcconfig"; sourceTree = "<group>"; };
+		C411AD4D876FF09C4145C7C1 /* libPods-croton-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-croton-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C634F15224FD69360034150C /* crotonRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = crotonRelease.entitlements; path = croton/crotonRelease.entitlements; sourceTree = "<group>"; };
+		C63C29C124EBCBB000B416C9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D73BE9E1F71587306E251315 /* Pods-crotonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crotonTests.debug.xcconfig"; path = "Target Support Files/Pods-crotonTests/Pods-crotonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB096A5BAF95E3F2E15D3B48 /* libPods-crotonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crotonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB2A7911673BECF243AD0AFA /* libPods-croton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-croton.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -74,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F4FDA501060227167961B9E /* libPods-myprojectnameTests.a in Frameworks */,
+				1F4FDA501060227167961B9E /* libPods-crotonTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA96C3ADB0062FBBC713B357 /* libPods-myprojectname.a in Frameworks */,
+				EA96C3ADB0062FBBC713B357 /* libPods-croton.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFC6356B33C2913A7A459200 /* libPods-myprojectname-tvOS.a in Frameworks */,
+				FFC6356B33C2913A7A459200 /* libPods-croton-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,20 +101,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F22FDD448D66AAEA5EAC65 /* libPods-myprojectname-tvOSTests.a in Frameworks */,
+				79F22FDD448D66AAEA5EAC65 /* libPods-croton-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* myprojectnameTests */ = {
+		00E356EF1AD99517003FC87E /* crotonTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* myprojectnameTests.m */,
+				00E356F21AD99517003FC87E /* crotonTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = myprojectnameTests;
+			path = crotonTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -122,9 +125,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* myprojectname */ = {
+		13B07FAE1A68108700A75B9A /* croton */ = {
 			isa = PBXGroup;
 			children = (
+				C634F15224FD69360034150C /* crotonRelease.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -133,7 +137,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = myprojectname;
+			name = croton;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -141,10 +145,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				EB2A7911673BECF243AD0AFA /* libPods-myprojectname.a */,
-				456429721C6B23242C16220D /* libPods-myprojectname-tvOS.a */,
-				C411AD4D876FF09C4145C7C1 /* libPods-myprojectname-tvOSTests.a */,
-				EB096A5BAF95E3F2E15D3B48 /* libPods-myprojectnameTests.a */,
+				EB2A7911673BECF243AD0AFA /* libPods-croton.a */,
+				456429721C6B23242C16220D /* libPods-croton-tvOS.a */,
+				C411AD4D876FF09C4145C7C1 /* libPods-croton-tvOSTests.a */,
+				EB096A5BAF95E3F2E15D3B48 /* libPods-crotonTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,14 +156,14 @@
 		4F6811913B4E6CC747BBCB5B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1888E6FC20CF78ACA5E89C41 /* Pods-myprojectname.debug.xcconfig */,
-				BA0CB7250979924594CEDD19 /* Pods-myprojectname.release.xcconfig */,
-				0E31FC3EA7C7A08BAF37F522 /* Pods-myprojectname-tvOS.debug.xcconfig */,
-				2E1217E1E81DD2A7519A8A58 /* Pods-myprojectname-tvOS.release.xcconfig */,
-				38725D9BF24793FBEAF6D373 /* Pods-myprojectname-tvOSTests.debug.xcconfig */,
-				80A71BEBA18653AAC5A0EAE5 /* Pods-myprojectname-tvOSTests.release.xcconfig */,
-				D73BE9E1F71587306E251315 /* Pods-myprojectnameTests.debug.xcconfig */,
-				332F934DC8CB4922E8C2EB80 /* Pods-myprojectnameTests.release.xcconfig */,
+				1888E6FC20CF78ACA5E89C41 /* Pods-croton.debug.xcconfig */,
+				BA0CB7250979924594CEDD19 /* Pods-croton.release.xcconfig */,
+				0E31FC3EA7C7A08BAF37F522 /* Pods-croton-tvOS.debug.xcconfig */,
+				2E1217E1E81DD2A7519A8A58 /* Pods-croton-tvOS.release.xcconfig */,
+				38725D9BF24793FBEAF6D373 /* Pods-croton-tvOSTests.debug.xcconfig */,
+				80A71BEBA18653AAC5A0EAE5 /* Pods-croton-tvOSTests.release.xcconfig */,
+				D73BE9E1F71587306E251315 /* Pods-crotonTests.debug.xcconfig */,
+				332F934DC8CB4922E8C2EB80 /* Pods-crotonTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -174,9 +178,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* myprojectname */,
+				C63C29C124EBCBB000B416C9 /* Default-568h@2x.png */,
+				13B07FAE1A68108700A75B9A /* croton */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* myprojectnameTests */,
+				00E356EF1AD99517003FC87E /* crotonTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				4F6811913B4E6CC747BBCB5B /* Pods */,
@@ -189,10 +194,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* myprojectname.app */,
-				00E356EE1AD99517003FC87E /* myprojectnameTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* myprojectname-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* myprojectname-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* croton.app */,
+				00E356EE1AD99517003FC87E /* crotonTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* croton-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* croton-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,9 +205,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* myprojectnameTests */ = {
+		00E356ED1AD99517003FC87E /* crotonTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "myprojectnameTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "crotonTests" */;
 			buildPhases = (
 				8DF6D60DF62198B9913A43BD /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -214,14 +219,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = myprojectnameTests;
-			productName = myprojectnameTests;
-			productReference = 00E356EE1AD99517003FC87E /* myprojectnameTests.xctest */;
+			name = crotonTests;
+			productName = crotonTests;
+			productReference = 00E356EE1AD99517003FC87E /* crotonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* myprojectname */ = {
+		13B07F861A680F5B00A75B9A /* croton */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "myprojectname" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "croton" */;
 			buildPhases = (
 				341B8D7DD281FE882C2085E3 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -234,14 +239,14 @@
 			);
 			dependencies = (
 			);
-			name = myprojectname;
-			productName = myprojectname;
-			productReference = 13B07F961A680F5B00A75B9A /* myprojectname.app */;
+			name = croton;
+			productName = croton;
+			productReference = 13B07F961A680F5B00A75B9A /* croton.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* myprojectname-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* croton-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "myprojectname-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "croton-tvOS" */;
 			buildPhases = (
 				D5A0BC1261090DC7C9F9D562 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -254,14 +259,14 @@
 			);
 			dependencies = (
 			);
-			name = "myprojectname-tvOS";
-			productName = "myprojectname-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* myprojectname-tvOS.app */;
+			name = "croton-tvOS";
+			productName = "croton-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* croton-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* myprojectname-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* croton-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "myprojectname-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "croton-tvOSTests" */;
 			buildPhases = (
 				AEF52031C4EFF320B88FFCE4 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -273,9 +278,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "myprojectname-tvOSTests";
-			productName = "myprojectname-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* myprojectname-tvOSTests.xctest */;
+			name = "croton-tvOSTests";
+			productName = "croton-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* croton-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -302,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "myprojectname" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "croton" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -316,10 +321,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* myprojectname */,
-				00E356ED1AD99517003FC87E /* myprojectnameTests */,
-				2D02E47A1E0B4A5D006451C7 /* myprojectname-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* myprojectname-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* croton */,
+				00E356ED1AD99517003FC87E /* crotonTests */,
+				2D02E47A1E0B4A5D006451C7 /* croton-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* croton-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -338,6 +343,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				C63C29C224EBCBB000B416C9 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +408,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-myprojectname-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-croton-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -424,7 +430,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-myprojectnameTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-crotonTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -446,7 +452,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-myprojectname-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-croton-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -468,7 +474,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-myprojectname-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-croton-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -520,7 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* myprojectnameTests.m in Sources */,
+				00E356F31AD99517003FC87E /* crotonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* myprojectnameTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* crotonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,12 +561,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* myprojectname */;
+			target = 13B07F861A680F5B00A75B9A /* croton */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* myprojectname-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* croton-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -572,7 +578,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = myprojectname;
+			path = croton;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -580,14 +586,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D73BE9E1F71587306E251315 /* Pods-myprojectnameTests.debug.xcconfig */;
+			baseConfigurationReference = D73BE9E1F71587306E251315 /* Pods-crotonTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = myprojectnameTests/Info.plist;
+				INFOPLIST_FILE = crotonTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -597,17 +603,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myprojectname.app/myprojectname";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/croton.app/croton";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 332F934DC8CB4922E8C2EB80 /* Pods-myprojectnameTests.release.xcconfig */;
+			baseConfigurationReference = 332F934DC8CB4922E8C2EB80 /* Pods-crotonTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = myprojectnameTests/Info.plist;
+				INFOPLIST_FILE = crotonTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -617,18 +623,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myprojectname.app/myprojectname";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/croton.app/croton";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1888E6FC20CF78ACA5E89C41 /* Pods-myprojectname.debug.xcconfig */;
+			baseConfigurationReference = 1888E6FC20CF78ACA5E89C41 /* Pods-croton.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = myprojectname/Info.plist;
+				INFOPLIST_FILE = croton/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -636,18 +642,19 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = myprojectname;
+				PRODUCT_NAME = croton;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA0CB7250979924594CEDD19 /* Pods-myprojectname.release.xcconfig */;
+			baseConfigurationReference = BA0CB7250979924594CEDD19 /* Pods-croton.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = croton/crotonRelease.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = myprojectname/Info.plist;
+				INFOPLIST_FILE = croton/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -655,14 +662,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = myprojectname;
+				PRODUCT_NAME = croton;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E31FC3EA7C7A08BAF37F522 /* Pods-myprojectname-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 0E31FC3EA7C7A08BAF37F522 /* Pods-croton-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -673,14 +680,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "myprojectname-tvOS/Info.plist";
+				INFOPLIST_FILE = "croton-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.myprojectname-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.croton-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -690,7 +697,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E1217E1E81DD2A7519A8A58 /* Pods-myprojectname-tvOS.release.xcconfig */;
+			baseConfigurationReference = 2E1217E1E81DD2A7519A8A58 /* Pods-croton-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -701,14 +708,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "myprojectname-tvOS/Info.plist";
+				INFOPLIST_FILE = "croton-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.myprojectname-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.croton-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -718,7 +725,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38725D9BF24793FBEAF6D373 /* Pods-myprojectname-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 38725D9BF24793FBEAF6D373 /* Pods-croton-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -728,24 +735,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "myprojectname-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "croton-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.myprojectname-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.croton-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myprojectname-tvOS.app/myprojectname-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/croton-tvOS.app/croton-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80A71BEBA18653AAC5A0EAE5 /* Pods-myprojectname-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 80A71BEBA18653AAC5A0EAE5 /* Pods-croton-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -755,17 +762,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "myprojectname-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "croton-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.myprojectname-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.croton-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/myprojectname-tvOS.app/myprojectname-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/croton-tvOS.app/croton-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -872,7 +879,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "myprojectnameTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "crotonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -881,7 +888,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "myprojectname" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "croton" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -890,7 +897,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "myprojectname-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "croton-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -899,7 +906,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "myprojectname-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "croton-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -908,7 +915,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "myprojectname" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "croton" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

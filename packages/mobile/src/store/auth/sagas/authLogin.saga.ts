@@ -19,7 +19,9 @@ function* handle(action: AuthLogin) {
     if (!result.token) {
       yield put({
         type: INFORMATION_NOTIFY,
-        payload: { error: result.message },
+        payload: {
+          error: result.message || 'Something wrong, pls try again later',
+        },
       });
     } else {
       yield put({

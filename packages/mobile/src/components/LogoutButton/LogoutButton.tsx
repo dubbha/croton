@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 
   logout__text: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
   },
 });
