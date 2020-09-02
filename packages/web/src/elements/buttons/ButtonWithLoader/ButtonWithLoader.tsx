@@ -11,6 +11,7 @@ type Props = {
   variant?: ButtonProps['variant'];
   type?: ButtonProps['type'];
   disabled?: boolean;
+  clickable?: boolean;
   isLoading?: boolean;
   isSuccess?: boolean;
   isFailure?: boolean;
@@ -23,6 +24,7 @@ export const ButtonWithLoader = ({
   variant = 'primary',
   type = 'button',
   disabled = false,
+  clickable = true,
   isLoading = false,
   isSuccess = false,
   isFailure = false,
@@ -57,6 +59,7 @@ export const ButtonWithLoader = ({
         classNames(
           'button-with-loader',
           { 'button-with-loader-error': showFailure },
+          { 'button-with-loader-non-clickable': !clickable },
         )
       }
     >
