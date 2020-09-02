@@ -63,4 +63,5 @@ buck-out/
 /coverage
 
 # firebase config file
-app/google-services.json
+android/app/google-services.json
+ios/GoogleService-Info.plist
