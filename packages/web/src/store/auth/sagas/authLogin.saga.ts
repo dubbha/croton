@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { http } from 'services';
+import { http, Config } from 'services';
 import {
   AUTH_LOGIN,
   AUTH_LOGIN_ERROR,
@@ -11,10 +11,12 @@ import {
 function* handle(action: AuthLogin) {
   const { email, password } = action.payload;
   try {
-    const result = yield call(http.post, '/auth/login', {
-      email,
-      password,
-    });
+    const result = yield call(
+      http.post,
+      '/auth/login',
+      { email, password },
+      { preventUnauthorizedInterceptor: true } as Config,
+    );
     const { data: { token, ...userData } } = result;
     yield call([localStorage, localStorage.setItem], 'authToken', token);
     yield put({

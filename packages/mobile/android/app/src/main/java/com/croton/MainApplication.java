@@ -1,4 +1,4 @@
-package com.myprojectname;
+package com.croton;
 
 import android.app.Application;
 import android.content.Context;

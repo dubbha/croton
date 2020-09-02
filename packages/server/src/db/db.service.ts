@@ -175,7 +175,12 @@ export default class DBService {
   }
 
   getShelfInvitationsByUserEmail(userEmail: string) {
-    return this.shelfInvitationRepository.find({ userEmail });
+    return this.shelfInvitationRepository.find({ where: { userEmail }, relations: ['shelf'] });
+  }
+
+  async getShelfInvitationsByShelfId(id: number) {
+    const shelf = await this.getShelfById(id);
+    return this.shelfInvitationRepository.find({ shelf });
   }
 
   getUserToShelf(userId: number, shelfId: number) {

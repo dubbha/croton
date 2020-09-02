@@ -22,7 +22,7 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       shelfAdminMiddleware,
       validationMiddleware(ShelfUserInviteDto),
-      this.userInviteHanlder
+      this.userInviteHandler
     );
 
     this.router.post(
@@ -106,10 +106,24 @@ export default class ShelfController extends BaseController {
       this.serverApi.shelfGetLastActions,
       authMiddleware,
       this.getLastActionsHanlder
-    )
+    );
+
+    this.router.post(
+      this.serverApi.shelfPendingInvites,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.userPendingInvitesHandler
+    );
+
+    this.router.delete(
+      this.serverApi.shelfRevokeInvite,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.shelfRevokeInviteHandler
+    );
   }
 
-  private userInviteHanlder = async (
+  private userInviteHandler = async (
     request: RequestWithShelfId,
     response: Response,
     next: NextFunction
@@ -300,6 +314,36 @@ export default class ShelfController extends BaseController {
         request.body.flowerId,
       );
       response.status(200).send(lastActions);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private userPendingInvitesHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const pendingInvites = await this.shelfService.getPendingInvites(
+        request.body.shelfId
+      );
+      response.send(pendingInvites);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private shelfRevokeInviteHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      await this.shelfService.revokeInvite(
+        request.body.inviteId
+      );
+      response.status(204).send();
     } catch (error) {
       next(error);
     }

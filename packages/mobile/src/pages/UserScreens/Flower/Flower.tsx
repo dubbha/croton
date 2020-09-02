@@ -11,7 +11,6 @@ import {
 
 export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
   const { params } = route;
-  console.dir(params);
   const [isShowFormConfig, setIsShowFormConfig] = useState(false);
   const [isShowFormRemove, setIsShowFormRemove] = useState(false);
 

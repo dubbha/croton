@@ -18,7 +18,6 @@ import { SHELF_FLOWER_GET } from '../../../store/shelves/actions';
 import { Flower } from '../../../components/Flower';
 
 export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
-  console.log('RENDER SHELF');
   const dispatch = useDispatch();
   const { params } = route;
   const { id: shelfId } = params;

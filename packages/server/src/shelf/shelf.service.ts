@@ -14,6 +14,7 @@ import ShelfEditFlowerDto from './shelf-edit-flower.dto';
 import { Actions } from '../constants/actions';
 
 import WrongShelfInvitationToken from '../exceptions/wrong-shelf-invitation-token.exception';
+import ShelfInvitation from '../models/shelf-invitation.entity';
 
 export default class ShelfService {
   private emailSendingService = new EmailSendingService();
@@ -160,5 +161,13 @@ export default class ShelfService {
       }),
       {},
     );
+  }
+
+  async getPendingInvites(shelfId: number): Promise<ShelfInvitation[]> {
+    return await this.dbService.getShelfInvitationsByShelfId(shelfId);
+  }
+
+  async revokeInvite(inviteId: number): Promise<void> {
+    await this.dbService.deleteShelfInvitation(inviteId);
   }
 }

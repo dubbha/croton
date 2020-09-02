@@ -1,11 +1,12 @@
 import React from 'react';
 import { ImageBackground, View, Text } from 'react-native';
 
+import styles from './styles';
 import { SCREEN_SIGN_IN, SCREEN_SIGN_UP } from '../../screens';
-
 import { CustomButton } from '../../../components/Button';
 import { Divider } from '../../../components/Divider';
-import styles from './styles';
+import { SocialLogin } from './../../../components/SocialLogin';
+
 const autorizationBgImg = require('./../../../assets/img/bg-home.jpg');
 
 export const Authorization = ({ navigation }: any) => {
@@ -34,22 +35,7 @@ export const Authorization = ({ navigation }: any) => {
             </View>
             <Divider />
             <View style={styles.buttonsWrap}>
-              <View style={styles.button}>
-                <CustomButton
-                  variant="primary"
-                  icon="iconFb"
-                  title="Facebook"
-                  onPress={() => console.log('Login facebook')}
-                />
-              </View>
-              <View style={styles.button}>
-                <CustomButton
-                  variant="primary"
-                  icon="iconGoogle"
-                  title="Google"
-                  onPress={() => console.log('Login Google')}
-                />
-              </View>
+              <SocialLogin variant="primary" />
             </View>
           </View>
         </View>
