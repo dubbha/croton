@@ -15,6 +15,7 @@ import {
   authEmailUpdateSaga,
 } from './auth/sagas';
 import {
+  shelfGetInvitesSaga,
   shelfInviteSaga,
   shelfInviteAcceptSaga,
   shelfInviteRevokeSaga,
@@ -30,7 +31,7 @@ import {
   shelfGetFlowerSaga,
   shelfActionSaga,
   shelfGetLastActionsSaga,
-  shelfGetInvitesSaga,
+  shelfGetActionsSaga,
 } from './shelf/sagas';
 import { notificationRegisterSaga } from './notification/sagas';
 
@@ -49,6 +50,7 @@ export function* rootSaga() {
     authUpdateProfileSaga(),
     authEmailResetSaga(),
     authEmailUpdateSaga(),
+    shelfGetInvitesSaga(),
     shelfInviteSaga(),
     shelfInviteAcceptSaga(),
     shelfInviteRevokeSaga(),
@@ -64,7 +66,7 @@ export function* rootSaga() {
     shelfGetFlowerSaga(),
     shelfActionSaga(),
     shelfGetLastActionsSaga(),
+    shelfGetActionsSaga(),
     notificationRegisterSaga(),
-    shelfGetInvitesSaga(),
   ]);
 }

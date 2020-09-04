@@ -8,3 +8,4 @@ export * from './navs';
 export * from './spinner';
 export * from './accordion';
 export * from './listgroup';
+export * from './table';

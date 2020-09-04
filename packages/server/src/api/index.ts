@@ -37,6 +37,7 @@ const shelfGetFlowers = `${shelf}/get-flowers`;
 const shelfGetFlower = `${shelf}/get-flower`;
 const shelfAction = `${shelf}/action`;
 const shelfGetLastActions = `${shelf}/get-last-actions`;
+const shelfGetActions = `${shelf}/get-actions`;
 const notificationRegister = `${notification}/register`;
 const internalNotification = `${internal}/notification`;
 const healthCheck = '/health-check';
@@ -77,6 +78,7 @@ export const api = {
   shelfGetFlower,
   shelfAction,
   shelfGetLastActions,
+  shelfGetActions,
   healthCheck,
   notificationRegister,
   internalNotification,

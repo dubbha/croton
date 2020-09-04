@@ -117,6 +117,12 @@ export default class ShelfController extends BaseController {
       this.getLastActionsHandler
     );
 
+    this.router.get(
+      this.serverApi.shelfGetActions,
+      authMiddleware,
+      this.getActionsHanlder,
+    );
+
     this.router.post(
       this.serverApi.shelfPendingInvites,
       authMiddleware,
@@ -340,6 +346,21 @@ export default class ShelfController extends BaseController {
         request.body.flowerId,
       );
       response.status(200).send(lastActions);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getActionsHanlder = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const actions = await this.shelfService.getActions(
+        parseInt(request.query.flowerId as string, 10),
+      );
+      response.status(200).send(actions);
     } catch (error) {
       next(error);
     }

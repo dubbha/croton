@@ -1,5 +1,5 @@
 import { Actions } from 'constants/actions';
-import { Shelf, Flower, Invite } from './interfaces';
+import { Shelf, Flower, FlowerLastActions, FlowerAction, Invite } from './interfaces';
 
 export const SHELF_GET_INVITES = 'SHELF_GET_INVITES';
 export const SHELF_GET_INVITES_SUCCESS = 'SHELF_GET_INVITES_SUCCESS';
@@ -65,6 +65,10 @@ export const SHELF_ACTION_ERROR = 'SHELF_ACTION_ERROR';
 export const SHELF_GET_LAST_ACTIONS = 'SHELF_GET_LAST_ACTIONS';
 export const SHELF_GET_LAST_ACTIONS_SUCCESS = 'SHELF_GET_LAST_ACTIONS_SUCCESS';
 export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
+
+export const SHELF_GET_ACTIONS = 'SHELF_GET_ACTIONS';
+export const SHELF_GET_ACTIONS_SUCCESS = 'SHELF_GET_ACTIONS_SUCCESS';
+export const SHELF_GET_ACTIONS_ERROR = 'SHELF_GET_ACTIONS_ERROR';
 
 export const SHELF_RESET = 'SHELF_RESET';
 
@@ -310,16 +314,26 @@ export interface ShelfGetLastActions {
 
 export interface ShelfGetLastActionsSuccess {
   type: typeof SHELF_GET_LAST_ACTIONS_SUCCESS;
-  payload: {
-    [key in Actions]: {
-      timestamp: number;
-      user: { id: number, firstName: string, lastName: string };
-    }
-  }
+  payload: FlowerLastActions;
 }
 
 export interface ShelfGetLastActionsError {
   type: typeof SHELF_GET_LAST_ACTIONS_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfGetActions {
+  type: typeof SHELF_GET_ACTIONS;
+  payload: { flowerId: number };
+}
+
+export interface ShelfGetActionsSuccess {
+  type: typeof SHELF_GET_ACTIONS_SUCCESS;
+  payload: FlowerAction[],
+}
+
+export interface ShelfGetActionsError {
+  type: typeof SHELF_GET_ACTIONS_ERROR;
   payload: { error: string };
 }
 
@@ -376,4 +390,7 @@ export type ShelfActionTypes =
   | ShelfGetLastActions
   | ShelfGetLastActionsSuccess
   | ShelfGetLastActionsError
+  | ShelfGetActions
+  | ShelfGetActionsSuccess
+  | ShelfGetActionsError
   | ShelfReset;

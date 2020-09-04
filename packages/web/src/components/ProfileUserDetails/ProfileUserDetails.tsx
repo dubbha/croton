@@ -5,7 +5,7 @@ import { UserAvatarSection } from './UserAvatarSection';
 import './styles.scss';
 
 export const ProfileUserDetails = () => (
-  <Container>
+  <Container inner>
     <UserAvatarSection />
     <UpdateProfileForm />
     <AddSocialToProfile />
