@@ -39,6 +39,9 @@ import {
   SHELF_GET_FLOWER,
   SHELF_GET_FLOWER_SUCCESS,
   SHELF_GET_FLOWER_ERROR,
+  SHELF_MOVE_FLOWER,
+  SHELF_MOVE_FLOWER_SUCCESS,
+  SHELF_MOVE_FLOWER_ERROR,
   SHELF_ACTION,
   SHELF_ACTION_SUCCESS,
   SHELF_ACTION_ERROR,
@@ -72,7 +75,7 @@ export const initialState: ShelfState = {
 
 export function shelfReducer(
   state = initialState,
-  action: ShelfActionTypes | LocationChangeAction,
+  action: ShelfActionTypes | LocationChangeAction
 ): ShelfState {
   switch (action.type) {
     case SHELF_INVITE:
@@ -93,6 +96,7 @@ export function shelfReducer(
     case SHELF_GET_INVITES:
     case SHELF_GET_ACTIONS:
     case SHELF_GET_USERS:
+    case SHELF_MOVE_FLOWER:
       return {
         ...state,
         isLoading: true,
@@ -138,7 +142,7 @@ export function shelfReducer(
         ...state,
         isLoading: false,
         flower: {
-          ...state.flower as Flower,
+          ...(state.flower as Flower),
           lastActions: action.payload,
         },
       };
@@ -163,6 +167,27 @@ export function shelfReducer(
         isLoading: false,
         users: action.payload.users,
       };
+
+    case SHELF_MOVE_FLOWER_SUCCESS:
+      const { flower, oldShelf, newShelf } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        flower: state.flower && flower,
+        flowers: state.flowers.map((savedFlower) =>
+          savedFlower.id === flower.id ? flower : savedFlower
+        ),
+        shelves: state.shelves.map((savedShelf) => {
+          switch (savedShelf.id) {
+            case oldShelf.id:
+              return oldShelf;
+            case newShelf.id:
+              return newShelf;
+            default:
+              return savedShelf;
+          }
+        }),
+      };
     case SHELF_INVITE_ERROR:
     case SHELF_INVITE_ACCEPT_ERROR:
     case SHELF_INVITE_REVOKE_ERROR:
@@ -180,6 +205,7 @@ export function shelfReducer(
     case SHELF_GET_LAST_ACTIONS_ERROR:
     case SHELF_GET_ACTIONS_ERROR:
     case SHELF_GET_USERS_ERROR:
+    case SHELF_MOVE_FLOWER_ERROR:
       return {
         ...state,
         isLoading: false,
