@@ -168,6 +168,10 @@ export default class ShelfService {
     );
   }
 
+  getActions(flowerId: number) {
+    return this.dbService.getActionsByFlowerId(flowerId);
+  }
+
   async getPendingInvites(shelfId: number): Promise<ShelfInvitation[]> {
     return await this.dbService.getShelfInvitationsByShelfId(shelfId);
   }

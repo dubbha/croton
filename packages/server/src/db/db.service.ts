@@ -358,6 +358,23 @@ export default class DBService {
     })
   }
 
+  async getActionsByFlowerId(flowerId: number): Promise<Partial<ActionEntity>[]> {
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return (
+      await this.actionRepository.find({
+        where: {
+          flower,
+        },
+        order: {
+          timestamp: 'ASC',
+        },
+        relations: ['user'],
+        select: ['timestamp', 'action', 'user']
+      })
+    ).map(({ timestamp, action, user: { firstName, lastName } }) =>
+      ({ timestamp, action, firstName, lastName }));
+  }
+
   async getLastNotification(flowerId: number, action: Actions) {
     const flower = await this.flowerRepository.findOne(flowerId);
     return this.notificationRepository.findOne({

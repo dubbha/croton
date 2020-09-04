@@ -8,18 +8,30 @@ export type Shelf = {
   pictureUrl: string,
 }
 
+export type FlowerRrules = { [key in Actions]: string };
+
+export type FlowerLastActions = {
+  [key in Actions]: {
+    timestamp: number;
+    user: { id: number, firstName: string, lastName: string };
+  }
+};
+
+export type FlowerAction = {
+  timestamp: number;
+  action: Actions;
+  firstName: string;
+  lastName: string;
+};
+
 export type Flower = {
   id: number;
   name: string;
   description: string;
   pictureUrls: string[];
-  rrules: { [key in Actions]: string };
-  lastActions: {
-    [key in Actions]: {
-      timestamp: number;
-      user: { id: number, firstName: string, lastName: string };
-    }
-  };
+  rrules: FlowerRrules;
+  lastActions: FlowerLastActions;
+  actions: FlowerAction[];
   shelfId: number;
 }
 

@@ -9,6 +9,9 @@ import { LeafIcon, ListGroup, HandHoldingHeartIcon, FireAltIcon, ButtonWithLoade
 import { Confirm } from 'components';
 import { Actions } from 'constants/actions';
 import { EditFlower } from '../EditFlower';
+import { Heatmap } from './Heatmap';
+import { Stats } from './Stats';
+import { Log } from './Log';
 import './styles.scss';
 
 export const Flower = () => {
@@ -123,6 +126,9 @@ export const Flower = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+      <Heatmap actions={flower?.actions} />
+      <Stats actions={flower?.actions} rrules={flower?.rrules} />
+      <Log actions={flower?.actions} />
     </div>
   );
 };

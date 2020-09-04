@@ -1,4 +1,4 @@
-@import '../../../assets/styles/theme';
+@import '../../../custom.scss';
 
 .flower {
   &.container {
@@ -60,5 +60,74 @@
       justify-content: center;
       min-width: 22px;
     }
+  }
+
+  th,
+  td.action-name {
+    text-transform: capitalize;
+  }
+}
+
+.heatmap-container {
+  width: 100%;
+  padding-right: 1rem;
+  margin: 2rem 0 -3rem 0;
+
+  @include media-breakpoint-up(md) {
+    width: 75%;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 50%;
+  }
+}
+
+.stats-container {
+  width: 100%;
+  padding: 0 1rem;
+
+  h4 {
+    color: $color-grass-dark;
+  }
+}
+
+.log-container {
+  width: 100%;
+  padding: 2rem 1rem 0;
+
+  h4 {
+    color: $color-grass-dark;
+  }
+}
+
+.react-calendar-heatmap {
+  text {
+    font-size: 6px;
+    fill: #aaa;
+  }
+
+  .react-calendar-heatmap-small-text {
+    font-size: 5px;
+  }
+
+  rect:hover {
+    stroke: #555;
+    stroke-width: 1px;
+  }
+
+  .color-croton-0, .color-empty {
+    fill: #eeeeee;
+  }
+  .color-croton-1 {
+    fill: $color-grass-light;
+  }
+  .color-croton-2, .color-filled {
+    fill: $color-grass;
+  }
+  .color-croton-3 {
+    fill: $color-grass-dark;
+  }
+  .color-croton-4 {
+    fill: $color-grass-darkest;
   }
 }
