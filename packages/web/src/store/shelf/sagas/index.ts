@@ -12,3 +12,4 @@ export * from './shelfGetFlowers.saga';
 export * from './shelfGetFlower.saga';
 export * from './shelfAction.saga';
 export * from './shelfGetLastActions.saga';
+export * from './shelfGetInvites.saga';

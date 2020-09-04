@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tabs, Tab } from 'react-bootstrap';
-import { Modal, Button } from 'elements';
-import { SHELF_RESET } from 'store/shelf';
+import {Modal, Button, Alert, InfoAlert} from 'elements';
+import { getShelf } from 'store/shelf/selectors';
+import {SHELF_GET_FLOWERS, SHELF_GET_INVITES, SHELF_RESET} from 'store/shelf';
 import { InviteUserToShelf } from '../InviteUserToShelf';
+import {AddFlower} from "../AddFlower";
 
 type Props = {
   shelfId: number;
@@ -12,6 +14,13 @@ type Props = {
 export const UserManagement = ({ shelfId }: Props) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+  const { invites } = useSelector(getShelf);
+
+  useEffect(() => {
+    dispatch({ type: SHELF_GET_INVITES, payload: { shelfId } });
+  }, [dispatch, shelfId]);
+
+  const refreshInvites = () => dispatch({ type: SHELF_GET_INVITES, payload: { shelfId } });
 
   const handleClose = () => {
     setShowModal(false);
@@ -48,21 +57,27 @@ export const UserManagement = ({ shelfId }: Props) => {
               </Table>
             </Tab>
             <Tab eventKey="invitations" title="Invitations">
-              <InviteUserToShelf shelfId={shelfId} />
-              <Table striped>
-                <thead>
-                  <th>Email</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </thead>
-                <tbody>
-                  <td>Email@email.com</td>
-                  <td>Pending</td>
-                  <td>
-                    <Button variant="danger">Remove invite</Button>
-                  </td>
-                </tbody>
-              </Table>
+              <InviteUserToShelf shelfId={shelfId} onClose={refreshInvites} />
+              {invites.length ? (
+                <Table striped>
+                  <thead>
+                    <th>Email</th>
+                    <th>Expires In</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody>
+                    {invites.map(({ userEmail, expiresIn}) => (
+                      <tr>
+                        <td>{userEmail}</td>
+                        <td>{new Date(+expiresIn).getHours()} hours</td>
+                        <td>
+                          <Button variant="danger">Remove invite</Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              ) : <div className="mt-2 mb-2"><InfoAlert>You do not have any invites yet</InfoAlert></div>}
             </Tab>
           </Tabs>
         </Modal.Body>

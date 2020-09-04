@@ -1,5 +1,9 @@
 import { Actions } from 'constants/actions';
-import { Shelf, Flower } from './interfaces';
+import { Shelf, Flower, Invite } from './interfaces';
+
+export const SHELF_GET_INVITES = 'SHELF_GET_INVITES';
+export const SHELF_GET_INVITES_SUCCESS = 'SHELF_GET_INVITES_SUCCESS';
+export const SHELF_GET_INVITES_ERROR = 'SHELF_GET_INVITES_ERROR';
 
 export const SHELF_INVITE = 'SHELF_INVITE';
 export const SHELF_INVITE_SUCCESS = 'SHELF_INVITE_SUCCESS';
@@ -59,6 +63,21 @@ export const SHELF_GET_LAST_ACTIONS_SUCCESS = 'SHELF_GET_LAST_ACTIONS_SUCCESS';
 export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
 
 export const SHELF_RESET = 'SHELF_RESET';
+
+export interface ShelfGetInvites {
+  type: typeof SHELF_GET_INVITES;
+  payload: { shelfId: number };
+}
+
+export interface ShelfGetInvitesSuccess {
+  type: typeof SHELF_GET_INVITES_SUCCESS;
+  payload: { invites: Invite[] };
+}
+
+export interface ShelfGetInvitesError {
+  type: typeof SHELF_GET_INVITES_ERROR;
+  payload: { error: string };
+}
 
 export interface ShelfInvite {
   type: typeof SHELF_INVITE;
@@ -290,6 +309,9 @@ export interface ShelfReset {
 }
 
 export type ShelfActionTypes =
+  | ShelfGetInvites
+  | ShelfGetInvitesSuccess
+  | ShelfGetInvitesError
   | ShelfInvite
   | ShelfInviteSuccess
   | ShelfInviteError
