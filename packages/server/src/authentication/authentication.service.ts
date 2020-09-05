@@ -27,9 +27,14 @@ import EmailSendingService from '../services/email-sending.service';
 import DBService from '../db/db.service';
 
 import PasswordUpdateDto from './password-update.dto';
+import MobileRegistrationDto from './mobile-registration.dto';
+import NotificationService from '../services/notification.service';
+import WrongMobileVerificationToken from '../exceptions/wrong-mobile-verification-token.exception';
+import MobileVerificationTokenExpired from '../exceptions/mobile-verification-token-expired.exception';
 
 export default class AuthenticationService {
   private emailSendingService = new EmailSendingService();
+  private notificationService = new NotificationService();
   private dbService = new DBService();
 
   public async register(
@@ -46,6 +51,31 @@ export default class AuthenticationService {
         password: hashedPassword,
       });
       await this.sendActivationMessage(user, host);
+      return;
+    }
+    if (existingUser.socialProfile) {
+      throw new UserWithThatEmailAlreadyRegisteredBySocial({
+        email,
+        googleId: existingUser.socialProfile.googleId,
+        facebookId: existingUser.socialProfile.facebookId,
+      });
+    }
+    throw new UserWithThatEmailAlreadyExists(existingUser.email);
+  }
+
+  public async mobileRegister(
+    mobileRegistrationData: MobileRegistrationDto
+  ): Promise<void> {
+    const { email, token } = mobileRegistrationData;
+    const existingUser = await this.dbService.getUserByEmail(email);
+    if (!existingUser) {
+      const hashedPassword = await createNewPassword(mobileRegistrationData.password);
+      const user = await this.dbService.saveUser({
+        ...mobileRegistrationData,
+        status: UserStatuses.PENDING_VERIFICATION,
+        password: hashedPassword,
+      });
+      await this.sendMobileActivationMessage(user, token);
       return;
     }
     if (existingUser.socialProfile) {
@@ -120,6 +150,27 @@ export default class AuthenticationService {
     return createTokenizedUser(user);
   }
 
+  public async mobileRegistrationConfirm(mobileVerificationToken: string): Promise<UserWithToken> {
+    const mobileVerification = await this.dbService.getMobileVerificationByToken(
+      mobileVerificationToken
+    );
+
+    if (!mobileVerification) {
+      throw new WrongMobileVerificationToken();
+    }
+
+    if (mobileVerification.expiresIn < Date.now()) {
+      throw new MobileVerificationTokenExpired();
+    }
+
+    const user = await this.dbService.getUserById(mobileVerification.userId);
+    user.status = UserStatuses.ACTIVE;
+    await this.dbService.updateUser(user);
+    await this.dbService.removeMobileVerification(mobileVerification);
+
+    return createTokenizedUser(user);
+  }
+
   private validateUser(user: User): void {
     if (!user) {
       throw new WrongCredentials();
@@ -177,6 +228,26 @@ export default class AuthenticationService {
       firstName,
       host,
       emailVerificationToken
+    );
+  }
+
+  private async sendMobileActivationMessage(
+    { id }: User,
+    registrationToken: string
+  ): Promise<void> {
+    const mobileVerificationToken = createRandomString(2);
+    const expiresInHours = createExpiresInHours(
+      Number(process.env.MOBILE_VERIFICATION_EXPIRATION_TIME)
+    );
+    await this.dbService.createMobileVerification({
+      userId: id,
+      mobileVerificationToken,
+      expiresIn: Date.now() + expiresInHours,
+    });
+
+    await this.notificationService.sendMobileActivationMessage(
+      mobileVerificationToken,
+      registrationToken
     );
   }
 }

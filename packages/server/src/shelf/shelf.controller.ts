@@ -7,6 +7,9 @@ import authMiddleware from '../middlewares/auth.middleware';
 import shelfAdminMiddleware from '../middlewares/shelf-admin.middleware';
 import ShelfUserInviteDto from './shelf-user-invite.dto';
 import RequestWithShelfId from '../interfaces/request-with-shelf-id.interface'
+import ShelfGetPendingInvitesDto from './shelf-get-pending-invites.dto';
+import ShelfRevokeInviteDto from './shelf-revoke-invite.dto';
+import { QueryParams } from '../constants/query-params';
 
 export default class ShelfController extends BaseController {
   private shelfService = new ShelfService();
@@ -35,6 +38,12 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       shelfAdminMiddleware,
       this.userDeleteHandler
+    );
+
+    this.router.get(
+      this.serverApi.shelfGetUsers,
+      authMiddleware,
+      this.getUsersHandler
     );
 
     this.router.post(
@@ -105,12 +114,13 @@ export default class ShelfController extends BaseController {
     this.router.post(
       this.serverApi.shelfGetLastActions,
       authMiddleware,
-      this.getLastActionsHanlder
+      this.getLastActionsHandler
     );
 
     this.router.post(
       this.serverApi.shelfPendingInvites,
       authMiddleware,
+      validationMiddleware(ShelfGetPendingInvitesDto),
       shelfAdminMiddleware,
       this.userPendingInvitesHandler
     );
@@ -118,6 +128,7 @@ export default class ShelfController extends BaseController {
     this.router.delete(
       this.serverApi.shelfRevokeInvite,
       authMiddleware,
+      validationMiddleware(ShelfRevokeInviteDto),
       shelfAdminMiddleware,
       this.shelfRevokeInviteHandler
     );
@@ -161,8 +172,23 @@ export default class ShelfController extends BaseController {
   ): Promise<void> => {
     try {
       const { shelfId, userId } = request.body;
-      await this.shelfService.deleteUser(shelfId, userId)
+      await this.shelfService.deleteUser(shelfId, userId);
       response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getUsersHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const users = await this.shelfService.getShelfUsers(
+        Number(request.query[QueryParams.SHELF_ID])
+      );
+      response.send(users);
     } catch (error) {
       next(error);
     }
@@ -304,7 +330,7 @@ export default class ShelfController extends BaseController {
     }
   }
 
-  private getLastActionsHanlder = async (
+  private getLastActionsHandler = async (
     request: Request,
     response: Response,
     next: NextFunction,

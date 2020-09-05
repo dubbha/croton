@@ -2,10 +2,16 @@ interface CreateUserAuthEntityPayload {
   userId: number;
   expiresIn: number;
 }
+
 export interface CreateEmailRelatedPayload extends CreateUserAuthEntityPayload {
   emailVerificationToken?: string;
   emailResetToken?: string;
 }
+
+export interface CreateMobileRelatedPayload extends CreateUserAuthEntityPayload {
+  mobileVerificationToken?: string;
+}
+
 export interface CreatePasswordResetPayload
   extends CreateUserAuthEntityPayload {
   passwordResetToken: string;
