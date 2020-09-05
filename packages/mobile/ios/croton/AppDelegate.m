@@ -12,6 +12,8 @@
 #import <React/RCTRootView.h>
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
+@import UIKit;
+@import Firebase;
 
 @implementation AppDelegate
 
@@ -68,6 +70,8 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
   // Define UNUserNotificationCenter
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
+
+  [FIRApp configure];
   
   return YES;
 }
