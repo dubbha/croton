@@ -14,6 +14,10 @@ export const SHELF_INVITE_ACCEPT = 'SHELF_INVITE_ACCEPT';
 export const SHELF_INVITE_ACCEPT_SUCCESS = 'SHELF_INVITE_ACCEPT_SUCCESS';
 export const SHELF_INVITE_ACCEPT_ERROR = 'SHELF_INVITE_ACCEPT_ERROR';
 
+export const SHELF_INVITE_REVOKE = 'SHELF_INVITE_REVOKE';
+export const SHELF_INVITE_REVOKE_SUCCESS = 'SHELF_INVITE_REVOKE_SUCCESS';
+export const SHELF_INVITE_REVOKE_ERROR = 'SHELF_INVITE_REVOKE_ERROR';
+
 export const SHELF_DELETE_USER = 'SHELF_DELETE_USER';
 export const SHELF_DELETE_USER_SUCCESS = 'SHELF_DELETE_USER_SUCCESS';
 export const SHELF_DELETE_USER_ERROR = 'SHELF_DELETE_USER_ERROR';
@@ -106,6 +110,21 @@ export interface ShelfInviteAcceptSuccess {
 
 export interface ShelfInviteAcceptError {
   type: typeof SHELF_INVITE_ACCEPT_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfInviteRevoke {
+  type: typeof SHELF_INVITE_REVOKE;
+  payload: { shelfId: number, inviteId: number };
+}
+
+export interface ShelfInviteRevokeSuccess {
+  type: typeof SHELF_INVITE_REVOKE_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfInviteRevokeError {
+  type: typeof SHELF_INVITE_REVOKE_ERROR;
   payload: { error: string };
 }
 
@@ -318,6 +337,9 @@ export type ShelfActionTypes =
   | ShelfInviteAccept
   | ShelfInviteAcceptSuccess
   | ShelfInviteAcceptError
+  | ShelfInviteRevoke
+  | ShelfInviteRevokeSuccess
+  | ShelfInviteRevokeError
   | ShelfDeleteUser
   | ShelfDeleteUserSuccess
   | ShelfDeleteUserError

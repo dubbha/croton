@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tabs, Tab } from 'react-bootstrap';
-import {Modal, Button, Alert, InfoAlert} from 'elements';
+import { Modal, Button, InfoAlert, LoadingSpinner, ErrorAlert } from 'elements';
 import { getShelf } from 'store/shelf/selectors';
-import {SHELF_GET_FLOWERS, SHELF_GET_INVITES, SHELF_RESET} from 'store/shelf';
+import { SHELF_GET_INVITES, SHELF_INVITE_REVOKE, SHELF_RESET } from 'store/shelf';
 import { InviteUserToShelf } from '../InviteUserToShelf';
-import {AddFlower} from "../AddFlower";
 
 type Props = {
   shelfId: number;
@@ -14,11 +13,12 @@ type Props = {
 export const UserManagement = ({ shelfId }: Props) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const { invites } = useSelector(getShelf);
+  const { invites, isLoading, info, error } = useSelector(getShelf);
 
-  useEffect(() => {
+  const handleOpen = () => {
     dispatch({ type: SHELF_GET_INVITES, payload: { shelfId } });
-  }, [dispatch, shelfId]);
+    setShowModal(true);
+  };
 
   const refreshInvites = () => dispatch({ type: SHELF_GET_INVITES, payload: { shelfId } });
 
@@ -27,9 +27,22 @@ export const UserManagement = ({ shelfId }: Props) => {
     dispatch({ type: SHELF_RESET });
   };
 
+  const revokeInvite = (id) => {
+    dispatch({ type: SHELF_INVITE_REVOKE, payload: { shelfId, inviteId: id } });
+    refreshInvites();
+  };
+
+  const calculateHours = (expiresIn) => {
+    const dateNow = new Date().getTime();
+    const expireDate = new Date(+expiresIn).getTime();
+    const timeDifference = Math.abs(expireDate - dateNow);
+
+    return (timeDifference / 1000 / 3600).toFixed(0);
+  };
+
   return (
     <>
-      <Button variant="outline-primary" onClick={() => setShowModal(true)}>
+      <Button variant="outline-primary" onClick={() => handleOpen()}>
         Users
       </Button>
       <Modal show={showModal} onHide={handleClose} size="lg" centered>
@@ -39,45 +52,64 @@ export const UserManagement = ({ shelfId }: Props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Tabs defaultActiveKey="users" id="uncontrolled-tab-example">
-            <Tab eventKey="users" title="Users">
-              <Table striped>
-                <thead>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Actions</th>
-                </thead>
-                <tbody>
-                  <td>Name</td>
-                  <td>email@email.com</td>
-                  <td>
-                    <Button variant="danger">Remove</Button>
-                  </td>
-                </tbody>
-              </Table>
-            </Tab>
+          <Tabs defaultActiveKey="invitations" id="uncontrolled-tab-example">
             <Tab eventKey="invitations" title="Invitations">
+              <div className="spinner-container">
+                {isLoading && <LoadingSpinner />}
+              </div>
+              <div className="mt-2 mb-2">
+                {info && <InfoAlert>{info}</InfoAlert>}
+                {error && <ErrorAlert>{error}</ErrorAlert>}
+              </div>
               <InviteUserToShelf shelfId={shelfId} onClose={refreshInvites} />
               {invites.length ? (
                 <Table striped>
                   <thead>
-                    <th>Email</th>
-                    <th>Expires In</th>
-                    <th>Actions</th>
+                    <tr>
+                      <th>Email</th>
+                      <th>Expires In</th>
+                      <th>Actions</th>
+                    </tr>
                   </thead>
                   <tbody>
-                    {invites.map(({ userEmail, expiresIn}) => (
+                    {invites.map(({ id, userEmail, expiresIn }) => (
                       <tr>
                         <td>{userEmail}</td>
-                        <td>{new Date(+expiresIn).getHours()} hours</td>
+                        <td>{calculateHours(expiresIn)} hours</td>
                         <td>
-                          <Button variant="danger">Remove invite</Button>
+                          <Button
+                            disabled={isLoading}
+                            variant="danger"
+                            onClick={() => revokeInvite(id)}
+                          >
+                            Revoke invite
+                          </Button>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </Table>
-              ) : <div className="mt-2 mb-2"><InfoAlert>You do not have any invites yet</InfoAlert></div>}
+              ) : <div className="mt-2 mb-2"><InfoAlert>You do not have any invites yet.</InfoAlert></div>}
+            </Tab>
+            <Tab eventKey="users" title="Users" disabled>
+              <Table striped>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Name</td>
+                    <td>email@email.com</td>
+                    <td>
+                      <Button variant="danger">Remove</Button>
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
             </Tab>
           </Tabs>
         </Modal.Body>

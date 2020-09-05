@@ -1,5 +1,6 @@
-export * from './shelfInviteAccept.saga';
 export * from './shelfInvite.saga';
+export * from './shelfInviteAccept.saga';
+export * from './shelfInviteRevoke.saga';
 export * from './shelfDeleteUser.saga';
 export * from './shelfAddShelf.saga';
 export * from './shelfEditShelf.saga';
