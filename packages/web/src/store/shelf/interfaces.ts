@@ -23,6 +23,12 @@ export type Flower = {
   shelfId: number;
 }
 
+export type Invite = {
+  id: number;
+  userEmail: string;
+  expiresIn: string;
+}
+
 export interface ShelfState {
   isLoading: boolean;
   error: string | null;
@@ -30,4 +36,5 @@ export interface ShelfState {
   shelves: Shelf[];
   flowers: Flower[];
   flower: Flower | null;
+  invites: Invite[];
 }
