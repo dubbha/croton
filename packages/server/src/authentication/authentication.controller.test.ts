@@ -5,7 +5,9 @@ import MockProvidersAuthService from '../providers-auth/providers-auth.service';
 import AuthenticationController from './authentication.controller';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(typeorm as any).getRepository = jest.fn();
+const mockGetRepository = jest.fn();
+
+(typeorm as any).getRepository = mockGetRepository;
 
 const mockApi = {
   handleAuthResult: jest.fn(),
@@ -21,6 +23,11 @@ beforeEach(() => {
     Object.assign(this, mockApi);
     return this;
   });
+  jest.spyOn(typeorm, 'getConnection').mockImplementation((() => {}) as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  jest.spyOn(typeorm, 'EntityManager').mockImplementation(function() {
+    return { getRepository: mockGetRepository };
+  } as any);
 });
 
 describe('AuthenticationController', () => {

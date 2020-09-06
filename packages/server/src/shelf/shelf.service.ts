@@ -30,37 +30,33 @@ export default class ShelfService {
   ): Promise<void> {
     const { SHELF_INVITATION_EXPIRY_TIME } = process.env;
     const shelfInvitationToken = createRandomString(64);
-    const expiresInHours = createExpiresInHours(
-      Number(SHELF_INVITATION_EXPIRY_TIME)
-    );
+    const expiresInHours = createExpiresInHours(Number(SHELF_INVITATION_EXPIRY_TIME));
 
     await this.dbService.saveShelfInvitation({
       userEmail,
       shelfId,
       shelfInvitationToken,
       expiresIn: Date.now() + expiresInHours,
-    });
+    })
 
-    const existingUser = await this.dbService.getUserByEmail(userEmail);
+    const existingUser = await this.dbService.getUserByEmail(userEmail)
     if (existingUser) {
       await this.emailSendingService.sendShelfInvitationMessage(
         userEmail,
         existingUser.firstName,
         host,
-        shelfInvitationToken
+        shelfInvitationToken,
       );
     } else {
       await this.emailSendingService.sendShelfInvitationMessageUnknownUser(
         userEmail,
-        host
+        host,
       );
     }
   }
 
   async acceptInvitation(shelfInvitationToken: string): Promise<void> {
-    const shelfInvitation = await this.dbService.getShelfInvitationByToken(
-      shelfInvitationToken
-    );
+    const shelfInvitation = await this.dbService.getShelfInvitationByToken(shelfInvitationToken);
     if (!shelfInvitation) {
       throw new WrongShelfInvitationToken();
     }
@@ -81,32 +77,17 @@ export default class ShelfService {
 
   async addShelf(
     { name, location, description, pictureUrl = '' }: ShelfAddShelfDto,
-    authToken: string
+    authToken: string,
   ): Promise<void> {
     const { id: userId } = verifyToken(authToken);
-    const shelf = await this.dbService.saveShelf(
-      name,
-      location,
-      description,
-      pictureUrl
-    );
+    const shelf = await this.dbService.saveShelf(name, location, description, pictureUrl);
     await this.dbService.saveUserToShelf(userId, shelf.id, true);
   }
 
-  async editShelf({
-    id,
-    name,
-    location,
-    description,
-    pictureUrl = '',
-  }: ShelfEditShelfDto): Promise<void> {
-    await this.dbService.updateShelf(
-      id,
-      name,
-      location,
-      description,
-      pictureUrl
-    );
+  async editShelf(
+    { id, name, location, description, pictureUrl = '' }: ShelfEditShelfDto,
+  ): Promise<void> {
+    await this.dbService.updateShelf(id, name, location, description, pictureUrl);
   }
 
   async deleteShelf(id: number): Promise<void> {
@@ -119,53 +100,30 @@ export default class ShelfService {
     return this.dbService.getShelvesByUserId(userId);
   }
 
-  async addFlower({
-    shelfId,
-    name,
-    description,
-    order,
-    rrules = {
-      [Actions.WATERING]: '',
-      [Actions.HYDRATION]: '',
-      [Actions.FERTILIZING]: '',
-    },
-    pictureUrls = [],
-  }: ShelfAddFlowerDto): Promise<void> {
-    if (order === undefined) {
-      order = await this.dbService.countFlowersByShelfId(shelfId);
-    }
-    await this.dbService.saveFlower(
+  async addFlower(
+    {
       shelfId,
       name,
       description,
       order,
-      rrules,
-      pictureUrls
-    );
+      rrules = { [Actions.WATERING]: '', [Actions.HYDRATION]: '', [Actions.FERTILIZING]: '' },
+    }: ShelfAddFlowerDto): Promise<void> {
+    if (order === undefined) {
+      order = await this.dbService.countFlowersByShelfId(shelfId);
+    }
+    await this.dbService.saveFlower(shelfId, name, description, order, rrules);
   }
 
-  async editFlower({
-    id,
-    shelfId,
-    name,
-    description,
-    order,
-    rrules = {
-      [Actions.WATERING]: '',
-      [Actions.HYDRATION]: '',
-      [Actions.FERTILIZING]: '',
-    },
-    pictureUrls = [],
-  }: ShelfEditFlowerDto): Promise<void> {
-    await this.dbService.updateFlower(
+  async editFlower(
+    {
       id,
       shelfId,
       name,
       description,
       order,
-      rrules,
-      pictureUrls
-    );
+      rrules = { [Actions.WATERING]: '', [Actions.HYDRATION]: '', [Actions.FERTILIZING]: '' },
+    }: ShelfEditFlowerDto): Promise<void> {
+    await this.dbService.updateFlower(id, shelfId, name, description, order, rrules);
   }
 
   async deleteFlower(id: number): Promise<void> {
@@ -180,16 +138,8 @@ export default class ShelfService {
     await this.dbService.deleteImagesFromFlower(images);
   }
 
-  async moveFlower({
-    currentShelfId,
-    targetShelfId,
-    flowerId,
-  }: ShelfMoveFlowerDto) {
-    return await this.dbService.moveFlower(
-      flowerId,
-      currentShelfId,
-      targetShelfId
-    );
+  async moveFlower({ shelfId, targetShelfId, flowerId }: ShelfMoveFlowerDto) {
+    return await this.dbService.moveFlower(flowerId, shelfId, targetShelfId);
   }
 
   getFlowers(shelfId: number) {
@@ -201,8 +151,8 @@ export default class ShelfService {
   }
 
   async addAction(
-    { action, flowerId }: { action: Actions; flowerId: number },
-    authToken: string
+    { action, flowerId }: { action: Actions, flowerId: number },
+    authToken: string,
   ) {
     const { id: userId } = verifyToken(authToken);
     const timestamp = Math.ceil(Date.now() / 1000);
@@ -211,9 +161,7 @@ export default class ShelfService {
 
   async getLastActions(flowerId: number) {
     const lastActions = await Promise.all(
-      Object.values(Actions).map(action =>
-        this.dbService.getLastAction(flowerId, action)
-      )
+      Object.values(Actions).map(action => this.dbService.getLastAction(flowerId, action))
     );
     return lastActions.filter(Boolean).reduce(
       (acc, cur) => ({
@@ -227,7 +175,7 @@ export default class ShelfService {
           },
         },
       }),
-      {}
+      {},
     );
   }
 

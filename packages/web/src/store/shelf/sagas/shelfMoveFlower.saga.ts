@@ -8,17 +8,17 @@ import {
 } from '../actions';
 
 function* handle(action: ShelfMoveFlower) {
-  const { flowerId, currentShelfId, targetShelfId } = action.payload;
+  const { flowerId, shelfId, targetShelfId } = action.payload;
 
   try {
-    const payload = yield call(http.post, '/shelf/move-flower', {
+    const { data } = yield call(http.post, '/shelf/move-flower', {
       flowerId,
-      currentShelfId,
+      shelfId,
       targetShelfId,
     });
     yield put({
       type: SHELF_MOVE_FLOWER_SUCCESS,
-      payload,
+      payload: data,
     });
   } catch (e) {
     yield put({
@@ -28,6 +28,6 @@ function* handle(action: ShelfMoveFlower) {
   }
 }
 
-export function* shelfAddFlowerSaga() {
+export function* shelfMoveFlowerSaga() {
   yield takeLatest(SHELF_MOVE_FLOWER, handle);
 }

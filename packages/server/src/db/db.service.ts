@@ -311,7 +311,6 @@ export default class DBService {
     description: string,
     order: number,
     rrules: { [key in Actions]: string },
-    pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne({ id: shelfId });
     return this.flowerRepository.save({
@@ -320,7 +319,6 @@ export default class DBService {
       description,
       order,
       rrules,
-      pictureUrls,
     });
   }
 
@@ -333,14 +331,10 @@ export default class DBService {
     rrules: { [key in Actions]: string }
   ) {
     const shelf = await this.shelfRepository.findOne(shelfId);
-    return this.flowerRepository.update(id, {
-      shelf,
-      name,
-      description,
-      order,
-      rrules,
-      pictureUrls,
-    });
+    return this.flowerRepository.update(
+      id,
+      { shelf, name, description, order, rrules },
+    );
   }
 
   deleteFlower(id: number) {
@@ -368,42 +362,48 @@ export default class DBService {
   @Transaction()
   private async moveFlowerInTransaction(
     flowerId: number,
-    currentShelfId: number,
+    shelfId: number,
     targetShelfId: number,
     @TransactionManager() entityManager: EntityManager
   ) {
     const flowerRepInTransaction = entityManager.getRepository(FlowerEntity);
     const shelfRepInTransaction = entityManager.getRepository(ShelfEntity);
-    const movingFlower = await flowerRepInTransaction.findOne(flowerId);
-    const oldShelf = await shelfRepInTransaction.findOne(currentShelfId);
-    const newShelf = await shelfRepInTransaction.findOne(targetShelfId);
-    const updatedFlower = { ...movingFlower, shelfId: targetShelfId };
-    const updatedOldShelf = {
-      ...oldShelf,
-      flowers: oldShelf.flowers.filter(({ id }) => id !== movingFlower.id),
+    const findShelfConfig = {
+      relations: ['flowers'],
     };
-    const updatedNewShelf = {
-      ...newShelf,
-      flowers: [...newShelf.flowers, movingFlower],
+    const findFlowerConfig = {
+      relations: ['shelf'],
+    };
+    const movingFlower = await flowerRepInTransaction.findOne(
+      flowerId,
+      findFlowerConfig
+    );
+    const shelf = await shelfRepInTransaction.findOne(shelfId, findShelfConfig);
+    const targetShelf = await shelfRepInTransaction.findOne(
+      targetShelfId,
+      findShelfConfig
+    );
+    const updatedFlower = { ...movingFlower, shelf: targetShelf };
+    const updatedOldShelf = {
+      ...shelf,
+      flowers: shelf.flowers.filter(({ id }) => id !== movingFlower.id),
+    };
+    const updatedTargetShelf = {
+      ...targetShelf,
+      flowers: [...targetShelf.flowers, movingFlower],
     };
     await flowerRepInTransaction.update(flowerId, updatedFlower);
-    await shelfRepInTransaction.update(currentShelfId, updatedOldShelf);
-    await shelfRepInTransaction.update(targetShelfId, updatedNewShelf);
     return {
       flower: updatedFlower,
-      oldShelf: updatedOldShelf,
-      newShelf: updatedNewShelf,
+      shelf: updatedOldShelf,
+      targetShelf: updatedTargetShelf,
     };
   }
 
-  async moveFlower(
-    flowerId: number,
-    currentShelfId: number,
-    targetShelfId: number
-  ) {
+  async moveFlower(flowerId: number, shelfId: number, targetShelfId: number) {
     return this.moveFlowerInTransaction(
       flowerId,
-      currentShelfId,
+      shelfId,
       targetShelfId,
       this.entityManager
     );

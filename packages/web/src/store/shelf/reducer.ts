@@ -75,7 +75,7 @@ export const initialState: ShelfState = {
 
 export function shelfReducer(
   state = initialState,
-  action: ShelfActionTypes | LocationChangeAction
+  action: ShelfActionTypes | LocationChangeAction,
 ): ShelfState {
   switch (action.type) {
     case SHELF_INVITE:
@@ -142,7 +142,7 @@ export function shelfReducer(
         ...state,
         isLoading: false,
         flower: {
-          ...(state.flower as Flower),
+          ...state.flower as Flower,
           lastActions: action.payload,
         },
       };
@@ -169,24 +169,26 @@ export function shelfReducer(
       };
 
     case SHELF_MOVE_FLOWER_SUCCESS:
-      const { flower, oldShelf, newShelf } = action.payload;
       return {
         ...state,
         isLoading: false,
-        flower: state.flower && flower,
+        flower: state.flower && action.payload.flower,
         flowers: state.flowers.map((savedFlower) =>
-          savedFlower.id === flower.id ? flower : savedFlower
-        ),
+          savedFlower.id === action.payload.flower.id
+            ? action.payload.flower
+            : savedFlower),
         shelves: state.shelves.map((savedShelf) => {
-          switch (savedShelf.id) {
-            case oldShelf.id:
-              return oldShelf;
-            case newShelf.id:
-              return newShelf;
-            default:
-              return savedShelf;
+          if (savedShelf.id === action.payload.shelf.id) {
+            return action.payload.shelf;
           }
+          if (savedShelf.id === action.payload.targetShelf.id) {
+            return action.payload.targetShelf;
+          }
+          return savedShelf;
         }),
+        info: `Your flower has been succesfully moved to the shelf ${
+          action.payload.targetShelf.name
+        }`,
       };
     case SHELF_INVITE_ERROR:
     case SHELF_INVITE_ACCEPT_ERROR:

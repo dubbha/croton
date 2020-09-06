@@ -94,7 +94,7 @@ export const Flower = () => {
           onClose={handleClose}
         />
         <Confirm text="Delete Flower" onConfirm={deleteFlower} />
-        <MoveFlower flowerId={flowerId} flowerName={flower?.name} currentShelfId={flower?.shelfId}/>
+        <MoveFlower flowerId={flowerId} flowerName={flower?.name} shelfId={flower?.shelfId} />
       </div>
       <ListGroup className="flower-actions">
         {Object.values(Actions).map(action => (

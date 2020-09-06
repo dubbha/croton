@@ -36,6 +36,11 @@ const mockDone = jest.fn();
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (passport as any).use = mockPassportUse;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+jest.spyOn(typeorm, 'getConnection').mockImplementation((() => {}) as any);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+jest.spyOn(typeorm, 'EntityManager').mockImplementation(function() {
+  return { getRepository: mockGetRepository };
+} as any);
 jest
   .spyOn(passport, 'authenticate')
   .mockImplementation(() => mockPassportAuthenticate);
