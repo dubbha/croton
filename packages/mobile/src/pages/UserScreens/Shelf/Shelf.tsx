@@ -14,7 +14,7 @@ import {
 import { FlowerFormConfig } from '../../../components/FlowerForms';
 import { CustomButton } from '../../../components/Button';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { SHELF_FLOWER_GET } from '../../../store/shelves/actions';
+import { SHELF_FLOWERS_GET } from '../../../store/shelves/actions';
 import { Flower } from '../../../components/Flower';
 
 export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
@@ -110,7 +110,7 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
 
   useEffect(() => {
     dispatch({
-      type: SHELF_FLOWER_GET,
+      type: SHELF_FLOWERS_GET,
       payload: { shelfId },
     });
   }, [dispatch, shelfId]);

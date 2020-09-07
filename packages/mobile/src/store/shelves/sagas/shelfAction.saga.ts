@@ -4,26 +4,23 @@ import {
   INFORMATION_NOTIFY,
   INFORMATION_LOADER,
 } from '../../information/actions';
-import {
-  SHELF_FLOWER_GET,
-  SHELF_FLOWER_GET_SUCCESS,
-  ShelfFlowerGet,
-} from '../actions';
+import { SHELF_ACTION } from '../actions';
 import { httpSender } from '../../../services/http/http.service';
 
-function* handle(action: ShelfFlowerGet) {
+function* handle({ payload }: any) {
   try {
-    const { id } = action.payload;
+    const { action, flowerId, shelfId } = payload;
     yield put({ type: INFORMATION_LOADER });
 
-    const flower = yield call(httpSender.send, {
-      router: '/api/shelf/get-flower',
-      body: { id },
+    yield call(httpSender.send, {
+      router: '/api/shelf/action',
+      body: { action, flowerId, shelfId },
     });
-
     yield put({
-      type: SHELF_FLOWER_GET_SUCCESS,
-      payload: { flower },
+      type: INFORMATION_NOTIFY,
+      payload: {
+        info: 'Action success',
+      },
     });
   } catch (e) {
     console.error(e);
@@ -36,6 +33,6 @@ function* handle(action: ShelfFlowerGet) {
   }
 }
 
-export function* shelfFlowerGetSaga() {
-  yield takeLatest(SHELF_FLOWER_GET, handle);
+export function* shelfActionSaga() {
+  yield takeLatest(SHELF_ACTION, handle);
 }

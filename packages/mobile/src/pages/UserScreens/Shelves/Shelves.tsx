@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   Modal,
-  Text,
   TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,21 +17,17 @@ import { ShelfFormConfig } from '../../../components/ShelfForms';
 import { CustomButton } from '../../../components/Button';
 
 const renderShelves = (shelves: ShelfInterface[], navigation: any) => {
-  let shelvesList;
-  if (!shelves.length) {
-    shelvesList = <Text>Shelves are empty</Text>;
-  } else {
-    shelvesList = shelves.map(shelf => {
-      return (
-        <TouchableOpacity
-          onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
-          style={styles.shelves__item}
-          key={shelf.id}>
-          <Shelf {...shelf} />
-        </TouchableOpacity>
-      );
-    });
-  }
+  let shelvesList = shelves.map(shelf => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
+        style={styles.shelves__item}
+        key={shelf.id}>
+        <Shelf {...shelf} />
+      </TouchableOpacity>
+    );
+  });
+
   return <ScrollView style={styles.shelves__list}>{shelvesList}</ScrollView>;
 };
 

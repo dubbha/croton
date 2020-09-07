@@ -10,10 +10,12 @@ import {
   shelvesShelfEditSaga,
   shelvesShelfDeleteSaga,
   shelvesShelfInviteSaga,
+  shelfFlowersGetSaga,
   shelfFlowerGetSaga,
   shelfFlowerAddSaga,
   shelfFlowerEditSaga,
   shelfFlowerDeleteSaga,
+  shelfActionSaga,
 } from './shelves/sagas';
 
 import { all } from 'redux-saga/effects';
@@ -28,9 +30,11 @@ export function* rootSaga() {
     shelvesShelfEditSaga(),
     shelvesShelfDeleteSaga(),
     shelvesShelfInviteSaga(),
+    shelfFlowersGetSaga(),
     shelfFlowerGetSaga(),
     shelfFlowerAddSaga(),
     shelfFlowerEditSaga(),
     shelfFlowerDeleteSaga(),
+    shelfActionSaga(),
   ]);
 }
