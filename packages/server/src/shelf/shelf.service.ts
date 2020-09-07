@@ -15,6 +15,7 @@ import { Actions } from '../constants/actions';
 
 import WrongShelfInvitationToken from '../exceptions/wrong-shelf-invitation-token.exception';
 import ShelfInvitation from '../models/shelf-invitation.entity';
+import UserToShelf from '../models/user-to-shelf.entity';
 
 export default class ShelfService {
   private emailSendingService = new EmailSendingService();
@@ -65,6 +66,10 @@ export default class ShelfService {
 
   async deleteUser(shelfId: number, userId: number): Promise<void> {
     await this.dbService.deleteUserToShelf(userId, shelfId);
+  }
+
+  async getShelfUsers(shelfId: number): Promise<UserToShelf[]> {
+    return await this.dbService.getUsersToShelf(shelfId);
   }
 
   async addShelf(

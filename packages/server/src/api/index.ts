@@ -8,7 +8,9 @@ const authLogin = `${auth}/login`;
 const authLoginFacebook = `${auth}/facebook`;
 const authLoginGoogle = `${auth}/google`;
 const authRegister = `${auth}/register`;
+const authMobileRegister = `${auth}/mobile-register`;
 const authConfirm = `${auth}/confirm`;
+const authMobileConfirm = `${auth}/mobile-confirm`;
 const authPasswordReset = `${auth}/password-reset`;
 const authPasswordUpdate = `${auth}/password-update`;
 const userManagementEmailReset = `${management}/email-reset`;
@@ -23,6 +25,7 @@ const shelfPendingInvites = `${shelf}/pending-invites`;
 const shelfRevokeInvite = `${shelf}/revoke-invite`;
 const shelfUserInviteAccept = `${shelf}/user-invite-accept`;
 const shelfUserDelete = `${shelf}/user-delete`;
+const shelfGetUsers = `${shelf}/get-users`;
 const shelfAddShelf = `${shelf}/add-shelf`;
 const shelfEditShelf = `${shelf}/edit-shelf`;
 const shelfDeleteShelf = `${shelf}/delete-shelf`;
@@ -43,9 +46,11 @@ export const api = {
   auth,
   authLogin,
   authRegister,
+  authMobileRegister,
   authLoginFacebook,
   authLoginGoogle,
   authConfirm,
+  authMobileConfirm,
   authPasswordReset,
   authPasswordUpdate,
   userManagementEmailReset,
@@ -60,6 +65,7 @@ export const api = {
   shelfRevokeInvite,
   shelfUserInviteAccept,
   shelfUserDelete,
+  shelfGetUsers,
   shelfAddShelf,
   shelfEditShelf,
   shelfDeleteShelf,

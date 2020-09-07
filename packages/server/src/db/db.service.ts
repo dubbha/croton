@@ -21,15 +21,17 @@ import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfa
 import UserWithToken from '../interfaces/tokenized.user.interface';
 
 import {
-  CreateEmailRelatedPayload,
+  CreateEmailRelatedPayload, CreateMobileRelatedPayload,
   CreatePasswordResetPayload,
   ShelfInvitationPayload,
 } from './interfaces';
 import NotificationToken from '../models/notification-token.entity';
+import MobileVerificationEntity from '../models/mobile-verification.entity';
 
 export default class DBService {
   private userRepository: Repository<UserEntity>;
   private emailVerificationRepository: Repository<EmailVerificationEntity>;
+  private mobileVerificationRepository: Repository<MobileVerificationEntity>;
   private passwordResetRepository: Repository<PasswordResetEntity>;
   private socialProfileRepository: Repository<SocialProfileEntity>;
   private emailResetRepository: Repository<EmailResetEntity>;
@@ -45,6 +47,7 @@ export default class DBService {
     this.userRepository = getRepository(UserEntity);
     this.emailResetRepository = getRepository(EmailResetEntity);
     this.emailVerificationRepository = getRepository(EmailVerificationEntity);
+    this.mobileVerificationRepository = getRepository(MobileVerificationEntity);
     this.passwordResetRepository = getRepository(PasswordResetEntity);
     this.socialProfileRepository = getRepository(SocialProfileEntity);
     this.shelfRepository = getRepository(ShelfEntity);
@@ -125,12 +128,24 @@ export default class DBService {
     return this.emailVerificationRepository.findOne({ emailVerificationToken });
   }
 
+  public getMobileVerificationByToken(mobileVerificationToken: string) {
+    return this.mobileVerificationRepository.findOne({ mobileVerificationToken });
+  }
+
   public removeEmailVerification(emailVerification: EmailVerificationEntity) {
     return this.emailVerificationRepository.delete(emailVerification.id);
   }
 
+  public removeMobileVerification(mobileVerification: MobileVerificationEntity) {
+    return this.mobileVerificationRepository.delete(mobileVerification.id);
+  }
+
   public createEmailVerification(config: CreateEmailRelatedPayload) {
     return this.emailVerificationRepository.save(config);
+  }
+
+  public createMobileVerification(config: CreateMobileRelatedPayload) {
+    return this.mobileVerificationRepository.save(config);
   }
 
   public getPasswordResetByToken(passwordResetToken: string) {
@@ -208,6 +223,11 @@ export default class DBService {
     const shelf = await this.shelfRepository.findOne(shelfId);
 
     return this.userToShelfRepository.delete({ user, shelf });
+  }
+
+  async getUsersToShelf(shelfId: number) {
+    const shelf = await this.shelfRepository.findOne(shelfId);
+    return this.userToShelfRepository.find({ where: { shelf }, relations: ['user'] });
   }
 
   getShelfById(id: number) {
