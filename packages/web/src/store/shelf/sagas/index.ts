@@ -1,5 +1,6 @@
-export * from './shelfInviteAccept.saga';
 export * from './shelfInvite.saga';
+export * from './shelfInviteAccept.saga';
+export * from './shelfInviteRevoke.saga';
 export * from './shelfDeleteUser.saga';
 export * from './shelfAddShelf.saga';
 export * from './shelfEditShelf.saga';
@@ -12,3 +13,4 @@ export * from './shelfGetFlowers.saga';
 export * from './shelfGetFlower.saga';
 export * from './shelfAction.saga';
 export * from './shelfGetLastActions.saga';
+export * from './shelfGetInvites.saga';

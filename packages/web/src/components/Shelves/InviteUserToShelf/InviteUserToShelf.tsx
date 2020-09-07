@@ -8,9 +8,10 @@ import './styles.scss';
 
 type Props = {
   shelfId: number;
+  onClose?: () => void;
 }
 
-export const InviteUserToShelf = ({ shelfId }: Props) => {
+export const InviteUserToShelf = ({ shelfId, onClose = () => {} }: Props) => {
   const [showModal, setShowModal] = useState(false);
   const [userEmail, setUserEmail] = useState('');
 
@@ -28,6 +29,7 @@ export const InviteUserToShelf = ({ shelfId }: Props) => {
   const handleClose = () => {
     setShowModal(false);
     dispatch({ type: SHELF_RESET });
+    onClose();
   };
 
   return (

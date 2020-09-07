@@ -23,7 +23,7 @@ export const ShelfInvitationAccept = () => {
   return (
     <Container>
       <Header />
-      {isLoading && <InfoAlert>Acceting the invitation</InfoAlert>}
+      {isLoading && <InfoAlert>Accepting the invitation</InfoAlert>}
       {info && <InfoAlert>{info}</InfoAlert>}
       {error && <ErrorAlert>{error}</ErrorAlert>}
       {!error && !info && !isLoading && <AlertPlaceholder />}

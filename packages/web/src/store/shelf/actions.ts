@@ -1,5 +1,9 @@
 import { Actions } from 'constants/actions';
-import { Shelf, Flower } from './interfaces';
+import { Shelf, Flower, Invite } from './interfaces';
+
+export const SHELF_GET_INVITES = 'SHELF_GET_INVITES';
+export const SHELF_GET_INVITES_SUCCESS = 'SHELF_GET_INVITES_SUCCESS';
+export const SHELF_GET_INVITES_ERROR = 'SHELF_GET_INVITES_ERROR';
 
 export const SHELF_INVITE = 'SHELF_INVITE';
 export const SHELF_INVITE_SUCCESS = 'SHELF_INVITE_SUCCESS';
@@ -9,6 +13,10 @@ export const SHELF_INVITE_RESET = 'SHELF_INVITE_RESET';
 export const SHELF_INVITE_ACCEPT = 'SHELF_INVITE_ACCEPT';
 export const SHELF_INVITE_ACCEPT_SUCCESS = 'SHELF_INVITE_ACCEPT_SUCCESS';
 export const SHELF_INVITE_ACCEPT_ERROR = 'SHELF_INVITE_ACCEPT_ERROR';
+
+export const SHELF_INVITE_REVOKE = 'SHELF_INVITE_REVOKE';
+export const SHELF_INVITE_REVOKE_SUCCESS = 'SHELF_INVITE_REVOKE_SUCCESS';
+export const SHELF_INVITE_REVOKE_ERROR = 'SHELF_INVITE_REVOKE_ERROR';
 
 export const SHELF_DELETE_USER = 'SHELF_DELETE_USER';
 export const SHELF_DELETE_USER_SUCCESS = 'SHELF_DELETE_USER_SUCCESS';
@@ -60,6 +68,21 @@ export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
 
 export const SHELF_RESET = 'SHELF_RESET';
 
+export interface ShelfGetInvites {
+  type: typeof SHELF_GET_INVITES;
+  payload: { shelfId: number };
+}
+
+export interface ShelfGetInvitesSuccess {
+  type: typeof SHELF_GET_INVITES_SUCCESS;
+  payload: { invites: Invite[] };
+}
+
+export interface ShelfGetInvitesError {
+  type: typeof SHELF_GET_INVITES_ERROR;
+  payload: { error: string };
+}
+
 export interface ShelfInvite {
   type: typeof SHELF_INVITE;
   payload: { userEmail: string; shelfId: number };
@@ -87,6 +110,21 @@ export interface ShelfInviteAcceptSuccess {
 
 export interface ShelfInviteAcceptError {
   type: typeof SHELF_INVITE_ACCEPT_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfInviteRevoke {
+  type: typeof SHELF_INVITE_REVOKE;
+  payload: { shelfId: number, inviteId: number };
+}
+
+export interface ShelfInviteRevokeSuccess {
+  type: typeof SHELF_INVITE_REVOKE_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfInviteRevokeError {
+  type: typeof SHELF_INVITE_REVOKE_ERROR;
   payload: { error: string };
 }
 
@@ -290,12 +328,18 @@ export interface ShelfReset {
 }
 
 export type ShelfActionTypes =
+  | ShelfGetInvites
+  | ShelfGetInvitesSuccess
+  | ShelfGetInvitesError
   | ShelfInvite
   | ShelfInviteSuccess
   | ShelfInviteError
   | ShelfInviteAccept
   | ShelfInviteAcceptSuccess
   | ShelfInviteAcceptError
+  | ShelfInviteRevoke
+  | ShelfInviteRevokeSuccess
+  | ShelfInviteRevokeError
   | ShelfDeleteUser
   | ShelfDeleteUserSuccess
   | ShelfDeleteUserError
