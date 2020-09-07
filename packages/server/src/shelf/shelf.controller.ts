@@ -10,6 +10,9 @@ import RequestWithShelfId from '../interfaces/request-with-shelf-id.interface'
 import ShelfGetPendingInvitesDto from './shelf-get-pending-invites.dto';
 import ShelfRevokeInviteDto from './shelf-revoke-invite.dto';
 import { QueryParams } from '../constants/query-params';
+import ShelfAddImageDto from './shelf-add-image.dto';
+import shelfUserMiddleware from '../middlewares/shelf-user.middleware';
+import ShelfDeleteImageDto from './shelf-delete-image.dto';
 
 export default class ShelfController extends BaseController {
   private shelfService = new ShelfService();
@@ -84,6 +87,22 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       shelfAdminMiddleware,
       this.editFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfFlowerAddImages,
+      authMiddleware,
+      shelfUserMiddleware,
+      validationMiddleware(ShelfAddImageDto),
+      this.addImagesToFlowerHandler
+    );
+
+    this.router.delete(
+      this.serverApi.shelfFlowerDeleteImages,
+      authMiddleware,
+      shelfUserMiddleware,
+      validationMiddleware(ShelfDeleteImageDto),
+      this.deleteImagesFromFlowerHandler
     );
 
     this.router.post(
@@ -275,6 +294,32 @@ export default class ShelfController extends BaseController {
   ): Promise<void> => {
     try {
       await this.shelfService.editFlower(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private addImagesToFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.addImagesToFlower(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private deleteImagesFromFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.deleteImagesFromFlower(request.body);
       response.status(204).send();
     } catch (error) {
       next(error);

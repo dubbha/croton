@@ -7,6 +7,7 @@ import SocialProfileEntity from '../models/social-profile.entity';
 import EmailResetEntity from '../models/email-reset.entity';
 import ShelfEntity from '../models/shelf.entity';
 import FlowerEntity from '../models/flower.entity';
+import ImageEntity from '../models/image.entity';
 import ShelfInvitationEntity from '../models/shelf-invitation.entity';
 import UserToShelfEntity from '../models/user-to-shelf.entity';
 import ActionEntity from '../models/action.entity';
@@ -37,6 +38,7 @@ export default class DBService {
   private emailResetRepository: Repository<EmailResetEntity>;
   private shelfRepository: Repository<ShelfEntity>;
   private flowerRepository: Repository<FlowerEntity>;
+  private imageRepository: Repository<ImageEntity>;
   private shelfInvitationRepository: Repository<ShelfInvitationEntity>;
   private userToShelfRepository: Repository<UserToShelfEntity>;
   private actionRepository: Repository<ActionEntity>;
@@ -52,6 +54,7 @@ export default class DBService {
     this.socialProfileRepository = getRepository(SocialProfileEntity);
     this.shelfRepository = getRepository(ShelfEntity);
     this.flowerRepository = getRepository(FlowerEntity);
+    this.imageRepository = getRepository(ImageEntity);
     this.shelfInvitationRepository = getRepository(ShelfInvitationEntity);
     this.userToShelfRepository = getRepository(UserToShelfEntity);
     this.actionRepository = getRepository(ActionEntity);
@@ -280,7 +283,7 @@ export default class DBService {
   }
 
   getFlowerById(id: number) {
-    return this.flowerRepository.findOne(id, { relations: ['shelf'] });
+    return this.flowerRepository.findOne(id, { relations: ['shelf', 'images'] });
   }
 
   async getFlowersByShelfId(shelfId: number) {
@@ -318,18 +321,35 @@ export default class DBService {
     name: string,
     description: string,
     order: number,
-    rrules: { [key in Actions]: string },
-    pictureUrls: string[]
+    rrules: { [key in Actions]: string }
   ) {
     const shelf = await this.shelfRepository.findOne(shelfId);
     return this.flowerRepository.update(
       id,
-      { shelf, name, description, order, rrules, pictureUrls },
+      { shelf, name, description, order, rrules },
     );
   }
 
   deleteFlower(id: number) {
     return this.flowerRepository.delete(id);
+  }
+
+  async addImagesToFlower(flowerId: number, images: string[]) {
+    const flower = await this.getFlowerById(flowerId);
+    await Promise.all(images.map(async (image) => {
+      return await this.imageRepository.save({
+        image,
+        flower
+      });
+    }));
+  }
+
+  async deleteImagesFromFlower(images: number[]) {
+    await Promise.all(images.map(async (id) => {
+      await this.imageRepository.delete({
+        id
+      });
+    }));
   }
 
   async getUsersByFlowerId(id: number) {

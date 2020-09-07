@@ -16,6 +16,8 @@ import { Actions } from '../constants/actions';
 import WrongShelfInvitationToken from '../exceptions/wrong-shelf-invitation-token.exception';
 import ShelfInvitation from '../models/shelf-invitation.entity';
 import UserToShelf from '../models/user-to-shelf.entity';
+import ShelfAddImageDto from './shelf-add-image.dto';
+import ShelfDeleteImageDto from './shelf-delete-image.dto';
 
 export default class ShelfService {
   private emailSendingService = new EmailSendingService();
@@ -121,14 +123,21 @@ export default class ShelfService {
       description,
       order,
       rrules = { [Actions.WATERING]: '', [Actions.HYDRATION]: '', [Actions.FERTILIZING]: '' },
-      pictureUrls = [],
     }: ShelfEditFlowerDto,
   ): Promise<void> {
-    await this.dbService.updateFlower(id, shelfId, name, description, order, rrules, pictureUrls);
+    await this.dbService.updateFlower(id, shelfId, name, description, order, rrules);
   }
 
   async deleteFlower(id: number): Promise<void> {
     await this.dbService.deleteFlower(id);
+  }
+
+  async addImagesToFlower({ flowerId, images }: ShelfAddImageDto): Promise<void> {
+    await this.dbService.addImagesToFlower(flowerId, images);
+  }
+
+  async deleteImagesFromFlower({ images }: ShelfDeleteImageDto): Promise<void> {
+    await this.dbService.deleteImagesFromFlower(images);
   }
 
   getFlowers(shelfId: number) {
