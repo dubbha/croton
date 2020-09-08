@@ -3,7 +3,6 @@ import { api } from './../../config/environment';
 type httpCongis = {
   router: string;
   body: object;
-  token: string;
 };
 
 class HttpSender {
@@ -26,7 +25,6 @@ class HttpSender {
         headers.authorization = this.token;
       }
 
-      console.log(address);
       const resp = await fetch(address, {
         method: 'POST',
         headers,
