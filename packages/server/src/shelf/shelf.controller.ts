@@ -150,7 +150,7 @@ export default class ShelfController extends BaseController {
       this.userPendingInvitesHandler
     );
 
-    this.router.delete(
+    this.router.post(
       this.serverApi.shelfRevokeInvite,
       authMiddleware,
       validationMiddleware(ShelfRevokeInviteDto),

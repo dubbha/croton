@@ -15,3 +15,4 @@ export * from './shelfAction.saga';
 export * from './shelfGetLastActions.saga';
 export * from './shelfGetInvites.saga';
 export * from './shelfGetActions.saga';
+export * from './shelfGetUsers.saga';

@@ -32,6 +32,7 @@ import {
   shelfActionSaga,
   shelfGetLastActionsSaga,
   shelfGetActionsSaga,
+  shelfGetUsersSaga,
 } from './shelf/sagas';
 import { notificationRegisterSaga } from './notification/sagas';
 
@@ -68,5 +69,6 @@ export function* rootSaga() {
     shelfGetLastActionsSaga(),
     shelfGetActionsSaga(),
     notificationRegisterSaga(),
+    shelfGetUsersSaga(),
   ]);
 }

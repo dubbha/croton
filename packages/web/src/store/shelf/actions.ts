@@ -1,5 +1,5 @@
 import { Actions } from 'constants/actions';
-import { Shelf, Flower, FlowerLastActions, FlowerAction, Invite } from './interfaces';
+import { Shelf, Flower, FlowerLastActions, FlowerAction, Invite, User } from './interfaces';
 
 export const SHELF_GET_INVITES = 'SHELF_GET_INVITES';
 export const SHELF_GET_INVITES_SUCCESS = 'SHELF_GET_INVITES_SUCCESS';
@@ -69,6 +69,10 @@ export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
 export const SHELF_GET_ACTIONS = 'SHELF_GET_ACTIONS';
 export const SHELF_GET_ACTIONS_SUCCESS = 'SHELF_GET_ACTIONS_SUCCESS';
 export const SHELF_GET_ACTIONS_ERROR = 'SHELF_GET_ACTIONS_ERROR';
+
+export const SHELF_GET_USERS = 'SHELF_GET_USERS';
+export const SHELF_GET_USERS_SUCCESS = 'SHELF_GET_USERS_SUCCESS';
+export const SHELF_GET_USERS_ERROR = 'SHELF_GET_USERS_ERROR';
 
 export const SHELF_RESET = 'SHELF_RESET';
 
@@ -337,6 +341,21 @@ export interface ShelfGetActionsError {
   payload: { error: string };
 }
 
+export interface ShelfGetUsers {
+  type: typeof SHELF_GET_USERS;
+  payload: { shelfId: number };
+}
+
+export interface ShelfGetUsersSuccess {
+  type: typeof SHELF_GET_USERS_SUCCESS;
+  payload: { users: User[] };
+}
+
+export interface ShelfGetUsersError {
+  type: typeof SHELF_GET_USERS_ERROR;
+  payload: { error: string };
+}
+
 export interface ShelfReset {
   type: typeof SHELF_RESET;
 }
@@ -393,4 +412,7 @@ export type ShelfActionTypes =
   | ShelfGetActions
   | ShelfGetActionsSuccess
   | ShelfGetActionsError
+  | ShelfGetUsers
+  | ShelfGetUsersSuccess
+  | ShelfGetUsersError
   | ShelfReset;
