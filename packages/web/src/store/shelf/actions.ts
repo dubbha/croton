@@ -62,6 +62,10 @@ export const SHELF_MOVE_FLOWER = 'SHELF_MOVE_FLOWER';
 export const SHELF_MOVE_FLOWER_SUCCESS = 'SHELF_MOVE_FLOWER_SUCCESS';
 export const SHELF_MOVE_FLOWER_ERROR = 'SHELF_MOVE_FLOWER_ERROR';
 
+export const SHELF_ADD_FLOWER_IMAGES = 'SHELF_ADD_FLOWER_IMAGES';
+export const SHELF_ADD_FLOWER_IMAGES_SUCCESS = 'SHELF_ADD_FLOWER_IMAGES_SUCCESS';
+export const SHELF_ADD_FLOWER_IMAGES_ERROR = 'SHELF_ADD_FLOWER_IMAGES_ERROR';
+
 export const SHELF_ACTION = 'SHELF_ACTION';
 export const SHELF_ACTION_SUCCESS = 'SHELF_ACTION_SUCCESS';
 export const SHELF_ACTION_ERROR = 'SHELF_ACTION_ERROR';
@@ -315,6 +319,21 @@ export interface ShelfMoveFlowerError {
   payload: { error: string };
 }
 
+export interface ShelfAddFlowerImages {
+  type: typeof SHELF_ADD_FLOWER_IMAGES,
+  payload: { flowerId: number, images: string[] };
+}
+
+export interface ShelfAddFlowerImagesSuccess {
+  type: typeof SHELF_ADD_FLOWER_IMAGES_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfAddFlowerImagesError {
+  type: typeof SHELF_ADD_FLOWER_IMAGES_ERROR;
+  payload: { error: string };
+}
+
 export interface ShelfAction {
   type: typeof SHELF_ACTION;
   payload: { action: Actions, flowerId: number, shelfId: number };
@@ -425,6 +444,9 @@ export type ShelfActionTypes =
   | ShelfMoveFlower
   | ShelfMoveFlowerSuccess
   | ShelfMoveFlowerError
+  | ShelfAddFlowerImages
+  | ShelfAddFlowerImagesSuccess
+  | ShelfAddFlowerImagesError
   | ShelfAction
   | ShelfActionSuccess
   | ShelfActionError

@@ -11,6 +11,7 @@ import {
   faMapMarkerAlt,
   faCheck,
   faTimes,
+  faFileImage,
 } from '@fortawesome/free-solid-svg-icons';
 
 const wrap = (icon: IconProp) => (props: Partial<FontAwesomeIconProps>) =>
@@ -25,3 +26,4 @@ export const FireAltIcon = wrap(faFireAlt);
 export const MapMarkerIcon = wrap(faMapMarkerAlt);
 export const CheckIcon = wrap(faCheck);
 export const TimesIcon = wrap(faTimes);
+export const FileImageIcon = wrap(faFileImage);
