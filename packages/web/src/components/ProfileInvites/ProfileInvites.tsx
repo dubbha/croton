@@ -31,7 +31,7 @@ export const ProfileInvites = () => {
 
   return (
     <>
-      <div className="profile-link" onClick={() => handleOpen()}>Invites</div>
+      <Button variant="outline-primary" className="profile-link" onClick={() => handleOpen()}>Invites</Button>
       <Modal show={showModal} onHide={handleClose} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>
