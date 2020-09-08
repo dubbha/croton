@@ -15,7 +15,10 @@ export default StyleSheet.create({
     height: COMPONENTS_STYLE.buttonHeight,
     borderRadius: 5,
     backgroundColor: COLORS.lightMain,
-    color: COLORS.green,
+  },
+
+  button__body__solid: {
+    backgroundColor: COLORS.green,
   },
 
   button__body__outline: {
@@ -30,6 +33,10 @@ export default StyleSheet.create({
     color: COLORS.green,
     fontSize: 12,
     fontWeight: '500',
+  },
+
+  button__text__solid: {
+    color: COLORS.lightMain,
   },
 
   button__text__outline: {

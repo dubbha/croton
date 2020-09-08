@@ -1,10 +1,20 @@
 import React, { FC, useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { RRule } from 'rrule';
+
+import {
+  SafeAreaView,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import styles from './styles';
 import {
-  SHELF_FLOWER_GET,
+  SHELF_FLOWERS_GET,
   SHELF_FLOWER_ADD,
   SHELF_FLOWER_EDIT,
 } from '../../store/shelves/actions';
@@ -18,6 +28,9 @@ import { ShelfFormHeader } from './FlowerFormHeader';
 import { CustomInput } from '../Input';
 import { CustomButton } from '../Button';
 import { NotifyMessage } from '../NotifyMessage';
+import { Accordion } from '../Accordion';
+import { daysName, rrulesDefaultValue, timingTypes } from './helpers';
+import { CareForm } from '../CareForms';
 
 interface FlowerFormConfigProps {
   closeFunc: (name?: string) => void;
@@ -29,8 +42,6 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
   shelfId,
   closeFunc,
 }) => {
-  // TODO: remove this mockup
-  const FakeRrules = '{"watering":"","hydration":"","fertilizing":""}';
   const dispatch = useDispatch();
   // TODO: this object we should import from input component
   const validationStatusDefaultValue = {
@@ -51,9 +62,138 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
     setValidationStatusFlowerDescription,
   ] = useState<ValidationResult>(validationStatusDefaultValue);
 
+  // TODO: Move this functionality for separate class
+  const getRruleType = (rrule: any) => {
+    const { freq } = rrule;
+    if (!freq) {
+      return null;
+    }
+    let type;
+    switch (freq) {
+      case 2: {
+        type = timingTypes.weekly;
+        break;
+      }
+      case 3: {
+        type = timingTypes.daily;
+        break;
+      }
+      case 4: {
+        type = timingTypes.hourly;
+        break;
+      }
+      default: {
+        type = null;
+      }
+    }
+    return type;
+  };
+
+  const getRruleInterval = (rrule: any) => {
+    return rrule.interval;
+  };
+
+  const getRruleDay = (day: any) => {
+    const index = day.weekday;
+    let dayName;
+
+    switch (index) {
+      case 0: {
+        dayName = daysName.sun;
+        break;
+      }
+      case 1: {
+        dayName = daysName.mon;
+        break;
+      }
+      case 2: {
+        dayName = daysName.tue;
+        break;
+      }
+      case 3: {
+        dayName = daysName.wed;
+        break;
+      }
+      case 4: {
+        dayName = daysName.thu;
+        break;
+      }
+      case 5: {
+        dayName = daysName.fri;
+        break;
+      }
+      case 6: {
+        dayName = daysName.sat;
+        break;
+      }
+    }
+    return dayName;
+  };
+
+  const getRruleDays = (rrule: any) => {
+    const days: (string | undefined)[] = [];
+    if (rrule.byweekday) {
+      rrule.byweekday.forEach((day: any) => {
+        days.push(getRruleDay(day));
+      });
+    }
+    return days.length ? days : [];
+  };
+
+  // parse current rrule
+  // set rrule
+  const getRruleObj = (configs: any) => {
+    if (!configs) {
+      return '';
+    }
+    const rrule = RRule.parseString(configs);
+    const type = getRruleType(rrule);
+    const interval = getRruleInterval(rrule);
+    const byweekday = getRruleDays(rrule);
+
+    return {
+      type,
+      interval,
+      byweekday,
+    };
+  };
+  const currentRrules = flower.rrules;
+  let currentWateringRules;
+  let currentFertilizingRules;
+  let currentHydrationRules;
+  if (currentRrules) {
+    currentWateringRules = getRruleObj(currentRrules.watering);
+    currentFertilizingRules = getRruleObj(currentRrules.fertilizing);
+    currentHydrationRules = getRruleObj(currentRrules.hydration);
+  }
+  const [wateringRules, setWateringRules] = useState<any>(
+    currentWateringRules || rrulesDefaultValue,
+  );
+  const [hydrationRules, setHydrationRules] = useState<any>(
+    currentHydrationRules || rrulesDefaultValue,
+  );
+  const [fertilizingRules, setFertilizingRules] = useState<any>(
+    currentFertilizingRules || rrulesDefaultValue,
+  );
+
+  const getWeekDay = (byweekday?: Array<string>) => {
+    if (!byweekday || !byweekday.length) {
+      return null;
+    }
+    const days = byweekday.map(day => RRule[day.toUpperCase()]);
+    return days;
+  };
+
+  const setFlowerRrulesDefault = () => {
+    setWateringRules(rrulesDefaultValue);
+    setHydrationRules(rrulesDefaultValue);
+    setFertilizingRules(rrulesDefaultValue);
+  };
+
   const setDefaultValue = () => {
     setFlowerName('');
     setFlowerDescription('');
+    setFlowerRrulesDefault();
   };
 
   const setDefaultValidationStatus = () => {
@@ -64,6 +204,31 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
   const setDefaultState = () => {
     setDefaultValidationStatus();
     setDefaultValue();
+  };
+
+  const getRrule = (rule: any) => {
+    const rrule = new RRule({
+      freq: RRule[rule.type.toUpperCase()],
+      interval: rule.interval,
+      byweekday: getWeekDay(rule.byweekday),
+      dtstart: new Date(),
+    });
+    return rrule;
+  };
+
+  const getRruleInStr = (rule: any) => {
+    const rrule = getRrule(rule);
+    return rrule.toString();
+  };
+
+  const getRrules = () => {
+    const rrules = {
+      watering: getRruleInStr(wateringRules),
+      hydration: getRruleInStr(hydrationRules),
+      fertilizing: getRruleInStr(fertilizingRules),
+    };
+
+    return rrules;
   };
 
   const submitForm = () => {
@@ -91,9 +256,9 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
             id: flower.id,
             shelfId: flower.shelfId,
             order: flower.order,
-            name: flowerName,
-            description: flowerDescription,
-            rrules: FakeRrules,
+            name: flowerName || new Date().toString(),
+            description: flowerDescription || new Date().toString(),
+            rrules: getRrules(),
           },
         });
         setDefaultValidationStatus();
@@ -105,7 +270,7 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
             shelfId,
             name: flowerName,
             description: flowerDescription,
-            rrules: FakeRrules,
+            rrules: getRrules(),
           },
         });
         setDefaultState();
@@ -133,67 +298,112 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
   const closeModalFunc = () => {
     const id = flower.shelfId ? flower.shelfId : shelfId;
     dispatch({
-      type: SHELF_FLOWER_GET,
+      type: SHELF_FLOWERS_GET,
       payload: { shelfId: id },
     });
     closeFunc(isNameChanged);
   };
 
   return (
-    <SafeAreaView style={styles.flowerForm}>
-      <ShelfFormHeader closeFunc={closeModalFunc} />
-      <View style={styles.flowerForm__body}>
-        <View style={styles.flowerForm__message}>
-          <NotifyMessage />
-        </View>
-        <View
-          style={[
-            styles.flowerForm__inputWrap,
-            styles.flowerForm__inputWrap__1,
-          ]}>
-          <CustomInput
-            inputType="flowerName"
-            value={flowerName}
-            validationStatus={validationStatusFlowerName}
-            onChangeText={(data: string) => setFlowerName(data)}
-            onBlur={() =>
-              inputValidatorFunctionalComponent(
-                flowerName,
-                'flowerName',
-                setValidationStatusFlowerName,
-              )
-            }
-          />
-        </View>
-        <View
-          style={[
-            styles.flowerForm__inputWrap,
-            styles.flowerForm__inputWrap__2,
-          ]}>
-          <CustomInput
-            inputType="flowerDescription"
-            value={flowerDescription}
-            validationStatus={validationStatusFlowerDescription}
-            onChangeText={(data: string) => setFlowerDescription(data)}
-            onBlur={() =>
-              inputValidatorFunctionalComponent(
-                flowerDescription,
-                'flowerDescription',
-                setValidationStatusFlowerDescription,
-              )
-            }
-          />
-        </View>
-        <View style={styles.flowerForm__buttonWrap}>
-          <View style={styles.flowerForm__button}>
-            <CustomButton
-              title="Submit"
-              variant="primary"
-              onPress={() => submitForm()}
-            />
-          </View>
-        </View>
-      </View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.flowerForm}>
+      <SafeAreaView style={styles.flowerForm__content}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView
+            scrollEnabled={Platform.OS === 'android' ? false : true}
+            contentContainerStyle={styles.flowerForm__keyboard}>
+            <View style={styles.flowerForm__header}>
+              <ShelfFormHeader closeFunc={closeModalFunc} />
+            </View>
+            <View style={styles.flowerForm__body}>
+              <View style={styles.flowerForm__message}>
+                <NotifyMessage />
+              </View>
+              <View>
+                <View
+                  style={[
+                    styles.flowerForm__inputWrap,
+                    styles.flowerForm__inputWrap__1,
+                  ]}>
+                  <CustomInput
+                    inputType="flowerName"
+                    value={flowerName}
+                    validationStatus={validationStatusFlowerName}
+                    onChangeText={(data: string) => setFlowerName(data)}
+                    onBlur={() =>
+                      inputValidatorFunctionalComponent(
+                        flowerName,
+                        'flowerName',
+                        setValidationStatusFlowerName,
+                      )
+                    }
+                  />
+                </View>
+                <View
+                  style={[
+                    styles.flowerForm__inputWrap,
+                    styles.flowerForm__inputWrap__2,
+                  ]}>
+                  <CustomInput
+                    inputType="flowerDescription"
+                    value={flowerDescription}
+                    validationStatus={validationStatusFlowerDescription}
+                    onChangeText={(data: string) => setFlowerDescription(data)}
+                    onBlur={() =>
+                      inputValidatorFunctionalComponent(
+                        flowerDescription,
+                        'flowerDescription',
+                        setValidationStatusFlowerDescription,
+                      )
+                    }
+                  />
+                </View>
+              </View>
+              {/* TODO: should make scroll for last open accordion item*/}
+              <ScrollView style={styles.flowerForm__accordions}>
+                <View
+                  style={[
+                    styles.flowerForm__accordion,
+                    styles.flowerForm__accordion__first,
+                  ]}>
+                  <Accordion title="Watering">
+                    <CareForm
+                      defaultParameters={wateringRules}
+                      setParameter={setWateringRules}
+                    />
+                  </Accordion>
+                </View>
+                <View style={styles.flowerForm__accordion}>
+                  <Accordion title="Hydration">
+                    <CareForm
+                      defaultParameters={hydrationRules}
+                      setParameter={setHydrationRules}
+                    />
+                  </Accordion>
+                </View>
+                <View style={styles.flowerForm__accordion}>
+                  <Accordion title="Fertilizing">
+                    <CareForm
+                      defaultParameters={fertilizingRules}
+                      setParameter={setFertilizingRules}
+                    />
+                  </Accordion>
+                </View>
+              </ScrollView>
+            </View>
+            <View style={styles.flowerForm__footer}>
+              <View style={styles.flowerForm__button}>
+                <CustomButton
+                  title="Submit"
+                  variant="primary"
+                  onPress={() => submitForm()}
+                />
+              </View>
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
