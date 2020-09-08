@@ -24,11 +24,16 @@ export type FlowerAction = {
   lastName: string;
 };
 
+export type Image = {
+  id: number,
+  image: string,
+}
+
 export type Flower = {
   id: number;
   name: string;
   description: string;
-  pictureUrls: string[];
+  images: Image[];
   rrules: FlowerRrules;
   lastActions: FlowerLastActions;
   actions: FlowerAction[];

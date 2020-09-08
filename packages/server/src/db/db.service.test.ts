@@ -355,6 +355,6 @@ describe('DBService', () => {
 
   it('should get flower by id', async () => {
     await new DBService().getFlowerById(id);
-    expect(mockFlowerRepository.findOne).toBeCalledWith(id, { relations: ['shelf'] });
+    expect(mockFlowerRepository.findOne).toBeCalledWith(id, { relations: ['shelf', 'images'] });
   });
 });

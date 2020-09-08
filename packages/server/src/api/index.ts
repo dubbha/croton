@@ -32,6 +32,8 @@ const shelfDeleteShelf = `${shelf}/delete-shelf`;
 const shelfGetShelves = `${shelf}/get-shelves`;
 const shelfAddFlower = `${shelf}/add-flower`;
 const shelfEditFlower = `${shelf}/edit-flower`;
+const shelfFlowerAddImages = `${shelf}/flower-add-images`;
+const shelfFlowerDeleteImages = `${shelf}/flower-delete-images`;
 const shelfDeleteFlower = `${shelf}/delete-flower`;
 const shelfGetFlowers = `${shelf}/get-flowers`;
 const shelfGetFlower = `${shelf}/get-flower`;
@@ -73,6 +75,8 @@ export const api = {
   shelfGetShelves,
   shelfAddFlower,
   shelfEditFlower,
+  shelfFlowerAddImages,
+  shelfFlowerDeleteImages,
   shelfDeleteFlower,
   shelfGetFlowers,
   shelfGetFlower,
