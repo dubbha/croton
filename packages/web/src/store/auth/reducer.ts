@@ -1,21 +1,24 @@
 import { LOCATION_CHANGE, LocationChangeAction } from 'connected-react-router';
 import { AuthState } from './interfaces';
 import {
+  ADD_FACEBOOK,
+  ADD_FACEBOOK_ERROR,
+  ADD_FACEBOOK_SUCCESS,
+  ADD_GOOGLE,
+  ADD_GOOGLE_ERROR,
+  ADD_GOOGLE_SUCCESS,
   AUTH_EMAIL_CONFIRM,
   AUTH_EMAIL_CONFIRM_ERROR,
   AUTH_EMAIL_CONFIRM_SUCCESS,
   AUTH_FACEBOOK,
   AUTH_FACEBOOK_ERROR,
   AUTH_FACEBOOK_SUCCESS,
-  ADD_FACEBOOK,
-  ADD_FACEBOOK_ERROR,
-  ADD_FACEBOOK_SUCCESS,
+  AUTH_GET_INVITES,
+  AUTH_GET_INVITES_SUCCESS,
+  AUTH_GET_INVITES_ERROR,
   AUTH_GOOGLE,
   AUTH_GOOGLE_ERROR,
   AUTH_GOOGLE_SUCCESS,
-  ADD_GOOGLE,
-  ADD_GOOGLE_ERROR,
-  ADD_GOOGLE_SUCCESS,
   AUTH_LOGIN,
   AUTH_LOGIN_ERROR,
   AUTH_LOGIN_SUCCESS,
@@ -52,6 +55,7 @@ export const initialState: AuthState = {
   info: null,
   socialProfile: null,
   isSignedInWithSocial: false,
+  invites: [],
 };
 
 export function authReducer(
@@ -70,6 +74,7 @@ export function authReducer(
     case AUTH_UPDATE_PROFILE:
     case AUTH_RESET_EMAIL:
     case AUTH_UPDATE_EMAIL:
+    case AUTH_GET_INVITES:
       return {
         ...state,
         isLoading: true,
@@ -97,7 +102,12 @@ export function authReducer(
         socialProfile,
       };
     }
-
+    case AUTH_GET_INVITES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        invites: action.payload.invites,
+      };
     case AUTH_FACEBOOK_SUCCESS:
     case AUTH_GOOGLE_SUCCESS: {
       const { id, firstName, lastName, email, socialProfile } = action.payload;
@@ -130,6 +140,7 @@ export function authReducer(
     case AUTH_GOOGLE_ERROR:
     case ADD_FACEBOOK_ERROR:
     case ADD_GOOGLE_ERROR:
+    case AUTH_GET_INVITES_ERROR:
       return {
         ...state,
         isLoading: false,
