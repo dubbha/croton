@@ -1,4 +1,11 @@
-import { getRepository, Repository } from 'typeorm';
+import {
+  getRepository,
+  Repository,
+  Transaction,
+  EntityManager,
+  getConnection,
+  TransactionManager,
+} from 'typeorm';
 
 import UserEntity from '../models/user.entity';
 import EmailVerificationEntity from '../models/email-verification.entity';
@@ -30,6 +37,7 @@ import NotificationToken from '../models/notification-token.entity';
 import MobileVerificationEntity from '../models/mobile-verification.entity';
 
 export default class DBService {
+  private entityManager: EntityManager;
   private userRepository: Repository<UserEntity>;
   private emailVerificationRepository: Repository<EmailVerificationEntity>;
   private mobileVerificationRepository: Repository<MobileVerificationEntity>;
@@ -60,6 +68,7 @@ export default class DBService {
     this.actionRepository = getRepository(ActionEntity);
     this.notificationRepository = getRepository(NotificationEntity);
     this.notificationTokenRepository = getRepository(NotificationToken);
+    this.entityManager = new EntityManager(getConnection());
   }
 
   public getUserById(id: number) {
@@ -302,7 +311,6 @@ export default class DBService {
     description: string,
     order: number,
     rrules: { [key in Actions]: string },
-    pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne({ id: shelfId });
     return this.flowerRepository.save({
@@ -311,7 +319,6 @@ export default class DBService {
       description,
       order,
       rrules,
-      pictureUrls,
     });
   }
 
@@ -350,6 +357,56 @@ export default class DBService {
         id
       });
     }));
+  }
+
+  @Transaction()
+  private async moveFlowerInTransaction(
+    flowerId: number,
+    shelfId: number,
+    targetShelfId: number,
+    @TransactionManager() entityManager: EntityManager
+  ) {
+    const flowerRepInTransaction = entityManager.getRepository(FlowerEntity);
+    const shelfRepInTransaction = entityManager.getRepository(ShelfEntity);
+    const findShelfConfig = {
+      relations: ['flowers'],
+    };
+    const findFlowerConfig = {
+      relations: ['shelf'],
+    };
+    const movingFlower = await flowerRepInTransaction.findOne(
+      flowerId,
+      findFlowerConfig
+    );
+    const shelf = await shelfRepInTransaction.findOne(shelfId, findShelfConfig);
+    const targetShelf = await shelfRepInTransaction.findOne(
+      targetShelfId,
+      findShelfConfig
+    );
+    const updatedFlower = { ...movingFlower, shelf: targetShelf };
+    const updatedOldShelf = {
+      ...shelf,
+      flowers: shelf.flowers.filter(({ id }) => id !== movingFlower.id),
+    };
+    const updatedTargetShelf = {
+      ...targetShelf,
+      flowers: [...targetShelf.flowers, movingFlower],
+    };
+    await flowerRepInTransaction.update(flowerId, updatedFlower);
+    return {
+      flower: updatedFlower,
+      shelf: updatedOldShelf,
+      targetShelf: updatedTargetShelf,
+    };
+  }
+
+  async moveFlower(flowerId: number, shelfId: number, targetShelfId: number) {
+    return this.moveFlowerInTransaction(
+      flowerId,
+      shelfId,
+      targetShelfId,
+      this.entityManager
+    );
   }
 
   async getUsersByFlowerId(id: number) {

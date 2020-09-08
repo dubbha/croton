@@ -13,6 +13,7 @@ import { Heatmap } from './Heatmap';
 import { Stats } from './Stats';
 import { Log } from './Log';
 import './styles.scss';
+import { MoveFlower } from '../MoveFlower';
 
 export const Flower = () => {
   const { params: { id } } = useRouteMatch();
@@ -93,6 +94,7 @@ export const Flower = () => {
           onClose={handleClose}
         />
         <Confirm text="Delete Flower" onConfirm={deleteFlower} />
+        <MoveFlower flowerId={flowerId} flowerName={flower?.name} shelfId={flower?.shelfId} />
       </div>
       <ListGroup className="flower-actions">
         {Object.values(Actions).map(action => (
