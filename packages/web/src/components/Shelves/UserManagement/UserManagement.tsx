@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tabs, Tab } from 'react-bootstrap';
 import { Modal, Button, InfoAlert, LoadingSpinner, ErrorAlert } from 'elements';
 import { getShelf } from 'store/shelf/selectors';
-import { SHELF_GET_INVITES, SHELF_INVITE_REVOKE, SHELF_RESET } from 'store/shelf';
+import { SHELF_GET_INVITES, SHELF_INVITE_REVOKE, SHELF_RESET, SHELF_GET_USERS } from 'store/shelf';
 import { InviteUserToShelf } from '../InviteUserToShelf';
 
 type Props = {
@@ -13,10 +13,11 @@ type Props = {
 export const UserManagement = ({ shelfId }: Props) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const { invites, isLoading, info, error } = useSelector(getShelf);
+  const { invites, users, isLoading, info, error } = useSelector(getShelf);
 
   const handleOpen = () => {
     dispatch({ type: SHELF_GET_INVITES, payload: { shelfId } });
+    dispatch({ type: SHELF_GET_USERS, payload: { shelfId } });
     setShowModal(true);
   };
 
@@ -52,7 +53,29 @@ export const UserManagement = ({ shelfId }: Props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Tabs defaultActiveKey="invitations" id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey="users" id="uncontrolled-tab-example">
+            <Tab eventKey="users" title="Users">
+              {users.length ? (
+                <Table striped>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map(({ userId, user, isAdmin }) => (
+                      <tr key={userId}>
+                        <td>{`${user.firstName} ${user.lastName}`}</td>
+                        <td>{isAdmin ? 'Admin' : 'Regular'}</td>
+                        <td>{user.email}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              ) : <div className="mt-2 mb-2"><InfoAlert>There are no users in this shelf.</InfoAlert></div>}
+            </Tab>
             <Tab eventKey="invitations" title="Invitations">
               <div className="spinner-container">
                 {isLoading && <LoadingSpinner />}
@@ -73,7 +96,7 @@ export const UserManagement = ({ shelfId }: Props) => {
                   </thead>
                   <tbody>
                     {invites.map(({ id, userEmail, expiresIn }) => (
-                      <tr>
+                      <tr key={id}>
                         <td>{userEmail}</td>
                         <td>{calculateHours(expiresIn)} hours</td>
                         <td>
@@ -90,26 +113,6 @@ export const UserManagement = ({ shelfId }: Props) => {
                   </tbody>
                 </Table>
               ) : <div className="mt-2 mb-2"><InfoAlert>You do not have any invites yet.</InfoAlert></div>}
-            </Tab>
-            <Tab eventKey="users" title="Users" disabled>
-              <Table striped>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Name</td>
-                    <td>email@email.com</td>
-                    <td>
-                      <Button variant="danger">Remove</Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
             </Tab>
           </Tabs>
         </Modal.Body>

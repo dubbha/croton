@@ -12,9 +12,9 @@ function* handle(action: ShelfInviteRevoke) {
 
   try {
     yield call(
-      http.delete,
+      http.post,
       '/shelf/revoke-invite',
-      { data: { shelfId, inviteId } },
+      { shelfId, inviteId },
     );
     yield put({
       type: SHELF_INVITE_REVOKE_SUCCESS,

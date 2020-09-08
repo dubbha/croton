@@ -52,6 +52,9 @@ import {
   SHELF_GET_INVITES,
   SHELF_GET_INVITES_SUCCESS,
   SHELF_GET_INVITES_ERROR,
+  SHELF_GET_USERS,
+  SHELF_GET_USERS_SUCCESS,
+  SHELF_GET_USERS_ERROR,
   ShelfActionTypes,
 } from './actions';
 import { ShelfState, Flower } from './interfaces';
@@ -64,6 +67,7 @@ export const initialState: ShelfState = {
   flowers: [],
   flower: null,
   invites: [],
+  users: [],
 };
 
 export function shelfReducer(
@@ -88,6 +92,7 @@ export function shelfReducer(
     case SHELF_GET_LAST_ACTIONS:
     case SHELF_GET_INVITES:
     case SHELF_GET_ACTIONS:
+    case SHELF_GET_USERS:
       return {
         ...state,
         isLoading: true,
@@ -152,6 +157,12 @@ export function shelfReducer(
           actions: action.payload,
         },
       };
+    case SHELF_GET_USERS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        users: action.payload.users,
+      };
     case SHELF_INVITE_ERROR:
     case SHELF_INVITE_ACCEPT_ERROR:
     case SHELF_INVITE_REVOKE_ERROR:
@@ -168,6 +179,7 @@ export function shelfReducer(
     case SHELF_ACTION_ERROR:
     case SHELF_GET_LAST_ACTIONS_ERROR:
     case SHELF_GET_ACTIONS_ERROR:
+    case SHELF_GET_USERS_ERROR:
       return {
         ...state,
         isLoading: false,

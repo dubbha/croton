@@ -46,6 +46,20 @@ export type Invite = {
   expiresIn: string;
 }
 
+export type UserDetails = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  status: string;
+}
+
+export type User = {
+  userId: number;
+  shelfId: number;
+  isAdmin: boolean;
+  user: UserDetails;
+}
+
 export interface ShelfState {
   isLoading: boolean;
   error: string | null;
@@ -54,4 +68,5 @@ export interface ShelfState {
   flowers: Flower[];
   flower: Flower | null;
   invites: Invite[];
+  users: User[];
 }
