@@ -5,8 +5,8 @@ import EmailVerificationEntity from '../models/email-verification.entity';
 import PasswordResetEntity from '../models/password-reset.entity';
 import SocialProfileEntity from '../models/social-profile.entity';
 import EmailResetEntity from '../models/email-reset.entity';
-import ShelfEntity  from '../models/shelf.entity';
-import ShelfInvitationEntity  from '../models/shelf-invitation.entity';
+import ShelfEntity from '../models/shelf.entity';
+import ShelfInvitationEntity from '../models/shelf-invitation.entity';
 import UserToShelfEntity from '../models/user-to-shelf.entity';
 import FlowerEntity from '../models/flower.entity';
 
@@ -141,31 +141,39 @@ const mockShelfEntity = {
   pictureUrl: 'http://picture.url',
 };
 
+const mockGetRepository = function (entity: GetRepositoryPayload) {
+  switch (entity) {
+    case UserEntity:
+      return mockUserRepository;
+    case EmailVerificationEntity:
+      return mockEmailVerificationRepository;
+    case PasswordResetEntity:
+      return mockPasswordResetRepository;
+    case SocialProfileEntity:
+      return mockSocialProfileRepository;
+    case EmailResetEntity:
+      return mockResetEmailRepository;
+    case ShelfEntity:
+      return mockShelfRepository;
+    case ShelfInvitationEntity:
+      return mockShelfInvitationRepository;
+    case UserToShelfEntity:
+      return mockUserToShelfRepository;
+    case FlowerEntity:
+      return mockFlowerRepository;
+  }
+} as any;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-jest
-  .spyOn(typeorm, 'getRepository')
-  .mockImplementation(function(entity: GetRepositoryPayload) {
-    switch (entity) {
-      case UserEntity:
-        return mockUserRepository;
-      case EmailVerificationEntity:
-        return mockEmailVerificationRepository;
-      case PasswordResetEntity:
-        return mockPasswordResetRepository;
-      case SocialProfileEntity:
-        return mockSocialProfileRepository;
-      case EmailResetEntity:
-        return mockResetEmailRepository;
-      case ShelfEntity:
-        return mockShelfRepository;
-      case ShelfInvitationEntity:
-        return mockShelfInvitationRepository;
-      case UserToShelfEntity:
-        return mockUserToShelfRepository;
-      case FlowerEntity:
-        return mockFlowerRepository;
-    }
-  } as any);
+jest.spyOn(typeorm, 'getRepository').mockImplementation(mockGetRepository);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+jest.spyOn(typeorm, 'getConnection').mockImplementation((() => { }) as any);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+jest.spyOn(typeorm, 'EntityManager').mockImplementation(function () {
+  return { getRepository: mockGetRepository };
+} as any);
 
 describe('DBService', () => {
   it('should create', () => {

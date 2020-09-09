@@ -30,10 +30,12 @@ import {
   shelfDeleteFlowerSaga,
   shelfGetFlowersSaga,
   shelfGetFlowerSaga,
+  shelfAddFlowerImagesSaga,
   shelfActionSaga,
   shelfGetLastActionsSaga,
   shelfGetActionsSaga,
   shelfGetUsersSaga,
+  shelfMoveFlowerSaga,
 } from './shelf/sagas';
 import { notificationRegisterSaga } from './notification/sagas';
 
@@ -67,10 +69,12 @@ export function* rootSaga() {
     shelfDeleteFlowerSaga(),
     shelfGetFlowersSaga(),
     shelfGetFlowerSaga(),
+    shelfAddFlowerImagesSaga(),
     shelfActionSaga(),
     shelfGetLastActionsSaga(),
     shelfGetActionsSaga(),
     notificationRegisterSaga(),
     shelfGetUsersSaga(),
+    shelfMoveFlowerSaga(),
   ]);
 }

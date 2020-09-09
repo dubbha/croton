@@ -113,22 +113,26 @@ export const Stats = ({
         <thead>
           <tr>
             <th>Metric</th>
-            {actionNames.map(action => <th>{action}</th>)}
+            {actionNames.map(action => <th key={action}>{action}</th>)}
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Current Times Missed</td>
-            {actionNames.map(action => <td>{stats.currentTimesMissedByAction[action]}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.currentTimesMissedByAction[action]}</td>
+            ))}
           </tr>
           <tr>
             <td>Total Actions Performed</td>
-            {actionNames.map(action => <td>{stats.totalActionsByAction[action]}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.totalActionsByAction[action]}</td>
+            ))}
           </tr>
           <tr>
             <td>Late Actions</td>
             {actionNames.map(action => (
-              <td>
+              <td key={action}>
                 {stats.lateActionsByAction[action]}
               </td>
             ))}
@@ -136,7 +140,7 @@ export const Stats = ({
           <tr>
             <td>Late Actions Percentage</td>
             {actionNames.map(action => (
-              <td>
+              <td key={action}>
                 {stats.totalActionsByAction[action]
                   ? ((stats.lateActionsByAction[action]
                     / stats.totalActionsByAction[action]) * 100).toFixed(2)
@@ -147,29 +151,39 @@ export const Stats = ({
           </tr>
           <tr>
             <td>Total Times Missed</td>
-            {actionNames.map(action => <td>{stats.timesMissedByAction[action]}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.timesMissedByAction[action]}</td>
+            ))}
           </tr>
           <tr>
             <td>Max Times Missed</td>
-            {actionNames.map(action => <td>{stats.maxTimesMissedByAction[action]}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.maxTimesMissedByAction[action]}</td>
+            ))}
           </tr>
           <tr>
             <td>Average Times Missed</td>
-            {actionNames.map(action => <td>{stats.avgTimesMissedByAction[action].toFixed(2)}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.avgTimesMissedByAction[action].toFixed(2)}</td>
+            ))}
           </tr>
           <tr>
             <td>Total Overdue Hours</td>
             {actionNames.map(action => (
-              <td>{stats.totalOverdueHoursByAction[action].toFixed(2)}</td>
+              <td key={action}>{stats.totalOverdueHoursByAction[action].toFixed(2)}</td>
             ))}
           </tr>
           <tr>
             <td>Max Overdue Hours</td>
-            {actionNames.map(action => <td>{stats.maxOverdueHoursByAction[action].toFixed(2)}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.maxOverdueHoursByAction[action].toFixed(2)}</td>
+            ))}
           </tr>
           <tr>
             <td>Average Overdue Hours</td>
-            {actionNames.map(action => <td>{stats.avgOverdueHoursByAction[action].toFixed(2)}</td>)}
+            {actionNames.map(action => (
+              <td key={action}>{stats.avgOverdueHoursByAction[action].toFixed(2)}</td>
+            ))}
           </tr>
         </tbody>
       </Table>

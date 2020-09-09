@@ -106,6 +106,13 @@ export default class ShelfController extends BaseController {
     );
 
     this.router.post(
+      this.serverApi.shelfMoveFlower,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.moveFlowerHandler
+    );
+
+    this.router.post(
       this.serverApi.shelfDeleteFlower,
       authMiddleware,
       shelfAdminMiddleware,
@@ -300,6 +307,21 @@ export default class ShelfController extends BaseController {
     }
   }
 
+  private moveFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const updatedShelvesAndFlower = await this.shelfService.moveFlower(
+        request.body
+      );
+      response.status(200).send(updatedShelvesAndFlower);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   private addImagesToFlowerHandler = async (
     request: Request,
     response: Response,
@@ -365,7 +387,7 @@ export default class ShelfController extends BaseController {
     }
   }
 
-  private actionHanlder = async(
+  private actionHanlder = async (
     request: Request,
     response: Response,
     next: NextFunction,
