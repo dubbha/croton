@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import './styles.scss';
 
 type Props = {
-  images: string[] | undefined;
+  images: string[];
 };
 
 export const Gallery = ({ images }: Props) => {
@@ -15,7 +15,7 @@ export const Gallery = ({ images }: Props) => {
 
   return (
     <Carousel className="gallery col-md-6" activeIndex={index} onSelect={handleSelect} touch keyboard>
-      {images && images.map((image) => (
+      {images.map((image) => (
         <Carousel.Item key={image.slice(-5)} className="gallery-item">
           <img className="d-block gallery-image" src={image} alt={`flower${index}`} />
         </Carousel.Item>

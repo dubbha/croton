@@ -130,7 +130,7 @@ export const Flower = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
-      {flower?.images.length && <Gallery images={flower?.images.map(({ image }) => image)} />}
+      {!!flower?.images.length && <Gallery images={flower.images.map(({ image }) => image)} />}
       <Heatmap actions={flower?.actions} />
       <Stats actions={flower?.actions} rrules={flower?.rrules} />
       <Log actions={flower?.actions} />
