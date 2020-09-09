@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { SHELF_GET_FLOWER, SHELF_DELETE_FLOWER, SHELF_ACTION } from 'store/shelf';
 import { getFlower, getShelf } from 'store/shelf/selectors';
 import { LeafIcon, ListGroup, HandHoldingHeartIcon, FireAltIcon, ButtonWithLoader } from 'elements';
-import { Confirm } from 'components';
+import { Confirm, Gallery } from 'components';
 import { Actions } from 'constants/actions';
 import { EditFlower } from '../EditFlower';
 import { AddImage } from './AddImage';
@@ -130,6 +130,7 @@ export const Flower = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+      {flower?.images.length && <Gallery images={flower?.images.map(({ image }) => image)} />}
       <Heatmap actions={flower?.actions} />
       <Stats actions={flower?.actions} rrules={flower?.rrules} />
       <Log actions={flower?.actions} />
