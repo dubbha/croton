@@ -102,7 +102,7 @@ export const UserManagement = ({ shelfId }: Props) => {
                         <td>
                           <Button
                             disabled={isLoading}
-                            variant="danger"
+                            variant="outline-danger"
                             onClick={() => revokeInvite(id)}
                           >
                             Revoke invite

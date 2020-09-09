@@ -13,6 +13,7 @@ import {
   authUpdateProfileSaga,
   authEmailResetSaga,
   authEmailUpdateSaga,
+  authGetInvitesSaga,
 } from './auth/sagas';
 import {
   shelfGetInvitesSaga,
@@ -53,6 +54,7 @@ export function* rootSaga() {
     authUpdateProfileSaga(),
     authEmailResetSaga(),
     authEmailUpdateSaga(),
+    authGetInvitesSaga(),
     shelfGetInvitesSaga(),
     shelfInviteSaga(),
     shelfInviteAcceptSaga(),
