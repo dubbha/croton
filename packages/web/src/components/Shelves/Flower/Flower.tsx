@@ -9,6 +9,7 @@ import { LeafIcon, ListGroup, HandHoldingHeartIcon, FireAltIcon, ButtonWithLoade
 import { Confirm } from 'components';
 import { Actions } from 'constants/actions';
 import { EditFlower } from '../EditFlower';
+import { AddImage } from './AddImage';
 import { Heatmap } from './Heatmap';
 import { Stats } from './Stats';
 import { Log } from './Log';
@@ -89,12 +90,13 @@ export const Flower = () => {
       <p>{flower?.description}</p>
       <div className="flower-menu">
         <EditFlower
-          id={id}
+          id={flowerId}
           initialValues={flower || {}}
           onClose={handleClose}
         />
         <Confirm text="Delete Flower" onConfirm={deleteFlower} />
         <MoveFlower flowerId={flowerId} flowerName={flower?.name} shelfId={flower?.shelfId} />
+        <AddImage id={flowerId} />
       </div>
       <ListGroup className="flower-actions">
         {Object.values(Actions).map(action => (

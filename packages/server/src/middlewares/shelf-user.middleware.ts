@@ -14,9 +14,12 @@ export default async function shelfUserMiddleware(
   next: NextFunction
 ) {
   try {
-    const { body: { shelfId } } = request;
+    const { body: { flowerId } } = request;
     const { id } = verifyToken(request.headers.authorization);
-    const userRelatedToShelf = await new DBService().getUserToShelf(id, shelfId);
+
+    const dbService = new DBService();
+    const flower = await dbService.getFlowerById(flowerId);
+    const userRelatedToShelf = await new DBService().getUserToShelf(id, flower.shelf.id);
 
     if (userRelatedToShelf) {
       next()
