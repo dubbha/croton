@@ -3,9 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { rrulestr } from 'rrule';
 import classNames from 'classnames';
-import { SHELF_GET_FLOWER, SHELF_DELETE_FLOWER, SHELF_ACTION } from 'store/shelf';
+import {
+  SHELF_GET_FLOWER,
+  SHELF_DELETE_FLOWER,
+  SHELF_ACTION,
+  SHELF_DELETE_FLOWER_IMAGES,
+} from 'store/shelf';
+import { useMediaWidth } from 'hooks';
 import { getFlower, getShelf } from 'store/shelf/selectors';
-import { LeafIcon, ListGroup, HandHoldingHeartIcon, FireAltIcon, ButtonWithLoader } from 'elements';
+import {
+  LeafIcon,
+  ListGroup,
+  HandHoldingHeartIcon,
+  FireAltIcon,
+  ButtonWithLoader,
+} from 'elements';
 import { Confirm, Gallery } from 'components';
 import { Actions } from 'constants/actions';
 import { EditFlower } from '../EditFlower';
@@ -13,10 +25,12 @@ import { AddImage } from './AddImage';
 import { Heatmap } from './Heatmap';
 import { Stats } from './Stats';
 import { Log } from './Log';
-import './styles.scss';
 import { MoveFlower } from '../MoveFlower';
+import './styles.scss';
 
 export const Flower = () => {
+  const width = useMediaWidth();
+
   const { params: { id } } = useRouteMatch();
   const flowerId = Number(id);
 
@@ -52,6 +66,11 @@ export const Flower = () => {
   const deleteFlower = () => dispatch({
     type: SHELF_DELETE_FLOWER,
     payload: { id: flowerId, shelfId: flower?.shelfId },
+  });
+
+  const deleteFlowerImage = (index: number) => dispatch({
+    type: SHELF_DELETE_FLOWER_IMAGES,
+    payload: { flowerId, imageIds: [flower?.images[index].id] },
   });
 
   const humanReadableRrules = flower?.rrules
@@ -98,6 +117,12 @@ export const Flower = () => {
         <MoveFlower flowerId={flowerId} flowerName={flower?.name} shelfId={flower?.shelfId} />
         <AddImage id={flowerId} />
       </div>
+      {!!flower?.images.length && (
+        <Gallery
+          images={flower.images.map(({ image }) => image)}
+          onDelete={deleteFlowerImage}
+        />
+      )}
       <ListGroup className="flower-actions">
         {Object.values(Actions).map(action => (
           <ListGroup.Item key={action}>
@@ -125,12 +150,11 @@ export const Flower = () => {
               onClick={() => markActionPerformed(action)}
               onNotificationTimeout={handleNotificationTimeout}
             >
-              Mark Performed
+              {width === 'xs' ? 'Done' : 'Mark Performed'}
             </ButtonWithLoader>
           </ListGroup.Item>
         ))}
       </ListGroup>
-      {!!flower?.images.length && <Gallery images={flower.images.map(({ image }) => image)} />}
       <Heatmap actions={flower?.actions} />
       <Stats actions={flower?.actions} rrules={flower?.rrules} />
       <Log actions={flower?.actions} />

@@ -12,6 +12,7 @@ export * from './shelfGetShelves.saga';
 export * from './shelfGetFlowers.saga';
 export * from './shelfGetFlower.saga';
 export * from './shelfAddFlowerImages.saga';
+export * from './shelfDeleteFlowerImages.saga';
 export * from './shelfAction.saga';
 export * from './shelfGetLastActions.saga';
 export * from './shelfGetInvites.saga';

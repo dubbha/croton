@@ -134,8 +134,8 @@ export default class ShelfService {
     await this.dbService.addImagesToFlower(flowerId, images);
   }
 
-  async deleteImagesFromFlower({ images }: ShelfDeleteImageDto): Promise<void> {
-    await this.dbService.deleteImagesFromFlower(images);
+  async deleteImagesFromFlower({ imageIds }: ShelfDeleteImageDto): Promise<void> {
+    await this.dbService.deleteImagesFromFlower(imageIds);
   }
 
   async moveFlower({ shelfId, targetShelfId, flowerId }: ShelfMoveFlowerDto) {

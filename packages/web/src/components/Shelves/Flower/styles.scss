@@ -12,16 +12,34 @@
 
   &-menu {
     margin: 0;
+    width: 100%;
+    text-align: center;
 
     button {
-      display: inline-block;
-      margin: 0 10px;
-      width: 150px;
+      display: block;
+      width: 100%;
+      margin: 0.25rem 0;
+      box-sizing: border-box;
+
+      @include media-breakpoint-up(sm) {
+        display: inline-block;
+        width: 150px;
+        margin: 0 10px;
+      }
     }
   }
 
   &-actions {
     margin: 1rem auto 0 auto;
+    width: 100%;
+  
+    @include media-breakpoint-up(md) {
+      width: 75%;
+    }
+  
+    @include media-breakpoint-up(xl) {
+      width: 50%;
+    }
 
     .list-group-item {
       display: flex;
@@ -30,7 +48,11 @@
 
       button {
         margin: 0 0 0 1rem;
-        width: 150px;
+        width: 75px;
+
+        @include media-breakpoint-up(sm) {
+          width: 150px;
+        }
       }
       .spinner-button {
         position: relative;
@@ -69,9 +91,11 @@
 }
 
 .heatmap-container {
-  width: 100%;
   padding-right: 1rem;
-  margin: 2rem 0 -3rem 0;
+  margin: 1rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  width: 100%;
 
   @include media-breakpoint-up(md) {
     width: 75%;
@@ -84,19 +108,37 @@
 
 .stats-container {
   width: 100%;
-  padding: 0 1rem;
+  padding: 0;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 1rem;
+  }
 
   h4 {
     color: $color-grass-dark;
+    margin-left: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
   }
 }
 
 .log-container {
   width: 100%;
-  padding: 2rem 1rem 0;
+  padding: 2rem 0 0 0;
+
+  @include media-breakpoint-up(md) {
+    padding: 2rem 1rem 0;
+  }
 
   h4 {
     color: $color-grass-dark;
+    margin-left: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
   }
 }
 
