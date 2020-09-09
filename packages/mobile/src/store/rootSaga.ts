@@ -1,6 +1,7 @@
 import {
   authLoginSaga,
   authRegisterSaga,
+  authConfirmSaga,
   authProfileUpdateSaga,
 } from './auth/sagas';
 
@@ -24,6 +25,7 @@ export function* rootSaga() {
   yield all([
     authLoginSaga(),
     authRegisterSaga(),
+    authConfirmSaga(),
     authProfileUpdateSaga(),
     shelvesGetSaga(),
     shelvesShelfAddSaga(),

@@ -3,6 +3,7 @@ import {
   INFORMATION_HIDE,
   INFORMATION_LOADER,
   INFORMATION_LOADER_HIDE,
+  INFORMATION_PUSHNOTIFICATION,
   InformationActionTypes,
 } from './actions';
 import { InformationState } from './interfaces';
@@ -23,7 +24,6 @@ export function informationReducer(
     case INFORMATION_NOTIFY: {
       const messageOptions = getMessageOptions(action.payload);
       const status = getStatus(action.payload);
-
       return {
         ...state,
         isLoading: false,
@@ -34,6 +34,7 @@ export function informationReducer(
 
     case INFORMATION_HIDE: {
       return {
+        ...state,
         ...initialState,
       };
     }
@@ -52,8 +53,18 @@ export function informationReducer(
       };
     }
 
+    case INFORMATION_PUSHNOTIFICATION: {
+      return {
+        ...state,
+        pushNotification: action.payload,
+      };
+    }
+
     default: {
-      return initialState;
+      return {
+        ...initialState,
+        ...state,
+      };
     }
   }
 }

@@ -25,10 +25,9 @@ export default StyleSheet.create({
   },
 
   flower__message: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 15,
+    height: 30,
     marginVertical: 5,
   },
 
@@ -85,7 +84,7 @@ export default StyleSheet.create({
   flower__action__body: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 15,
+    marginVertical: 10,
   },
 
   flower__action__footer: {

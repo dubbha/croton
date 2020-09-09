@@ -9,21 +9,22 @@ import {
   SHELF_FLOWER_DELETE,
   SHELF_FLOWERS_GET,
 } from '../../store/shelves/actions';
-import { ShelfInterface } from '../Shelf/interface';
 import { ShelfFormHeader } from './FlowerFormHeader';
 import { NotifyMessage } from '../NotifyMessage';
 import { CustomButton } from '../Button';
 
 interface ShelfFormConfigProps {
   closeFunc: (name?: string) => void;
-  shelf?: ShelfInterface;
+  flowerId: string;
+  shelfId: string;
 }
 
 export const FlowerFormDelete: FC<ShelfFormConfigProps> = ({
-  shelf = {},
+  flowerId,
+  shelfId,
   closeFunc,
 }) => {
-  const { id, shelfId } = shelf;
+  // const { id, shelfId } = shelf;
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -46,7 +47,7 @@ export const FlowerFormDelete: FC<ShelfFormConfigProps> = ({
             onPress={() => {
               dispatch({
                 type: SHELF_FLOWER_DELETE,
-                payload: { id, shelfId },
+                payload: { flowerId, shelfId },
               });
               navigation.navigate(SCREEN_USER_SHELF);
               dispatch({ type: SHELF_FLOWERS_GET, payload: { shelfId } });

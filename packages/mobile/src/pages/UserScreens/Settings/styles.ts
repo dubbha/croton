@@ -66,8 +66,9 @@ export default StyleSheet.create({
 
   settings__notifyMessage: {
     display: 'none',
-    height: 50,
-    marginVertical: 30,
+    height: 30,
+    marginTop: 30,
+    marginBottom: 15,
   },
 
   settings__notifyMessage__isShow: {

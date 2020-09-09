@@ -1,10 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
 import { SafeAreaView, FlatList, View, Text, Modal } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rrulestr } from 'rrule';
 
 import styles from './styles';
-import { SHELF_ACTION } from '../../../store/shelves/actions';
+import {
+  SHELF_ACTION,
+  SHELF_FLOWERS_GET,
+} from '../../../store/shelves/actions';
 import { FlowerInterface } from '../../../components/Flower/interface';
 import { httpSender } from '../../../services/http/http.service';
 import { CustomButton } from '../../../components/Button';
@@ -17,24 +20,16 @@ import { NotifyMessage } from '../../../components/NotifyMessage';
 export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
   // TODO: This logic will be broken if we should some more cofing, need change fetch to dispatch
   const dispatch = useDispatch();
-  const { params } = route;
-  let { rrules } = params;
+  let { params } = route;
+  const { shelfId, id: flowerId } = params;
+  const { flowers } = useSelector(state => state.shelves);
+  const flower = flowers.find(item => item.id === flowerId);
+  let { rrules } = flower;
   const [isShowFormConfig, setIsShowFormConfig] = useState(false);
   const [isShowFormRemove, setIsShowFormRemove] = useState(false);
   const [lastActions, setLastActions] = useState({});
   const [markedActions, setMarkedActions] = useState([]);
   // TODO: we should to change this with success dispatch result
-  const { shelfId, id: flowerId } = params;
-  const getActionKeys = (obj: any) => {
-    const keys = [];
-    const actionsTypes = ['watering', 'fertilizing', 'hydration'];
-    actionsTypes.forEach(type => {
-      if (obj[type]) {
-        keys.push(type);
-      }
-    });
-    return keys;
-  };
 
   useEffect(() => {
     const fetchLastActions = async () => {
@@ -53,6 +48,17 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
     fetchLastActions();
   }, [shelfId, flowerId]);
 
+  const getActionKeys = (obj: any) => {
+    const keys = [];
+    const actionsTypes = ['watering', 'fertilizing', 'hydration'];
+    actionsTypes.forEach(type => {
+      if (obj[type]) {
+        keys.push(type);
+      }
+    });
+    return keys;
+  };
+
   const markActionPerformed = async (action: any) => {
     try {
       dispatch({
@@ -70,13 +76,12 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
       <Modal animationType="fade" transparent={true}>
         <View style={styles.flower__modal}>
           <FlowerFormConfig
-            flower={params}
-            closeFunc={(name?: string) => {
+            flower={flower}
+            shelfId={shelfId}
+            closeFunc={(newParameters?: any) => {
               // TODO: need to implement this if store is changed (now always set new title)
               setIsShowFormConfig(false);
-              if (name) {
-                navigation.setOptions({ title: name });
-              }
+              navigation.setOptions({ ...newParameters });
             }}
           />
         </View>
@@ -89,8 +94,13 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
       <Modal animationType="fade" transparent={true}>
         <View style={styles.flower__modal}>
           <FlowerFormDelete
-            shelf={params}
+            flowerId={flowerId}
+            shelfId={shelfId}
             closeFunc={() => {
+              dispatch({
+                type: SHELF_FLOWERS_GET,
+                payload: { shelfId },
+              });
               setIsShowFormRemove(false);
             }}
           />
@@ -208,7 +218,7 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
         <FlatList
           data={rrules}
           renderItem={renderAction}
-          keyExtractor={rrule => rrule}
+          keyExtractor={rrule => rrule[0]}
           style={styles.flower__actions}
         />
       </View>
