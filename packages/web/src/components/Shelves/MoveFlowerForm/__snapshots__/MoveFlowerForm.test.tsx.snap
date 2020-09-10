@@ -9,10 +9,6 @@ exports[`components/MoveFlowerForm should call onSubmit prop on submit 1`] = `
     style="height: 38px;"
   />
   <div
-    data-testid="alertPlaceholder"
-    style="height: 38px;"
-  />
-  <div
     class="form-group"
   >
     <label
@@ -58,10 +54,6 @@ exports[`components/MoveFlowerForm should render successfully 1`] = `
 <form
   class="moveFlowerForm"
 >
-  <div
-    data-testid="alertPlaceholder"
-    style="height: 38px;"
-  />
   <div
     data-testid="alertPlaceholder"
     style="height: 38px;"

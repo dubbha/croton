@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 
 import { Shelf } from 'store/shelf';
 
@@ -14,7 +14,7 @@ import './styles.scss';
 
 type Props = {
   shelves: Shelf[];
-  onSubmit: (shelfId: number) => void;
+  onSubmit: (shelfId: number | undefined) => void;
   error: string | null;
   info: string | null;
   flowerName: string | null;
@@ -27,19 +27,23 @@ export const MoveFlowerForm = ({
   info,
   flowerName,
 }: Props) => {
-  const [selectedShelfId, setSelectedShelfId] = useState<Shelf['id']>(
-    shelves[0].id,
-  );
+  const [selectedShelfId, setSelectedShelfId] = useState<Shelf['id']>();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onSubmit(selectedShelfId);
   };
 
+  useEffect(() => {
+    setSelectedShelfId(shelves[0].id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Form onSubmit={handleSubmit} className="moveFlowerForm">
-      {error ? <ErrorAlert>{error}</ErrorAlert> : <AlertPlaceholder />}
-      {info ? <InfoAlert>{info}</InfoAlert> : <AlertPlaceholder />}
+      {error && <ErrorAlert>{error}</ErrorAlert>}
+      {info && <InfoAlert>{info}</InfoAlert>}
+      {!info && !error && <AlertPlaceholder />}
       <Form.Group>
         <Form.Label>Choose a new shelf for {flowerName}</Form.Label>
         <Form.Control
