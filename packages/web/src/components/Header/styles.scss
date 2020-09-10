@@ -1,6 +1,15 @@
-@import '../../assets/styles/theme';
+@import '../../custom.scss';
 
 header {
-  font-size: calc(10px + 1vmin);
+  font-size: 1.25rem;
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
+
+  .logo-with-menu {
+    display: flex;
+    flex-flow: row nowrap;
+
+    @include media-breakpoint-down(sm) {
+      flex-flow: column nowrap;
+    }
+  }
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { rrulestr } from 'rrule';
+import { Table } from 'elements';
 import { FlowerAction, FlowerRrules } from 'store/shelf/interfaces';
 import { Actions } from 'constants/actions';
-import { Table } from 'elements';
 
 type Props = {
   actions?: FlowerAction[];
   rrules?: FlowerRrules;
+  tableSize?: string;
 };
 
 const actionNames = Object.values(Actions);
@@ -19,6 +20,7 @@ const defaultRrules = fillByAction('') as FlowerRrules;
 export const Stats = ({
   actions = [],
   rrules = defaultRrules,
+  tableSize = '',
 }: Props) => {
   const actionTimestamps = actions.reduce(
     (acc, { action, timestamp }) => ({ ...acc, [action]: [...acc[action], timestamp] }),
@@ -109,7 +111,7 @@ export const Stats = ({
   return (
     <div className="stats-container">
       <h4>Statistics</h4>
-      <Table striped bordered hover>
+      <Table striped bordered hover size={tableSize}>
         <thead>
           <tr>
             <th>Metric</th>

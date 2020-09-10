@@ -1,17 +1,24 @@
-@import '../../../assets/styles/theme';
+@import '../../../custom.scss';
 
 .shelf {
-  &.container {
-    margin: 10px auto;
-    justify-content: start;
+  width: 80%;
+ 
+  @include media-breakpoint-down(lg) {
+    width: 100%;
   }
-
+  
   &-header {
+    text-align: center;
     color: $color-grass-dark;
   }
 
   &-location {
+    text-align: center;
     text-transform: none;
+  }
+
+  &-description {
+    text-align: center;
   }
 
   &-empty {
@@ -20,11 +27,26 @@
 
   &-actions {
     margin: 0 auto;
+    width: 100%;
+    text-align: center;
 
     button {
-      display: inline-block;
-      margin: 0 10px;
-      width: 150px;
+      display: block;
+      width: 100%;
+      margin: 0.25rem 0;
+      box-sizing: border-box;
+
+      @include media-breakpoint-up(sm) {
+        display: inline-block;
+        width: 135px;
+        margin: 0 0.125rem;
+      }
+
+      @include media-breakpoint-up(md) {
+        display: inline-block;
+        width: 150px;
+        margin: 0 10px;
+      }
     }
   }
 }

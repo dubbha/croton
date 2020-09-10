@@ -4,14 +4,16 @@ import { Table } from 'elements';
 
 type Props = {
   actions?: FlowerAction[];
+  tableSize?: string;
 };
 
 export const Log = ({
   actions = [],
+  tableSize = '',
 }: Props) => (
   <div className="log-container">
     <h4>Actions Log</h4>
-    <Table striped bordered hover>
+    <Table striped bordered hover size={tableSize}>
       <thead>
         <tr>
           <th>Date</th>

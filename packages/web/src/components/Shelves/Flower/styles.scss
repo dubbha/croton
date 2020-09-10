@@ -23,6 +23,12 @@
 
       @include media-breakpoint-up(sm) {
         display: inline-block;
+        width: 135px;
+        margin: 0 0.125rem;
+      }
+
+      @include media-breakpoint-up(md) {
+        display: inline-block;
         width: 150px;
         margin: 0 10px;
       }

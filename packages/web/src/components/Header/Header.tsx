@@ -12,8 +12,8 @@ export const Header = () => {
 
   return (
     <header>
-      <Navbar expand="lg">
-        <Nav className="mr-auto">
+      <Navbar>
+        <div className="logo-with-menu">
           <Navbar.Brand href="/">
             <img
               alt="logo"
@@ -24,16 +24,18 @@ export const Header = () => {
             />
             <img src={croton} alt="Croton. Care. Free." />
           </Navbar.Brand>
-          <Nav.Item>
-            <Link to="/#features">Features</Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link to="/#about">About</Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link to="/#services">Services</Link>
-          </Nav.Item>
-        </Nav>
+          <Nav>
+            <Nav.Item>
+              <Link to="/#features">Features</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/#about">About</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/#services">Services</Link>
+            </Nav.Item>
+          </Nav>
+        </div>
         <Nav>
           {isAuthenticated ? (
             <>

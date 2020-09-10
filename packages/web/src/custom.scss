@@ -54,6 +54,14 @@ footer {
   width: 100%;
 }
 
+.navbar-expand {
+  justify-content: space-between;
+
+  @include media-breakpoint-down(md) {
+    flex-flow: column nowrap;
+  }
+}
+
 .navbar-light .navbar-nav .nav-link {
   &, &:focus {
     color: $color-grass-dark;
