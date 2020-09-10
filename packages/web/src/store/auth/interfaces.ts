@@ -15,6 +15,7 @@ export type Invite = {
   userEmail: string;
   expiresIn: string;
   shelf: Shelf;
+  shelfInvitationToken: string;
 }
 
 export interface AuthState {
