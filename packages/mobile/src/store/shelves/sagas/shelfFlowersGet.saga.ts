@@ -1,8 +1,9 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest, delay } from 'redux-saga/effects';
 
 import {
   INFORMATION_NOTIFY,
   INFORMATION_LOADER,
+  INFORMATION_HIDE,
 } from '../../information/actions';
 import {
   SHELF_FLOWERS_GET,
@@ -25,6 +26,10 @@ function* handle(action: ShelfFlowersGet) {
       type: SHELF_FLOWERS_GET_SUCCESS,
       payload: { flowers },
     });
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
+    });
   } catch (e) {
     console.error(e);
     yield put({
@@ -32,6 +37,10 @@ function* handle(action: ShelfFlowersGet) {
       payload: {
         error: e.response.data.message || e.message,
       },
+    });
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
     });
   }
 }

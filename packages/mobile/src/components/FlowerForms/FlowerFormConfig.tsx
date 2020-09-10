@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import { RRule } from 'rrule';
-
 import {
   SafeAreaView,
   View,
@@ -14,7 +13,6 @@ import { useDispatch } from 'react-redux';
 
 import styles from './styles';
 import {
-  SHELF_FLOWERS_GET,
   SHELF_FLOWER_ADD,
   SHELF_FLOWER_EDIT,
 } from '../../store/shelves/actions';
@@ -49,11 +47,11 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
     isShowMessage: false,
   };
   const [isEdit] = useState(Boolean(flower.name));
-  const [isNameChanged, setIsNameChanged] = useState('');
   const [flowerName, setFlowerName] = useState(flower.name || '');
   const [flowerDescription, setFlowerDescription] = useState(
     flower.description || '',
   );
+  const [flowerRrules] = useState(flower.rrules || '');
   const [validationStatusFlowerName, setValidationStatusFlowerName] = useState<
     ValidationResult
   >(validationStatusDefaultValue);
@@ -140,8 +138,6 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
     return days.length ? days : [];
   };
 
-  // parse current rrule
-  // set rrule
   const getRruleObj = (configs: any) => {
     if (!configs) {
       return '';
@@ -254,15 +250,14 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
           type: SHELF_FLOWER_EDIT,
           payload: {
             id: flower.id,
-            shelfId: flower.shelfId,
+            shelfId,
             order: flower.order,
-            name: flowerName || new Date().toString(),
-            description: flowerDescription || new Date().toString(),
+            name: flowerName,
+            description: flowerDescription,
             rrules: getRrules(),
           },
         });
         setDefaultValidationStatus();
-        setIsNameChanged(flowerName);
       } else {
         dispatch({
           type: SHELF_FLOWER_ADD,
@@ -296,12 +291,11 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
   };
 
   const closeModalFunc = () => {
-    const id = flower.shelfId ? flower.shelfId : shelfId;
-    dispatch({
-      type: SHELF_FLOWERS_GET,
-      payload: { shelfId: id },
+    closeFunc({
+      title: flowerName,
+      description: flowerDescription,
+      rrules: flowerRrules,
     });
-    closeFunc(isNameChanged);
   };
 
   return (

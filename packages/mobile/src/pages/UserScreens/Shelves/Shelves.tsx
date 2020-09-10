@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   View,
+  Text,
   ScrollView,
   Modal,
   TouchableOpacity,
@@ -17,18 +18,25 @@ import { ShelfFormConfig } from '../../../components/ShelfForms';
 import { CustomButton } from '../../../components/Button';
 
 const renderShelves = (shelves: ShelfInterface[], navigation: any) => {
-  let shelvesList = shelves.map(shelf => {
+  if (!shelves || !shelves.length) {
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
-        style={styles.shelves__item}
-        key={shelf.id}>
-        <Shelf {...shelf} />
-      </TouchableOpacity>
+      <View>
+        <Text>Sheves are empty</Text>
+      </View>
     );
-  });
-
-  return <ScrollView style={styles.shelves__list}>{shelvesList}</ScrollView>;
+  } else {
+    let shelvesList = shelves.map(shelf => {
+      return (
+        <TouchableOpacity
+          onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
+          style={styles.shelves__item}
+          key={shelf.id}>
+          <Shelf {...shelf} />
+        </TouchableOpacity>
+      );
+    });
+    return <ScrollView style={styles.shelves__list}>{shelvesList}</ScrollView>;
+  }
 };
 
 export const Shelves = ({ navigation }: any) => {
