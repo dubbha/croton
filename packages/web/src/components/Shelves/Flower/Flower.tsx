@@ -117,7 +117,7 @@ export const Flower = () => {
         <MoveFlower flowerId={flowerId} flowerName={flower?.name} shelfId={flower?.shelfId} />
         <AddImage id={flowerId} />
       </div>
-      {!!flower?.images.length && (
+      {!!flower?.images?.length && (
         <Gallery
           images={flower.images.map(({ image }) => image)}
           onDelete={deleteFlowerImage}
