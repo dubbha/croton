@@ -1,6 +1,6 @@
 import { call, takeLatest, put, delay } from 'redux-saga/effects';
 
-import { AUTH_REGISTER, AuthRegister, AUTH_CONFIRM_EMAIL } from '../actions';
+import { AuthConfirm, AUTH_CONFIRM, AUTH_LOGIN_SUCCESS } from '../actions';
 import {
   INFORMATION_NOTIFY,
   INFORMATION_LOADER,
@@ -8,24 +8,32 @@ import {
 } from '../../information/actions';
 import { httpSender } from './../../../services/http/http.service';
 
-function* handle(action: AuthRegister) {
+function* handle(action: AuthConfirm) {
   try {
-    const { email, password, firstName, lastName, token } = action.payload;
+    const { code } = action.payload;
     yield put({ type: INFORMATION_LOADER });
     const result = yield call(httpSender.send, {
-      router: '/api/auth/mobile-register',
-      body: { email, password, firstName, lastName, token },
+      router: '/api/auth/mobile-confirm',
+      body: { mobileVerificationToken: code },
     });
-    const { status } = result;
-    if (status === true) {
+    if (result) {
+      const isResultValid = result.id;
       yield put({
         type: INFORMATION_NOTIFY,
-        payload: { info: result.message },
+        payload: { info: 'Login...' },
       });
-      yield put({
-        type: AUTH_CONFIRM_EMAIL,
-        payload: { isEmailVerification: true },
-      });
+      if (!isResultValid) {
+        yield put({
+          type: INFORMATION_NOTIFY,
+          payload: { error: result.message },
+        });
+      } else {
+        yield put({
+          type: AUTH_LOGIN_SUCCESS,
+          payload: result,
+        });
+        httpSender.setAuthorizationToken(result.token);
+      }
     } else {
       yield put({
         type: INFORMATION_NOTIFY,
@@ -48,6 +56,6 @@ function* handle(action: AuthRegister) {
   }
 }
 
-export function* authRegisterSaga() {
-  yield takeLatest(AUTH_REGISTER, handle);
+export function* authConfirmSaga() {
+  yield takeLatest(AUTH_CONFIRM, handle);
 }

@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, delay } from 'redux-saga/effects';
 
 import {
   AUTH_PROFILE_UPDATE,
@@ -8,13 +8,13 @@ import {
 import {
   INFORMATION_NOTIFY,
   INFORMATION_LOADER,
+  INFORMATION_HIDE,
 } from '../../information/actions';
 import { httpSender } from '../../../services/http/http.service';
 
 function* handle(action: AuthProfileUpdate) {
   try {
     yield put({ type: INFORMATION_LOADER });
-
     const { id, firstName, lastName } = action.payload;
     const resultUpdateProfileInfo = yield call(httpSender.send, {
       router: '/api/management/user-update',
@@ -49,10 +49,18 @@ function* handle(action: AuthProfileUpdate) {
         },
       });
     }
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
+    });
   } catch (e) {
     yield put({
       type: INFORMATION_NOTIFY,
       payload: { error: e.data.message },
+    });
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
     });
   }
 }

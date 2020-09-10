@@ -90,6 +90,9 @@ export interface ShelfFlowerAdd {
   payload: {
     name: string;
     description: string;
+    rrules: any;
+    shelfId: number;
+    pictureUrls?: any;
   };
 }
 

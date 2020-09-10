@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   code: {
@@ -11,18 +11,34 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
 
+  code__header: {
+    height: 30,
+    marginBottom: 15,
+  },
+
   code__text: {
     fontSize: 20,
+    textAlign: 'center',
+  },
+
+  code__fields: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   code__field: {
-    height: 50,
+    minHeight: 75,
+    width: 75,
+    paddingBottom: 0,
     marginVertical: 20,
-    elevation: Platform.OS === 'android' ? 5 : undefined,
-    zIndex: 5,
+    marginHorizontal: 5,
+    borderBottomWidth: 1,
+    fontSize: 40,
+    textAlign: 'center',
+    textAlignVertical: 'bottom',
   },
 
   code__button: {
-    backgroundColor: 'orange',
+    height: 50,
   },
 });
