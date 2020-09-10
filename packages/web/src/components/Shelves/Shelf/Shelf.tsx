@@ -6,7 +6,6 @@ import { Confirm } from 'components';
 import { getShelf } from 'store/shelf/selectors';
 import { SHELF_GET_SHELVES, SHELF_DELETE_SHELF } from 'store/shelf';
 import { FlowerList } from '../FlowerList';
-import { InviteUserToShelf } from '../InviteUserToShelf';
 import { EditShelf } from '../EditShelf';
 import { UserManagement } from '../UserManagement';
 
@@ -48,7 +47,6 @@ export const Shelf = () => {
           onClose={refreshShelves}
         />
         <Confirm text="Delete Shelf" onConfirm={deleteShelf} />
-        <InviteUserToShelf shelfId={shelfId} />
         <UserManagement shelfId={shelfId} />
       </div>
       <FlowerList shelfId={shelfId} />

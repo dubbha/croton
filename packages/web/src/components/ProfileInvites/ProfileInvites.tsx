@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import { Modal, Button, InfoAlert, ErrorAlert } from 'elements';
 import { getAuth } from 'store/auth/selectors';
+import { getShelf } from 'store/shelf/selectors';
 import { AUTH_GET_INVITES } from 'store/auth';
+import { SHELF_INVITE_ACCEPT } from 'store/shelf';
 
 import './styles.scss';
 
 export const ProfileInvites = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const { invites, isLoading, info, error } = useSelector(getAuth);
+  const { invites } = useSelector(getAuth);
+  const { isLoading, info, error } = useSelector(getShelf);
 
   const handleOpen = () => {
     setShowModal(true);
-    dispatch({ type: AUTH_GET_INVITES });
   };
+
+  useEffect(() => {
+    dispatch({ type: AUTH_GET_INVITES });
+  }, [dispatch, invites.length]);
 
   const handleClose = () => {
     setShowModal(false);
   };
 
-  const calculateHours = (expiresIn) => {
+  const reloadInvites = () => { dispatch({ type: AUTH_GET_INVITES }); };
+
+  const calculateHours = (expiresIn: string) => {
     const dateNow = new Date().getTime();
     const expireDate = new Date(+expiresIn).getTime();
     const timeDifference = Math.abs(expireDate - dateNow);
@@ -29,9 +37,17 @@ export const ProfileInvites = () => {
     return (timeDifference / 1000 / 3600).toFixed(0);
   };
 
+  const acceptInvite = (shelfInvitationToken: string) => {
+    dispatch({
+      type: SHELF_INVITE_ACCEPT,
+      payload: { shelfInvitationToken },
+    });
+    reloadInvites();
+  };
+
   return (
     <>
-      <Button variant="outline-primary" className="profile-link" onClick={() => handleOpen()}>Invites</Button>
+      {invites.length && <Button variant="link" className="profile-link" onClick={() => handleOpen()}>Pending Invites ({invites.length})</Button>}
       <Modal show={showModal} onHide={handleClose} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -50,11 +66,11 @@ export const ProfileInvites = () => {
                   <th>Shelf Name</th>
                   <th>Shelf Location</th>
                   <th>Expires In</th>
-                  <th>Actions</th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
-                {invites.map(({ id, shelf, expiresIn }) => (
+                {invites.map(({ id, shelf, expiresIn, shelfInvitationToken }) => (
                   <tr key={id}>
                     <td>{shelf.name}</td>
                     <td>{shelf.location}</td>
@@ -62,9 +78,10 @@ export const ProfileInvites = () => {
                     <td>
                       <Button
                         disabled={isLoading}
-                        variant="outline-danger"
+                        variant="outline-success"
+                        onClick={() => acceptInvite(shelfInvitationToken)}
                       >
-                        Dismiss
+                        Accept
                       </Button>
                     </td>
                   </tr>
