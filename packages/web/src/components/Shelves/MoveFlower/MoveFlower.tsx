@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getShelf } from 'store/shelf/selectors';
-import { SHELF_MOVE_FLOWER, Shelf } from 'store/shelf';
+import { SHELF_MOVE_FLOWER, SHELF_GET_SHELVES, SHELF_RESET, Shelf } from 'store/shelf';
 
 import { Modal, Button, BookmarkIcon } from 'elements';
 
@@ -22,11 +22,13 @@ export const MoveFlower = ({ flowerId, flowerName = '', shelfId = null }: Props)
   const { shelves, error, info } = useSelector(getShelf);
   const dispatch = useDispatch();
 
+  const resetState = useCallback(() => { dispatch({ type: SHELF_RESET }); }, [dispatch]);
+
   const handleClose = () => {
     setShowModal(false);
   };
 
-  const moveFlower = (targetShelfId: number): void => {
+  const moveFlower = (targetShelfId: number | undefined): void => {
     dispatch({
       type: SHELF_MOVE_FLOWER,
       payload: { flowerId, targetShelfId, shelfId },
@@ -34,14 +36,25 @@ export const MoveFlower = ({ flowerId, flowerName = '', shelfId = null }: Props)
     return undefined;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (shelves.length > 0) {
+      return undefined;
+    }
+    dispatch({ type: SHELF_GET_SHELVES });
+  }, [dispatch, shelves.length]);
+
+  useEffect(() => {
     if (info) {
       const timeoutId = setTimeout(() => {
         handleClose();
+        resetState();
       }, 2000);
-      return () => { clearTimeout(timeoutId); };
+      return () => {
+        resetState();
+        clearTimeout(timeoutId);
+      };
     }
-  }, [info]);
+  }, [info, resetState]);
 
   const [currentSelf, ...possibleTargetShelves] = shelves.reduce((acc, shelf) => {
     if (Number(shelfId) === Number(shelf.id)) {
@@ -67,10 +80,10 @@ export const MoveFlower = ({ flowerId, flowerName = '', shelfId = null }: Props)
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h4 className="moveFlowerModalSubtitle">
+              <h6 className="moveFlowerModalSubtitle">
                 The current shelf is{' '}
                 <strong>{currentSelf?.name}</strong>
-              </h4>
+              </h6>
               <MoveFlowerForm
                 onSubmit={moveFlower}
                 shelves={possibleTargetShelves}
