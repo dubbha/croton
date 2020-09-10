@@ -66,7 +66,7 @@ export const ProfileInvites = () => {
                   <th>Shelf Name</th>
                   <th>Shelf Location</th>
                   <th>Expires In</th>
-                  <th />
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
