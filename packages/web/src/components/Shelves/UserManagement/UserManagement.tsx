@@ -112,7 +112,11 @@ export const UserManagement = ({ shelfId }: Props) => {
                     ))}
                   </tbody>
                 </Table>
-              ) : <div className="mt-2 mb-2"><InfoAlert>You do not have any invites yet.</InfoAlert></div>}
+              ) : !info && (
+                <div className="mt-2 mb-2">
+                  <InfoAlert>You do not have any invites yet.</InfoAlert>
+                </div>
+              )}
             </Tab>
           </Tabs>
         </Modal.Body>
