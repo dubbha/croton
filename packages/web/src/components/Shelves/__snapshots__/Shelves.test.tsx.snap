@@ -2,34 +2,38 @@
 
 exports[`components/Shelves should render successfully 1`] = `
 <div
-  class="container shelves"
+  class="container container-inner"
 >
-  <h1
-    class="shelves-header"
+  <div
+    class="shelves"
   >
-    <svg
-      aria-hidden="true"
-      class="svg-inline--fa fa-seedling fa-w-16 "
-      data-icon="seedling"
-      data-prefix="fas"
-      focusable="false"
-      role="img"
-      viewBox="0 0 512 512"
-      xmlns="http://www.w3.org/2000/svg"
+    <h1
+      class="shelves-header"
     >
-      <path
-        d="M64 96H0c0 123.7 100.3 224 224 224v144c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V320C288 196.3 187.7 96 64 96zm384-64c-84.2 0-157.4 46.5-195.7 115.2 27.7 30.2 48.2 66.9 59 107.6C424 243.1 512 147.9 512 32h-64z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      class="icon-prefix"
-    >
-      My Shelves
-    </span>
-  </h1>
-  <div>
-    Shelf List
+      <svg
+        aria-hidden="true"
+        class="svg-inline--fa fa-seedling fa-w-16 "
+        data-icon="seedling"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M64 96H0c0 123.7 100.3 224 224 224v144c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V320C288 196.3 187.7 96 64 96zm384-64c-84.2 0-157.4 46.5-195.7 115.2 27.7 30.2 48.2 66.9 59 107.6C424 243.1 512 147.9 512 32h-64z"
+          fill="currentColor"
+        />
+      </svg>
+      <span
+        class="icon-prefix"
+      >
+        My Shelves
+      </span>
+    </h1>
+    <div>
+      Shelf List
+    </div>
   </div>
 </div>
 `;

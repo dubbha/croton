@@ -30,6 +30,7 @@ import './styles.scss';
 
 export const Flower = () => {
   const width = useMediaWidth();
+  const tableSize = ['xs', 'sm'].includes(width) ? 'sm' : '';
 
   const { params: { id } } = useRouteMatch();
   const flowerId = Number(id);
@@ -156,8 +157,8 @@ export const Flower = () => {
         ))}
       </ListGroup>
       <Heatmap actions={flower?.actions} />
-      <Stats actions={flower?.actions} rrules={flower?.rrules} />
-      <Log actions={flower?.actions} />
+      <Stats actions={flower?.actions} rrules={flower?.rrules} tableSize={tableSize} />
+      <Log actions={flower?.actions} tableSize={tableSize} />
     </div>
   );
 };
