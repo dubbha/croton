@@ -78,10 +78,4 @@ export default StyleSheet.create({
     elevation: Platform.OS === 'android' ? 5 : undefined,
     zIndex: 5,
   },
-
-  container__img: {
-    resizeMode: 'contain',
-    position: 'relative',
-    overflow: 'hidden',
-  },
 });

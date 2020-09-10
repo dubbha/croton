@@ -1,7 +1,3 @@
-export const INFORMATION_NOTIFY = 'INFORMATION_NOTIFY';
-export const INFORMATION_HIDE = 'INFORMATION_NOTIFY_HIDE';
-export const INFORMATION_LOADER = 'INFORMATION_LOADER';
-export const INFORMATION_LOADER_HIDE = 'INFORMATION_LOADER_HIDE';
 export interface InformationState {
   isLoading: boolean;
   status: null | boolean;
@@ -12,4 +8,12 @@ export interface InformationState {
 export interface PayloadInformationNotify {
   type: 'error' | 'info';
   message: 'string';
+}
+export interface PayloadInformatinoPushnotification {
+  id: string;
+  foreground: boolean;
+  title: string;
+  message: string;
+  sound: string | null;
+  userInteraction: boolean;
 }

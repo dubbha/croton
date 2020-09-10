@@ -14,7 +14,7 @@ import {
 import { FlowerFormConfig } from '../../../components/FlowerForms';
 import { CustomButton } from '../../../components/Button';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { SHELF_FLOWERS_GET } from '../../../store/shelves/actions';
+import { SHELF_FLOWERS_GET, SHELVES_GET } from '../../../store/shelves/actions';
 import { Flower } from '../../../components/Flower';
 
 export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
@@ -30,13 +30,24 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
     return state.shelves.flowers;
   });
 
+  useEffect(() => {
+    dispatch({
+      type: SHELF_FLOWERS_GET,
+      payload: { shelfId },
+    });
+  }, [dispatch, shelfId]);
+
   const renderFlowers = (flowers: FlowerInterface[], nav: any) => {
     let flowersList;
     if (!flowers.length) {
-      flowersList = <Text>Shelves are empty</Text>;
+      flowersList = (
+        <View>
+          <Text>Shelves are empty</Text>
+        </View>
+      );
     } else {
       // TODO: Why we shouldn't send shelfId in every flower (we have it in db);
-      flowersList = flowers.map(flower => {
+      const items = flowers.map(flower => {
         return (
           <TouchableOpacity
             onPress={() =>
@@ -48,8 +59,9 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
           </TouchableOpacity>
         );
       });
+      flowersList = <ScrollView style={styles.shelf__list}>{items}</ScrollView>;
     }
-    return <ScrollView style={styles.shelf__list}>{flowersList}</ScrollView>;
+    return flowersList;
   };
 
   const renderSettings = () => (
@@ -75,6 +87,7 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
         <ShelfFormDelete
           shelf={params}
           closeFunc={() => {
+            dispatch({ type: SHELVES_GET });
             setIsShowFormRemove(false);
           }}
         />
@@ -101,19 +114,16 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
         <FlowerFormConfig
           shelfId={shelfId}
           closeFunc={() => {
+            dispatch({
+              type: SHELF_FLOWERS_GET,
+              payload: { shelfId },
+            });
             setIsShowFormFlower(false);
           }}
         />
       </View>
     </Modal>
   );
-
-  useEffect(() => {
-    dispatch({
-      type: SHELF_FLOWERS_GET,
-      payload: { shelfId },
-    });
-  }, [dispatch, shelfId]);
 
   return (
     <SafeAreaView style={styles.shelf}>

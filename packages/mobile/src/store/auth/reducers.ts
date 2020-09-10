@@ -6,12 +6,14 @@ import {
   AUTH_CONFIRM_EMAIL,
   AuthState,
   AuthActionTypes,
+  AUTH_TOKEN_SET,
 } from './actions';
 
 export const initialState: AuthState = {
   isAuthenticated: false,
   id: null,
   token: null,
+  mobileToken: null,
   firstName: null,
   lastName: null,
   email: null,
@@ -32,8 +34,6 @@ export function authReducer(
         email,
         firstName,
         lastName,
-        error: null,
-        info: null,
       };
     }
 
@@ -48,14 +48,13 @@ export function authReducer(
     // TODO: After logout we should clean shelves store too
     case AUTH_LOGOUT: {
       return {
+        ...state,
         isAuthenticated: false,
         id: null,
         token: null,
         email: null,
         firstName: null,
         lastName: null,
-        error: null,
-        info: null,
         isEmailVerification: false,
       };
     }
@@ -65,13 +64,21 @@ export function authReducer(
       const data = action.payload;
       return {
         ...state,
-        data,
+        ...data,
       };
     }
 
     case AUTH_PROFILE_UPDATE_EMAIL: {
       return {
         ...state,
+      };
+    }
+
+    case AUTH_TOKEN_SET: {
+      const { mobileToken } = action.payload;
+      return {
+        ...state,
+        mobileToken,
       };
     }
 

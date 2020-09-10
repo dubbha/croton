@@ -26,6 +26,7 @@ import { NotifyMessage } from './../../../components/NotifyMessage';
 
 const signInBg = require('./../../../assets/img/bg-signIn.png');
 
+// TODO: Should remove memory lick
 class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
   constructor(props: AuthorizationProps) {
     super(props);
@@ -55,7 +56,8 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
     if (isValidAllFields) {
       const email = this.state.email;
       const password = this.state.password;
-      this.props.submitForm({ email, password });
+      const registrationToken = this.props.mobileToken;
+      this.props.submitForm({ email, password, registrationToken });
     } else {
       setTimeout(() => {
         hideMessageClassComponent(this, [
@@ -148,8 +150,8 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
 }
 
 const mapStateToProps = ({ auth }: InterfaceStore) => {
-  const { error } = auth;
-  return { error };
+  const { error, mobileToken } = auth;
+  return { error, mobileToken };
 };
 
 const mapDispatchToProps = (dispatch: any) => {

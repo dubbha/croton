@@ -24,6 +24,7 @@ export default StyleSheet.create({
 
   flowerForm__body: {
     flex: 1,
+    justifyContent: 'center',
     paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
   },
 
@@ -46,9 +47,8 @@ export default StyleSheet.create({
   },
 
   flowerForm__message: {
-    flex: 0.1,
     marginTop: 10,
-    minHeight: 30,
+    height: 30,
   },
 
   flowerForm__accordions: {
