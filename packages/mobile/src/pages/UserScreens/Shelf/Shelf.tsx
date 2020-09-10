@@ -42,7 +42,7 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
     if (!flowers.length) {
       flowersList = (
         <View>
-          <Text>Shelves are empty</Text>
+          <Text>Shelf is empty</Text>
         </View>
       );
     } else {

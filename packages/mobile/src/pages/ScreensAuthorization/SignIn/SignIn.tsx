@@ -26,7 +26,7 @@ import { NotifyMessage } from './../../../components/NotifyMessage';
 
 const signInBg = require('./../../../assets/img/bg-signIn.png');
 
-// TODO: Should remove memory lick
+// TODO: Should remove memory leak
 class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
   constructor(props: AuthorizationProps) {
     super(props);
