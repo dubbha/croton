@@ -21,7 +21,7 @@ const renderShelves = (shelves: ShelfInterface[], navigation: any) => {
   if (!shelves || !shelves.length) {
     return (
       <View>
-        <Text>Sheves are empty</Text>
+        <Text>Shelves are empty</Text>
       </View>
     );
   } else {

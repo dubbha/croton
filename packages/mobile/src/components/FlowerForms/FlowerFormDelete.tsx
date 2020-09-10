@@ -24,7 +24,6 @@ export const FlowerFormDelete: FC<ShelfFormConfigProps> = ({
   shelfId,
   closeFunc,
 }) => {
-  // const { id, shelfId } = shelf;
   const dispatch = useDispatch();
   const navigation = useNavigation();
 

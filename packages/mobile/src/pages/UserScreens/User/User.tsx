@@ -18,7 +18,7 @@ import { httpSender } from '../../../services/http/http.service';
 export const User = ({ navigation }: any) => {
   // TODO: Get image from user profile
   const image = { uri: 'https://reactjs.org/logo-og.png' };
-  const { token: registrationToken } = useSelector(state => state.auth);
+  const { mobileToken: registrationToken } = useSelector(state => state.auth);
 
   useEffect(() => {
     httpSender.send({
