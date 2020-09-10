@@ -351,8 +351,8 @@ export default class DBService {
     }));
   }
 
-  async deleteImagesFromFlower(images: number[]) {
-    await Promise.all(images.map(async (id) => {
+  async deleteImagesFromFlower(imageIds: number[]) {
+    await Promise.all(imageIds.map(async (id) => {
       await this.imageRepository.delete({
         id
       });

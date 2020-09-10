@@ -97,7 +97,7 @@ export default class ShelfController extends BaseController {
       this.addImagesToFlowerHandler
     );
 
-    this.router.delete(
+    this.router.post(
       this.serverApi.shelfFlowerDeleteImages,
       authMiddleware,
       shelfUserMiddleware,

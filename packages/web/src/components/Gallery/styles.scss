@@ -1,9 +1,20 @@
+@import '../../custom.scss';
+
 .gallery {
-  padding: 15px 0;
+  width: 100%;
+  padding: 1rem;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
-  margin: 10px;
+  margin: 1rem 0 0 0;
+
+  @include media-breakpoint-up(md) {
+    width: 75%;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 50%;
+  }
 
   &-image {
     object-fit: cover;
@@ -13,5 +24,20 @@
 
   &-item {
     height: 400px;
+
+    &-icon {
+      color: white;
+      opacity: 0.5;
+      cursor: pointer;
+    }
   }
+}
+
+.carousel-caption {
+    top: 0;
+    right: 0 !important;
+    bottom: auto !important;
+    left: auto !important;
+    padding: 1rem !important;
+    text-align: right !important;
 }

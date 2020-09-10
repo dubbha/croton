@@ -2,8 +2,8 @@ import { IsArray, IsNumber } from 'class-validator';
 
 export default class ShelfDeleteImageDto {
   @IsNumber()
-  shelfId: number;
+  flowerId: number;
 
   @IsArray()
-  images: number[];
+  imageIds: number[];
 }

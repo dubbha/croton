@@ -9,3 +9,4 @@ export * from './spinner';
 export * from './accordion';
 export * from './listgroup';
 export * from './table';
+export * from './carousel';

@@ -66,6 +66,10 @@ export const SHELF_ADD_FLOWER_IMAGES = 'SHELF_ADD_FLOWER_IMAGES';
 export const SHELF_ADD_FLOWER_IMAGES_SUCCESS = 'SHELF_ADD_FLOWER_IMAGES_SUCCESS';
 export const SHELF_ADD_FLOWER_IMAGES_ERROR = 'SHELF_ADD_FLOWER_IMAGES_ERROR';
 
+export const SHELF_DELETE_FLOWER_IMAGES = 'SHELF_DELETE_FLOWER_IMAGES';
+export const SHELF_DELETE_FLOWER_IMAGES_SUCCESS = 'SHELF_DELETE_FLOWER_IMAGES_SUCCESS';
+export const SHELF_DELETE_FLOWER_IMAGES_ERROR = 'SHELF_DELETE_FLOWER_IMAGES_ERROR';
+
 export const SHELF_ACTION = 'SHELF_ACTION';
 export const SHELF_ACTION_SUCCESS = 'SHELF_ACTION_SUCCESS';
 export const SHELF_ACTION_ERROR = 'SHELF_ACTION_ERROR';
@@ -334,6 +338,21 @@ export interface ShelfAddFlowerImagesError {
   payload: { error: string };
 }
 
+export interface ShelfDeleteFlowerImages {
+  type: typeof SHELF_DELETE_FLOWER_IMAGES,
+  payload: { flowerId: number, imageIds: number[] };
+}
+
+export interface ShelfDeleteFlowerImagesSuccess {
+  type: typeof SHELF_DELETE_FLOWER_IMAGES_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfDeleteFlowerImagesError {
+  type: typeof SHELF_DELETE_FLOWER_IMAGES_ERROR;
+  payload: { error: string };
+}
+
 export interface ShelfAction {
   type: typeof SHELF_ACTION;
   payload: { action: Actions, flowerId: number, shelfId: number };
@@ -447,6 +466,9 @@ export type ShelfActionTypes =
   | ShelfAddFlowerImages
   | ShelfAddFlowerImagesSuccess
   | ShelfAddFlowerImagesError
+  | ShelfDeleteFlowerImages
+  | ShelfDeleteFlowerImagesSuccess
+  | ShelfDeleteFlowerImagesError
   | ShelfAction
   | ShelfActionSuccess
   | ShelfActionError
