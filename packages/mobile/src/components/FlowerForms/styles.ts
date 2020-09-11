@@ -4,28 +4,22 @@ import { COMPONENTS_STYLE, COLORS } from '../../styles';
 export default StyleSheet.create({
   flowerForm: {
     flex: 1,
-    flexDirection: 'column',
   },
 
-  flowerForm__modal: {
+  flowerForm__content: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: COLORS.lightMain,
+  },
+
+  flowerForm__keyboard: {
+    flexGrow: 1,
   },
 
   flowerForm__header: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
     height: 55,
     paddingRight: 20,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGrey,
     paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
-  },
-
-  flowerForm__header__text: {
-    fontWeight: '800',
   },
 
   flowerForm__body: {
@@ -34,9 +28,32 @@ export default StyleSheet.create({
     paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
   },
 
+  flowerForm__footer: {
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingTop: 10,
+    paddingBottom: 30,
+  },
+
+  flowerForm__header__content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+
+  flowerForm__header__text: {
+    fontWeight: '800',
+  },
+
   flowerForm__message: {
     marginTop: 10,
-    minHeight: 30,
+    height: 30,
+  },
+
+  flowerForm__accordions: {
+    marginTop: 20,
+    maxHeight: 300,
   },
 
   flowerForm__inputWrap: {
@@ -59,13 +76,16 @@ export default StyleSheet.create({
     zIndex: 5,
   },
 
-  flowerForm__buttonWrap: {
-    height: 70,
-    marginTop: 20,
-    justifyContent: 'space-between',
+  flowerForm__accordion: {
+    marginTop: 15,
+  },
+
+  flowerForm__accordion__first: {
+    marginTop: 0,
   },
 
   flowerForm__button: {
+    marginTop: 40,
     height: 50,
     width: '100%',
   },

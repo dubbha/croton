@@ -1,0 +1,10 @@
+@import '../../assets/styles/theme';
+
+.profile-link {
+  color: $color-grass;
+
+  &:hover {
+    color: $color-grass-dark;
+    cursor: pointer;
+  }
+}

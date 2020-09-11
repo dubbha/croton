@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   KeyboardAvoidingView,
   View,
@@ -11,59 +11,52 @@ import {
 } from 'react-native';
 
 import styles from './styles';
-import { SCREEN_AUTHORIZATION } from '../../screens';
-import { InputConfigs } from '../../../components/Input/inputConfigs';
 import { CustomButton } from '../../../components/Button';
-import { CustomInput } from '../../../components/Input';
+import { AUTH_CONFIRM } from '../../../store/auth/actions';
+import { NotifyMessage } from '../../../components/NotifyMessage';
+import { TextInput } from 'react-native-gesture-handler';
 
 export const VerificationEmailWithCode = () => {
-  const navigation = useNavigation();
-  const [code, setCode] = useState('');
-  const [validationStatus, setValidationStatus] = useState({
-    status: null,
-    isShowMessage: false,
-  });
+  const dispatch = useDispatch();
+  const [codeLetterFirst, setCodeLetterFirst] = useState('');
+  const [codeLetterSecond, setCodeLetterSecond] = useState('');
+  const [codeLetterThird, setCodeLetterThird] = useState('');
+  const [codeLetterFourth, setCodeLetterFourth] = useState('');
+  const { pushNotification } = useSelector(state => state.information);
+  let message;
+  if (pushNotification) {
+    message = pushNotification.message;
+  } else {
+    message = '';
+  }
+  const statelessStr = 'Your activation code is: ';
+  const messageCode = message.replace(statelessStr, '');
 
-  const validateInput = (isForced?: boolean) => {
-    const result = {
-      status: null,
-      isShowMessage: false,
-    };
-    if (!code.length) {
-      setValidationStatus(result);
-      return;
-    }
-
-    const validator = InputConfigs.verificationEmailWithCode.validator;
-    const status = validator(code);
-
-    result.status = status;
-    if (!status) {
-      result.isShowMessage = true;
-      setTimeout(function() {
-        const defaultResult = {
-          status: result.status,
-          isShowMessage: false,
-        };
-        setValidationStatus(defaultResult);
-      }, 2000);
-    } else {
-      result.isShowMessage = false;
-    }
-
-    setValidationStatus(result);
-
-    if (isForced) {
-      return status;
-    }
+  const setCodeLetter = (code: string) => {
+    setCodeLetterFirst(code[0]);
+    setCodeLetterSecond(code[1]);
+    setCodeLetterThird(code[2]);
+    setCodeLetterFourth(code[3]);
   };
 
-  const submitForm = () => {
-    const status = validateInput();
-    // TODO: navigate to SCREEN_USER or show message
-    if (status) {
-      navigation.navigate(SCREEN_AUTHORIZATION);
+  const getFullCode = () => {
+    return (
+      codeLetterFirst + codeLetterSecond + codeLetterThird + codeLetterFourth
+    );
+  };
+
+  useEffect(() => {
+    if (messageCode) {
+      setCodeLetter(messageCode);
     }
+  }, [messageCode]);
+
+  const submitForm = () => {
+    const code = getFullCode();
+    dispatch({
+      type: AUTH_CONFIRM,
+      payload: { code },
+    });
   };
 
   return (
@@ -72,21 +65,51 @@ export const VerificationEmailWithCode = () => {
       style={styles.code}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.code__container}>
-          <Text style={styles.code__text}>Pls write code from your email</Text>
-          <View style={styles.code__field}>
-            <CustomInput
-              inputType="verificationEmailWithCode"
-              validationStatus={validationStatus}
-              onChangeText={(value: string) => setCode(value)}
-              onBlur={() => validateInput()}
-            />
+          <View style={styles.code__header}>
+            <NotifyMessage />
           </View>
-          <View style={styles.code__button}>
-            <CustomButton
-              variant={'primary'}
-              title={'Submit'}
-              onPress={() => submitForm()}
-            />
+          <View style={styles.code__body}>
+            <Text style={styles.code__text}>
+              Pls enter code from notification
+            </Text>
+            {/* TODO: Should add transition when set letter */}
+            <View style={styles.code__fields}>
+              <TextInput
+                style={styles.code__field}
+                autoCapitalize="none"
+                maxLength={1}
+                onChangeText={letter => setCodeLetterFirst(letter)}
+                value={codeLetterFirst}
+              />
+              <TextInput
+                style={styles.code__field}
+                autoCapitalize="none"
+                maxLength={1}
+                onChangeText={letter => setCodeLetterSecond(letter)}
+                value={codeLetterSecond}
+              />
+              <TextInput
+                style={styles.code__field}
+                autoCapitalize="none"
+                maxLength={1}
+                onChangeText={letter => setCodeLetterThird(letter)}
+                value={codeLetterThird}
+              />
+              <TextInput
+                style={styles.code__field}
+                autoCapitalize="none"
+                maxLength={1}
+                onChangeText={letter => setCodeLetterFourth(letter)}
+                value={codeLetterFourth}
+              />
+            </View>
+            <View style={styles.code__button}>
+              <CustomButton
+                variant={'primary'}
+                title={'Submit'}
+                onPress={() => submitForm()}
+              />
+            </View>
           </View>
         </SafeAreaView>
       </TouchableWithoutFeedback>

@@ -3,6 +3,7 @@ import { Actions } from '../constants/actions';
 import Shelf from './shelf.entity';
 import Action from './action.entity';
 import Notification from './notification.entity';
+import Image from './image.entity';
 
 @Entity()
 export default class Flower {
@@ -18,9 +19,6 @@ export default class Flower {
   @Column()
   description: string;
 
-  @Column('simple-array')
-  pictureUrls: string[];
-
   @Column('simple-json')
   rrules: { [key in Actions]: string }
 
@@ -32,4 +30,7 @@ export default class Flower {
 
   @OneToMany(() => Notification, notification => notification.flower)
   notifications: Notification[];
+
+  @OneToMany(() => Image, image => image.flower)
+  images: Image[];
 }

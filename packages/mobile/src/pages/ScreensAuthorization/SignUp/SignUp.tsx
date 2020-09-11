@@ -3,7 +3,6 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   View,
-  Image,
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
@@ -112,6 +111,7 @@ export class SignUpComponent extends React.Component<
         password: this.state.password,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
+        token: this.props.mobileToken,
       });
     } else {
       setTimeout(() => {
@@ -263,10 +263,6 @@ export class SignUpComponent extends React.Component<
                     onPress={() => this.submitForm()}
                   />
                 </View>
-                <Image
-                  style={styles.container__img}
-                  source={require('./../../../assets/img/bg-signIn.png')}
-                />
               </View>
             </View>
           </ScrollView>
@@ -277,8 +273,8 @@ export class SignUpComponent extends React.Component<
 }
 
 const mapStateToProps = ({ auth }: InterfaceStore) => {
-  const { error, info, isEmailVerification } = auth;
-  return { error, info, isEmailVerification };
+  const { error, info, isEmailVerification, mobileToken } = auth;
+  return { error, info, isEmailVerification, mobileToken };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -288,6 +284,7 @@ const mapDispatchToProps = (dispatch: any) => {
       password,
       firstName,
       lastName,
+      token,
     }: PayloadAuthRegister) =>
       dispatch({
         type: AUTH_REGISTER,
@@ -296,6 +293,7 @@ const mapDispatchToProps = (dispatch: any) => {
           password,
           firstName,
           lastName,
+          token,
         },
       }),
   };

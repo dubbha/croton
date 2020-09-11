@@ -27,7 +27,7 @@ export default class App {
   }
 
   private initializeMiddleware(): void {
-    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.json({ limit: '20mb' }));
     this.app.use(cors());
     this.app.use(morgan('combined'));
     this.app.use(passport.initialize());

@@ -1,4 +1,4 @@
-import { IsString, IsArray, IsOptional, IsNumber, IsObject } from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsObject } from 'class-validator';
 import { Actions } from '../constants/actions';
 
 export default class ShelfAddFlowerDto {
@@ -18,8 +18,4 @@ export default class ShelfAddFlowerDto {
   @IsObject()
   @IsOptional()
   rrules?: { [key in Actions]: string }
-
-  @IsArray()
-  @IsOptional()
-  pictureUrls?: string[]
 }

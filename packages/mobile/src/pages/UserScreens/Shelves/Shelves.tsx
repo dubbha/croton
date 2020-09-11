@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   View,
+  Text,
   ScrollView,
   Modal,
-  Text,
   TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,11 +18,14 @@ import { ShelfFormConfig } from '../../../components/ShelfForms';
 import { CustomButton } from '../../../components/Button';
 
 const renderShelves = (shelves: ShelfInterface[], navigation: any) => {
-  let shelvesList;
-  if (!shelves.length) {
-    shelvesList = <Text>Shelves are empty</Text>;
+  if (!shelves || !shelves.length) {
+    return (
+      <View>
+        <Text>Shelves are empty</Text>
+      </View>
+    );
   } else {
-    shelvesList = shelves.map(shelf => {
+    let shelvesList = shelves.map(shelf => {
       return (
         <TouchableOpacity
           onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
@@ -32,8 +35,8 @@ const renderShelves = (shelves: ShelfInterface[], navigation: any) => {
         </TouchableOpacity>
       );
     });
+    return <ScrollView style={styles.shelves__list}>{shelvesList}</ScrollView>;
   }
-  return <ScrollView style={styles.shelves__list}>{shelvesList}</ScrollView>;
 };
 
 export const Shelves = ({ navigation }: any) => {

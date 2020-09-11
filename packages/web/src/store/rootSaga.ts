@@ -13,10 +13,13 @@ import {
   authUpdateProfileSaga,
   authEmailResetSaga,
   authEmailUpdateSaga,
+  authGetInvitesSaga,
 } from './auth/sagas';
 import {
+  shelfGetInvitesSaga,
   shelfInviteSaga,
   shelfInviteAcceptSaga,
+  shelfInviteRevokeSaga,
   shelfDeleteUserSaga,
   shelfAddShelfSaga,
   shelfEditShelfSaga,
@@ -27,8 +30,13 @@ import {
   shelfDeleteFlowerSaga,
   shelfGetFlowersSaga,
   shelfGetFlowerSaga,
+  shelfAddFlowerImagesSaga,
+  shelfDeleteFlowerImagesSaga,
   shelfActionSaga,
   shelfGetLastActionsSaga,
+  shelfGetActionsSaga,
+  shelfGetUsersSaga,
+  shelfMoveFlowerSaga,
 } from './shelf/sagas';
 import { notificationRegisterSaga } from './notification/sagas';
 
@@ -47,8 +55,11 @@ export function* rootSaga() {
     authUpdateProfileSaga(),
     authEmailResetSaga(),
     authEmailUpdateSaga(),
+    authGetInvitesSaga(),
+    shelfGetInvitesSaga(),
     shelfInviteSaga(),
     shelfInviteAcceptSaga(),
+    shelfInviteRevokeSaga(),
     shelfDeleteUserSaga(),
     shelfAddShelfSaga(),
     shelfEditShelfSaga(),
@@ -59,8 +70,13 @@ export function* rootSaga() {
     shelfDeleteFlowerSaga(),
     shelfGetFlowersSaga(),
     shelfGetFlowerSaga(),
+    shelfAddFlowerImagesSaga(),
+    shelfDeleteFlowerImagesSaga(),
     shelfActionSaga(),
     shelfGetLastActionsSaga(),
+    shelfGetActionsSaga(),
     notificationRegisterSaga(),
+    shelfGetUsersSaga(),
+    shelfMoveFlowerSaga(),
   ]);
 }

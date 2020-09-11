@@ -1,9 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import PushNotification from 'react-native-push-notification';
+// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
-import { InterfaceStore } from '../../store';
 import {
   SCREEN_AUTHORIZATION,
   SCREEN_EMAIL_VERIFICATION,
@@ -30,6 +31,8 @@ import { Shelves } from '../UserScreens/Shelves';
 import { Shelf } from '../UserScreens/Shelf';
 import { Flowers } from '../UserScreens/Flowers';
 import { Flower } from '../UserScreens/Flower';
+import { AUTH_TOKEN_SET } from '../../store/auth/actions';
+import { INFORMATION_PUSHNOTIFICATION } from '../../store/information/actions';
 
 export const Stack = createStackNavigator();
 
@@ -105,7 +108,51 @@ type MainScreenStateProps = {
   isAuthenticated?: boolean;
 };
 
-const MainComponent = ({ isAuthenticated }: MainScreenStateProps) => {
+export const MainScreen = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+  const { isAuthenticated } = auth;
+
+  useEffect(() => {
+    // TODO: this is changes for test with real dev account
+    // should uncomment when get dev credentials
+    // PushNotificationIOS.requestPermissions(['alert', 'badge', 'sound']);
+
+    // PushNotificationIOS.addEventListener('register', function(data) {
+    //   console.log('PushNotificationIOS register');
+    //   console.dir(data);
+    // });
+
+    // PushNotificationIOS.addEventListener('notification', function(data) {
+    //   console.log('PushNotificationIOS notification');
+    //   console.dir(data);
+    // });
+
+    // PushNotificationIOS.addEventListener('registrationError', function(data) {
+    //   console.log('PushNotificationIOS registrationError');
+    //   console.dir(data);
+    // });
+    PushNotification.configure({
+      onRegister: function({ token }) {
+        console.log(token);
+        dispatch({
+          type: AUTH_TOKEN_SET,
+          payload: {
+            mobileToken: token,
+          },
+        });
+      },
+
+      onNotification: function(notification: any) {
+        console.log(notification);
+        dispatch({
+          type: INFORMATION_PUSHNOTIFICATION,
+          payload: notification,
+        });
+      },
+    });
+  }, [dispatch]);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -114,13 +161,3 @@ const MainComponent = ({ isAuthenticated }: MainScreenStateProps) => {
     </NavigationContainer>
   );
 };
-
-const mapStateToProps = (state: InterfaceStore) => {
-  const auth = state.auth;
-  return auth;
-};
-
-export const MainScreen = connect(
-  mapStateToProps,
-  null,
-)(MainComponent);

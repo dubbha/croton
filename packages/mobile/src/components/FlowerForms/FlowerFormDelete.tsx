@@ -7,29 +7,31 @@ import styles from './styles';
 import { SCREEN_USER_SHELF } from '../../pages/screens';
 import {
   SHELF_FLOWER_DELETE,
-  SHELF_FLOWER_GET,
+  SHELF_FLOWERS_GET,
 } from '../../store/shelves/actions';
-import { ShelfInterface } from '../Shelf/interface';
 import { ShelfFormHeader } from './FlowerFormHeader';
 import { NotifyMessage } from '../NotifyMessage';
 import { CustomButton } from '../Button';
 
 interface ShelfFormConfigProps {
   closeFunc: (name?: string) => void;
-  shelf?: ShelfInterface;
+  flowerId: string;
+  shelfId: string;
 }
 
 export const FlowerFormDelete: FC<ShelfFormConfigProps> = ({
-  shelf = {},
+  flowerId,
+  shelfId,
   closeFunc,
 }) => {
-  const { id, shelfId } = shelf;
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.flowerForm}>
-      <ShelfFormHeader closeFunc={closeFunc} />
+      <View style={styles.flowerForm__header}>
+        <ShelfFormHeader closeFunc={closeFunc} />
+      </View>
       <View style={styles.flowerForm__body}>
         <View style={styles.flowerForm__message}>
           <NotifyMessage />
@@ -37,22 +39,20 @@ export const FlowerFormDelete: FC<ShelfFormConfigProps> = ({
         <View>
           <Text>Are you sure?</Text>
         </View>
-        <View style={styles.flowerForm__buttonWrap}>
-          <View style={styles.flowerForm__button}>
-            <CustomButton
-              title="Confirm"
-              variant="primary"
-              onPress={() => {
-                dispatch({
-                  type: SHELF_FLOWER_DELETE,
-                  payload: { id, shelfId },
-                });
-                navigation.navigate(SCREEN_USER_SHELF);
-                dispatch({ type: SHELF_FLOWER_GET, payload: { shelfId } });
-                closeFunc();
-              }}
-            />
-          </View>
+        <View style={styles.flowerForm__button}>
+          <CustomButton
+            title="Confirm"
+            variant="primary"
+            onPress={() => {
+              dispatch({
+                type: SHELF_FLOWER_DELETE,
+                payload: { flowerId, shelfId },
+              });
+              navigation.navigate(SCREEN_USER_SHELF);
+              dispatch({ type: SHELF_FLOWERS_GET, payload: { shelfId } });
+              closeFunc();
+            }}
+          />
         </View>
       </View>
     </SafeAreaView>

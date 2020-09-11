@@ -4,6 +4,20 @@ export interface SocialProfile {
   pictureUrl: string;
 }
 
+export type Shelf = {
+  id: number;
+  name: string;
+  location: string;
+}
+
+export type Invite = {
+  id: number;
+  userEmail: string;
+  expiresIn: string;
+  shelf: Shelf;
+  shelfInvitationToken: string;
+}
+
 export interface AuthState {
   isLoading: boolean;
   isAuthenticated: boolean;
@@ -15,4 +29,5 @@ export interface AuthState {
   info: string | null;
   socialProfile: SocialProfile | null;
   isSignedInWithSocial: boolean;
+  invites: Invite[];
 }

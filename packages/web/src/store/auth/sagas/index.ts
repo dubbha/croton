@@ -11,3 +11,4 @@ export * from './authEmailReset.saga';
 export * from './authEmailUpdate.saga';
 export * from './addFacebook.saga';
 export * from './addGoogle.saga';
+export * from './authGetInvites.saga';

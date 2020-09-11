@@ -3,7 +3,6 @@ import { api } from './../../config/environment';
 type httpCongis = {
   router: string;
   body: object;
-  token: string;
 };
 
 class HttpSender {

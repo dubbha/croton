@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { View, Text } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './styles';
-import { INFORMATION_HIDE } from '../../store/information/actions';
 import { MessageOptions, NotifyMessageProps } from './interfaces';
 
 const renderLoader = () => {
@@ -32,17 +31,8 @@ const renderMessage = (data: MessageOptions) => {
   );
 };
 
-export const NotifyMessage: FC<NotifyMessageProps> = ({ timer }) => {
-  const dispatch = useDispatch();
+export const NotifyMessage: FC<NotifyMessageProps> = () => {
   const information = useSelector(state => state.information);
-  const dispatchDelay = 1500;
   const { type, message, isLoading } = information;
-
-  if (message) {
-    setTimeout(() => {
-      dispatch({ type: INFORMATION_HIDE });
-    }, timer || dispatchDelay);
-  }
-
   return isLoading ? renderLoader() : renderMessage({ type, message });
 };

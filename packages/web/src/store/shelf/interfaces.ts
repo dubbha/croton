@@ -8,19 +8,56 @@ export type Shelf = {
   pictureUrl: string,
 }
 
+export type FlowerRrules = { [key in Actions]: string };
+
+export type FlowerLastActions = {
+  [key in Actions]: {
+    timestamp: number;
+    user: { id: number, firstName: string, lastName: string };
+  }
+};
+
+export type FlowerAction = {
+  timestamp: number;
+  action: Actions;
+  firstName: string;
+  lastName: string;
+};
+
+export type Image = {
+  id: number,
+  image: string,
+}
+
 export type Flower = {
   id: number;
   name: string;
   description: string;
-  pictureUrls: string[];
-  rrules: { [key in Actions]: string };
-  lastActions: {
-    [key in Actions]: {
-      timestamp: number;
-      user: { id: number, firstName: string, lastName: string };
-    }
-  };
+  images: Image[];
+  rrules: FlowerRrules;
+  lastActions: FlowerLastActions;
+  actions: FlowerAction[];
   shelfId: number;
+}
+
+export type Invite = {
+  id: number;
+  userEmail: string;
+  expiresIn: string;
+}
+
+export type UserDetails = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  status: string;
+}
+
+export type User = {
+  userId: number;
+  shelfId: number;
+  isAdmin: boolean;
+  user: UserDetails;
 }
 
 export interface ShelfState {
@@ -30,4 +67,6 @@ export interface ShelfState {
   shelves: Shelf[];
   flowers: Flower[];
   flower: Flower | null;
+  invites: Invite[];
+  users: User[];
 }

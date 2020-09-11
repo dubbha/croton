@@ -2,10 +2,11 @@ import {
   SHELVES_GET,
   SHELVES_GET_SUCCESS,
   SHELVES_SHELF_ADD,
-  SHELF_FLOWER_GET,
+  SHELF_FLOWERS_GET,
   SHELF_FLOWER_ADD,
   ShelvesActionTypes,
-  SHELF_FLOWER_GET_SUCCESS,
+  SHELF_FLOWERS_GET_SUCCESS,
+  SHELF_FLOWER_GET,
 } from './actions';
 
 export const initialState = {
@@ -37,16 +38,23 @@ export function shelvesReducer(
       };
     }
 
-    case SHELF_FLOWER_GET: {
+    case SHELF_FLOWERS_GET: {
       return {
         ...state,
       };
     }
 
-    case SHELF_FLOWER_GET_SUCCESS: {
+    case SHELF_FLOWERS_GET_SUCCESS: {
       return {
         ...state,
         flowers: action.payload.flowers,
+      };
+    }
+
+    case SHELF_FLOWER_GET: {
+      return {
+        ...state,
+        flower: action.payload.flower,
       };
     }
 

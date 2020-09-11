@@ -3,15 +3,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { rrulestr } from 'rrule';
 import classNames from 'classnames';
-import { SHELF_GET_FLOWER, SHELF_DELETE_FLOWER, SHELF_ACTION } from 'store/shelf';
+import {
+  SHELF_GET_FLOWER,
+  SHELF_DELETE_FLOWER,
+  SHELF_ACTION,
+  SHELF_DELETE_FLOWER_IMAGES,
+} from 'store/shelf';
+import { useMediaWidth } from 'hooks';
 import { getFlower, getShelf } from 'store/shelf/selectors';
-import { LeafIcon, ListGroup, HandHoldingHeartIcon, FireAltIcon, ButtonWithLoader } from 'elements';
-import { Confirm } from 'components';
+import {
+  LeafIcon,
+  ListGroup,
+  HandHoldingHeartIcon,
+  FireAltIcon,
+  ButtonWithLoader,
+} from 'elements';
+import { Confirm, Gallery } from 'components';
 import { Actions } from 'constants/actions';
 import { EditFlower } from '../EditFlower';
+import { AddImage } from './AddImage';
+import { Heatmap } from './Heatmap';
+import { Stats } from './Stats';
+import { Log } from './Log';
+import { MoveFlower } from '../MoveFlower';
 import './styles.scss';
 
 export const Flower = () => {
+  const width = useMediaWidth();
+  const tableSize = ['xs', 'sm'].includes(width) ? 'sm' : '';
+
   const { params: { id } } = useRouteMatch();
   const flowerId = Number(id);
 
@@ -47,6 +67,11 @@ export const Flower = () => {
   const deleteFlower = () => dispatch({
     type: SHELF_DELETE_FLOWER,
     payload: { id: flowerId, shelfId: flower?.shelfId },
+  });
+
+  const deleteFlowerImage = (index: number) => dispatch({
+    type: SHELF_DELETE_FLOWER_IMAGES,
+    payload: { flowerId, imageIds: [flower?.images[index].id] },
   });
 
   const humanReadableRrules = flower?.rrules
@@ -85,12 +110,20 @@ export const Flower = () => {
       <p>{flower?.description}</p>
       <div className="flower-menu">
         <EditFlower
-          id={id}
+          id={flowerId}
           initialValues={flower || {}}
           onClose={handleClose}
         />
         <Confirm text="Delete Flower" onConfirm={deleteFlower} />
+        <MoveFlower flowerId={flowerId} flowerName={flower?.name} shelfId={flower?.shelfId} />
+        <AddImage id={flowerId} />
       </div>
+      {!!flower?.images?.length && (
+        <Gallery
+          images={flower.images.map(({ image }) => image)}
+          onDelete={deleteFlowerImage}
+        />
+      )}
       <ListGroup className="flower-actions">
         {Object.values(Actions).map(action => (
           <ListGroup.Item key={action}>
@@ -111,17 +144,21 @@ export const Flower = () => {
               {humanReadableRrules[action] && `: ${humanReadableRrules[action]}`}
             </span>
             <ButtonWithLoader
+              clickable={!actionMarked}
               isLoading={isLoading && actionMarked === action}
               isSuccess={!!info && actionMarked === action}
               isFailure={!!error && actionMarked === action}
               onClick={() => markActionPerformed(action)}
               onNotificationTimeout={handleNotificationTimeout}
             >
-              Mark Performed
+              {width === 'xs' ? 'Done' : 'Mark Performed'}
             </ButtonWithLoader>
           </ListGroup.Item>
         ))}
       </ListGroup>
+      <Heatmap actions={flower?.actions} />
+      <Stats actions={flower?.actions} rrules={flower?.rrules} tableSize={tableSize} />
+      <Log actions={flower?.actions} tableSize={tableSize} />
     </div>
   );
 };

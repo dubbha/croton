@@ -1,4 +1,4 @@
-import { SocialProfile } from './interfaces';
+import { SocialProfile, Invite } from './interfaces';
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
@@ -49,6 +49,10 @@ export const AUTH_RESET_EMAIL_ERROR = 'AUTH_RESET_EMAIL_ERROR';
 export const AUTH_UPDATE_EMAIL = 'AUTH_UPDATE_EMAIL';
 export const AUTH_UPDATE_EMAIL_SUCCESS = 'AUTH_UPDATE_EMAIL_SUCCESS';
 export const AUTH_UPDATE_EMAIL_ERROR = 'AUTH_UPDATE_EMAIL_ERROR';
+
+export const AUTH_GET_INVITES = 'AUTH_GET_INVITES';
+export const AUTH_GET_INVITES_SUCCESS = 'AUTH_GET_INVITES_SUCCESS';
+export const AUTH_GET_INVITES_ERROR = 'AUTH_GET_INVITES_ERROR';
 
 interface AuthLoginSuccessPayload {
   id: number;
@@ -250,6 +254,20 @@ export interface AuthUpdateEmailError {
   payload: { error: string };
 }
 
+export interface AuthGetInvites {
+  type: typeof AUTH_GET_INVITES;
+}
+
+export interface AuthGetInvitesSuccess {
+  type: typeof AUTH_GET_INVITES_SUCCESS;
+  payload: { invites: Invite[] };
+}
+
+export interface AuthGetInvitesError {
+  type: typeof AUTH_GET_INVITES_ERROR;
+  payload: { error: string };
+}
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
@@ -287,4 +305,7 @@ export type AuthActionTypes =
   | AuthResetEmailError
   | AuthUpdateEmail
   | AuthUpdateEmailSuccess
-  | AuthUpdateEmailError;
+  | AuthUpdateEmailError
+  | AuthGetInvites
+  | AuthGetInvitesSuccess
+  | AuthGetInvitesError;

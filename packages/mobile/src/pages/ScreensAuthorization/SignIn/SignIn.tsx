@@ -11,8 +11,8 @@ import {
 import { connect } from 'react-redux';
 
 import styles from './styles';
-import { InterfaceStore } from './../../../store';
 import { AUTH_LOGIN, PayloadAuthLogin } from './../../../store/auth/actions';
+import { InterfaceStore } from './../../../store';
 import { SignInState, AuthorizationProps } from './../interfaces';
 import {
   inputValidatorClassComponent,
@@ -24,6 +24,9 @@ import { Divider } from './../../../components/Divider';
 import { SocialLogin } from './../../../components/SocialLogin';
 import { NotifyMessage } from './../../../components/NotifyMessage';
 
+const signInBg = require('./../../../assets/img/bg-signIn.png');
+
+// TODO: Should remove memory leak
 class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
   constructor(props: AuthorizationProps) {
     super(props);
@@ -53,7 +56,8 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
     if (isValidAllFields) {
       const email = this.state.email;
       const password = this.state.password;
-      this.props.submitForm({ email, password });
+      const registrationToken = this.props.mobileToken;
+      this.props.submitForm({ email, password, registrationToken });
     } else {
       setTimeout(() => {
         hideMessageClassComponent(this, [
@@ -135,10 +139,7 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
                     onPress={() => this.submitForm()}
                   />
                 </View>
-                <Image
-                  style={styles.container__img}
-                  source={require('./../../../assets/img/bg-signIn.png')}
-                />
+                <Image style={styles.container__img} source={signInBg} />
               </View>
             </View>
           </ScrollView>
@@ -149,8 +150,8 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
 }
 
 const mapStateToProps = ({ auth }: InterfaceStore) => {
-  const { error } = auth;
-  return { error };
+  const { error, mobileToken } = auth;
+  return { error, mobileToken };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
