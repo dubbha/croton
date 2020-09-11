@@ -8,7 +8,9 @@ const authLogin = `${auth}/login`;
 const authLoginFacebook = `${auth}/facebook`;
 const authLoginGoogle = `${auth}/google`;
 const authRegister = `${auth}/register`;
+const authMobileRegister = `${auth}/mobile-register`;
 const authConfirm = `${auth}/confirm`;
+const authMobileConfirm = `${auth}/mobile-confirm`;
 const authPasswordReset = `${auth}/password-reset`;
 const authPasswordUpdate = `${auth}/password-update`;
 const userManagementEmailReset = `${management}/email-reset`;
@@ -17,20 +19,28 @@ const userManagementUserUpdate = `${management}/user-update`;
 const userManagementMergeWithSocial = `${management}/merge-with-social`;
 const userManagementAddFacebook = `${management}/add-facebook`;
 const userManagementAddGoogle = `${management}/add-google`;
+const userManagementShelfInvites = `${management}/user-invites`;
 const shelfUserInvite = `${shelf}/user-invite`;
+const shelfPendingInvites = `${shelf}/pending-invites`;
+const shelfRevokeInvite = `${shelf}/revoke-invite`;
 const shelfUserInviteAccept = `${shelf}/user-invite-accept`;
 const shelfUserDelete = `${shelf}/user-delete`;
+const shelfGetUsers = `${shelf}/get-users`;
 const shelfAddShelf = `${shelf}/add-shelf`;
 const shelfEditShelf = `${shelf}/edit-shelf`;
 const shelfDeleteShelf = `${shelf}/delete-shelf`;
 const shelfGetShelves = `${shelf}/get-shelves`;
 const shelfAddFlower = `${shelf}/add-flower`;
 const shelfEditFlower = `${shelf}/edit-flower`;
+const shelfFlowerAddImages = `${shelf}/flower-add-images`;
+const shelfFlowerDeleteImages = `${shelf}/flower-delete-images`;
+const shelfMoveFlower = `${shelf}/move-flower`;
 const shelfDeleteFlower = `${shelf}/delete-flower`;
 const shelfGetFlowers = `${shelf}/get-flowers`;
 const shelfGetFlower = `${shelf}/get-flower`;
 const shelfAction = `${shelf}/action`;
 const shelfGetLastActions = `${shelf}/get-last-actions`;
+const shelfGetActions = `${shelf}/get-actions`;
 const notificationRegister = `${notification}/register`;
 const internalNotification = `${internal}/notification`;
 const healthCheck = '/health-check';
@@ -40,9 +50,11 @@ export const api = {
   auth,
   authLogin,
   authRegister,
+  authMobileRegister,
   authLoginFacebook,
   authLoginGoogle,
   authConfirm,
+  authMobileConfirm,
   authPasswordReset,
   authPasswordUpdate,
   userManagementEmailReset,
@@ -51,20 +63,28 @@ export const api = {
   userManagementMergeWithSocial,
   userManagementAddFacebook,
   userManagementAddGoogle,
+  userManagementShelfInvites,
   shelfUserInvite,
+  shelfPendingInvites,
+  shelfRevokeInvite,
   shelfUserInviteAccept,
   shelfUserDelete,
+  shelfGetUsers,
   shelfAddShelf,
   shelfEditShelf,
   shelfDeleteShelf,
   shelfGetShelves,
   shelfAddFlower,
   shelfEditFlower,
+  shelfFlowerAddImages,
+  shelfFlowerDeleteImages,
+  shelfMoveFlower,
   shelfDeleteFlower,
   shelfGetFlowers,
   shelfGetFlower,
   shelfAction,
   shelfGetLastActions,
+  shelfGetActions,
   healthCheck,
   notificationRegister,
   internalNotification,

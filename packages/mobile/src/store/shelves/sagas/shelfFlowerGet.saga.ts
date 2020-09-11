@@ -1,8 +1,9 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest, delay } from 'redux-saga/effects';
 
 import {
   INFORMATION_NOTIFY,
   INFORMATION_LOADER,
+  INFORMATION_HIDE,
 } from '../../information/actions';
 import {
   SHELF_FLOWER_GET,
@@ -13,17 +14,21 @@ import { httpSender } from '../../../services/http/http.service';
 
 function* handle(action: ShelfFlowerGet) {
   try {
-    const { shelfId } = action.payload;
+    const { id } = action.payload;
     yield put({ type: INFORMATION_LOADER });
 
-    const flowers = yield call(httpSender.send, {
-      router: '/api/shelf/get-flowers',
-      body: { shelfId },
+    const flower = yield call(httpSender.send, {
+      router: '/api/shelf/get-flower',
+      body: { id },
     });
 
     yield put({
       type: SHELF_FLOWER_GET_SUCCESS,
-      payload: { flowers },
+      payload: { flower },
+    });
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
     });
   } catch (e) {
     console.error(e);
@@ -32,6 +37,10 @@ function* handle(action: ShelfFlowerGet) {
       payload: {
         error: e.response.data.message || e.message,
       },
+    });
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
     });
   }
 }

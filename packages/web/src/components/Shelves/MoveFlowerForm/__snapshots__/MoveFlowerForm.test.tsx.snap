@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/MoveFlowerForm should call onSubmit prop on submit 1`] = `
+<form
+  class="moveFlowerForm"
+>
+  <div
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
+  />
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Choose a new shelf for 
+      Rose
+    </label>
+    <select
+      class="custom-select"
+      data-testid="moveFlowerForm__selectShelf"
+    >
+      <option
+        value="1"
+      >
+        Test Shelf 1
+      </option>
+      <option
+        value="2"
+      >
+        Test Shelf 2
+      </option>
+      <option
+        value="3"
+      >
+        Test Shelf 3
+      </option>
+    </select>
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    type="submit"
+  >
+    <span>
+      Move Flower
+    </span>
+  </button>
+</form>
+`;
+
+exports[`components/MoveFlowerForm should render successfully 1`] = `
+<form
+  class="moveFlowerForm"
+>
+  <div
+    data-testid="alertPlaceholder"
+    style="height: 38px;"
+  />
+  <div
+    class="form-group"
+  >
+    <label
+      class="form-label"
+    >
+      Choose a new shelf for 
+      Rose
+    </label>
+    <select
+      class="custom-select"
+      data-testid="moveFlowerForm__selectShelf"
+    >
+      <option
+        value="1"
+      >
+        Test Shelf 1
+      </option>
+      <option
+        value="2"
+      >
+        Test Shelf 2
+      </option>
+      <option
+        value="3"
+      >
+        Test Shelf 3
+      </option>
+    </select>
+  </div>
+  <button
+    class="btn btn-primary"
+    data-testid="submitButton"
+    type="submit"
+  >
+    <span>
+      Move Flower
+    </span>
+  </button>
+</form>
+`;

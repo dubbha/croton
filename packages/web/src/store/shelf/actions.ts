@@ -1,5 +1,9 @@
 import { Actions } from 'constants/actions';
-import { Shelf, Flower } from './interfaces';
+import { Shelf, Flower, FlowerLastActions, FlowerAction, Invite, User } from './interfaces';
+
+export const SHELF_GET_INVITES = 'SHELF_GET_INVITES';
+export const SHELF_GET_INVITES_SUCCESS = 'SHELF_GET_INVITES_SUCCESS';
+export const SHELF_GET_INVITES_ERROR = 'SHELF_GET_INVITES_ERROR';
 
 export const SHELF_INVITE = 'SHELF_INVITE';
 export const SHELF_INVITE_SUCCESS = 'SHELF_INVITE_SUCCESS';
@@ -9,6 +13,10 @@ export const SHELF_INVITE_RESET = 'SHELF_INVITE_RESET';
 export const SHELF_INVITE_ACCEPT = 'SHELF_INVITE_ACCEPT';
 export const SHELF_INVITE_ACCEPT_SUCCESS = 'SHELF_INVITE_ACCEPT_SUCCESS';
 export const SHELF_INVITE_ACCEPT_ERROR = 'SHELF_INVITE_ACCEPT_ERROR';
+
+export const SHELF_INVITE_REVOKE = 'SHELF_INVITE_REVOKE';
+export const SHELF_INVITE_REVOKE_SUCCESS = 'SHELF_INVITE_REVOKE_SUCCESS';
+export const SHELF_INVITE_REVOKE_ERROR = 'SHELF_INVITE_REVOKE_ERROR';
 
 export const SHELF_DELETE_USER = 'SHELF_DELETE_USER';
 export const SHELF_DELETE_USER_SUCCESS = 'SHELF_DELETE_USER_SUCCESS';
@@ -50,6 +58,18 @@ export const SHELF_GET_FLOWER = 'SHELF_GET_FLOWER';
 export const SHELF_GET_FLOWER_SUCCESS = 'SHELF_GET_FLOWER_SUCCESS';
 export const SHELF_GET_FLOWER_ERROR = 'SHELF_GET_FLOWER_ERROR';
 
+export const SHELF_MOVE_FLOWER = 'SHELF_MOVE_FLOWER';
+export const SHELF_MOVE_FLOWER_SUCCESS = 'SHELF_MOVE_FLOWER_SUCCESS';
+export const SHELF_MOVE_FLOWER_ERROR = 'SHELF_MOVE_FLOWER_ERROR';
+
+export const SHELF_ADD_FLOWER_IMAGES = 'SHELF_ADD_FLOWER_IMAGES';
+export const SHELF_ADD_FLOWER_IMAGES_SUCCESS = 'SHELF_ADD_FLOWER_IMAGES_SUCCESS';
+export const SHELF_ADD_FLOWER_IMAGES_ERROR = 'SHELF_ADD_FLOWER_IMAGES_ERROR';
+
+export const SHELF_DELETE_FLOWER_IMAGES = 'SHELF_DELETE_FLOWER_IMAGES';
+export const SHELF_DELETE_FLOWER_IMAGES_SUCCESS = 'SHELF_DELETE_FLOWER_IMAGES_SUCCESS';
+export const SHELF_DELETE_FLOWER_IMAGES_ERROR = 'SHELF_DELETE_FLOWER_IMAGES_ERROR';
+
 export const SHELF_ACTION = 'SHELF_ACTION';
 export const SHELF_ACTION_SUCCESS = 'SHELF_ACTION_SUCCESS';
 export const SHELF_ACTION_ERROR = 'SHELF_ACTION_ERROR';
@@ -58,7 +78,30 @@ export const SHELF_GET_LAST_ACTIONS = 'SHELF_GET_LAST_ACTIONS';
 export const SHELF_GET_LAST_ACTIONS_SUCCESS = 'SHELF_GET_LAST_ACTIONS_SUCCESS';
 export const SHELF_GET_LAST_ACTIONS_ERROR = 'SHELF_GET_LAST_ACTIONS_ERROR';
 
+export const SHELF_GET_ACTIONS = 'SHELF_GET_ACTIONS';
+export const SHELF_GET_ACTIONS_SUCCESS = 'SHELF_GET_ACTIONS_SUCCESS';
+export const SHELF_GET_ACTIONS_ERROR = 'SHELF_GET_ACTIONS_ERROR';
+
+export const SHELF_GET_USERS = 'SHELF_GET_USERS';
+export const SHELF_GET_USERS_SUCCESS = 'SHELF_GET_USERS_SUCCESS';
+export const SHELF_GET_USERS_ERROR = 'SHELF_GET_USERS_ERROR';
+
 export const SHELF_RESET = 'SHELF_RESET';
+
+export interface ShelfGetInvites {
+  type: typeof SHELF_GET_INVITES;
+  payload: { shelfId: number };
+}
+
+export interface ShelfGetInvitesSuccess {
+  type: typeof SHELF_GET_INVITES_SUCCESS;
+  payload: { invites: Invite[] };
+}
+
+export interface ShelfGetInvitesError {
+  type: typeof SHELF_GET_INVITES_ERROR;
+  payload: { error: string };
+}
 
 export interface ShelfInvite {
   type: typeof SHELF_INVITE;
@@ -87,6 +130,21 @@ export interface ShelfInviteAcceptSuccess {
 
 export interface ShelfInviteAcceptError {
   type: typeof SHELF_INVITE_ACCEPT_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfInviteRevoke {
+  type: typeof SHELF_INVITE_REVOKE;
+  payload: { shelfId: number, inviteId: number };
+}
+
+export interface ShelfInviteRevokeSuccess {
+  type: typeof SHELF_INVITE_REVOKE_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfInviteRevokeError {
+  type: typeof SHELF_INVITE_REVOKE_ERROR;
   payload: { error: string };
 }
 
@@ -250,6 +308,51 @@ export interface ShelfGetFlowerError {
   payload: { error: string };
 }
 
+export interface ShelfMoveFlower {
+  type: typeof SHELF_MOVE_FLOWER;
+  payload: { flowerId: number, shelfId: number, targetShelfId: number };
+}
+
+export interface ShelfMoveFlowerSuccess {
+  type: typeof SHELF_MOVE_FLOWER_SUCCESS;
+  payload: { flower: Flower, shelf: Shelf, targetShelf: Shelf };
+}
+
+export interface ShelfMoveFlowerError {
+  type: typeof SHELF_MOVE_FLOWER_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfAddFlowerImages {
+  type: typeof SHELF_ADD_FLOWER_IMAGES,
+  payload: { flowerId: number, images: string[] };
+}
+
+export interface ShelfAddFlowerImagesSuccess {
+  type: typeof SHELF_ADD_FLOWER_IMAGES_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfAddFlowerImagesError {
+  type: typeof SHELF_ADD_FLOWER_IMAGES_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfDeleteFlowerImages {
+  type: typeof SHELF_DELETE_FLOWER_IMAGES,
+  payload: { flowerId: number, imageIds: number[] };
+}
+
+export interface ShelfDeleteFlowerImagesSuccess {
+  type: typeof SHELF_DELETE_FLOWER_IMAGES_SUCCESS;
+  payload: { info: string };
+}
+
+export interface ShelfDeleteFlowerImagesError {
+  type: typeof SHELF_DELETE_FLOWER_IMAGES_ERROR;
+  payload: { error: string };
+}
+
 export interface ShelfAction {
   type: typeof SHELF_ACTION;
   payload: { action: Actions, flowerId: number, shelfId: number };
@@ -272,16 +375,41 @@ export interface ShelfGetLastActions {
 
 export interface ShelfGetLastActionsSuccess {
   type: typeof SHELF_GET_LAST_ACTIONS_SUCCESS;
-  payload: {
-    [key in Actions]: {
-      timestamp: number;
-      user: { id: number, firstName: string, lastName: string };
-    }
-  }
+  payload: FlowerLastActions;
 }
 
 export interface ShelfGetLastActionsError {
   type: typeof SHELF_GET_LAST_ACTIONS_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfGetActions {
+  type: typeof SHELF_GET_ACTIONS;
+  payload: { flowerId: number };
+}
+
+export interface ShelfGetActionsSuccess {
+  type: typeof SHELF_GET_ACTIONS_SUCCESS;
+  payload: FlowerAction[],
+}
+
+export interface ShelfGetActionsError {
+  type: typeof SHELF_GET_ACTIONS_ERROR;
+  payload: { error: string };
+}
+
+export interface ShelfGetUsers {
+  type: typeof SHELF_GET_USERS;
+  payload: { shelfId: number };
+}
+
+export interface ShelfGetUsersSuccess {
+  type: typeof SHELF_GET_USERS_SUCCESS;
+  payload: { users: User[] };
+}
+
+export interface ShelfGetUsersError {
+  type: typeof SHELF_GET_USERS_ERROR;
   payload: { error: string };
 }
 
@@ -290,12 +418,18 @@ export interface ShelfReset {
 }
 
 export type ShelfActionTypes =
+  | ShelfGetInvites
+  | ShelfGetInvitesSuccess
+  | ShelfGetInvitesError
   | ShelfInvite
   | ShelfInviteSuccess
   | ShelfInviteError
   | ShelfInviteAccept
   | ShelfInviteAcceptSuccess
   | ShelfInviteAcceptError
+  | ShelfInviteRevoke
+  | ShelfInviteRevokeSuccess
+  | ShelfInviteRevokeError
   | ShelfDeleteUser
   | ShelfDeleteUserSuccess
   | ShelfDeleteUserError
@@ -326,10 +460,25 @@ export type ShelfActionTypes =
   | ShelfGetFlower
   | ShelfGetFlowerSuccess
   | ShelfGetFlowerError
+  | ShelfMoveFlower
+  | ShelfMoveFlowerSuccess
+  | ShelfMoveFlowerError
+  | ShelfAddFlowerImages
+  | ShelfAddFlowerImagesSuccess
+  | ShelfAddFlowerImagesError
+  | ShelfDeleteFlowerImages
+  | ShelfDeleteFlowerImagesSuccess
+  | ShelfDeleteFlowerImagesError
   | ShelfAction
   | ShelfActionSuccess
   | ShelfActionError
   | ShelfGetLastActions
   | ShelfGetLastActionsSuccess
   | ShelfGetLastActionsError
+  | ShelfGetActions
+  | ShelfGetActionsSuccess
+  | ShelfGetActionsError
+  | ShelfGetUsers
+  | ShelfGetUsersSuccess
+  | ShelfGetUsersError
   | ShelfReset;

@@ -6,6 +6,7 @@ import {
   SHELF_GET_FLOWER_ERROR,
   ShelfGetFlower,
   SHELF_GET_LAST_ACTIONS,
+  SHELF_GET_ACTIONS,
 } from '../actions';
 
 function* handle(action: ShelfGetFlower) {
@@ -24,6 +25,10 @@ function* handle(action: ShelfGetFlower) {
     yield put({
       type: SHELF_GET_LAST_ACTIONS,
       payload: { flowerId: id, shelfId: shelf.id },
+    });
+    yield put({
+      type: SHELF_GET_ACTIONS,
+      payload: { flowerId: id },
     });
   } catch (e) {
     yield put({

@@ -1,4 +1,11 @@
-import { getRepository, Repository } from 'typeorm';
+import {
+  getRepository,
+  Repository,
+  Transaction,
+  EntityManager,
+  getConnection,
+  TransactionManager,
+} from 'typeorm';
 
 import UserEntity from '../models/user.entity';
 import EmailVerificationEntity from '../models/email-verification.entity';
@@ -7,6 +14,7 @@ import SocialProfileEntity from '../models/social-profile.entity';
 import EmailResetEntity from '../models/email-reset.entity';
 import ShelfEntity from '../models/shelf.entity';
 import FlowerEntity from '../models/flower.entity';
+import ImageEntity from '../models/image.entity';
 import ShelfInvitationEntity from '../models/shelf-invitation.entity';
 import UserToShelfEntity from '../models/user-to-shelf.entity';
 import ActionEntity from '../models/action.entity';
@@ -21,20 +29,24 @@ import { ProvidersIdDBFieldName } from '../providers-auth/providers-auth.interfa
 import UserWithToken from '../interfaces/tokenized.user.interface';
 
 import {
-  CreateEmailRelatedPayload,
+  CreateEmailRelatedPayload, CreateMobileRelatedPayload,
   CreatePasswordResetPayload,
   ShelfInvitationPayload,
 } from './interfaces';
 import NotificationToken from '../models/notification-token.entity';
+import MobileVerificationEntity from '../models/mobile-verification.entity';
 
 export default class DBService {
+  private entityManager: EntityManager;
   private userRepository: Repository<UserEntity>;
   private emailVerificationRepository: Repository<EmailVerificationEntity>;
+  private mobileVerificationRepository: Repository<MobileVerificationEntity>;
   private passwordResetRepository: Repository<PasswordResetEntity>;
   private socialProfileRepository: Repository<SocialProfileEntity>;
   private emailResetRepository: Repository<EmailResetEntity>;
   private shelfRepository: Repository<ShelfEntity>;
   private flowerRepository: Repository<FlowerEntity>;
+  private imageRepository: Repository<ImageEntity>;
   private shelfInvitationRepository: Repository<ShelfInvitationEntity>;
   private userToShelfRepository: Repository<UserToShelfEntity>;
   private actionRepository: Repository<ActionEntity>;
@@ -45,15 +57,18 @@ export default class DBService {
     this.userRepository = getRepository(UserEntity);
     this.emailResetRepository = getRepository(EmailResetEntity);
     this.emailVerificationRepository = getRepository(EmailVerificationEntity);
+    this.mobileVerificationRepository = getRepository(MobileVerificationEntity);
     this.passwordResetRepository = getRepository(PasswordResetEntity);
     this.socialProfileRepository = getRepository(SocialProfileEntity);
     this.shelfRepository = getRepository(ShelfEntity);
     this.flowerRepository = getRepository(FlowerEntity);
+    this.imageRepository = getRepository(ImageEntity);
     this.shelfInvitationRepository = getRepository(ShelfInvitationEntity);
     this.userToShelfRepository = getRepository(UserToShelfEntity);
     this.actionRepository = getRepository(ActionEntity);
     this.notificationRepository = getRepository(NotificationEntity);
     this.notificationTokenRepository = getRepository(NotificationToken);
+    this.entityManager = new EntityManager(getConnection());
   }
 
   public getUserById(id: number) {
@@ -125,12 +140,24 @@ export default class DBService {
     return this.emailVerificationRepository.findOne({ emailVerificationToken });
   }
 
+  public getMobileVerificationByToken(mobileVerificationToken: string) {
+    return this.mobileVerificationRepository.findOne({ mobileVerificationToken });
+  }
+
   public removeEmailVerification(emailVerification: EmailVerificationEntity) {
     return this.emailVerificationRepository.delete(emailVerification.id);
   }
 
+  public removeMobileVerification(mobileVerification: MobileVerificationEntity) {
+    return this.mobileVerificationRepository.delete(mobileVerification.id);
+  }
+
   public createEmailVerification(config: CreateEmailRelatedPayload) {
     return this.emailVerificationRepository.save(config);
+  }
+
+  public createMobileVerification(config: CreateMobileRelatedPayload) {
+    return this.mobileVerificationRepository.save(config);
   }
 
   public getPasswordResetByToken(passwordResetToken: string) {
@@ -175,7 +202,12 @@ export default class DBService {
   }
 
   getShelfInvitationsByUserEmail(userEmail: string) {
-    return this.shelfInvitationRepository.find({ userEmail });
+    return this.shelfInvitationRepository.find({ where: { userEmail }, relations: ['shelf'] });
+  }
+
+  async getShelfInvitationsByShelfId(id: number) {
+    const shelf = await this.getShelfById(id);
+    return this.shelfInvitationRepository.find({ shelf });
   }
 
   getUserToShelf(userId: number, shelfId: number) {
@@ -203,6 +235,11 @@ export default class DBService {
     const shelf = await this.shelfRepository.findOne(shelfId);
 
     return this.userToShelfRepository.delete({ user, shelf });
+  }
+
+  async getUsersToShelf(shelfId: number) {
+    const shelf = await this.shelfRepository.findOne(shelfId);
+    return this.userToShelfRepository.find({ where: { shelf }, relations: ['user'] });
   }
 
   getShelfById(id: number) {
@@ -255,7 +292,7 @@ export default class DBService {
   }
 
   getFlowerById(id: number) {
-    return this.flowerRepository.findOne(id, { relations: ['shelf'] });
+    return this.flowerRepository.findOne(id, { relations: ['shelf', 'images'] });
   }
 
   async getFlowersByShelfId(shelfId: number) {
@@ -274,7 +311,6 @@ export default class DBService {
     description: string,
     order: number,
     rrules: { [key in Actions]: string },
-    pictureUrls: string[]
   ) {
     const shelf = await this.shelfRepository.findOne({ id: shelfId });
     return this.flowerRepository.save({
@@ -283,7 +319,6 @@ export default class DBService {
       description,
       order,
       rrules,
-      pictureUrls,
     });
   }
 
@@ -293,18 +328,85 @@ export default class DBService {
     name: string,
     description: string,
     order: number,
-    rrules: { [key in Actions]: string },
-    pictureUrls: string[]
+    rrules: { [key in Actions]: string }
   ) {
     const shelf = await this.shelfRepository.findOne(shelfId);
     return this.flowerRepository.update(
       id,
-      { shelf, name, description, order, rrules, pictureUrls },
+      { shelf, name, description, order, rrules },
     );
   }
 
   deleteFlower(id: number) {
     return this.flowerRepository.delete(id);
+  }
+
+  async addImagesToFlower(flowerId: number, images: string[]) {
+    const flower = await this.getFlowerById(flowerId);
+    await Promise.all(images.map(async (image) => {
+      return await this.imageRepository.save({
+        image,
+        flower
+      });
+    }));
+  }
+
+  async deleteImagesFromFlower(imageIds: number[]) {
+    await Promise.all(imageIds.map(async (id) => {
+      await this.imageRepository.delete({
+        id
+      });
+    }));
+  }
+
+  @Transaction()
+  private async moveFlowerInTransaction(
+    flowerId: number,
+    shelfId: number,
+    targetShelfId: number,
+    @TransactionManager() entityManager: EntityManager
+  ) {
+    const flowerRepInTransaction = entityManager.getRepository(FlowerEntity);
+    const shelfRepInTransaction = entityManager.getRepository(ShelfEntity);
+    const findShelfConfig = {
+      relations: ['flowers'],
+    };
+    const findFlowerConfig = {
+      relations: ['shelf'],
+    };
+    const movingFlower = await flowerRepInTransaction.findOne(
+      flowerId,
+      findFlowerConfig
+    );
+    const shelf = await shelfRepInTransaction.findOne(shelfId, findShelfConfig);
+    const targetShelf = await shelfRepInTransaction.findOne(
+      targetShelfId,
+      findShelfConfig
+    );
+    const updatedFlower = { ...movingFlower, shelf: targetShelf };
+    const updatedOldShelf = {
+      ...shelf,
+      flowers: shelf.flowers.filter(({ id }) => id !== movingFlower.id),
+    };
+    const updatedTargetShelf = {
+      ...targetShelf,
+      flowers: [...targetShelf.flowers, movingFlower],
+    };
+    await flowerRepInTransaction.update(flowerId, updatedFlower);
+    return {
+      flower: updatedFlower,
+      shelf: updatedOldShelf,
+      targetShelf: updatedTargetShelf,
+    };
+  }
+
+  async moveFlower(flowerId: number, shelfId: number, targetShelfId: number) {
+    return this.moveFlowerInTransaction(
+      flowerId,
+      shelfId,
+      targetShelfId,
+      this.entityManager
+    );
   }
 
   async getUsersByFlowerId(id: number) {
@@ -331,6 +433,23 @@ export default class DBService {
       },
       relations: ['user'],
     })
+  }
+
+  async getActionsByFlowerId(flowerId: number): Promise<Partial<ActionEntity>[]> {
+    const flower = await this.flowerRepository.findOne(flowerId);
+    return (
+      await this.actionRepository.find({
+        where: {
+          flower,
+        },
+        order: {
+          timestamp: 'ASC',
+        },
+        relations: ['user'],
+        select: ['timestamp', 'action', 'user']
+      })
+    ).map(({ timestamp, action, user: { firstName, lastName } }) =>
+      ({ timestamp, action, firstName, lastName }));
   }
 
   async getLastNotification(flowerId: number, action: Actions) {

@@ -4,7 +4,6 @@ import { HeaderBackButton } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 import { AUTH_CONFIRM_EMAIL } from '../../../store/auth/actions';
-import { INFORMATION_HIDE } from '../../../store/information/actions';
 
 export const VerificationBackButton = () => {
   const dispatch = useDispatch();
@@ -18,7 +17,6 @@ export const VerificationBackButton = () => {
         isEmailVerification: false,
       },
     });
-    dispatch({ type: INFORMATION_HIDE });
   };
 
   return <HeaderBackButton onPress={() => gotToMainScreen()} />;

@@ -11,13 +11,15 @@
     "start:android": "run-p dev android",
     "start:ios": "run-p dev ios",
     "studio": "studio android",
-    "xcode": "open ios/myprojectname.xcworkspace",
+    "xcode": "open ios/croton.xcworkspace",
     "lint": "eslint ./src --ext .jsx,.js,.tsx,.ts",
     "test": "jest --silent",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/picker": "^1.6.6",
+    "@react-native-community/push-notification-ios": "^1.4.1",
     "@react-navigation/native": "^5.7.0",
     "@react-navigation/stack": "^5.7.0",
     "core": "0.0.1",
@@ -25,14 +27,17 @@
     "react-devtools": "^4.8.1",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-push-notification": "^5.0.1",
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.1.1",
-    "react-native-screens": "^2.9.0"
+    "react-native-screens": "^2.9.0",
+    "rrule": "2.6.3"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "0.0.7",
     "@types/react": "16.9.19",
     "@types/react-native": "0.61.12",
+    "@types/react-native-push-notification": "^5.0.0",
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "24.9.0",
     "eslint": "^6.6.0",
@@ -45,8 +50,12 @@
   },
   "jest": {
     "preset": "react-native",
-    "transformIgnorePatterns": ["node_modules/(?!(jest-)?react-native|@?react-navigation)"],
-    "setupFiles": ["../../node_modules/react-native-gesture-handler/jestSetup.js"]
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@?react-navigation)"
+    ],
+    "setupFiles": [
+      "../../node_modules/react-native-gesture-handler/jestSetup.js"
+    ]
   },
   "license": "MIT"
 }

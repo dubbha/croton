@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../../../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'myprojectname' do
-  # Pods for myprojectname
+target 'croton' do
+  # Pods for croton
   pod 'FBLazyVector', :path => "../../../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../../../node_modules/react-native/Libraries/RCTRequired"
@@ -33,8 +33,10 @@ target 'myprojectname' do
   pod 'DoubleConversion', :podspec => '../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../../../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../../../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
 
-  target 'myprojectnameTests' do
+  target 'crotonTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +44,10 @@ target 'myprojectname' do
   use_native_modules!
 end
 
-target 'myprojectname-tvOS' do
-  # Pods for myprojectname-tvOS
+target 'croton-tvOS' do
+  # Pods for croton-tvOS
 
-  target 'myprojectname-tvOSTests' do
+  target 'croton-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

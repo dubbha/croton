@@ -5,7 +5,7 @@ import styles from './styles';
 import { FlowerInterface } from './interface';
 
 export const Flower: FC<FlowerInterface> = props => {
-  const { name = null, description = null, pictureUrls = null } = props;
+  const { name = null, description = null, pictureUrls = [] } = props;
 
   const mainPicture = pictureUrls[0];
   const pictureSource = {
@@ -24,7 +24,7 @@ export const Flower: FC<FlowerInterface> = props => {
           </View>
         </View>
         <View style={styles.flower__rightPart}>
-          <Text style={styles.flower__img}>{name}</Text>
+          <Text>{name}</Text>
           <Text style={styles.flower__description}>{description}</Text>
         </View>
       </View>

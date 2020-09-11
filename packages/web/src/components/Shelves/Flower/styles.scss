@@ -1,4 +1,4 @@
-@import '../../../assets/styles/theme';
+@import '../../../custom.scss';
 
 .flower {
   &.container {
@@ -12,16 +12,40 @@
 
   &-menu {
     margin: 0;
+    width: 100%;
+    text-align: center;
 
     button {
-      display: inline-block;
-      margin: 0 10px;
-      width: 150px;
+      display: block;
+      width: 100%;
+      margin: 0.25rem 0;
+      box-sizing: border-box;
+
+      @include media-breakpoint-up(sm) {
+        display: inline-block;
+        width: 135px;
+        margin: 0 0.125rem;
+      }
+
+      @include media-breakpoint-up(md) {
+        display: inline-block;
+        width: 150px;
+        margin: 0 10px;
+      }
     }
   }
 
   &-actions {
     margin: 1rem auto 0 auto;
+    width: 100%;
+  
+    @include media-breakpoint-up(md) {
+      width: 75%;
+    }
+  
+    @include media-breakpoint-up(xl) {
+      width: 50%;
+    }
 
     .list-group-item {
       display: flex;
@@ -30,7 +54,11 @@
 
       button {
         margin: 0 0 0 1rem;
-        width: 150px;
+        width: 75px;
+
+        @include media-breakpoint-up(sm) {
+          width: 150px;
+        }
       }
       .spinner-button {
         position: relative;
@@ -60,5 +88,94 @@
       justify-content: center;
       min-width: 22px;
     }
+  }
+
+  th,
+  td.action-name {
+    text-transform: capitalize;
+  }
+}
+
+.heatmap-container {
+  padding-right: 1rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    width: 75%;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 50%;
+  }
+}
+
+.stats-container {
+  width: 100%;
+  padding: 0;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 1rem;
+  }
+
+  h4 {
+    color: $color-grass-dark;
+    margin-left: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
+  }
+}
+
+.log-container {
+  width: 100%;
+  padding: 2rem 0 0 0;
+
+  @include media-breakpoint-up(md) {
+    padding: 2rem 1rem 0;
+  }
+
+  h4 {
+    color: $color-grass-dark;
+    margin-left: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
+  }
+}
+
+.react-calendar-heatmap {
+  text {
+    font-size: 6px;
+    fill: #aaa;
+  }
+
+  .react-calendar-heatmap-small-text {
+    font-size: 5px;
+  }
+
+  rect:hover {
+    stroke: #555;
+    stroke-width: 1px;
+  }
+
+  .color-croton-0, .color-empty {
+    fill: #eeeeee;
+  }
+  .color-croton-1 {
+    fill: $color-grass-light;
+  }
+  .color-croton-2, .color-filled {
+    fill: $color-grass;
+  }
+  .color-croton-3 {
+    fill: $color-grass-dark;
+  }
+  .color-croton-4 {
+    fill: $color-grass-darkest;
   }
 }

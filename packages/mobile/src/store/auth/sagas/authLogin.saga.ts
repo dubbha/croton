@@ -1,25 +1,31 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, delay } from 'redux-saga/effects';
 
 import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AuthLogin } from '../actions';
 import {
   INFORMATION_NOTIFY,
   INFORMATION_LOADER,
+  INFORMATION_HIDE,
 } from '../../information/actions';
 import { httpSender } from './../../../services/http/http.service';
 
 function* handle(action: AuthLogin) {
   try {
+    const { email, password } = action.payload;
     yield put({ type: INFORMATION_LOADER });
 
     const result = yield call(httpSender.send, {
       router: '/api/auth/login',
-      body: action.payload,
+      body: {
+        email,
+        password,
+      },
     });
-
     if (!result.token) {
       yield put({
         type: INFORMATION_NOTIFY,
-        payload: { error: result.message },
+        payload: {
+          error: result.message || 'Something wrong, pls try again later',
+        },
       });
     } else {
       yield put({
@@ -29,11 +35,19 @@ function* handle(action: AuthLogin) {
 
       httpSender.setAuthorizationToken(result.token);
     }
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
+    });
   } catch (e) {
     // TODO: now this is useless catch, should fix it
     yield put({
       type: INFORMATION_NOTIFY,
       payload: { error: e.data.message },
+    });
+    yield delay(1000);
+    yield put({
+      type: INFORMATION_HIDE,
     });
   }
 }

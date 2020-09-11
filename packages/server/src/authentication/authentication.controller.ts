@@ -10,6 +10,8 @@ import PasswordResetDto from './password-reset.dto';
 import PasswordUpdateDto from './password-update.dto';
 
 import ProvidersAuthService from '../providers-auth/providers-auth.service';
+import MobileRegistrationDto from './mobile-registration.dto';
+import MobileVerificationDto from './mobile-verification.dto';
 
 export default class AuthenticationController extends BaseController {
   private authenticationService: AuthenticationService;
@@ -34,9 +36,19 @@ export default class AuthenticationController extends BaseController {
       this.registrationHandler
     );
     this.router.post(
+      this.serverApi.authMobileRegister,
+      validationMiddleware(MobileRegistrationDto),
+      this.mobileRegistrationHandler
+    );
+    this.router.post(
       this.serverApi.authConfirm,
       validationMiddleware(EmailVerificationDto),
       this.emailConfirmHandler
+    );
+    this.router.post(
+      this.serverApi.authMobileConfirm,
+      validationMiddleware(MobileVerificationDto),
+      this.mobileRegistrationConfirmHandler
     );
 
     this.router.post(
@@ -134,6 +146,34 @@ export default class AuthenticationController extends BaseController {
     try {
       await this.authenticationService.updatePassword(request.body);
       response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private mobileRegistrationHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.authenticationService.mobileRegister(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private mobileRegistrationConfirmHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const user = await this.authenticationService.mobileRegistrationConfirm(
+        request.body.mobileVerificationToken
+      );
+      response.send(user);
     } catch (error) {
       next(error);
     }

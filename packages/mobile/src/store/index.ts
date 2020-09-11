@@ -15,6 +15,7 @@ export interface InterfaceStoreAuth {
   lastName: string;
   error: string;
   info: string;
+  mobileToken: string;
 }
 export interface InterfaceStore {
   auth: InterfaceStoreAuth;

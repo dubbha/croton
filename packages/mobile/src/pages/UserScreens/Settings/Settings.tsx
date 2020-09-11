@@ -19,7 +19,7 @@ import { NotifyMessage } from '../../../components/NotifyMessage';
 
 export const Settings = () => {
   const dispatch = useDispatch();
-  // TODO: type any for state?
+  // TODO: we should get user info when click back button
   const auth = useSelector((state: any) => state.auth, shallowEqual);
   const { id, token, info, error } = auth;
   const [firstName, setFirstName] = useState(auth.firstName);

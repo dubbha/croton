@@ -5,16 +5,18 @@ import {
   TouchableHighlight,
   Image,
   Text,
-  StyleSheet,
   ButtonProps,
 } from 'react-native';
 
-import { COLORS, COMPONENTS_STYLE } from '../../styles';
-import { ICONS } from '../../assets/icons';
+import styles from './styles';
+import { COLORS } from '../../styles';
+
+// TODO: we shoud restructured this
+export type ButtonVariant = 'default' | 'primary' | 'primary__solid';
 
 interface CustomButtonProps extends ButtonProps {
   title: string;
-  variant?: 'default' | 'primary';
+  variant?: ButtonVariant;
   icon?: string;
 }
 
@@ -24,8 +26,8 @@ export const CustomButton = ({
   icon,
   ...buttonProps
 }: CustomButtonProps) => {
-  const isPrimary = variant === 'primary' ? true : false;
-  const iconSource = icon && ICONS[icon];
+  const isPrimary = variant === 'primary';
+  const isSolid = variant === 'primary__solid';
 
   return (
     <View style={styles.button}>
@@ -34,14 +36,14 @@ export const CustomButton = ({
           style={[
             styles.button__body,
             isPrimary && styles.button__body__outline,
+            isSolid && styles.button__body__solid,
           ]}>
-          {iconSource && (
-            <Image style={styles.button__icon} source={iconSource} />
-          )}
+          {icon && <Image style={styles.button__icon} source={icon} />}
           <Text
             style={[
               styles.button__text,
               isPrimary && styles.button__text__outline,
+              isSolid && styles.button__text__solid,
             ]}>
             {title}
           </Text>
@@ -50,46 +52,5 @@ export const CustomButton = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    maxHeight: COMPONENTS_STYLE.buttonHeight,
-  },
-
-  button__body: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: COMPONENTS_STYLE.buttonHeight,
-    borderRadius: 5,
-    backgroundColor: COLORS.lightMain,
-    color: COLORS.green,
-  },
-
-  button__body__outline: {
-    borderColor: COLORS.green,
-    borderWidth: 2,
-    backgroundColor: COLORS.lightMain,
-  },
-
-  button__text: {
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    color: COLORS.green,
-    fontSize: 12,
-    fontWeight: '500',
-  },
-
-  button__text__outline: {
-    color: COLORS.green,
-  },
-
-  button__icon: {
-    width: 17.5,
-    height: 17.5,
-    marginRight: 10,
-  },
-});
 
 AppRegistry.registerComponent('CustomButton', () => CustomButton);

@@ -4,6 +4,7 @@ export interface AuthorizationProps {
   error: string;
   info: string;
   navigation: object;
+  mobileToken: string;
   submitForm: (data: object) => void;
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import { AUTH_LOGOUT } from './../../store/auth/actions';
+import { INFORMATION_HIDE } from '../../store/information/actions';
 
 export const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,10 @@ export const LogoutButton = () => {
     <View style={styles.logout}>
       <Text
         style={styles.logout__text}
-        onPress={() => dispatch({ type: AUTH_LOGOUT })}>
+        onPress={() => {
+          dispatch({ type: AUTH_LOGOUT });
+          dispatch({ type: INFORMATION_HIDE });
+        }}>
         Logout
       </Text>
     </View>
@@ -23,7 +27,7 @@ const styles = StyleSheet.create({
   },
 
   logout__text: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
   },
 });

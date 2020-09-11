@@ -1,10 +1,21 @@
 import React from 'react';
+import classNames from 'classnames';
+import './styles.scss';
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
-  className?: string;
+  inner?: boolean;
 };
 
-export const Container = ({ children }: Props) => (
-  <div className="container">{children}</div>
+export const Container = ({ inner, children }: Props) => (
+  <div
+    className={
+      classNames(
+        'container',
+        { 'container-inner': inner },
+      )
+    }
+  >
+    {children}
+  </div>
 );

@@ -16,6 +16,7 @@ describe('components/ProfileUserDetails', () => {
       AddSocialToProfile: () => (
         <button data-testid="WOOSH-WOOSH-AND-SOCIAL-PROFILE-IS-ADDED" />
       ),
+      ProfileInvites: () => <div data-testid="ProfileInvites" />,
     }));
 
     const { ProfileUserDetails } = require('./ProfileUserDetails');

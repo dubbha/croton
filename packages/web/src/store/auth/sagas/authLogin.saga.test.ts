@@ -32,9 +32,12 @@ describe('system/authLoginSaga', () => {
     const { token, ...userData } = data;
 
     return expectSaga(authLoginSaga)
-      .call(http.post, '/auth/login', {
-        ...loginPayload,
-      })
+      .call(
+        http.post,
+        '/auth/login',
+        { ...loginPayload },
+        { preventUnauthorizedInterceptor: true },
+      )
       .call([localStorage, localStorage.setItem], 'authToken', token)
       .put({
         type: AUTH_LOGIN_SUCCESS,

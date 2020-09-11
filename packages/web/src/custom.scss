@@ -4,7 +4,7 @@
 
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 100%;
   flex-direction: column;
   align-items: center;
@@ -52,6 +52,14 @@
 header,
 footer {
   width: 100%;
+}
+
+.navbar-expand {
+  justify-content: space-between;
+
+  @include media-breakpoint-down(md) {
+    flex-flow: column nowrap;
+  }
 }
 
 .navbar-light .navbar-nav .nav-link {

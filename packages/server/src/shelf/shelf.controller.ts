@@ -7,6 +7,12 @@ import authMiddleware from '../middlewares/auth.middleware';
 import shelfAdminMiddleware from '../middlewares/shelf-admin.middleware';
 import ShelfUserInviteDto from './shelf-user-invite.dto';
 import RequestWithShelfId from '../interfaces/request-with-shelf-id.interface'
+import ShelfGetPendingInvitesDto from './shelf-get-pending-invites.dto';
+import ShelfRevokeInviteDto from './shelf-revoke-invite.dto';
+import { QueryParams } from '../constants/query-params';
+import ShelfAddImageDto from './shelf-add-image.dto';
+import shelfUserMiddleware from '../middlewares/shelf-user.middleware';
+import ShelfDeleteImageDto from './shelf-delete-image.dto';
 
 export default class ShelfController extends BaseController {
   private shelfService = new ShelfService();
@@ -22,7 +28,7 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       shelfAdminMiddleware,
       validationMiddleware(ShelfUserInviteDto),
-      this.userInviteHanlder
+      this.userInviteHandler
     );
 
     this.router.post(
@@ -35,6 +41,12 @@ export default class ShelfController extends BaseController {
       authMiddleware,
       shelfAdminMiddleware,
       this.userDeleteHandler
+    );
+
+    this.router.get(
+      this.serverApi.shelfGetUsers,
+      authMiddleware,
+      this.getUsersHandler
     );
 
     this.router.post(
@@ -78,6 +90,29 @@ export default class ShelfController extends BaseController {
     );
 
     this.router.post(
+      this.serverApi.shelfFlowerAddImages,
+      authMiddleware,
+      shelfUserMiddleware,
+      validationMiddleware(ShelfAddImageDto),
+      this.addImagesToFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfFlowerDeleteImages,
+      authMiddleware,
+      shelfUserMiddleware,
+      validationMiddleware(ShelfDeleteImageDto),
+      this.deleteImagesFromFlowerHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfMoveFlower,
+      authMiddleware,
+      shelfAdminMiddleware,
+      this.moveFlowerHandler
+    );
+
+    this.router.post(
       this.serverApi.shelfDeleteFlower,
       authMiddleware,
       shelfAdminMiddleware,
@@ -105,11 +140,33 @@ export default class ShelfController extends BaseController {
     this.router.post(
       this.serverApi.shelfGetLastActions,
       authMiddleware,
-      this.getLastActionsHanlder
-    )
+      this.getLastActionsHandler
+    );
+
+    this.router.get(
+      this.serverApi.shelfGetActions,
+      authMiddleware,
+      this.getActionsHanlder,
+    );
+
+    this.router.post(
+      this.serverApi.shelfPendingInvites,
+      authMiddleware,
+      validationMiddleware(ShelfGetPendingInvitesDto),
+      shelfAdminMiddleware,
+      this.userPendingInvitesHandler
+    );
+
+    this.router.post(
+      this.serverApi.shelfRevokeInvite,
+      authMiddleware,
+      validationMiddleware(ShelfRevokeInviteDto),
+      shelfAdminMiddleware,
+      this.shelfRevokeInviteHandler
+    );
   }
 
-  private userInviteHanlder = async (
+  private userInviteHandler = async (
     request: RequestWithShelfId,
     response: Response,
     next: NextFunction
@@ -147,8 +204,23 @@ export default class ShelfController extends BaseController {
   ): Promise<void> => {
     try {
       const { shelfId, userId } = request.body;
-      await this.shelfService.deleteUser(shelfId, userId)
+      await this.shelfService.deleteUser(shelfId, userId);
       response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getUsersHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const users = await this.shelfService.getShelfUsers(
+        Number(request.query[QueryParams.SHELF_ID])
+      );
+      response.send(users);
     } catch (error) {
       next(error);
     }
@@ -235,6 +307,47 @@ export default class ShelfController extends BaseController {
     }
   }
 
+  private moveFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const updatedShelvesAndFlower = await this.shelfService.moveFlower(
+        request.body
+      );
+      response.status(200).send(updatedShelvesAndFlower);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private addImagesToFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.addImagesToFlower(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private deleteImagesFromFlowerHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      await this.shelfService.deleteImagesFromFlower(request.body);
+      response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
   private deleteFlowerHandler = async (
     request: Request,
     response: Response,
@@ -274,7 +387,7 @@ export default class ShelfController extends BaseController {
     }
   }
 
-  private actionHanlder = async(
+  private actionHanlder = async (
     request: Request,
     response: Response,
     next: NextFunction,
@@ -290,7 +403,7 @@ export default class ShelfController extends BaseController {
     }
   }
 
-  private getLastActionsHanlder = async (
+  private getLastActionsHandler = async (
     request: Request,
     response: Response,
     next: NextFunction,
@@ -300,6 +413,51 @@ export default class ShelfController extends BaseController {
         request.body.flowerId,
       );
       response.status(200).send(lastActions);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private getActionsHanlder = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const actions = await this.shelfService.getActions(
+        parseInt(request.query.flowerId as string, 10),
+      );
+      response.status(200).send(actions);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private userPendingInvitesHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const pendingInvites = await this.shelfService.getPendingInvites(
+        request.body.shelfId
+      );
+      response.send(pendingInvites);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private shelfRevokeInviteHandler = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      await this.shelfService.revokeInvite(
+        request.body.inviteId
+      );
+      response.status(204).send();
     } catch (error) {
       next(error);
     }

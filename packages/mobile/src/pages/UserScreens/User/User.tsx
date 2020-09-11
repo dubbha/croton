@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -12,10 +13,21 @@ import {
 
 import styles from './styles';
 import { SCREEN_USER_SETTINGS, SCREEN_USER_SHELVES } from '../../screens';
+import { httpSender } from '../../../services/http/http.service';
 
 export const User = ({ navigation }: any) => {
   // TODO: Get image from user profile
   const image = { uri: 'https://reactjs.org/logo-og.png' };
+  const { mobileToken: registrationToken } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    httpSender.send({
+      router: '/api/notification/register',
+      body: {
+        registrationToken,
+      },
+    });
+  });
 
   return (
     <KeyboardAvoidingView

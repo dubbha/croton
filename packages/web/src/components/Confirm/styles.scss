@@ -1,0 +1,11 @@
+.confirm-wrapper {
+  &-icon {
+    display: inline-block;
+    outline: none;
+
+    &:focus *,
+    &:hover * {
+      opacity: 1;
+    }
+  }
+}

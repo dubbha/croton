@@ -2,19 +2,21 @@ export interface AuthState {
   isAuthenticated: boolean;
   id: number | null;
   token: string | null;
+  mobileToken?: string | null;
   email: string | null;
   firstName: string | null;
   lastName: string | null;
-  error?: string | null;
-  info?: string | null;
   isEmailVerification?: boolean;
 }
+
+export const AUTH_TOKEN_SET = 'AUTH_TOKEN_SET';
 
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 
 export const AUTH_REGISTER = 'AUTH_REGISTER';
+export const AUTH_CONFIRM = 'AUTH_CONFIRM';
 export const AUTH_CONFIRM_EMAIL = 'AUTH_CONFIRM_EMAIL';
 
 export const AUTH_PROFILE_UPDATE = 'AUTH_PROFILE_UPDATE';
@@ -38,6 +40,12 @@ export interface PayloadAuthRegister {
   password: string;
   firstName: string;
   lastName: string;
+  token: string;
+}
+
+export interface PayloadAuthConfirm {
+  code: string;
+  registrationToken: string;
 }
 
 export interface PayloadAuthConfirmEmail {
@@ -61,6 +69,10 @@ export interface PayloadAuthProfileEmail {
   email: string;
 }
 
+export interface PayloadAuthTokenSet {
+  mobileToken: string;
+}
+
 export interface AuthLogin {
   type: typeof AUTH_LOGIN;
   payload: PayloadAuthLogin;
@@ -78,6 +90,11 @@ export interface AuthLoginSuccess {
 export interface AuthRegister {
   type: typeof AUTH_REGISTER;
   payload: PayloadAuthRegister;
+}
+
+export interface AuthConfirm {
+  type: typeof AUTH_CONFIRM;
+  payload: PayloadAuthConfirm;
 }
 
 export interface AuthConfirmEmail {
@@ -100,11 +117,18 @@ export interface AuthProfileUpdateEmail {
   payload: PayloadAuthProfileEmail;
 }
 
+export interface AuthTokenSet {
+  type: typeof AUTH_TOKEN_SET;
+  payload: PayloadAuthTokenSet;
+}
+
 export type AuthActionTypes =
   | AuthLogin
   | AuthLoginSuccess
   | AuthLogout
   | AuthRegister
+  | AuthConfirm
   | AuthConfirmEmail
   | AuthProfileUpdateInfo
-  | AuthProfileUpdateEmail;
+  | AuthProfileUpdateEmail
+  | AuthTokenSet;

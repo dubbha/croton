@@ -51,6 +51,12 @@ export default class UserManagementController extends BaseController {
       this.providersAuthService.verifyGoogleLogin,
       this.mergeUserProfilesHandler
     );
+
+    this.router.get(
+      this.serverApi.userManagementShelfInvites,
+      authMiddleware,
+      this.userManagementShelfInvitesHandler
+    );
   }
 
   private emailResetHandler = async (
@@ -111,6 +117,21 @@ export default class UserManagementController extends BaseController {
         request.body.email
       );
       response.send(mergedUser);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private userManagementShelfInvitesHandler = async (
+    request: RequestWithUser,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const shelfInvites = await this.userManagementService.getUserShelfInvites(
+        request.user.email
+      );
+      response.send(shelfInvites);
     } catch (error) {
       next(error);
     }

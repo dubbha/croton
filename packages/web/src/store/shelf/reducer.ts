@@ -6,6 +6,9 @@ import {
   SHELF_INVITE_ACCEPT,
   SHELF_INVITE_ACCEPT_SUCCESS,
   SHELF_INVITE_ACCEPT_ERROR,
+  SHELF_INVITE_REVOKE,
+  SHELF_INVITE_REVOKE_SUCCESS,
+  SHELF_INVITE_REVOKE_ERROR,
   SHELF_DELETE_USER,
   SHELF_DELETE_USER_SUCCESS,
   SHELF_DELETE_USER_ERROR,
@@ -36,13 +39,28 @@ import {
   SHELF_GET_FLOWER,
   SHELF_GET_FLOWER_SUCCESS,
   SHELF_GET_FLOWER_ERROR,
+  SHELF_MOVE_FLOWER,
+  SHELF_MOVE_FLOWER_SUCCESS,
+  SHELF_MOVE_FLOWER_ERROR,
+  SHELF_ADD_FLOWER_IMAGES,
+  SHELF_ADD_FLOWER_IMAGES_SUCCESS,
+  SHELF_ADD_FLOWER_IMAGES_ERROR,
   SHELF_ACTION,
   SHELF_ACTION_SUCCESS,
   SHELF_ACTION_ERROR,
   SHELF_GET_LAST_ACTIONS,
   SHELF_GET_LAST_ACTIONS_SUCCESS,
   SHELF_GET_LAST_ACTIONS_ERROR,
+  SHELF_GET_ACTIONS,
+  SHELF_GET_ACTIONS_SUCCESS,
+  SHELF_GET_ACTIONS_ERROR,
   SHELF_RESET,
+  SHELF_GET_INVITES,
+  SHELF_GET_INVITES_SUCCESS,
+  SHELF_GET_INVITES_ERROR,
+  SHELF_GET_USERS,
+  SHELF_GET_USERS_SUCCESS,
+  SHELF_GET_USERS_ERROR,
   ShelfActionTypes,
 } from './actions';
 import { ShelfState, Flower } from './interfaces';
@@ -54,6 +72,8 @@ export const initialState: ShelfState = {
   shelves: [],
   flowers: [],
   flower: null,
+  invites: [],
+  users: [],
 };
 
 export function shelfReducer(
@@ -63,6 +83,7 @@ export function shelfReducer(
   switch (action.type) {
     case SHELF_INVITE:
     case SHELF_INVITE_ACCEPT:
+    case SHELF_INVITE_REVOKE:
     case SHELF_DELETE_USER:
     case SHELF_ADD_SHELF:
     case SHELF_EDIT_SHELF:
@@ -73,8 +94,13 @@ export function shelfReducer(
     case SHELF_DELETE_FLOWER:
     case SHELF_GET_FLOWERS:
     case SHELF_GET_FLOWER:
+    case SHELF_ADD_FLOWER_IMAGES:
     case SHELF_ACTION:
     case SHELF_GET_LAST_ACTIONS:
+    case SHELF_GET_INVITES:
+    case SHELF_GET_ACTIONS:
+    case SHELF_GET_USERS:
+    case SHELF_MOVE_FLOWER:
       return {
         ...state,
         isLoading: true,
@@ -83,6 +109,7 @@ export function shelfReducer(
       };
     case SHELF_INVITE_SUCCESS:
     case SHELF_INVITE_ACCEPT_SUCCESS:
+    case SHELF_INVITE_REVOKE_SUCCESS:
     case SHELF_DELETE_USER_SUCCESS:
     case SHELF_ADD_SHELF_SUCCESS:
     case SHELF_EDIT_SHELF_SUCCESS:
@@ -90,6 +117,7 @@ export function shelfReducer(
     case SHELF_ADD_FLOWER_SUCCESS:
     case SHELF_EDIT_FLOWER_SUCCESS:
     case SHELF_DELETE_FLOWER_SUCCESS:
+    case SHELF_ADD_FLOWER_IMAGES_SUCCESS:
     case SHELF_ACTION_SUCCESS:
       return {
         ...state,
@@ -123,8 +151,53 @@ export function shelfReducer(
           lastActions: action.payload,
         },
       };
+    case SHELF_GET_INVITES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        invites: action.payload.invites,
+      };
+    case SHELF_GET_ACTIONS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        flower: {
+          ...state.flower as Flower,
+          actions: action.payload,
+        },
+      };
+    case SHELF_GET_USERS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        users: action.payload.users,
+      };
+
+    case SHELF_MOVE_FLOWER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        flower: state.flower && action.payload.flower,
+        flowers: state.flowers.map((savedFlower) =>
+          savedFlower.id === action.payload.flower.id
+            ? action.payload.flower
+            : savedFlower),
+        shelves: state.shelves.map((savedShelf) => {
+          if (savedShelf.id === action.payload.shelf.id) {
+            return action.payload.shelf;
+          }
+          if (savedShelf.id === action.payload.targetShelf.id) {
+            return action.payload.targetShelf;
+          }
+          return savedShelf;
+        }),
+        info: `Your flower has been succesfully moved to the shelf ${
+          action.payload.targetShelf.name
+        }`,
+      };
     case SHELF_INVITE_ERROR:
     case SHELF_INVITE_ACCEPT_ERROR:
+    case SHELF_INVITE_REVOKE_ERROR:
     case SHELF_DELETE_USER_ERROR:
     case SHELF_ADD_SHELF_ERROR:
     case SHELF_EDIT_SHELF_ERROR:
@@ -135,8 +208,12 @@ export function shelfReducer(
     case SHELF_DELETE_FLOWER_ERROR:
     case SHELF_GET_FLOWERS_ERROR:
     case SHELF_GET_FLOWER_ERROR:
+    case SHELF_ADD_FLOWER_IMAGES_ERROR:
     case SHELF_ACTION_ERROR:
     case SHELF_GET_LAST_ACTIONS_ERROR:
+    case SHELF_GET_ACTIONS_ERROR:
+    case SHELF_GET_USERS_ERROR:
+    case SHELF_MOVE_FLOWER_ERROR:
       return {
         ...state,
         isLoading: false,
@@ -151,6 +228,14 @@ export function shelfReducer(
         error: null,
         info: null,
         flower: null,
+        invites: [],
+      };
+    case SHELF_GET_INVITES_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error,
+        invites: [],
       };
     default:
       return state;
