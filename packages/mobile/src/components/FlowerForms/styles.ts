@@ -32,8 +32,7 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
-    paddingTop: 10,
-    paddingBottom: 30,
+    paddingVertical: 20,
   },
 
   flowerForm__header__content: {
@@ -52,8 +51,9 @@ export default StyleSheet.create({
   },
 
   flowerForm__accordions: {
-    marginTop: 20,
     maxHeight: 300,
+    paddingVertical: 10,
+    marginTop: 20,
   },
 
   flowerForm__inputWrap: {
@@ -85,7 +85,6 @@ export default StyleSheet.create({
   },
 
   flowerForm__button: {
-    marginTop: 40,
     height: 50,
     width: '100%',
   },

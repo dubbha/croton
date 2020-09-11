@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../../styles';
 
 export default StyleSheet.create({
   code: {
@@ -14,6 +15,10 @@ export default StyleSheet.create({
   code__header: {
     height: 30,
     marginBottom: 15,
+  },
+
+  code__footer: {
+    marginTop: 20,
   },
 
   code__text: {
@@ -40,5 +45,10 @@ export default StyleSheet.create({
 
   code__button: {
     height: 50,
+  },
+
+  code__footer__text: {
+    color: COLORS.green,
+    fontSize: 12,
   },
 });
