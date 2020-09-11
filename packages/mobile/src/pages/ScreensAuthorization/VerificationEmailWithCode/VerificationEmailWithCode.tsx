@@ -111,6 +111,13 @@ export const VerificationEmailWithCode = () => {
               />
             </View>
           </View>
+          <View style={styles.code__footer}>
+            <Text
+              style={styles.code__footer__text}
+              onPress={() => console.log('Resend verification code')}>
+              Didn't get code? Resend.
+            </Text>
+          </View>
         </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
