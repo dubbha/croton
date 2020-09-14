@@ -14,7 +14,7 @@ export default StyleSheet.create({
   accordion__header: {
     width: '100%',
     paddingHorizontal: 5,
-    paddingVertical: 5,
+    paddingVertical: 10,
     borderBottomWidth: 0,
     borderColor: COLORS.lightGrey,
   },

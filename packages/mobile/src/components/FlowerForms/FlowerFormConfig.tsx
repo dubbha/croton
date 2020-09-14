@@ -88,7 +88,7 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
   };
 
   const getRruleInterval = (rrule: any) => {
-    return rrule.interval;
+    return rrule.interval || '';
   };
 
   const getRruleDay = (day: any) => {
@@ -97,31 +97,31 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
 
     switch (index) {
       case 0: {
-        dayName = daysName.sun;
-        break;
-      }
-      case 1: {
         dayName = daysName.mon;
         break;
       }
-      case 2: {
+      case 1: {
         dayName = daysName.tue;
         break;
       }
-      case 3: {
+      case 2: {
         dayName = daysName.wed;
         break;
       }
-      case 4: {
+      case 3: {
         dayName = daysName.thu;
         break;
       }
-      case 5: {
+      case 4: {
         dayName = daysName.fri;
         break;
       }
-      case 6: {
+      case 5: {
         dayName = daysName.sat;
+        break;
+      }
+      case 6: {
+        dayName = daysName.sun;
         break;
       }
     }
