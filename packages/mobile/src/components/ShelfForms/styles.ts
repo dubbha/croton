@@ -21,7 +21,7 @@ export default StyleSheet.create({
     paddingRight: 20,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGrey,
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   shelfForm__header__text: {
@@ -31,7 +31,7 @@ export default StyleSheet.create({
   shelfForm__body: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   shelfForm__message: {

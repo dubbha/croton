@@ -5,17 +5,17 @@ export default StyleSheet.create({
   shelves: {
     flex: 1,
     flexDirection: 'column',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
-  },
-
-  shelves__header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 20,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   shelves__body: {
     flex: 1,
+    paddingTop: COMPONENTS_STYLE.paddingFromTop,
+  },
+
+  shelves__footer: {
+    paddingTop: 10,
+    paddingBottom: COMPONENTS_STYLE.paddingFromBottom,
   },
 
   shelves__modal: {
@@ -42,6 +42,10 @@ export default StyleSheet.create({
     flex: 0.3,
     marginTop: 10,
     minHeight: 50,
+  },
+
+  shelves__item__first: {
+    marginTop: 0,
   },
 
   shelves__message: {

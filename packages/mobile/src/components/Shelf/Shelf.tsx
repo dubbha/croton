@@ -4,17 +4,35 @@ import { View, Text, ImageBackground } from 'react-native';
 import styles from './styles';
 import { ShelfInterface } from './interface';
 
+const shelfDefaultImg = require('./../../assets/img/shelf.png');
+
+const limitateString = (text: string, letterLimit: number) => {
+  if (text.length > letterLimit) {
+    return `${text.slice(0, letterLimit)}...`;
+  }
+  return text;
+};
+
 export const Shelf: FC<ShelfInterface> = props => {
   const {
-    name = null,
-    location = null,
-    description = null,
+    name = '',
+    location = '',
+    description = '',
     pictureUrl = null,
   } = props;
 
-  const pictureSource = {
-    uri: pictureUrl || 'https://reactnative.dev/img/tiny_logo.png',
-  };
+  let pictureSource;
+  if (pictureUrl) {
+    pictureSource = {
+      uri: pictureUrl,
+    };
+  } else {
+    pictureSource = shelfDefaultImg;
+  }
+
+  const limitLetterTitle = 40;
+  const limitLetterLocation = 40;
+  const limitLetterDescription = 60;
 
   return (
     <View style={styles.shelf}>
@@ -25,9 +43,15 @@ export const Shelf: FC<ShelfInterface> = props => {
           </View>
         </View>
         <View style={styles.shelf__rightPart}>
-          <Text style={styles.shelf__title}>{name}</Text>
-          <Text style={styles.shelf__location}>{location}</Text>
-          <Text style={styles.shelf__description}>{description}</Text>
+          <Text style={styles.shelf__title}>
+            {limitateString(name, limitLetterTitle)}
+          </Text>
+          <Text style={styles.shelf__location}>
+            {limitateString(location, limitLetterLocation)}
+          </Text>
+          <Text style={styles.shelf__description}>
+            {limitateString(description, limitLetterDescription)}
+          </Text>
         </View>
       </View>
     </View>

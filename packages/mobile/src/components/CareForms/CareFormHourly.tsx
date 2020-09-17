@@ -13,6 +13,7 @@ export const CareFormHourly = (props: any) => {
       <TextInput
         keyboardType="decimal-pad"
         style={styles.careForm__input}
+        placeholder={String(1)}
         value={String(value)}
         onChangeText={data => setValue(data)}
         onBlur={() => {

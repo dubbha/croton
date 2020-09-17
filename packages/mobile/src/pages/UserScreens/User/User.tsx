@@ -15,9 +15,11 @@ import styles from './styles';
 import { SCREEN_USER_SETTINGS, SCREEN_USER_SHELVES } from '../../screens';
 import { httpSender } from '../../../services/http/http.service';
 
+const userDefaultImg = require('./../../../assets/img/user.jpg');
+
 export const User = ({ navigation }: any) => {
   // TODO: Get image from user profile
-  const image = { uri: 'https://reactjs.org/logo-og.png' };
+  const image = userDefaultImg;
   const { mobileToken: registrationToken } = useSelector(state => state.auth);
 
   useEffect(() => {

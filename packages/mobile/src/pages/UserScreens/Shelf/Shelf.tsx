@@ -1,11 +1,10 @@
 import React, { FC, useState, useEffect } from 'react';
-import { View, SafeAreaView, Text, Modal } from 'react-native';
+import { View, SafeAreaView, Text, Modal, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './styles';
 import { SCREEN_USER_FLOWER } from '../../screens';
 import { ShelfInterface } from '../../../components/Shelf/interface';
-import { FlowerInterface } from '../../../components/Flower/interface';
 import {
   ShelfFormConfig,
   ShelfFormDelete,
@@ -13,20 +12,21 @@ import {
 } from '../../../components/ShelfForms';
 import { FlowerFormConfig } from '../../../components/FlowerForms';
 import { CustomButton } from '../../../components/Button';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SHELF_FLOWERS_GET, SHELVES_GET } from '../../../store/shelves/actions';
 import { Flower } from '../../../components/Flower';
+import { Accordion } from '../../../components/Accordion';
 
 export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { params } = route;
-  const { id: shelfId } = params;
+  const { id: shelfId, description, location } = params;
   const [isShowFormConfig, setIsShowFormConfig] = useState(false);
   const [isShowFormRemove, setIsShowFormRemove] = useState(false);
   const [isShowFormInvite, setIsShowFormInvite] = useState(false);
   const [isShowFormFlower, setIsShowFormFlower] = useState(false);
 
-  const shelfItems: ShelfInterface[] = useSelector(state => {
+  const flowers: ShelfInterface[] = useSelector(state => {
     return state.shelves.flowers;
   });
 
@@ -37,36 +37,9 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
     });
   }, [dispatch, shelfId]);
 
-  const renderFlowers = (flowers: FlowerInterface[], nav: any) => {
-    let flowersList;
-    if (!flowers.length) {
-      flowersList = (
-        <View>
-          <Text>Shelf is empty</Text>
-        </View>
-      );
-    } else {
-      // TODO: Why we shouldn't send shelfId in every flower (we have it in db);
-      const items = flowers.map(flower => {
-        return (
-          <TouchableOpacity
-            onPress={() =>
-              nav.navigate(SCREEN_USER_FLOWER, { shelfId, ...flower })
-            }
-            style={styles.shelf__item}
-            key={flower.id}>
-            <Flower {...flower} />
-          </TouchableOpacity>
-        );
-      });
-      flowersList = <ScrollView style={styles.shelf__list}>{items}</ScrollView>;
-    }
-    return flowersList;
-  };
-
   const renderSettings = () => (
     <Modal animationType="fade" transparent={true}>
-      <View style={styles.shelves__modal}>
+      <View style={styles.shelf__modal}>
         <ShelfFormConfig
           shelf={params}
           closeFunc={(name?: string) => {
@@ -83,7 +56,7 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
 
   const renderRemover = () => (
     <Modal animationType="fade" transparent={true}>
-      <View style={styles.shelves__modal}>
+      <View style={styles.shelf__modal}>
         <ShelfFormDelete
           shelf={params}
           closeFunc={() => {
@@ -97,7 +70,7 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
 
   const renderInvite = () => (
     <Modal animationType="fade" transparent={true}>
-      <View style={styles.shelves__modal}>
+      <View style={styles.shelf__modal}>
         <ShelfFormUserInvite
           shelf={params}
           closeFunc={() => {
@@ -110,7 +83,7 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
 
   const renderFormFlower = () => (
     <Modal animationType="fade" transparent={true}>
-      <View style={styles.shelves__modal}>
+      <View style={styles.shelf__modal}>
         <FlowerFormConfig
           shelfId={shelfId}
           closeFunc={() => {
@@ -125,37 +98,80 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
     </Modal>
   );
 
+  const renderFlower = ({ item: flower, index }: any) => {
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(SCREEN_USER_FLOWER, { shelfId, ...flower })
+        }
+        style={[
+          styles.shelf__item,
+          index === 0 ? styles.shelf__item__first : undefined,
+        ]}>
+        <Flower {...flower} />
+      </TouchableOpacity>
+    );
+  };
+
+  const renderFlowers = () => {
+    if (flowers && flowers.length) {
+      return (
+        <FlatList
+          ListHeaderComponent={
+            <View style={styles.shelf__info}>
+              <View style={styles.shelf__info__item}>
+                <Accordion title="Location information">
+                  <Text>{location}</Text>
+                </Accordion>
+              </View>
+              <View style={styles.shelf__info__item}>
+                <Accordion title="Description information">
+                  <Text>{description}</Text>
+                </Accordion>
+              </View>
+            </View>
+          }
+          data={flowers}
+          renderItem={renderFlower}
+          keyExtractor={item => item.id.toString()}
+        />
+      );
+    } else {
+      return <Text>Shelf is empty</Text>;
+    }
+  };
+
   return (
     <SafeAreaView style={styles.shelf}>
-      <View style={styles.shelf__header}>
-        <View style={styles.shelf__buttons}>
-          <View style={styles.shelf__button}>
+      <View style={styles.shelf__body}>{flowers && renderFlowers()}</View>
+      <View style={styles.shelf__footer}>
+        <View style={styles.shelf__footer__content}>
+          <View style={styles.shelf__buttons}>
+            <View style={styles.shelf__button}>
+              <CustomButton
+                title="Edit Shelf"
+                onPress={() => setIsShowFormConfig(true)}
+              />
+            </View>
+            <View style={styles.shelf__button}>
+              <CustomButton
+                title="Delete Shelf"
+                onPress={() => setIsShowFormRemove(true)}
+              />
+            </View>
+            <View style={styles.shelf__button}>
+              <CustomButton
+                title="Invite User"
+                onPress={() => setIsShowFormInvite(true)}
+              />
+            </View>
+          </View>
+          <View style={styles.shelf__addButton}>
             <CustomButton
-              title="Edit Shelf"
-              onPress={() => setIsShowFormConfig(true)}
+              title="Add flower"
+              onPress={() => setIsShowFormFlower(true)}
             />
           </View>
-          <View style={styles.shelf__button}>
-            <CustomButton
-              title="Delete Shelf"
-              onPress={() => setIsShowFormRemove(true)}
-            />
-          </View>
-          <View style={styles.shelf__button}>
-            <CustomButton
-              title="Invite User"
-              onPress={() => setIsShowFormInvite(true)}
-            />
-          </View>
-        </View>
-      </View>
-      <View style={styles.shelf__body}>
-        <CustomButton
-          title="Add flower"
-          onPress={() => setIsShowFormFlower(true)}
-        />
-        <View style={styles.shelf__flowerWrap}>
-          {shelfItems && renderFlowers(shelfItems, navigation)}
         </View>
       </View>
       {/* TODO: It make sense remove duplication there */}

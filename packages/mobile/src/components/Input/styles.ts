@@ -1,15 +1,15 @@
 import { StyleSheet, Platform } from 'react-native';
 
-import { COLORS } from '../../styles/Theme';
+import { COLORS, COMPONENTS_STYLE } from '../../styles/Theme';
 
 export default StyleSheet.create({
   input: {
     position: 'relative',
     flex: 1,
-    height: 50,
-    borderRadius: 5,
+    height: COMPONENTS_STYLE.mainHeight,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
     borderColor: COLORS.lightGrey,
-    borderWidth: 2,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -29,20 +29,19 @@ export default StyleSheet.create({
 
   input__field: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: COMPONENTS_STYLE.paddingLarge,
+    paddingHorizontal: COMPONENTS_STYLE.paddingMedium,
   },
 
   input__message: {
     position: 'absolute',
-    bottom: -40,
+    bottom: -33,
     left: -15,
     minWidth: '35%',
     paddingVertical: Platform.OS === 'android' ? 5 : 10,
-    paddingHorizontal: Platform.OS === 'android' ? 2.5 : 5,
+    paddingHorizontal: Platform.OS === 'android' ? 5 : 5,
     backgroundColor: COLORS.darkMain,
-    borderRadius: 5,
-    marginTop: 14,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
   },
 
   input__message__body: {
@@ -51,13 +50,13 @@ export default StyleSheet.create({
 
   input__message__triangle: {
     position: 'absolute',
-    top: -15,
+    top: -12,
     left: 10,
     width: 0,
     height: 0,
-    borderLeftWidth: 10,
-    borderRightWidth: 10,
-    borderBottomWidth: 10,
+    borderLeftWidth: 8,
+    borderRightWidth: 8,
+    borderBottomWidth: 8,
     borderStyle: 'solid',
     backgroundColor: 'transparent',
     borderLeftColor: 'transparent',
@@ -67,6 +66,7 @@ export default StyleSheet.create({
 
   input__message__text: {
     color: COLORS.lightMain,
+    fontSize: COMPONENTS_STYLE.fontSizeSmall,
     textAlign: 'center',
   },
 });
