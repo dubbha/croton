@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from 'react-native';
 
-import { COLORS } from '../../../styles';
+import { COLORS, COMPONENTS_STYLE } from '../../../styles';
 
 export default StyleSheet.create({
   container: {
@@ -16,7 +16,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   topPart: {
@@ -46,13 +46,13 @@ export default StyleSheet.create({
   mainText: {
     color: COLORS.green,
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: COMPONENTS_STYLE.fontSizeHead1,
   },
 
   additionText: {
     marginTop: 20,
     color: COLORS.green,
-    fontSize: 18,
+    fontSize: COMPONENTS_STYLE.fontSizeLarge,
   },
 
   androidButton: {

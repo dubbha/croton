@@ -133,7 +133,11 @@ class SignInComponent extends React.Component<AuthorizationProps, SignInState> {
                     }}
                   />
                 </View>
-                <View style={styles.container__inputWrap}>
+                <View
+                  style={[
+                    styles.container__inputWrap,
+                    styles.container__inputWrap__button,
+                  ]}>
                   <CustomButton
                     title="Sign In"
                     onPress={() => this.submitForm()}

@@ -4,41 +4,45 @@ import { COLORS, COMPONENTS_STYLE } from '../../../styles/Theme';
 export default StyleSheet.create({
   shelf: {
     flex: 1,
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
-  },
-
-  shelf__header: {
-    justifyContent: 'center',
-    minHeight: 50,
-    marginBottom: 20,
+    flexDirection: 'column',
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   shelf__body: {
-    flex: 1,
+    flex: 0.8,
+    paddingTop: COMPONENTS_STYLE.paddingFromTop,
   },
 
-  shelves__modal: {
+  shelf__footer: {
+    flex: 0.2,
+    paddingTop: 10,
+    paddingBottom: COMPONENTS_STYLE.paddingFromBottom,
+  },
+
+  shelf__footer__content: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
+  shelf__modal: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: COLORS.lightMain,
   },
 
-  shelf__message: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 25,
-    marginVertical: 5,
+  shelf__info__item: {
+    minHeight: 60,
+    marginBottom: 15,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
+    backgroundColor: COLORS.lightMain,
   },
 
   shelf__buttons: {
-    flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 15,
-    minHeight: 50,
   },
 
   shelf__button: {
@@ -48,15 +52,16 @@ export default StyleSheet.create({
   shelf__flowerWrap: {
     flex: 1,
     paddingVertical: 10,
-  },
-
-  shelf__list: {
-    flex: 1,
+    backgroundColor: 'lightgreen',
   },
 
   shelf__item: {
     flex: 0.3,
     marginTop: 10,
     minHeight: 50,
+  },
+
+  shelf__item__first: {
+    marginTop: 0,
   },
 });

@@ -1,25 +1,29 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../styles';
+import { COLORS, COMPONENTS_STYLE } from '../../styles';
 
 export default StyleSheet.create({
   accordion: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    borderWidth: 1,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
     borderColor: COLORS.lightGrey,
-    borderRadius: 5,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
+    overflow: 'hidden',
   },
 
   accordion__header: {
     width: '100%',
-    paddingHorizontal: 5,
+    height: '100%',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
     paddingVertical: 10,
     borderBottomWidth: 0,
     borderColor: COLORS.lightGrey,
   },
 
   accordion__header__expand: {
+    height: 'auto',
     borderBottomWidth: 1,
   },
 

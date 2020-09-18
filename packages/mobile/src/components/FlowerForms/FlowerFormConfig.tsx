@@ -265,7 +265,6 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
             shelfId,
             name: flowerName,
             description: flowerDescription,
-            rrules: getRrules(),
           },
         });
         setDefaultState();
@@ -355,36 +354,38 @@ export const FlowerFormConfig: FC<FlowerFormConfigProps> = ({
                 </View>
               </View>
               {/* TODO: should make scroll for last open accordion item*/}
-              <ScrollView style={styles.flowerForm__accordions}>
-                <View
-                  style={[
-                    styles.flowerForm__accordion,
-                    styles.flowerForm__accordion__first,
-                  ]}>
-                  <Accordion title="Watering">
-                    <CareForm
-                      defaultParameters={wateringRules}
-                      setParameter={setWateringRules}
-                    />
-                  </Accordion>
-                </View>
-                <View style={styles.flowerForm__accordion}>
-                  <Accordion title="Hydration">
-                    <CareForm
-                      defaultParameters={hydrationRules}
-                      setParameter={setHydrationRules}
-                    />
-                  </Accordion>
-                </View>
-                <View style={styles.flowerForm__accordion}>
-                  <Accordion title="Fertilizing">
-                    <CareForm
-                      defaultParameters={fertilizingRules}
-                      setParameter={setFertilizingRules}
-                    />
-                  </Accordion>
-                </View>
-              </ScrollView>
+              <View style={styles.flowerForm__accordionsWrap}>
+                <ScrollView style={styles.flowerForm__accordions}>
+                  <View
+                    style={[
+                      styles.flowerForm__accordion,
+                      styles.flowerForm__accordion__first,
+                    ]}>
+                    <Accordion title="Watering">
+                      <CareForm
+                        defaultParameters={wateringRules}
+                        setParameter={setWateringRules}
+                      />
+                    </Accordion>
+                  </View>
+                  <View style={styles.flowerForm__accordion}>
+                    <Accordion title="Hydration">
+                      <CareForm
+                        defaultParameters={hydrationRules}
+                        setParameter={setHydrationRules}
+                      />
+                    </Accordion>
+                  </View>
+                  <View style={styles.flowerForm__accordion}>
+                    <Accordion title="Fertilizing">
+                      <CareForm
+                        defaultParameters={fertilizingRules}
+                        setParameter={setFertilizingRules}
+                      />
+                    </Accordion>
+                  </View>
+                </ScrollView>
+              </View>
             </View>
             <View style={styles.flowerForm__footer}>
               <View style={styles.flowerForm__button}>

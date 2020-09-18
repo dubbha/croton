@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
+import { COMPONENTS_STYLE } from '../../styles/Theme';
 import { Nav } from '../Nav';
 import { Logo } from '../Logo';
 import { Search } from '../Search';
@@ -21,6 +23,6 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     borderStyle: 'solid',
     borderColor: '#fff',
-    borderRadius: 5,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
   },
 });

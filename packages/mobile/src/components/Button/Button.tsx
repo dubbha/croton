@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import styles from './styles';
-import { COLORS } from '../../styles';
 
 // TODO: we shoud restructured this
 export type ButtonVariant = 'default' | 'primary' | 'primary__solid';
@@ -31,7 +30,7 @@ export const CustomButton = ({
 
   return (
     <View style={styles.button}>
-      <TouchableHighlight underlayColor={COLORS.lightGreen} {...buttonProps}>
+      <TouchableHighlight underlayColor={'rgba(0, 0, 0, 0)'} {...buttonProps}>
         <View
           style={[
             styles.button__body,

@@ -25,20 +25,20 @@ export default StyleSheet.create({
 
   container__topPart: {
     flex: 0,
-    height: COMPONENTS_STYLE.buttonHeight,
+    height: COMPONENTS_STYLE.mainHeight,
   },
 
   container__bottomPart: {
     flex: 0.5,
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
 
   container__divider: {
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: COMPONENTS_STYLE.buttonHeight,
+    minHeight: COMPONENTS_STYLE.mainHeight,
   },
 
   container__inputWrap: {
@@ -49,6 +49,10 @@ export default StyleSheet.create({
 
   container__inputWrap__first: {
     marginTop: 0,
+  },
+
+  container__inputWrap__button: {
+    flexDirection: 'column',
   },
 
   // TODO:
