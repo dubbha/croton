@@ -45,6 +45,11 @@ If you use macOS you should install dependencies for Swift/Objective-C for run i
 ```
 [/packages/mobile/ios] pod install
 ```
+Also if you use Xcode v12.0 and have bug with local images in simulator, you should make fix changes
+```
+[/] yarn add patch-package postinstall-postinstall
+[/] yarn patch-package     
+```
 Use root or package level commands to run mobile:
 ```
 [/] yarn workspace mobile start:ios
