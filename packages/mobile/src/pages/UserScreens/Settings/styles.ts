@@ -15,7 +15,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   settings__pictureWrap: {
@@ -33,7 +33,7 @@ export default StyleSheet.create({
   },
 
   settings__label: {
-    fontSize: 16,
+    fontSize: COMPONENTS_STYLE.fontSizeMedium,
   },
 
   settings__input: {
@@ -49,7 +49,7 @@ export default StyleSheet.create({
   settings__picture__img: {
     width: 100,
     height: 100,
-    borderRadius: 50,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
     overflow: 'hidden',
   },
 

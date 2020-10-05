@@ -4,13 +4,28 @@ import { View, Text, ImageBackground } from 'react-native';
 import styles from './styles';
 import { FlowerInterface } from './interface';
 
-export const Flower: FC<FlowerInterface> = props => {
-  const { name = null, description = null, pictureUrls = [] } = props;
+const flowerDefaultImg = require('./../../assets/img/flower.png');
 
-  const mainPicture = pictureUrls[0];
-  const pictureSource = {
-    uri: mainPicture || 'https://reactnative.dev/img/tiny_logo.png',
-  };
+const limitateString = (text: string, letterLimit: number) => {
+  if (text.length > letterLimit) {
+    return `${text.slice(0, letterLimit)}...`;
+  }
+  return text;
+};
+
+export const Flower: FC<FlowerInterface> = props => {
+  const { name = '', description = '', pictureUrls = [] } = props;
+  let pictureSource;
+  if (pictureUrls.length) {
+    pictureSource = {
+      uri: pictureUrls[0],
+    };
+  } else {
+    pictureSource = flowerDefaultImg;
+  }
+
+  const limitLetterTitle = 40;
+  const limitLetterDescription = 60;
 
   return (
     <View style={styles.flower}>
@@ -24,8 +39,12 @@ export const Flower: FC<FlowerInterface> = props => {
           </View>
         </View>
         <View style={styles.flower__rightPart}>
-          <Text>{name}</Text>
-          <Text style={styles.flower__description}>{description}</Text>
+          <Text style={styles.flower__title}>
+            {limitateString(name, limitLetterTitle)}
+          </Text>
+          <Text style={styles.flower__description}>
+            {limitateString(description, limitLetterDescription)}
+          </Text>
         </View>
       </View>
     </View>

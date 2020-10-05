@@ -19,7 +19,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* crotonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* crotonTests.m */; };
 		79F22FDD448D66AAEA5EAC65 /* libPods-croton-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C411AD4D876FF09C4145C7C1 /* libPods-croton-tvOSTests.a */; };
 		C63C29C224EBCBB000B416C9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C63C29C124EBCBB000B416C9 /* Default-568h@2x.png */; };
-		C659DAE624FF9CA7003610A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C659DAE524FF9CA7003610A0 /* GoogleService-Info.plist */; };
+		C66D1C24251A043A0073C7E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C66D1C23251A043A0073C7E0 /* GoogleService-Info.plist */; };
+		C66D1C25251A043A0073C7E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C66D1C23251A043A0073C7E0 /* GoogleService-Info.plist */; };
 		EA96C3ADB0062FBBC713B357 /* libPods-croton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2A7911673BECF243AD0AFA /* libPods-croton.a */; };
 		FFC6356B33C2913A7A459200 /* libPods-croton-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456429721C6B23242C16220D /* libPods-croton-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -102,7 +103,7 @@
 		C411AD4D876FF09C4145C7C1 /* libPods-croton-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-croton-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C634F15224FD69360034150C /* crotonRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = crotonRelease.entitlements; path = croton/crotonRelease.entitlements; sourceTree = "<group>"; };
 		C63C29C124EBCBB000B416C9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C659DAE524FF9CA7003610A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C66D1C23251A043A0073C7E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6D6320A24FFC9650066FB69 /* croton.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = croton.entitlements; path = croton/croton.entitlements; sourceTree = "<group>"; };
 		D73BE9E1F71587306E251315 /* Pods-crotonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crotonTests.debug.xcconfig"; path = "Target Support Files/Pods-crotonTests/Pods-crotonTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB096A5BAF95E3F2E15D3B48 /* libPods-crotonTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crotonTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,8 +168,8 @@
 		13B07FAE1A68108700A75B9A /* croton */ = {
 			isa = PBXGroup;
 			children = (
+				C66D1C23251A043A0073C7E0 /* GoogleService-Info.plist */,
 				C6D6320A24FFC9650066FB69 /* croton.entitlements */,
-				C659DAE524FF9CA7003610A0 /* GoogleService-Info.plist */,
 				C634F15224FD69360034150C /* crotonRelease.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -392,7 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				C659DAE624FF9CA7003610A0 /* GoogleService-Info.plist in Resources */,
+				C66D1C24251A043A0073C7E0 /* GoogleService-Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C63C29C224EBCBB000B416C9 /* Default-568h@2x.png in Resources */,
 			);
@@ -403,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+				C66D1C25251A043A0073C7E0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

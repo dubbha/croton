@@ -4,17 +4,18 @@ import { COLORS, COMPONENTS_STYLE } from '../../../styles/Theme';
 export default StyleSheet.create({
   flower: {
     flex: 1,
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
-  },
-
-  flower__header: {
-    justifyContent: 'center',
-    minHeight: 50,
-    marginBottom: 10,
+    flexDirection: 'column',
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   flower__body: {
     flex: 1,
+    // paddingBottom: 10,
+  },
+
+  flower__footer: {
+    paddingTop: 20,
+    paddingBottom: COMPONENTS_STYLE.paddingFromBottom,
   },
 
   flower__modal: {
@@ -31,42 +32,67 @@ export default StyleSheet.create({
     marginVertical: 5,
   },
 
-  flower__buttons: {
+  flower__info: {
+    paddingTop: COMPONENTS_STYLE.paddingFromTop,
+    paddingBottom: COMPONENTS_STYLE.paddingFromBottom,
+    marginBottom: 20,
+    backgroundColor: COLORS.lightMain,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
+  },
+
+  flower__info__item: {
+    marginTop: 15,
+  },
+
+  flower__info__item__first: {
+    marginTop: 0,
+  },
+
+  flower__description: {
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
+    fontSize: COMPONENTS_STYLE.fontSizeMedium,
+    textAlign: 'center',
+  },
+
+  flower__pictureWrap: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  flower__picture: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
+  flower__picture__img: {
+    width: 100,
+    height: 100,
+    borderRadius: COMPONENTS_STYLE.borderRadiusSmall,
+    overflow: 'hidden',
+  },
+
+  flower__photo: {
     flex: 1,
-    flexWrap: 'wrap',
+    resizeMode: 'cover',
+  },
+
+  flower__buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 15,
-    minHeight: 50,
   },
 
   flower__button: {
     flex: 0.45,
   },
 
-  flower__flowerWrap: {
-    flex: 1,
-    paddingVertical: 10,
-  },
-
-  flower__list: {
-    flex: 1,
-  },
-
-  flower__item: {
-    flex: 0.3,
-    marginTop: 10,
-    minHeight: 50,
-  },
-
   flower__action: {
     width: '100%',
-    marginTop: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-    borderWidth: 1,
+    marginTop: 20,
+    paddingVertical: COMPONENTS_STYLE.paddingFromTop,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
     borderColor: COLORS.lightGrey,
-    borderRadius: 5,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
     backgroundColor: COLORS.lightMain,
   },
 
@@ -93,8 +119,8 @@ export default StyleSheet.create({
   },
 
   flower__action__icon: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     borderRadius: 50,
     backgroundColor: COLORS.lightGrey,
   },
@@ -108,8 +134,13 @@ export default StyleSheet.create({
   },
 
   flower__action__name: {
-    fontSize: 18,
+    fontSize: COMPONENTS_STYLE.fontSizeMedium,
     marginLeft: 10,
+  },
+
+  flower__action__description: {
+    fontSize: COMPONENTS_STYLE.fontSizeSmall,
+    color: COLORS.lightGrey,
   },
 
   flower__action__button: {

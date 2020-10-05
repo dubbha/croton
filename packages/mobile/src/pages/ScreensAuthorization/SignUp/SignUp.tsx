@@ -257,7 +257,11 @@ export class SignUpComponent extends React.Component<
                     }}
                   />
                 </View>
-                <View style={styles.container__inputWrap}>
+                <View
+                  style={[
+                    styles.container__inputWrap,
+                    styles.container__inputWrap__button,
+                  ]}>
                   <CustomButton
                     title={SCREEN_SIGN_UP}
                     onPress={() => this.submitForm()}

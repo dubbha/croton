@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-import { COLORS } from '../../styles/Theme';
+import { COLORS, COMPONENTS_STYLE } from '../../styles/Theme';
 
 export default StyleSheet.create({
   message: {
     flex: 1,
     display: 'none',
     width: '100%',
-    paddingHorizontal: 20,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
     paddingVertical: 7.5,
-    borderRadius: 20,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
     backgroundColor: COLORS.lightGrey,
   },
 
@@ -36,5 +36,6 @@ export default StyleSheet.create({
 
   message__text: {
     color: '#fff',
+    fontSize: COMPONENTS_STYLE.fontSizeSmall,
   },
 });

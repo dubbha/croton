@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COMPONENTS_STYLE } from '../../styles/Theme';
 
 export default StyleSheet.create({
   careForm: {
@@ -28,8 +29,9 @@ export default StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     marginHorizontal: 5,
-    borderWidth: 1,
-    borderRadius: 5,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
+    textAlign: 'center',
   },
 
   careForm__header__title: {

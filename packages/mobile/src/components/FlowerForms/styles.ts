@@ -19,21 +19,20 @@ export default StyleSheet.create({
     paddingRight: 20,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGrey,
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   flowerForm__body: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   flowerForm__footer: {
     width: '100%',
     justifyContent: 'space-between',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
-    paddingTop: 10,
-    paddingBottom: 30,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
+    paddingVertical: 20,
   },
 
   flowerForm__header__content: {
@@ -47,13 +46,13 @@ export default StyleSheet.create({
   },
 
   flowerForm__message: {
-    marginTop: 10,
     height: 30,
   },
 
-  flowerForm__accordions: {
-    marginTop: 20,
+  flowerForm__accordionsWrap: {
     maxHeight: 300,
+    paddingVertical: 10,
+    marginTop: 10,
   },
 
   flowerForm__inputWrap: {
@@ -77,7 +76,8 @@ export default StyleSheet.create({
   },
 
   flowerForm__accordion: {
-    marginTop: 15,
+    minHeight: 50,
+    marginTop: 20,
   },
 
   flowerForm__accordion__first: {
@@ -85,7 +85,6 @@ export default StyleSheet.create({
   },
 
   flowerForm__button: {
-    marginTop: 40,
     height: 50,
     width: '100%',
   },
