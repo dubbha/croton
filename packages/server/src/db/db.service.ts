@@ -109,7 +109,7 @@ export default class DBService {
   ) {
     const socialProfile = await this.socialProfileRepository.findOne({
       [providerIdKeyName]: id,
-    });
+    }, { relations: ['user'] });
     if (socialProfile && socialProfile.user) {
       const { user } = socialProfile;
       return { ...user, socialProfile };
