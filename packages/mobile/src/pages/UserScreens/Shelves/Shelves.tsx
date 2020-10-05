@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   View,
   Text,
-  ScrollView,
   Modal,
   TouchableOpacity,
 } from 'react-native';
@@ -16,28 +15,7 @@ import { ShelfInterface } from '../../../components/Shelf/interface';
 import { Shelf } from '../../../components/Shelf';
 import { ShelfFormConfig } from '../../../components/ShelfForms';
 import { CustomButton } from '../../../components/Button';
-
-const renderShelves = (shelves: ShelfInterface[], navigation: any) => {
-  if (!shelves || !shelves.length) {
-    return (
-      <View>
-        <Text>Shelves are empty</Text>
-      </View>
-    );
-  } else {
-    let shelvesList = shelves.map(shelf => {
-      return (
-        <TouchableOpacity
-          onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
-          style={styles.shelves__item}
-          key={shelf.id}>
-          <Shelf {...shelf} />
-        </TouchableOpacity>
-      );
-    });
-    return <ScrollView style={styles.shelves__list}>{shelvesList}</ScrollView>;
-  }
-};
+import { FlatList } from 'react-native-gesture-handler';
 
 export const Shelves = ({ navigation }: any) => {
   const [isShowShelfFormConfig, setIsShowShelfFormConfig] = useState(false);
@@ -64,20 +42,51 @@ export const Shelves = ({ navigation }: any) => {
     </Modal>
   );
 
+  const renderShelf = ({ item: shelf, index }: any) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate(SCREEN_USER_SHELF, { ...shelf })}
+        style={[
+          styles.shelves__item,
+          index === 0 ? styles.shelves__item__first : undefined,
+        ]}>
+        <Shelf {...shelf} />
+      </TouchableOpacity>
+    );
+  };
+
+  const renderShelves = () => {
+    if (!shelves || !shelves.length) {
+      return (
+        <View>
+          <Text>Shelves are empty</Text>
+        </View>
+      );
+    } else {
+      return (
+        <FlatList
+          data={shelves}
+          keyExtractor={item => item.id.toString()}
+          renderItem={renderShelf}
+        />
+      );
+    }
+  };
+
   return (
     <SafeAreaView style={styles.shelves}>
-      <View style={styles.shelves__header}>
+      <View style={styles.shelves__body}>
+        <View style={styles.shelves__listWrap}>
+          {shelves && renderShelves()}
+        </View>
+      </View>
+      <View style={styles.shelves__footer}>
         <CustomButton
           title="Add shelf"
           onPress={() => {
             setIsShowShelfFormConfig(true);
           }}
         />
-      </View>
-      <View style={styles.shelves__body}>
-        <View style={styles.shelves__listWrap}>
-          {shelves && renderShelves(shelves, navigation)}
-        </View>
       </View>
       {isShowShelfFormConfig && renderShelfSettings()}
     </SafeAreaView>

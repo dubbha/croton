@@ -17,5 +17,5 @@ export const timingTypes = {
 
 export const rrulesDefaultValue = {
   type: 'hourly',
-  interval: 1,
+  interval: '',
 };

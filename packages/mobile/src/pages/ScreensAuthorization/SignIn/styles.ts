@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'space-between',
     flexDirection: 'column',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
     paddingTop: 50,
   },
 
@@ -21,20 +21,20 @@ export default StyleSheet.create({
 
   container__topPart: {
     flex: 0,
-    height: COMPONENTS_STYLE.buttonHeight,
+    height: COMPONENTS_STYLE.mainHeight,
   },
 
   container__bottomPart: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
 
   container__divider: {
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: COMPONENTS_STYLE.buttonHeight,
+    minHeight: COMPONENTS_STYLE.mainHeight,
   },
 
   container__inputWrap: {
@@ -45,6 +45,10 @@ export default StyleSheet.create({
 
   container__inputWrap__first: {
     marginTop: 0,
+  },
+
+  container__inputWrap__button: {
+    flexDirection: 'column',
   },
 
   // TODO:
@@ -61,6 +65,7 @@ export default StyleSheet.create({
   },
 
   container__img: {
+    alignSelf: 'center',
     resizeMode: 'contain',
     position: 'relative',
     overflow: 'hidden',

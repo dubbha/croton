@@ -1,5 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
-import { SafeAreaView, FlatList, View, Text, Modal } from 'react-native';
+import {
+  SafeAreaView,
+  FlatList,
+  View,
+  Text,
+  Modal,
+  ImageBackground,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { rrulestr } from 'rrule';
 
@@ -17,11 +24,13 @@ import {
 } from '../../../components/FlowerForms';
 import { NotifyMessage } from '../../../components/NotifyMessage';
 
+const flowerDefaultImg = require('./../../../assets/img/flower.png');
+
 export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
   // TODO: This logic will be broken if we should some more cofing, need change fetch to dispatch
   const dispatch = useDispatch();
   let { params } = route;
-  const { shelfId, id: flowerId } = params;
+  const { shelfId, id: flowerId, description, pictureUrls = [] } = params;
   const { flowers } = useSelector(state => state.shelves);
   const flower = flowers.find(item => item.id === flowerId);
   let { rrules } = flower;
@@ -29,7 +38,14 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
   const [isShowFormRemove, setIsShowFormRemove] = useState(false);
   const [lastActions, setLastActions] = useState({});
   const [markedActions, setMarkedActions] = useState([]);
-  // TODO: we should to change this with success dispatch result
+  let pictureSource;
+  if (pictureUrls.length) {
+    pictureSource = {
+      uri: pictureUrls[0],
+    };
+  } else {
+    pictureSource = flowerDefaultImg;
+  }
 
   useEffect(() => {
     const fetchLastActions = async () => {
@@ -174,9 +190,9 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
           <Text style={styles.flower__action__name}>{actionName}</Text>
         </View>
         <View style={styles.flower__action__body}>
-          <View style={styles.flower__action__description}>
-            <Text>{actionDescription}</Text>
-          </View>
+          <Text style={styles.flower__action__description}>
+            {actionDescription}
+          </Text>
         </View>
         <View style={styles.flower__action__footer}>
           <View style={styles.flower__action__button}>
@@ -196,6 +212,41 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.flower}>
       <View style={styles.flower__header}>
+        <View style={styles.flower__message}>
+          <NotifyMessage />
+        </View>
+      </View>
+      <View style={styles.flower__body}>
+        <FlatList
+          ListHeaderComponent={
+            <View>
+              <View style={styles.flower__info}>
+                <View
+                  style={[
+                    styles.flower__info__item,
+                    styles.flower__info__item__first,
+                  ]}>
+                  <View style={styles.flower__picture}>
+                    <View style={styles.flower__picture__img}>
+                      <ImageBackground
+                        source={pictureSource}
+                        style={styles.flower__photo}
+                      />
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.flower__info__item}>
+                  <Text style={styles.flower__description}>{description}</Text>
+                </View>
+              </View>
+            </View>
+          }
+          data={rrules}
+          renderItem={renderAction}
+          keyExtractor={rrule => rrule[0]}
+        />
+      </View>
+      <View style={styles.flower__footer}>
         <View style={styles.flower__buttons}>
           <View style={styles.flower__button}>
             <CustomButton
@@ -210,17 +261,6 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
             />
           </View>
         </View>
-      </View>
-      <View style={styles.flower__body}>
-        <View style={styles.flower__message}>
-          <NotifyMessage />
-        </View>
-        <FlatList
-          data={rrules}
-          renderItem={renderAction}
-          keyExtractor={rrule => rrule[0]}
-          style={styles.flower__actions}
-        />
       </View>
       {isShowFormConfig && renderSettings()}
       {isShowFormRemove && renderRemover()}

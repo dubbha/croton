@@ -4,17 +4,18 @@ import { COLORS, COMPONENTS_STYLE } from '../../styles';
 
 export default StyleSheet.create({
   button: {
-    flex: 1,
-    maxHeight: COMPONENTS_STYLE.buttonHeight,
+    maxHeight: COMPONENTS_STYLE.mainHeight,
   },
 
   button__body: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: COMPONENTS_STYLE.buttonHeight,
-    borderRadius: 5,
+    height: COMPONENTS_STYLE.mainHeight,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
     backgroundColor: COLORS.lightMain,
+    borderColor: COLORS.green,
   },
 
   button__body__solid: {
@@ -23,7 +24,7 @@ export default StyleSheet.create({
 
   button__body__outline: {
     borderColor: COLORS.green,
-    borderWidth: 2,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
     backgroundColor: COLORS.lightMain,
   },
 
@@ -31,7 +32,7 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center',
     color: COLORS.green,
-    fontSize: 12,
+    fontSize: COMPONENTS_STYLE.fontSizeSmall,
     fontWeight: '500',
   },
 

@@ -17,6 +17,8 @@ import { CustomButton } from '../../../components/Button';
 import { CustomInput } from '../../../components/Input';
 import { NotifyMessage } from '../../../components/NotifyMessage';
 
+const userDefaultImg = require('./../../../assets/img/user.jpg');
+
 export const Settings = () => {
   const dispatch = useDispatch();
   // TODO: we should get user info when click back button
@@ -26,7 +28,7 @@ export const Settings = () => {
   const [lastName, setLastName] = useState(auth.lastName);
   const [email, setEmail] = useState(auth.email);
   // TODO: Get image from user profile
-  const image = { uri: 'https://reactjs.org/logo-og.png' };
+  const userImage = userDefaultImg;
 
   const getMessageOptions = (
     messageInfo: string | null,
@@ -75,7 +77,7 @@ export const Settings = () => {
             <View style={styles.settings__picture}>
               <View style={styles.settings__picture__img}>
                 <ImageBackground
-                  source={image}
+                  source={userImage}
                   style={styles.settings__photo}
                 />
               </View>

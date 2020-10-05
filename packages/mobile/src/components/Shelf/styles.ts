@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../styles';
+import { COLORS, COMPONENTS_STYLE } from '../../styles';
 
 export default StyleSheet.create({
   shelf: {
@@ -10,10 +10,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 5,
-    borderColor: COLORS.lightGrey,
-    borderWidth: 1,
-    borderRadius: 5,
+    paddingVertical: COMPONENTS_STYLE.paddingMedium,
+    paddingHorizontal: COMPONENTS_STYLE.paddingMedium,
+    backgroundColor: COLORS.lightMain,
+    borderColor: COLORS.green,
+    borderWidth: COMPONENTS_STYLE.borderWidth,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
   },
 
   shelf__leftPart: {
@@ -26,7 +28,8 @@ export default StyleSheet.create({
 
   shelf__picture: {
     flex: 1,
-    borderRadius: 20,
+    maxHeight: 70,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
     overflow: 'hidden',
   },
 
@@ -37,17 +40,17 @@ export default StyleSheet.create({
   },
 
   shelf__title: {
-    fontSize: 18,
     color: COLORS.green,
+    fontSize: COMPONENTS_STYLE.fontSizeMedium,
   },
 
   shelf__location: {
-    fontSize: 14,
     color: COLORS.lightGrey,
+    fontSize: COMPONENTS_STYLE.fontSizeAddition,
   },
 
   shelf__description: {
-    fontSize: 14,
-    color: COLORS.green,
+    color: COLORS.darkMain,
+    fontSize: COMPONENTS_STYLE.fontSizeSmall,
   },
 });

@@ -15,7 +15,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingHorizontal: COMPONENTS_STYLE.mainPaddingHorizontal,
+    paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   user__pictureWrap: {
@@ -31,14 +31,8 @@ export default StyleSheet.create({
   user__picture__img: {
     width: 100,
     height: 100,
-    borderRadius: 50,
+    borderRadius: COMPONENTS_STYLE.borderRadiusMedium,
     overflow: 'hidden',
-  },
-
-  user__picture__text: {
-    marginTop: 10,
-    fontSize: 24,
-    fontWeight: '700',
   },
 
   user__photo: {
@@ -51,14 +45,14 @@ export default StyleSheet.create({
   },
 
   user__nav__item: {
-    paddingVertical: 15,
-    paddingHorizontal: 5,
-    borderBottomWidth: 1,
+    paddingVertical: COMPONENTS_STYLE.paddingLarge,
+    paddingHorizontal: COMPONENTS_STYLE.paddingSmall,
+    borderBottomWidth: COMPONENTS_STYLE.borderWidth,
     borderBottomColor: COLORS.lightGrey,
   },
 
   user__nav__item__first: {
-    borderTopWidth: 1,
+    borderTopWidth: COMPONENTS_STYLE.borderWidth,
     borderTopColor: COLORS.lightGrey,
   },
 });

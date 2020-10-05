@@ -11,6 +11,22 @@ export const COLORS = {
 };
 
 export const COMPONENTS_STYLE = {
-  mainPaddingHorizontal: 20,
-  buttonHeight: 50,
+  mainHeight: 50,
+  paddingHorizontal: 25,
+  paddingFromBottom: 20,
+  paddingFromTop: 15,
+  paddingLarge: 15,
+  paddingMedium: 10,
+  paddingSmall: 5,
+  borderWidth: 1,
+  borderRadiusMedium: 15,
+  borderRadiusSmall: 5,
+  fontSizeHead1: 28,
+  fontSizeHead2: 26,
+  fontSizeHead3: 24,
+  fontSizeHead4: 22,
+  fontSizeAddition: 9,
+  fontSizeLarge: 20,
+  fontSizeMedium: 16,
+  fontSizeSmall: 12,
 };
