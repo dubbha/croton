@@ -34,27 +34,30 @@ Use root or package level commands to run specific package, e.g. web:
 
 [/packages/web] yarn start
 ```
+You should add your `google-services.json` from firebase configs to '[/packages/mobile/android/app].
+Also you should install gradlew dependencies.
+```
+[/packages/mobile/android] ./gradlew build
+```
 Use root or package level commands to run mobile:
 ```
-[/] yarn workspace mobile start:android
-
-[/packages/mobile] yarn start:android
+[/] yarn workspace mobile android
 ```
-You can run iOS simulator only on macOS
-If you use macOS you should install dependencies for Swift/Objective-C for run iOS emulator
+You can run iOS simulator only on macOS.
+You should add `GoogleService-Info.plist` from firebase configs to '[/packages/mobile/ios] and make link on it in the Xcode.
+Also you should install dependencies for Swift/Objective-C for run iOS emulator.
 ```
 [/packages/mobile/ios] pod install
 ```
-Also if you use Xcode v12.0 and have bug with local images in simulator, you should make fix changes
+Also if you use Xcode v12.0 and have bug with local images in simulator, you should make fix changes.
 ```
 [/] yarn add patch-package postinstall-postinstall
 [/] yarn patch-package     
 ```
 Use root or package level commands to run mobile:
 ```
-[/] yarn workspace mobile start:ios
+[/] yarn workspace mobile ios
 
-[/packages/mobile] yarn start:ios
 ```
 If you would like to start android simulator on macOS you should give permission for:
 ```
