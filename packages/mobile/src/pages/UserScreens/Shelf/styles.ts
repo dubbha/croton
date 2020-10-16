@@ -1,20 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { COLORS, COMPONENTS_STYLE } from '../../../styles/Theme';
 
 export default StyleSheet.create({
   shelf: {
+    flex: 1,
+  },
+
+  shelf__content: {
     flex: 1,
     flexDirection: 'column',
     paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   shelf__body: {
-    flex: 0.8,
+    flex: Platform.OS === 'android' ? 0.8 : 0.85,
     paddingTop: COMPONENTS_STYLE.paddingFromTop,
   },
 
   shelf__footer: {
-    flex: 0.2,
+    flex: Platform.OS === 'android' ? 0.2 : 0.15,
     paddingTop: 10,
     paddingBottom: COMPONENTS_STYLE.paddingFromBottom,
   },

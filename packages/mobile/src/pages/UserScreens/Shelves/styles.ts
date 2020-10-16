@@ -4,6 +4,10 @@ import { COMPONENTS_STYLE, COLORS } from '../../../styles';
 export default StyleSheet.create({
   shelves: {
     flex: 1,
+  },
+
+  shelves__content: {
+    flex: 1,
     flexDirection: 'column',
     paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },

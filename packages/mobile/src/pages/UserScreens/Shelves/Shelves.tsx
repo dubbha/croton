@@ -75,20 +75,22 @@ export const Shelves = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.shelves}>
-      <View style={styles.shelves__body}>
-        <View style={styles.shelves__listWrap}>
-          {shelves && renderShelves()}
+      <View style={styles.shelves__content}>
+        <View style={styles.shelves__body}>
+          <View style={styles.shelves__listWrap}>
+            {shelves && renderShelves()}
+          </View>
         </View>
+        <View style={styles.shelves__footer}>
+          <CustomButton
+            title="Add shelf"
+            onPress={() => {
+              setIsShowShelfFormConfig(true);
+            }}
+          />
+        </View>
+        {isShowShelfFormConfig && renderShelfSettings()}
       </View>
-      <View style={styles.shelves__footer}>
-        <CustomButton
-          title="Add shelf"
-          onPress={() => {
-            setIsShowShelfFormConfig(true);
-          }}
-        />
-      </View>
-      {isShowShelfFormConfig && renderShelfSettings()}
     </SafeAreaView>
   );
 };
