@@ -55,49 +55,56 @@ export const CareFormWeekly = (props: any) => {
         <Text>week(s)</Text>
       </View>
       <View style={styles.careForm__body__part}>
-        <View style={styles.careForm__months}>
-          <CustomButton
-            variant={isDayExists(daysName.mon) ? 'primary__solid' : 'primary'}
-            title={daysName.mon}
-            onPress={() => setDayHandler(daysName.mon)}
-            style={styles.careForm__month}
-          />
-          <CustomButton
-            variant={isDayExists(daysName.tue) ? 'primary__solid' : 'primary'}
-            title={daysName.tue}
-            onPress={() => setDayHandler(daysName.tue)}
-            style={styles.careForm__month}
-          />
-          <CustomButton
-            variant={isDayExists(daysName.wed) ? 'primary__solid' : 'primary'}
-            title={daysName.wed}
-            onPress={() => setDayHandler(daysName.wed)}
-            style={styles.careForm__month}
-          />
-          <CustomButton
-            variant={isDayExists(daysName.thu) ? 'primary__solid' : 'primary'}
-            title={daysName.thu}
-            onPress={() => setDayHandler(daysName.thu)}
-            style={styles.careForm__month}
-          />
-          <CustomButton
-            variant={isDayExists(daysName.fri) ? 'primary__solid' : 'primary'}
-            title={daysName.fri}
-            onPress={() => setDayHandler(daysName.fri)}
-            style={styles.careForm__month}
-          />
-          <CustomButton
-            variant={isDayExists(daysName.sat) ? 'primary__solid' : 'primary'}
-            title={daysName.sat}
-            onPress={() => setDayHandler(daysName.sat)}
-            style={styles.careForm__month}
-          />
-          <CustomButton
-            variant={isDayExists(daysName.sun) ? 'primary__solid' : 'primary'}
-            title={daysName.sun}
-            onPress={() => setDayHandler(daysName.sun)}
-            style={styles.careForm__month}
-          />
+        <View style={styles.careForm__days}>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.mon) ? 'primary__solid' : 'primary'}
+              title={daysName.mon}
+              onPress={() => setDayHandler(daysName.mon)}
+            />
+          </View>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.tue) ? 'primary__solid' : 'primary'}
+              title={daysName.tue}
+              onPress={() => setDayHandler(daysName.tue)}
+            />
+          </View>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.wed) ? 'primary__solid' : 'primary'}
+              title={daysName.wed}
+              onPress={() => setDayHandler(daysName.wed)}
+            />
+          </View>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.thu) ? 'primary__solid' : 'primary'}
+              title={daysName.thu}
+              onPress={() => setDayHandler(daysName.thu)}
+            />
+          </View>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.fri) ? 'primary__solid' : 'primary'}
+              title={daysName.fri}
+              onPress={() => setDayHandler(daysName.fri)}
+            />
+          </View>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.sat) ? 'primary__solid' : 'primary'}
+              title={daysName.sat}
+              onPress={() => setDayHandler(daysName.sat)}
+            />
+          </View>
+          <View style={styles.careForm__day}>
+            <CustomButton
+              variant={isDayExists(daysName.sun) ? 'primary__solid' : 'primary'}
+              title={daysName.sun}
+              onPress={() => setDayHandler(daysName.sun)}
+            />
+          </View>
         </View>
       </View>
     </View>

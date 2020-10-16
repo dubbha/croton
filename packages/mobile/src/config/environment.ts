@@ -1,5 +1,5 @@
 // TODO: this is only for test android emulator
-const fakeEnv: string = 'ngrok_example';
+const fakeEnv: string = '71368149020b';
 
 export const environments = {
   dev: {

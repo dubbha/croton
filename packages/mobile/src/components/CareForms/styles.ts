@@ -45,17 +45,15 @@ export default StyleSheet.create({
     marginLeft: 5,
   },
 
-  careForm__months: {
+  careForm__days: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    minHeight: 60,
+    justifyContent: 'space-between',
+    width: '100%',
     marginTop: 20,
   },
 
-  careForm__month: {
+  careForm__day: {
     flex: 0.14,
     padding: 5,
-    zIndex: 5,
-    minHeight: 60,
   },
 });
