@@ -32,6 +32,13 @@ export default class ShelfService {
     const shelfInvitationToken = createRandomString(64);
     const expiresInHours = createExpiresInHours(Number(SHELF_INVITATION_EXPIRY_TIME));
 
+    const existingUser = await this.dbService.getUserByEmail(userEmail);
+    const usersToShelf = await this.dbService.getUsersToShelf(shelfId);
+
+    if (existingUser && usersToShelf.some(({ userId }) => userId === existingUser.id)) {
+      return
+    }
+
     await this.dbService.saveShelfInvitation({
       userEmail,
       shelfId,
@@ -39,7 +46,6 @@ export default class ShelfService {
       expiresIn: Date.now() + expiresInHours,
     })
 
-    const existingUser = await this.dbService.getUserByEmail(userEmail)
     if (existingUser) {
       await this.emailSendingService.sendShelfInvitationMessage(
         userEmail,

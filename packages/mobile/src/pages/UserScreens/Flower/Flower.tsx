@@ -211,54 +211,58 @@ export const Flower: FC<FlowerInterface> = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.flower}>
-      <View style={styles.flower__header}>
-        <View style={styles.flower__message}>
-          <NotifyMessage />
+      <View style={styles.flower__content}>
+        <View style={styles.flower__header}>
+          <View style={styles.flower__message}>
+            <NotifyMessage />
+          </View>
         </View>
-      </View>
-      <View style={styles.flower__body}>
-        <FlatList
-          ListHeaderComponent={
-            <View>
-              <View style={styles.flower__info}>
-                <View
-                  style={[
-                    styles.flower__info__item,
-                    styles.flower__info__item__first,
-                  ]}>
-                  <View style={styles.flower__picture}>
-                    <View style={styles.flower__picture__img}>
-                      <ImageBackground
-                        source={pictureSource}
-                        style={styles.flower__photo}
-                      />
+        <View style={styles.flower__body}>
+          <FlatList
+            ListHeaderComponent={
+              <View>
+                <View style={styles.flower__info}>
+                  <View
+                    style={[
+                      styles.flower__info__item,
+                      styles.flower__info__item__first,
+                    ]}>
+                    <View style={styles.flower__picture}>
+                      <View style={styles.flower__picture__img}>
+                        <ImageBackground
+                          source={pictureSource}
+                          style={styles.flower__photo}
+                        />
+                      </View>
                     </View>
                   </View>
-                </View>
-                <View style={styles.flower__info__item}>
-                  <Text style={styles.flower__description}>{description}</Text>
+                  <View style={styles.flower__info__item}>
+                    <Text style={styles.flower__description}>
+                      {description}
+                    </Text>
+                  </View>
                 </View>
               </View>
+            }
+            data={rrules}
+            renderItem={renderAction}
+            keyExtractor={rrule => rrule[0]}
+          />
+        </View>
+        <View style={styles.flower__footer}>
+          <View style={styles.flower__buttons}>
+            <View style={styles.flower__button}>
+              <CustomButton
+                title="Edit Flower"
+                onPress={() => setIsShowFormConfig(true)}
+              />
             </View>
-          }
-          data={rrules}
-          renderItem={renderAction}
-          keyExtractor={rrule => rrule[0]}
-        />
-      </View>
-      <View style={styles.flower__footer}>
-        <View style={styles.flower__buttons}>
-          <View style={styles.flower__button}>
-            <CustomButton
-              title="Edit Flower"
-              onPress={() => setIsShowFormConfig(true)}
-            />
-          </View>
-          <View style={styles.flower__button}>
-            <CustomButton
-              title="Delete Flower"
-              onPress={() => setIsShowFormRemove(true)}
-            />
+            <View style={styles.flower__button}>
+              <CustomButton
+                title="Delete Flower"
+                onPress={() => setIsShowFormRemove(true)}
+              />
+            </View>
           </View>
         </View>
       </View>
