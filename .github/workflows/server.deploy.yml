@@ -15,37 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Extract branch name
+      - name: extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-
-      - name: build
-        run: |
-          yarn workspace server install
-          yarn workspace server build
-          mkdir deploy
-          cp -Rp packages/server/dist deploy/
-          cp -p packages/server/server.js deploy/
-          cp -Rp packages/server/migrations deploy/
-          cp -p packages/server/package.json deploy/
-          cp -p packages/server/tsconfig.json deploy/
-          ls -l deploy
-
-      - name: scp build files
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "deploy/*"
-          target: "/var/tmp/croton-server-deploy"
-          strip_components: 1
-          rm: true
-
-      - name: ssh, move build files, run migration, restart service
+      - name: ssh, fetch repo, build, restart service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -53,16 +27,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            branch=${{ steps.extract_branch.outputs.branch }}
-            echo $branch
-            mkdir -p /var/www/croton/server/$branch
-            rm -Rf /var/www/croton/server/$branch/build
-            cp -Rp /var/tmp/croton-server-deploy/* /var/www/croton/server/$branch/
-            ls -l /var/www/croton/server/$branch/
-            cd /var/www/croton/server/$branch/
-            npm install typescript@`node -p -e "require('./package.json').dependencies.typescript"`
-            npm install ts-node@`node -p -e "require('./package.json').devDependencies['ts-node']"`
-            npm install pg@`node -p -e "require('./package.json').dependencies.pg"`
-            npm install typeorm@`node -p -e "require('./package.json').dependencies.typeorm"`
-            npm run migration:run:linux
-            sudo systemctl restart croton-server-$branch
+            echo ${{ steps.extract_branch.outputs.branch }}
+            cd /var/www/croton-server-${{ steps.extract_branch.outputs.branch }}
+            git fetch origin
+            git checkout ${{ steps.extract_branch.outputs.branch }}
+            git reset --hard origin/${{ steps.extract_branch.outputs.branch }}
+            yarn workspace server install
+            yarn workspace server build
+            yarn workspace server migration:run:linux
+            sudo systemctl restart croton-server-${{ steps.extract_branch.outputs.branch }}
