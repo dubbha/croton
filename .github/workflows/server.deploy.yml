@@ -28,6 +28,7 @@ jobs:
           mkdir deploy
           cp -Rp packages/server/dist deploy/
           cp -p packages/server/server.js deploy/
+          cp -Rp packages/server/migrations deploy/
           cp -p packages/server/package.json deploy/
           ls -l deploy
 
@@ -58,6 +59,6 @@ jobs:
             cp -Rp /var/tmp/croton-server-deploy/* /var/www/croton/server/$branch/
             ls -l /var/www/croton/server/$branch/
             cd /var/www/croton/server/$branch/
-            yarn add typeorm
-            yarn workspace server migration:run:linux
+            npm install typeorm@`node -p -e "require('./package.json').dependencies.typeorm"`
+            npm run migration:run:linux
             sudo systemctl restart croton-server-$branch
