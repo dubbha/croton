@@ -30,6 +30,7 @@ jobs:
           cp -p packages/server/server.js deploy/
           cp -Rp packages/server/migrations deploy/
           cp -p packages/server/package.json deploy/
+          cp -p packages/server/tsconfig.json deploy/
           ls -l deploy
 
       - name: scp build files
@@ -59,8 +60,9 @@ jobs:
             cp -Rp /var/tmp/croton-server-deploy/* /var/www/croton/server/$branch/
             ls -l /var/www/croton/server/$branch/
             cd /var/www/croton/server/$branch/
-            npm install typeorm@`node -p -e "require('./package.json').dependencies.typeorm"`
             npm install typescript@`node -p -e "require('./package.json').dependencies.typescript"`
             npm install ts-node@`node -p -e "require('./package.json').devDependencies['ts-node']"`
+            npm install pg@`node -p -e "require('./package.json').dependencies.pg"`
+            npm install typeorm@`node -p -e "require('./package.json').dependencies.typeorm"`
             npm run migration:run:linux
             sudo systemctl restart croton-server-$branch
