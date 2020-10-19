@@ -4,13 +4,16 @@ import { COLORS, COMPONENTS_STYLE } from '../../../styles/Theme';
 export default StyleSheet.create({
   flower: {
     flex: 1,
+  },
+
+  flower__content: {
+    flex: 1,
     flexDirection: 'column',
     paddingHorizontal: COMPONENTS_STYLE.paddingHorizontal,
   },
 
   flower__body: {
     flex: 1,
-    // paddingBottom: 10,
   },
 
   flower__footer: {

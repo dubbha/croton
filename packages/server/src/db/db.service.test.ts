@@ -209,7 +209,7 @@ describe('DBService', () => {
       ProvidersIdDBFieldName.FACEBOOK,
       facebookId
     );
-    expect(mockSocialProfileRepository.findOne).toBeCalledWith({ facebookId });
+    expect(mockSocialProfileRepository.findOne).toBeCalledWith({ facebookId }, { relations: ['user'] });
   });
 
   it('should get email verification by token', async () => {

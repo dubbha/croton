@@ -143,34 +143,36 @@ export const Shelf: FC<ShelfInterface> = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.shelf}>
-      <View style={styles.shelf__body}>{flowers && renderFlowers()}</View>
-      <View style={styles.shelf__footer}>
-        <View style={styles.shelf__footer__content}>
-          <View style={styles.shelf__buttons}>
-            <View style={styles.shelf__button}>
+      <View style={styles.shelf__content}>
+        <View style={styles.shelf__body}>{flowers && renderFlowers()}</View>
+        <View style={styles.shelf__footer}>
+          <View style={styles.shelf__footer__content}>
+            <View style={styles.shelf__buttons}>
+              <View style={styles.shelf__button}>
+                <CustomButton
+                  title="Edit Shelf"
+                  onPress={() => setIsShowFormConfig(true)}
+                />
+              </View>
+              <View style={styles.shelf__button}>
+                <CustomButton
+                  title="Delete Shelf"
+                  onPress={() => setIsShowFormRemove(true)}
+                />
+              </View>
+              <View style={styles.shelf__button}>
+                <CustomButton
+                  title="Invite User"
+                  onPress={() => setIsShowFormInvite(true)}
+                />
+              </View>
+            </View>
+            <View style={styles.shelf__addButton}>
               <CustomButton
-                title="Edit Shelf"
-                onPress={() => setIsShowFormConfig(true)}
+                title="Add flower"
+                onPress={() => setIsShowFormFlower(true)}
               />
             </View>
-            <View style={styles.shelf__button}>
-              <CustomButton
-                title="Delete Shelf"
-                onPress={() => setIsShowFormRemove(true)}
-              />
-            </View>
-            <View style={styles.shelf__button}>
-              <CustomButton
-                title="Invite User"
-                onPress={() => setIsShowFormInvite(true)}
-              />
-            </View>
-          </View>
-          <View style={styles.shelf__addButton}>
-            <CustomButton
-              title="Add flower"
-              onPress={() => setIsShowFormFlower(true)}
-            />
           </View>
         </View>
       </View>
